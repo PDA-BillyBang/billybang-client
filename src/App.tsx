@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-black text-3xl underline">hi</div>
+      <div className="text-3xl underline">hi</div>
       {/* <div className="bg-black ">
         <div className="text-3xl font-bold">efse</div>
         <a href="https://vitejs.dev" target="_blank">
