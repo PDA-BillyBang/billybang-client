@@ -6,8 +6,11 @@ function App() {
 
   return (
     <>
-      <div className="text-3xl underline bg-blue-2">hi</div>
-      <LargeButton text="eeß" customWidth="w-[80vw]" isActive={1} />
+      <LargeButton text="확인" customWidth="w-[80vw]" isActive={0} />
+      <div className="my-2" />
+      <LargeButton text="확인" customWidth="w-[80vw]" isActive={1} />
+      <div className="my-2" />
+      <LargeButton text="확인" customWidth="w-[80vw]" isActive={2} />
     </>
   );
 }
