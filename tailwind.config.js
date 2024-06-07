@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+import flowbite from "flowbite-react/tailwind";
+
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx,vue}", "./public/index.html"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx,vue}",
+    "./public/index.html",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
+    flowbite.content(),
+  ],
   theme: {
     screens: {
       sm: "480px",
@@ -42,5 +49,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite.content()],
 };
