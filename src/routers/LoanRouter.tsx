@@ -12,7 +12,7 @@ export const loanRoutes: RouteObject[] = [
     element: <Navbar2 />,
     children: [
       {
-        index: true,
+        path: "",
         element: <Loan />,
       },
       {
@@ -20,7 +20,7 @@ export const loanRoutes: RouteObject[] = [
         element: <LoanCompany />,
       },
       {
-        path: ":loanId",
+        path: "detail/:detailId",
         element: <LoanDetail />,
       },
     ],

@@ -10,39 +10,42 @@ import UserInfoInputDone from "../routes/user/UserInfoInputDone";
 
 export const userRoutes: RouteObject[] = [
   {
-    path: "user/info",
-    children: [
-      {
-        index: true,
-        element: <UserInfoInput />,
-      },
-      {
-        path: "done",
-        element: <UserInfoInputDone />,
-      },
-    ],
-  },
-  {
     path: "user",
-    element: <Navbar />,
     children: [
       {
-        path: "login",
-        element: <LoginMain />,
+        path: "info",
+        children: [
+          {
+            path: "",
+            element: <UserInfoInput />,
+          },
+          {
+            path: "done",
+            element: <UserInfoInputDone />,
+          },
+        ],
       },
-    ],
-  },
-  {
-    path: "user",
-    element: <Navbar2 />,
-    children: [
       {
-        path: "login/pw",
-        element: <LoginPwInput />,
+        element: <Navbar />,
+        children: [
+          {
+            path: "login",
+            element: <LoginMain />,
+          },
+        ],
       },
       {
-        path: "signup",
-        element: <Signup />,
+        element: <Navbar2 />,
+        children: [
+          {
+            path: "login/pw",
+            element: <LoginPwInput />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+        ],
       },
     ],
   },

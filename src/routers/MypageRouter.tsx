@@ -13,7 +13,7 @@ export const mypageRoutes: RouteObject[] = [
     element: <Navbar />,
     children: [
       {
-        index: true,
+        path: "",
         element: <Mypage />,
       },
     ],

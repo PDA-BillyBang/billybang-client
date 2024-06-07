@@ -10,7 +10,7 @@ export const mapRoutes: RouteObject[] = [
     element: <Navbar />,
     children: [
       {
-        index: true,
+        path: "",
         element: <Map />,
       },
       {
