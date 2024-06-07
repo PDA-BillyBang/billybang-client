@@ -28,6 +28,9 @@ module.exports = {
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
+      Cafe24Shiningstar: ["Cafe24Shiningstar"],
+      "ClimateCrisisKR-1979": ["ClimateCrisisKR-1979"],
+      "CWDangamAsac-Bold": ["CWDangamAsac-Bold"],
     },
     extend: {
       spacing: {

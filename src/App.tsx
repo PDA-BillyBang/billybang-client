@@ -13,6 +13,8 @@ function App() {
       <div className="my-2" />
       <LargeButton text="확인" customWidth="w-[80vw]" isActive={2} />
       <div className="my-2" />
+      <LargeButton text="확인" customWidth="w-[80vw]" isActive={3} />
+      <div className="my-2" />
       <NavigateButton
         text="나에게 맞는 대출 상품이 궁금하다면 로그인하기"
         customWidth="w-[80vw]"
@@ -21,6 +23,10 @@ function App() {
       <SmallButton text="매매" isActive={true} />
       <div className="my-2" />
       <SmallButton text="매매" isActive={false} />
+      <div className="text-3xl font-CWDangamAsac-Bold text-dark-blue-1">
+        빌려방
+      </div>
+      <div className="text-3xl font-CWDangamAsac-Bold text-blue-1">빌려방</div>
     </>
   );
 }
