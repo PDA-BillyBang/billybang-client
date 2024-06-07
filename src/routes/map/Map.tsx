@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Main() {
+export default function Map() {
   return (
-    <div>Main</div>
+    <div>Map</div>
   )
 }
