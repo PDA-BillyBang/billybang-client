@@ -2,12 +2,12 @@ import React from "react";
 import { RouteObject } from "react-router-dom";
 import Map from "../routes/map/Map";
 import MapSearch from "../routes/map/MapSearch";
-import Navbar from "../components/common/navbar/Navbar";
+import MainHeader from "../components/common/header/MainHeader";
 
 export const mapRoutes: RouteObject[] = [
   {
     path: "",
-    element: <Navbar />,
+    element: <MainHeader />,
     children: [
       {
         path: "",

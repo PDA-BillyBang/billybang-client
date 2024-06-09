@@ -1,16 +1,16 @@
 import React from "react";
 import { RouteObject } from "react-router-dom";
-import Navbar from "../components/common/navbar/Navbar";
-import Navbar2 from "../components/common/navbar/Navbar2";
 import Mypage from "../routes/mypage/Mypage";
 import MypageLoan from "../routes/mypage/MypageLoan";
 import MypageProperties from "../routes/mypage/MypageProperties";
 import MypageEdit from "../routes/mypage/MypageEdit";
+import MainHeader from "../components/common/header/MainHeader";
+import SubHeader from "../components/common/header/SubHeader";
 
 export const mypageRoutes: RouteObject[] = [
   {
     path: "mypage",
-    element: <Navbar />,
+    element: <MainHeader />,
     children: [
       {
         path: "",
@@ -20,7 +20,7 @@ export const mypageRoutes: RouteObject[] = [
   },
   {
     path: "mypage",
-    element: <Navbar2 />,
+    element: <SubHeader />,
     children: [
       {
         path: "loan",

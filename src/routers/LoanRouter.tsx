@@ -1,15 +1,15 @@
 import React from "react";
 import { RouteObject } from "react-router-dom";
 
-import Navbar2 from "../components/common/navbar/Navbar2";
 import Loan from "../routes/loan/Loan";
 import LoanCompany from "../routes/loan/LoanCompany";
 import LoanDetail from "../routes/loan/LoanDetail";
+import SubHeader from "../components/common/header/SubHeader";
 
 export const loanRoutes: RouteObject[] = [
   {
     path: "loan",
-    element: <Navbar2 />,
+    element: <SubHeader />,
     children: [
       {
         path: "",
