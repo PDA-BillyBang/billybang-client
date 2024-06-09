@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+import flowbite from "flowbite-react/tailwind";
+
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx,vue}", "./public/index.html"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx,vue}",
+    "./public/index.html",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
+    flowbite.content(),
+  ],
   theme: {
     screens: {
       sm: "480px",
@@ -14,9 +21,10 @@ module.exports = {
       "black-1": "#000000",
       "grey-1": "#828282",
       "grey-2": "#BABABA",
-      "grey-3": "D9D9D9",
+      "grey-3": "#D9D9D9",
       "grey-4": "#E6E6E6",
-      "grey-5": "F4F4F4",
+      "grey-5": "#F4F4F4",
+      "grey-6": "#F7F7F7",
       "white-1": "#FFFFFF",
       "blue-1": "#004CC7",
       "blue-2": "#487FD7",
@@ -27,6 +35,9 @@ module.exports = {
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
+      Cafe24Shiningstar: ["Cafe24Shiningstar"],
+      "ClimateCrisisKR-1979": ["ClimateCrisisKR-1979"],
+      "CWDangamAsac-Bold": ["CWDangamAsac-Bold"],
     },
     extend: {
       spacing: {
@@ -38,5 +49,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite.content()],
 };
