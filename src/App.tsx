@@ -1,10 +1,11 @@
+import MainHeader from "./components/common/header/MainHeader";
 import "./App.css";
 
 function App() {
-  // const [count, setCount] = useState(0);
-
   return (
-    
+    <>
+      <MainHeader />
+    </>
   );
 }
 
