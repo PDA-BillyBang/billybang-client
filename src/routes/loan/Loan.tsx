@@ -8,12 +8,11 @@ const Loan = () => {
   }>();
 
   useEffect(() => {
-    setTitle("대출"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
+    setTitle("충무로엘크루메크로시티2"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
   }, [setTitle]);
 
   return (
-    <div>
-      Loan
+    <div className="flex flex-col items-center">
       <LoanCard />
     </div>
   );

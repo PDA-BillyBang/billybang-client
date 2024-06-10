@@ -8,7 +8,6 @@ import { useState } from "react";
 export default function SubHeader() {
   const [title, setTitle] = useState("");
 
-  
   return (
     <div>
       <Navbar fluid rounded>
@@ -23,9 +22,12 @@ export default function SubHeader() {
           <span className="self-center mx-auto text-xl font-semibold">
             {title}
           </span>
+          <Navbar.Brand href="https://flowbite-react.com">
+            <div className="h-5 sm:h-9 size-7 "></div>
+          </Navbar.Brand>
         </div>
       </Navbar>
-      <Outlet context={{ setTitle }}/>
+      <Outlet context={{ setTitle }} />
     </div>
   );
 }
