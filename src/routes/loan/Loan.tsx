@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import LoanCard from "../../components/loan/LoanCard";
 
 const Loan = () => {
-  const { setTitle } = useOutletContext<{ setTitle: (title: string) => void }>();
+  const { setTitle } = useOutletContext<{
+    setTitle: (title: string) => void;
+  }>();
 
   useEffect(() => {
-    setTitle('대출'); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
+    setTitle("대출"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
   }, [setTitle]);
 
-  return <div>Loan</div>;
+  return (
+    <div>
+      Loan
+      <LoanCard />
+    </div>
+  );
 };
 
 export default Loan;
