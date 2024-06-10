@@ -1,3 +1,4 @@
+import ProgressBar from "../../components/common/progressbar/ProgressBar";
 import React, {useEffect} from 'react';
 import { useOutletContext } from 'react-router-dom';
 
@@ -9,8 +10,12 @@ export default function SignUp() {
   }, [setTitle]);
 
   return (
-    <div>
-      <div>SignUp</div>
-    </div>
+    <>
+      <div className="flex flex-nowrap">
+        <ProgressBar color="blue-1" /> {/* Tailwind의 blue-900 컬러 */}
+        <ProgressBar color="grey-2" /> {/* Tailwind의 gray-200 컬러 */}
+        <ProgressBar color="grey-2" /> {/* Tailwind의 gray-200 컬러 */}
+      </div>
+    </>
   );
 }
