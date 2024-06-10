@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import LoanCard from "../../components/loan/LoanCard";
-import LoanHeader from "../../components/loan/LoanHeader";
 import LoanFiltering from "../../components/loan/LoanFiltering";
 import BottomDrawer from "../../components/common/button/BottomDrawer";
 
@@ -11,7 +10,6 @@ const Loan = () => {
   }>();
 
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClick = () => setIsOpen((prev) => !prev);
 
   useEffect(() => {
@@ -24,9 +22,6 @@ const Loan = () => {
       <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
         <div>children</div>
       </BottomDrawer>
-      <LoanHeader />
-      <div className="py-2"></div>
-      <LoanCard />
     </div>
   );
 };
