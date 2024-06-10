@@ -11,7 +11,7 @@ export default function InputForm({ title, text }: Props) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="w-full flex flex-col mx-customMargin">
+    <div className="w-full flex flex-col">
       <div
         className={`text-${
           isFocused ? "red" : "grey"
