@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import LoanCard from "../../components/loan/LoanCard";
+import LoanHeader from "../../components/loan/LoanHeader";
 
 const Loan = () => {
   const { setTitle } = useOutletContext<{
@@ -13,6 +14,8 @@ const Loan = () => {
 
   return (
     <div className="flex flex-col items-center">
+      <LoanHeader />
+      <div className="py-2"></div>
       <LoanCard />
     </div>
   );
