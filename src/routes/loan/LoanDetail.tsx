@@ -38,7 +38,8 @@ const LoanDetail = () => {
           <div className="w-[1.3rem] h-[1.3rem] bg-blue-1 rounded-full flex items-center justify-center">
             <img src={check} className="w-[1rem] h-[1rem] " />
           </div>
-          <div className="pl-[0.15rem] leading-[0.8rem] text-[0.8rem] text-grey-1">
+          <div className="pb-[2rem]" />
+          <div className="pl-[0.15rem] leading-[0.8rem] text-[1rem]">
             HF 보증
           </div>
         </div>
