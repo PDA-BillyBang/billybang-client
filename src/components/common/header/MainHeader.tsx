@@ -1,6 +1,7 @@
-import { Avatar, Navbar } from "flowbite-react";
+import { Avatar, FloatingLabel, Navbar } from "flowbite-react";
 import React from "react";
 import search from "images/search.svg";
+import FloatingInputForm1 from "../form/FloatingInputForm1";
 
 export default function MainHeader() {
   return (
@@ -12,11 +13,11 @@ export default function MainHeader() {
             className="mx-3 h-6 sm:h-9"
             alt="Flowbite React Logo"
           /> */}
-          <div className="text-[2rem] font-CWDangamAsac-Bold text-dark-blue-1 mr-3">
+          <div className="text-[2rem] font-CWDangamAsac-Bold text-dark-blue-1 mx-2">
             빌려방
           </div>
         </Navbar.Brand>
-        <div className="text-[1.5rem] text-grey-1 dark:text-white">
+        <div className="text-[1.2rem] text-grey-1 dark:text-white">
           서울시 성동구
         </div>
       </div>
@@ -32,6 +33,11 @@ export default function MainHeader() {
           rounded
         />
       </div>
+
+      {/* <FloatingInputForm1
+        title="연간 소득"
+        text="연간 소득 금액을 입력해주세요"
+      /> */}
     </Navbar>
   );
 }
