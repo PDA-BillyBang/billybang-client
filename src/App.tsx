@@ -5,7 +5,11 @@ import { mainRoutes } from "./routers/MainRouter";
 
 function renderRoutes(routesObj: RouteObject[]) {
   return routesObj.map((route) => (
-    <Route key={route.path} path={route.path} element={route.element}>
+    <Route
+      key={route.path}
+      path={route.path}
+      element={route.element}
+    >
       {route.children && renderRoutes(route.children)}
     </Route>
   ));

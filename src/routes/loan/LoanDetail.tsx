@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
-export default function LoanDetail() {
-  return (
-    <div>LoanDetail</div>
-  )
-}
+const LoanDetail = () => {
+  const { setTitle } = useOutletContext<{ setTitle: (title: string) => void }>();
+
+  useEffect(() => {
+    setTitle('상품상세');
+  }, [setTitle]);
+
+  return <div>LoanDetail</div>;
+};
+
+export default LoanDetail;
