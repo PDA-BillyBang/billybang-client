@@ -1,6 +1,7 @@
-import { Avatar, Navbar } from "flowbite-react";
+import { Avatar, FloatingLabel, Navbar } from "flowbite-react";
 import React from "react";
 import search from "images/search.svg";
+
 import { Outlet } from "react-router-dom";
 type Props = {};
 

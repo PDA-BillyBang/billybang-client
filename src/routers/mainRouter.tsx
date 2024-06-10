@@ -9,5 +9,5 @@ export const mainRoutes = [
   ...mapRoutes,
   ...userRoutes,
   ...mypageRoutes,
-  ...notFoundRoutes
+  ...notFoundRoutes,
 ];
