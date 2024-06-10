@@ -15,6 +15,7 @@ export default function MainHeader() {
             </div>
           </Navbar.Brand>
           <div className="text-[1.2rem] text-grey-1 dark:text-white">
+
             서울시 성동구
           </div>
         </div>

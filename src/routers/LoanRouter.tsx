@@ -1,6 +1,5 @@
 import React from "react";
 import { RouteObject } from "react-router-dom";
-
 import Loan from "../routes/loan/Loan";
 import LoanCompany from "../routes/loan/LoanCompany";
 import LoanDetail from "../routes/loan/LoanDetail";
@@ -12,7 +11,7 @@ export const loanRoutes: RouteObject[] = [
     element: <SubHeader />,
     children: [
       {
-        path: "",
+        path: "recommend/:propertyId",
         element: <Loan />,
       },
       {
