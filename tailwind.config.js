@@ -45,6 +45,7 @@ module.exports = {
         144: "36rem",
         customWidthPercent: "85%",
         customMargin: "1rem",
+
       },
       borderRadius: {
         "4xl": "2rem",
