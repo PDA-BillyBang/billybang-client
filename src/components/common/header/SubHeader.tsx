@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { Navbar } from "flowbite-react";
 import backButton from "../../../assets/image/icons/backButton.svg";
 interface Props {
