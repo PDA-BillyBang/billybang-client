@@ -4,6 +4,7 @@ import bankTest from "../../assets/image/test/bank-test.png";
 import filledLike from "../../assets/image/icons/filledLike.svg";
 import check from "../../assets/image/icons/check.svg";
 import LoanSmallButton from "./LoanSmallButton";
+import LargeButton from "../../components/common/button/LargeButton";
 
 const LoanDetail = () => {
   const { setTitle } = useOutletContext<{
@@ -43,6 +44,34 @@ const LoanDetail = () => {
             HF 보증
           </div>
         </div>
+        <div className="text-red-1 pt-[0.3rem] font-bold">2.3~3.5%</div>
+        <div className="text-grey-1 pt-[0.5rem]">
+          주택금융공사 주택신용보증서 담보(90%보증)로 영업점 방문없이 인터넷상담
+          및 대출 실행이 가능한 전세대출
+        </div>
+        <div className="flex flex-row pt-[1rem]">
+          <div className="flex flex-col w-[30%] text-grey-1">
+            <div className="pt-[1rem]">분류</div>
+            <div className="pt-[1rem]">한도</div>
+            <div className="pt-[1rem]">LTV</div>
+            <div className="pt-[1rem]">기간</div>
+            <div className="pt-[1rem]">우대조건</div>
+          </div>
+          <div className="flex flex-col w-[70%]">
+            <div className="pt-[1rem]">주택담보대출</div>
+            <div className="pt-[1rem]">2억원</div>
+            <div className="pt-[1rem]">70%</div>
+            <div className="pt-[1rem]">1년~ 10년</div>
+            <div className="pt-[1rem]">신혼, 부부합산소득, 자녀여부</div>
+          </div>
+        </div>
+      </div>
+      <div className="w-[100%] flex justify-center absolute bottom-[1.7rem]">
+        <LargeButton
+          text="상세 보기"
+          customWidth="w-customWidthPercent"
+          isActive={0}
+        />
       </div>
     </div>
   );
