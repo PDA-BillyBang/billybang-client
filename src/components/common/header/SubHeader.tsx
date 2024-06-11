@@ -14,29 +14,24 @@ export default function SubHeader() {
   };
 
   return (
-    <div className="bg-white-1">
-      <Navbar fluid rounded>
-        <div className="fixed top-0 pt-[0.5rem] bg-white-1 flex items-center justify-between w-full">
-          <Navbar.Brand>
+    <div className="flex flex-col ">
+      <div className="fixed top-0 pt-[0.5rem] w-full bg-white-1">
+        <Navbar className="flex flex-row justify-between w-full bg-white-1">
+          <div>
             <img
               src={backButton}
-              className="h-5 sm:h-9 size-7 "
+              className="h-5 sm:h-9 size-7"
               alt="Billibang Logo"
               onClick={handleClickBack}
             />
-          </Navbar.Brand>
-          {/* <span className="self-center mx-auto text-xl font-semibold">
-            {title}
-          </span> */}
-          {/* <Navbar.Brand href="https://flowbite-react.com">
-            <div className="h-5 sm:h-9 size-7 "></div>
-          </Navbar.Brand> */}
-          <div className="flex-1 text-center">
+          </div>
+          <div>
             <span className="text-xl font-semibold">{title}</span>
           </div>
-          <div className="w-5 h-5 sm:h-9"></div>
-        </div>
-      </Navbar>
+          <div className="h-5 sm:h-9 size-7"></div>
+        </Navbar>
+      </div>
+      <div className="pt-[2rem]" />
       <Outlet context={{ setTitle }} />
     </div>
   );
