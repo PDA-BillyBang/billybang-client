@@ -6,9 +6,18 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
+    alias: [
       // tsconfig.json의 "paths" 설정과 일치시킵니다.
-      images: path.resolve(__dirname, "src/assets/image/icons"),
-    },
+      // images: path.resolve(__dirname, "src/assets/image/icons"),
+      {
+        find: "images",
+        replacement: path.resolve(__dirname, "src/assets/image/icons"),
+      },
+      { find: "@", replacement: path.resolve(__dirname, "src") },
+      {
+        find: "@components",
+        replacement: path.resolve(__dirname, "src/components"),
+      },
+    ],
   },
 });
