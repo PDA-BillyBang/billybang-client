@@ -4,9 +4,15 @@ interface Props {
   text: string;
   customWidth: string;
   isActive: number;
+  handleClick?: () => void;
 }
 
-export default function LargeButton({ text, customWidth, isActive }: Props) {
+export default function LargeButton({
+  text,
+  customWidth,
+  isActive,
+  handleClick,
+}: Props) {
   let buttonStyles;
 
   switch (isActive) {
@@ -24,5 +30,9 @@ export default function LargeButton({ text, customWidth, isActive }: Props) {
       break;
   }
 
-  return <button className={buttonStyles}>{text}</button>;
+  return (
+    <button className={buttonStyles} onClick={handleClick}>
+      {text}
+    </button>
+  );
 }
