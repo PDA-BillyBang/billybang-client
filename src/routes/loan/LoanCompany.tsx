@@ -5,6 +5,8 @@ import upArrow from "../../assets/image/icons/upArrow.svg";
 import LoanSmallButton from "./LoanSmallButton";
 import SelectHeader from "../../components/common/header/SelectHeader";
 import { useState } from "react";
+import CompanyEvaluation from "./company/CompanyEvaluation";
+import CompanyInfo from "./company/CompanyInfo";
 
 const LoanCompany = () => {
   const { setTitle } = useOutletContext<{
@@ -83,6 +85,7 @@ const LoanCompany = () => {
           leftText="재무제표"
           rightText="재무평가"
         />
+        {selectActive === 0 ? <CompanyInfo /> : <CompanyEvaluation />}
       </div>
     </div>
   );

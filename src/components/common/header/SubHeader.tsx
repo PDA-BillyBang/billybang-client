@@ -14,9 +14,9 @@ export default function SubHeader() {
   };
 
   return (
-    <div>
+    <div className="bg-white-1">
       <Navbar fluid rounded>
-        <div className="flex items-center justify-between w-full">
+        <div className="fixed top-[0.4rem] bg-white-1 flex items-center justify-between w-full">
           <Navbar.Brand>
             <img
               src={backButton}
