@@ -80,7 +80,7 @@ export default function Map({}: Props) {
   }, []);
 
   return (
-    <>
+    <div className="mt-16">
       <div id="map" className="relative h-96 w-full bg-grey-6 rounded-[5px]">
       <div className="absolute top-4 left-4 z-10 p-1 bg-white-2 rounded">
           <img 
@@ -95,7 +95,7 @@ export default function Map({}: Props) {
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
         {mapInfo}
       </pre>
-      <Pin></Pin>
-    </>
+      <Pin area={33} price={1150} onClick={()=>{}} count={3} ></Pin>
+    </div>
   );
 }
