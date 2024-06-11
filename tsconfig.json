@@ -23,8 +23,8 @@
     "baseUrl": "./src",
     "paths": {
       "images/*": ["assets/image/icons/*"],
-      "@components/*": ["src/components/*"],
-      "@/*": ["src/*"]
+      "@components/*": ["components/*"],
+      "@/*": ["*"]
     }
   },
   "include": ["src"],
