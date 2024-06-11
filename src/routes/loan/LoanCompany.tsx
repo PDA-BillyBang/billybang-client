@@ -49,7 +49,7 @@ const LoanCompany = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center w-[100%]">
+    <div className="flex flex-col items-center w-[100%] mt-[1rem]">
       <div className="flex flex-col w-customWidthPercent mt-[1rem]">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">

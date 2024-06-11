@@ -29,7 +29,7 @@ const LoanDetail = () => {
   };
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center mt-[1rem] ">
       <div className="py-[0.5rem]" />
       <div className=" w-customWidthPercent">
         <div className="flex flex-row items-center justify-between">
