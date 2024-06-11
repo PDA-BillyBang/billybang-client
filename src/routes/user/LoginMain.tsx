@@ -1,8 +1,8 @@
 // src/routes/user/LoginMain.tsx
 import React from "react";
 import FloatingInputForm1 from "../../components/common/form/FloatingInputForm1"; // 경로를 프로젝트 구조에 맞게 조정합니다.
-import KaKaoBtn from "../../assets/image/icons/kakao.png";
-import LargeButton from "../../components/common/button/LargeButton";
+import KaKaoBtn from "images/kakao.png";
+import LargeButton from "@components/common/button/LargeButton";
 
 export default function Login() {
   return (
