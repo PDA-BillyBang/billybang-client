@@ -26,6 +26,7 @@ module.exports = {
       "grey-5": "#F4F4F4",
       "grey-6": "#F7F7F7",
       "white-1": "#FFFFFF",
+      "white-2": "rgba(255, 255, 255, 0.5)",
       "blue-1": "#004CC7",
       "blue-2": "#487FD7",
       "blue-3": "#91AFFF",
