@@ -31,6 +31,10 @@ export default function SubHeader() {
           <Navbar.Brand href="https://flowbite-react.com">
             <div className="h-5 sm:h-9 size-7 "></div>
           </Navbar.Brand>
+          <div className="flex-1 text-center">
+            <span className="text-xl font-semibold">{title}</span>
+          </div>
+          <div className="h-5 sm:h-9 w-5"></div>
         </div>
       </Navbar>
       <Outlet context={{ setTitle }} />

@@ -20,7 +20,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         {renderRoutes(mainRoutes)}
-        efe
       </Routes>
     </BrowserRouter>
   );
