@@ -20,18 +20,18 @@ export default function SubHeader() {
           <div>
             <img
               src={backButton}
-              className="h-5 sm:h-9 size-7"
+              className="h-5 sm:h-9 size-4"
               alt="Billibang Logo"
               onClick={handleClickBack}
             />
           </div>
           <div>
-            <span className="text-xl font-semibold">{title}</span>
+            <span className="text-[1.2rem] font-semibold">{title}</span>
           </div>
-          <div className="h-5 sm:h-9 size-7"></div>
+          <div className="h-5 sm:h-9 size-4"></div>
         </Navbar>
       </div>
-      <div className="pt-[2rem]" />
+      <div className="pt-[2.5rem]" />
       <Outlet context={{ setTitle }} />
     </div>
   );
