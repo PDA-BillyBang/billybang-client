@@ -2,11 +2,17 @@ import React from "react";
 import bankTest from "../../assets/image/test/bank-test.png";
 import filledLike from "../../assets/image/icons/filledLike.svg";
 
-type Props = {};
+type Props = {
+  propertyId?: number;
+  handleClick?: (index: number) => void;
+};
 
-export default function LoanCard({}: Props) {
+export default function LoanCard({ propertyId, handleClick }: Props) {
   return (
-    <div className="h-[180px] w-customWidthPercent bg-grey-6 rounded-[5px] hover:bg-grey-5">
+    <div
+      onClick={() => propertyId && handleClick && handleClick(propertyId)}
+      className="h-[180px] cursor-pointer w-customWidthPercent bg-grey-6 rounded-[5px] hover:bg-grey-5"
+    >
       <div className="px-[1rem] py-[0.5rem] flex flex-col">
         <div className="flex flex-row items-center justify-between w-[100%]">
           <img
