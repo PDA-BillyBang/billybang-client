@@ -25,16 +25,16 @@ export default function SubHeader() {
               onClick={handleClickBack}
             />
           </Navbar.Brand>
-          <span className="self-center mx-auto text-xl font-semibold">
+          {/* <span className="self-center mx-auto text-xl font-semibold">
             {title}
-          </span>
-          <Navbar.Brand href="https://flowbite-react.com">
+          </span> */}
+          {/* <Navbar.Brand href="https://flowbite-react.com">
             <div className="h-5 sm:h-9 size-7 "></div>
-          </Navbar.Brand>
+          </Navbar.Brand> */}
           <div className="flex-1 text-center">
             <span className="text-xl font-semibold">{title}</span>
           </div>
-          <div className="h-5 sm:h-9 w-5"></div>
+          <div className="w-5 h-5 sm:h-9"></div>
         </div>
       </Navbar>
       <Outlet context={{ setTitle }} />
