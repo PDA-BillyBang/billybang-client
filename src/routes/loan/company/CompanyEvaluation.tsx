@@ -10,6 +10,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import size from "../../../assets/image/company/size.svg";
+import stability from "../../../assets/image/company/stability.svg";
+import growingTrend from "../../../assets/image/company/growingTrend.svg";
+import money from "../../../assets/image/company/money.svg";
 
 type Props = {};
 const data = [
@@ -56,11 +60,36 @@ export default function CompanyEvaluation({}: Props) {
         </BarChart>
       </ResponsiveContainer>
       <div className="flex flex-col w-[100%]">
-        <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem]">
-          <div>규모형태</div>
-          <div>상위 3%</div>
+        <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem] justify-between items-center px-[1rem]">
+          <div className="text-[0.8rem] flex flex-row items-center">
+            <img src={size} className="pr-[0.2rem]" />
+            규모형태
+          </div>
+          <div className="text-[0.8rem] font-bold text-red-1">상위 3%</div>
+        </div>
+        <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem] justify-between items-center px-[1rem]">
+          <div className="text-[0.8rem] flex flex-row items-center">
+            <img src={stability} className="pr-[0.2rem]" />
+            안정성
+          </div>
+          <div className="text-[0.8rem] font-bold text-red-1">상위 3%</div>
+        </div>
+        <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem] justify-between items-center px-[1rem]">
+          <div className="text-[0.8rem] flex flex-row items-center">
+            <img src={growingTrend} className="pr-[0.2rem]" />
+            성장성
+          </div>
+          <div className="text-[0.8rem] font-bold text-red-1">상위 3%</div>
+        </div>
+        <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem] justify-between items-center px-[1rem]">
+          <div className="text-[0.8rem] flex flex-row items-center">
+            <img src={money} className="pr-[0.2rem]" />
+            수익성
+          </div>
+          <div className="text-[0.8rem] font-bold text-red-1">상위 3%</div>
         </div>
       </div>
+      <div className="py-[1rem]" />
     </div>
   );
 }
