@@ -15,7 +15,7 @@ export default function SubHeader() {
 
   return (
     <div className="flex flex-col ">
-      <div className="fixed top-0 pt-[0.5rem] w-full bg-white-1">
+      <div className="fixed top-0 pt-[0.5rem] w-full bg-white-1 z-10">
         <Navbar className="flex flex-row justify-between w-full bg-white-1">
           <div>
             <img
