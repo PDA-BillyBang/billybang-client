@@ -1,10 +1,19 @@
 // src/routes/user/LoginMain.tsx
-import React from "react";
+import React, { useState } from "react";
 import FloatingInputForm1 from "../../components/common/form/FloatingInputForm1"; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from "images/kakao.png";
 import LargeButton from "@components/common/button/LargeButton";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+
+  // 상태 업데이트 헬퍼 함수
+  const handleEmailChange = (value: string | number) => {
+    if (typeof value === "string") {
+      setEmail(value);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <div className="w-customWidthPercent font-bold text-[1.5rem] my-[7rem]">
@@ -16,7 +25,11 @@ export default function Login() {
         <div className="bg-white-1 text-grey-2 text-[0.8rem]">
           먼저 로그인, 회원가입이 필요해요!
         </div>
-        <FloatingInputForm1 text="이메일 주소를 입력해주세요"></FloatingInputForm1>
+        <FloatingInputForm1
+          text="이메일 주소를 입력해주세요"
+          value={email}
+          onChange={handleEmailChange}
+        ></FloatingInputForm1>
         <div className="my-4">
           <LargeButton
             text="계속하기"
