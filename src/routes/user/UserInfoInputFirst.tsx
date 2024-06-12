@@ -1,18 +1,9 @@
 import LargeButton from "@components/common/button/LargeButton";
+import RadioOption from "@components/common/button/RadioButton";
 import FloatingInputForm1 from "@components/common/form/FloatingInputForm1";
 import ProgressBar from "@components/common/progressbar/ProgressBar";
-import { Label, Radio } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-
-interface RadioOptionProps {
-  id: string;
-  name: string;
-  value: string;
-  selectedOption: string;
-  onChange: (option: string) => void;
-  label: string;
-}
 
 const UserInfoInputFirst: React.FC = () => {
   const [salary, setSalary] = useState<number>(0);
@@ -76,7 +67,7 @@ const UserInfoInputFirst: React.FC = () => {
         <ProgressBar color={1} />
       </div>
 
-      <div className="flex flex-col w-customWidthPercent mt-[4rem] my-[2rem]">
+      <div className="flex flex-col w-customWidthPercent mt-[2rem] mb-[1rem]">
         <FloatingInputForm1
           type="number"
           title="연간소득금액"
@@ -87,7 +78,7 @@ const UserInfoInputFirst: React.FC = () => {
         />
       </div>
 
-      <div className="flex flex-col w-customWidthPercent my-[2rem]">
+      <div className="flex flex-col w-customWidthPercent my-[1rem]">
         <FloatingInputForm1
           type="number"
           title="신용 등급"
@@ -100,10 +91,8 @@ const UserInfoInputFirst: React.FC = () => {
         />
       </div>
 
-      <div className="flex flex-col w-customWidthPercent my-[2rem] text-grey-2 hover:text-[black]">
-        <div className="text-[1.5rem] font-bold mb-2">
-          생애 최초 주택 구입자
-        </div>
+      <div className="flex flex-col w-customWidthPercent my-[1rem] text-grey-2 hover:text-[black]">
+        <div className="text-[1.5rem] font-bold">생애 최초 주택 구입자</div>
         <RadioOption
           id="firstBuyerYes"
           name="firstBuyerOption"
@@ -122,8 +111,8 @@ const UserInfoInputFirst: React.FC = () => {
         />
       </div>
 
-      <div className="flex flex-col w-customWidthPercent my-[2rem] text-grey-2 hover:text-[black]">
-        <div className="text-[1.5rem] font-bold mb-2">대출 보유 여부</div>
+      <div className="flex flex-col w-customWidthPercent text-grey-2 hover:text-[black]">
+        <div className="text-[1.5rem] font-bold">대출 보유 여부</div>
         <RadioOption
           id="loanYes"
           name="loanOption"
@@ -145,30 +134,6 @@ const UserInfoInputFirst: React.FC = () => {
       <div className="mt-auto w-customWidthPercent flex flex-col items-center mb-4">
         <LargeButton text="계속하기" customWidth="w-full" isActive={isActive} />
       </div>
-    </div>
-  );
-};
-
-const RadioOption: React.FC<RadioOptionProps> = ({
-  id,
-  name,
-  value,
-  selectedOption,
-  onChange,
-  label,
-}) => {
-  return (
-    <div className="flex items-center gap-2">
-      <Radio
-        id={id}
-        name={name}
-        value={value}
-        checked={selectedOption === value}
-        onChange={() => onChange(value)}
-      />
-      <Label className="text-[1.2rem]" htmlFor={value}>
-        {label}
-      </Label>
     </div>
   );
 };
