@@ -4,15 +4,15 @@ type Props = {
   type?: string;
   title?: string;
   text: string;
-  value: string; // 입력 값을 부모로부터 받음
-  onChange: (value: string) => void; // 입력 값이 변경될 때 호출할 핸들러
-  validate?: (value: string) => boolean; // 유효성 검사 함수
+  value?: string | number; // 부모로부터 입력 값을 받음
+  onChange: (value: string | number) => void; // 입력 값이 변경될 때 호출할 핸들러
+  validate?: (value: string | number) => boolean; // 유효성 검사 함수
   errorMessage?: string; // 오류 메시지
 };
 
 export default function FloatingInputForm1({
   type = "text",
-  title,
+  title = "",
   text,
   value,
   onChange,
@@ -24,7 +24,8 @@ export default function FloatingInputForm1({
 
   const handleBlur = () => {
     setIsFocused(false);
-    if (validate) {
+    if (validate && value !== undefined) {
+      // 수정된 부분: value가 정의되어 있을 때만 유효성 검사 수행
       setIsValid(validate(value));
     }
   };
@@ -34,7 +35,7 @@ export default function FloatingInputForm1({
       <div
         className={`text-${
           isFocused ? "red" : "grey"
-        }-2 text-[1.5rem] font-bold `}
+        }-2 text-[1.5rem] font-bold`}
       >
         {title}
       </div>
@@ -44,9 +45,10 @@ export default function FloatingInputForm1({
         value={value}
         onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
-        }
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          const newValue = type === "number" ? +e.target.value : e.target.value;
+          onChange(newValue);
+        }}
         className="w-full h-[3rem] border-b border-grey-2 placeholder-grey-2 focus:outline-none focus:border-[black]"
       />
       {!isValid && (

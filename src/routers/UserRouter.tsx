@@ -3,7 +3,9 @@ import { RouteObject } from "react-router-dom";
 import LoginMain from "../routes/user/LoginMain";
 import LoginPwInput from "../routes/user/LoginPwInput";
 import Signup from "../routes/user/Signup";
-import UserInfoInput from "../routes/user/UserInfoInput";
+import UserInfoInputFirst from "../routes/user/UserInfoInputFirst";
+import UserInfoInputSecond from "../routes/user/UserInfoInputSecond";
+import UserInfoInputThird from "../routes/user/UserInfoInputThird";
 import UserInfoInputDone from "../routes/user/UserInfoInputDone";
 import MainHeader from "../components/common/header/MainHeader";
 import SubHeader from "../components/common/header/SubHeader";
@@ -17,8 +19,23 @@ export const userRoutes: RouteObject[] = [
         children: [
           {
             path: "",
-            element: <UserInfoInput />,
+            element: <SubHeader />,
+            children: [
+              {
+                path: "first",
+                element: <UserInfoInputFirst />,
+              },
+              {
+                path: "second",
+                element: <UserInfoInputSecond />,
+              },
+              {
+                path: "third",
+                element: <UserInfoInputThird />,
+              },
+            ],
           },
+
           {
             path: "done",
             element: <UserInfoInputDone />,
