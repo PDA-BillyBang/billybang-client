@@ -1,5 +1,6 @@
 import React from "react";
 import profileTest from "../../assets/image/test/profile-test.svg";
+import FavoriteRooms from "../../components/mypage/FavoriteRooms";
 
 export default function Mypage() {
   return (
@@ -19,7 +20,9 @@ export default function Mypage() {
           </div>
         </div>
       </div>
-      <div>찜한 방</div>
+      <div className="py-[1rem]" />
+      <div className="font-bold pb-[0.4rem]">찜한 방</div>
+      <FavoriteRooms />
     </div>
   );
 }
