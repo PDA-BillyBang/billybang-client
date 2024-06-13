@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import roomTest from "../../assets/image/test/room-test.svg";
 import filledLike from "../../assets/image/icons/filledLike.svg";
+import LikeButton from "../common/button/LikeButton";
 type Props = {};
 
-export default function FavoriteDetailLoanCard({}: Props) {
+export default function FavoriteDetailRoomCard({}: Props) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [likeActive, setLikeActive] = useState<boolean>(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,6 +18,11 @@ export default function FavoriteDetailLoanCard({}: Props) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleLikeClick = () => {
+    console.log("like");
+    setLikeActive((prev) => !prev);
+  };
 
   return (
     <div className="w-[100%] hover:bg-grey-5 bg-grey-6 h-[150px] sm:h-[140px] flex flex-row rounded-[10px]">
@@ -30,7 +37,7 @@ export default function FavoriteDetailLoanCard({}: Props) {
       <div className="flex flex-col w-[59%] pt-[10px]">
         <div className="font-bold w-[100%] justify-between items-center pr-[0.8rem] text-[1rem] flex flex-row">
           <div>두산위브파빌리온</div>
-          <img src={filledLike} className="h-[1.5rem] w-[1.5rem]" />
+          <LikeButton handleClick={handleLikeClick} isActive={likeActive} />
         </div>
         <div className="flex flex-row items-baseline">
           <div className="text-blue-1 text-[0.7rem] font-bold">매매</div>

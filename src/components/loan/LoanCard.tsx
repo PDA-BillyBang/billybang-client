@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import bankTest from "../../assets/image/test/bank-test.png";
-import filledLike from "../../assets/image/icons/filledLike.svg";
+import LikeButton from "../common/button/LikeButton";
 
 type Props = {
   propertyId?: number;
   handleClick?: (index: number) => void;
+  likeActive?: boolean;
 };
 
-export default function LoanCard({ propertyId, handleClick }: Props) {
+export default function LoanCard({
+  propertyId,
+  handleClick,
+  likeActive = false,
+}: Props) {
+  const [likeButtonActive, setLikeButtonActive] = useState<boolean>(likeActive);
+  const handleLikeClick = () => {
+    console.log("like loan card");
+    setLikeButtonActive((prev) => !prev);
+  };
   return (
     <div
       onClick={() => propertyId && handleClick && handleClick(propertyId)}
-      className="h-[180px] cursor-pointer w-customWidthPercent bg-grey-6 rounded-[5px] hover:bg-grey-5"
+      className="h-[180px] w-[100%] cursor-pointer bg-grey-6 rounded-[5px] hover:bg-grey-5"
     >
       <div className="px-[1rem] py-[0.5rem] flex flex-col">
         <div className="flex flex-row items-center justify-between w-[100%]">
@@ -22,10 +32,9 @@ export default function LoanCard({ propertyId, handleClick }: Props) {
           />
           <div className="px-[0.2rem]" />
           <div className="w-[85%] font-bold text-[1.3rem]">우리은행</div>
-          <img
-            src={filledLike}
-            alt="star check"
-            className="w-[1.5rem] h-[1.5rem]"
+          <LikeButton
+            isActive={likeButtonActive}
+            handleClick={handleLikeClick}
           />
         </div>
         <div className="py-[0.2rem]" />
@@ -41,7 +50,7 @@ export default function LoanCard({ propertyId, handleClick }: Props) {
           <div className="py-[0.15rem]" />
           <div className="flex flex-row justify-between text-[0.9rem]">
             <div className="text-grey-1">2.4억, LTV 70%이내</div>
-            <div className="font-bold text-red-1">2.3~3.5%</div>
+            <div className="font-bold text-blue-1"> 2.3~3.5%</div>
           </div>
         </div>
       </div>

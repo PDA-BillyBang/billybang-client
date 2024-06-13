@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import FavoriteDetailLoanCard from "../../components/mypage/FavoriteDetailLoanCard";
+import FavoriteDetailRoomCard from "../../components/mypage/FavoriteDetailRoomCard";
 
 export default function MypageProperties() {
   const { setTitle } = useOutletContext<{
@@ -19,7 +19,7 @@ export default function MypageProperties() {
         {data.map((value, index) => {
           return (
             <div key={index} className="pb-[0.5rem]">
-              <FavoriteDetailLoanCard />
+              <FavoriteDetailRoomCard />
             </div>
           );
         })}
