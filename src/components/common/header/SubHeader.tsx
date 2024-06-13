@@ -14,7 +14,6 @@ export default function SubHeader() {
   };
 
   return (
-
     <div className="flex flex-col ">
       <div className="fixed top-0 pt-[0.5rem] w-full bg-white-1 z-10">
         <Navbar className="flex flex-row justify-between w-full bg-white-1">
@@ -25,7 +24,6 @@ export default function SubHeader() {
               alt="Billibang Logo"
               onClick={handleClickBack}
             />
-
           </div>
           <div>
             <span className="text-[1.2rem] font-semibold">{title}</span>
@@ -33,7 +31,7 @@ export default function SubHeader() {
           <div className="h-5 sm:h-9 size-4"></div>
         </Navbar>
       </div>
-      <div className="pt-[2.5rem]" />
+      {/* <div className="pt-[1.5rem]" /> */}
       <Outlet context={{ setTitle }} />
     </div>
   );

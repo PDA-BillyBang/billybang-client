@@ -163,7 +163,7 @@ export default function UserInfoInputSecond() {
         <LargeButton
           text="이전"
           customWidth="w-[50%]"
-          isActive={3}
+          isActive={4}
         ></LargeButton>
         <LargeButton
           text="다음"
