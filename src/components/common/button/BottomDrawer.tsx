@@ -19,7 +19,7 @@ export default function BottomDrawer({ isOpen, handleClose, children }: Props) {
         className="w-[100px] h-[3px] bg-grey-2 rounded-[10px] mb-[10px]"
         onClick={handleClose}
       ></button>
-      <Drawer.Items className="h-[50vh]">{children}</Drawer.Items>
+      <Drawer.Items className="h-[50vh] w-full">{children}</Drawer.Items>
     </Drawer>
   );
 }
