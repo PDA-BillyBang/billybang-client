@@ -2,6 +2,7 @@ import Pin from "../../components/map/Pin";
 import React, { useEffect, useState, useRef } from "react";
 import Aim from '../../assets/image/icons/aim.png';
 import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 
 type Property = {
   propertyId: number;
@@ -61,14 +62,27 @@ export default function MapComponent() {
         count: 1,
         price: 1100,
       },
+      {
+        propertyId: 4,
+        articleName: "104동 309호",
+        latitude: 37.53992802945424,
+        longitude: 127.05142662693137,
+        buildingName: "위례자이",
+        realEstateType: "아파트",
+        area1: 32,
+        area2: 29,
+        count: 1,
+        price: 1100,
+      },
     ];
 
     setProperties(dummyProperties);
 
     const container = document.getElementById('map');
     const options = {
-      center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
-      level: 3, // 지도의 확대 레벨
+      center: new window.kakao.maps.LatLng(37.53992802945424, 127.05142662693137),
+      // center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
+      level: 1, // 지도의 확대 레벨
     };
     const mapInstance = new window.kakao.maps.Map(container, options); // 지도를 생성
     setMap(mapInstance);
@@ -107,7 +121,7 @@ export default function MapComponent() {
 
   useEffect(() => {
     if (!map) return;
-
+    
     const moveToCurrentLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -125,8 +139,8 @@ export default function MapComponent() {
     properties.forEach((property) => {
       const position = new window.kakao.maps.LatLng(property.latitude, property.longitude);
       const container = document.createElement('div');
-
-      ReactDOM.render(
+      const root = createRoot(container); 
+      root.render(
         <Pin
           area={property.area1}
           price={property.price}
@@ -137,7 +151,6 @@ export default function MapComponent() {
           }}
           isSelected={selectedPropertyId === property.propertyId}
         />,
-        container
       );
 
       const customOverlay = new window.kakao.maps.CustomOverlay({
@@ -154,9 +167,9 @@ export default function MapComponent() {
 
     return () => {
       document.getElementById('currentLocationImg')?.removeEventListener('click', moveToCurrentLocation);
-
       // 기존 오버레이들을 모두 제거
       Object.values(overlayRef.current).forEach((overlay) => overlay.setMap(null));
+    
     };
   }, [map, properties, selectedPropertyId]);
 

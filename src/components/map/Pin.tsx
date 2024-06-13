@@ -12,8 +12,7 @@ type Props = {
 export default function Pin({ propertyId, area, price, count, handleClick, isSelected }: Props) {
   return (
     <div
-      id="main"
-      className="w-20 h-16 flex flex-col items-start justify-end cursor-pointer bg-transparent"
+      className="flex flex-col items-start justify-end cursor-pointer bg-transparent absolute"
       onClick={() => handleClick(propertyId)}
     >
       <div
