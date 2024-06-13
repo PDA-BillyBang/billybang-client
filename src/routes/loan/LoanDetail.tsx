@@ -6,6 +6,7 @@ import check from "../../assets/image/icons/check.svg";
 import LoanSmallButton from "./LoanSmallButton";
 import LargeButton from "../../components/common/button/LargeButton";
 import { useNavigate } from "react-router-dom";
+import LikeButton from "../../components/common/button/LikeButton";
 
 const LoanDetail = () => {
   const { setTitle } = useOutletContext<{
@@ -29,7 +30,7 @@ const LoanDetail = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-[1rem] ">
+    <div className="flex flex-col items-center mt-[80px] ">
       <div className="py-[0.5rem]" />
       <div className=" w-customWidthPercent">
         <div className="flex flex-row items-center justify-between">
@@ -49,7 +50,7 @@ const LoanDetail = () => {
           <div className="font-bold text-[1.2rem] leading-[1.2rem] text-center">
             iTouch 전세론(주택금융보증)
           </div>
-          <img src={filledLike} className="w-[25px] h-[25px]" />
+          <LikeButton />
         </header>
         <div className="flex flex-row items-center">
           <div className="w-[1.3rem] h-[1.3rem] bg-blue-1 rounded-full flex items-center justify-center">

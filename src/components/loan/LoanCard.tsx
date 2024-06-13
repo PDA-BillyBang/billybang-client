@@ -3,13 +3,13 @@ import bankTest from "../../assets/image/test/bank-test.png";
 import LikeButton from "../common/button/LikeButton";
 
 type Props = {
-  propertyId?: number;
+  loanId?: number;
   handleClick?: (index: number) => void;
   likeActive?: boolean;
 };
 
 export default function LoanCard({
-  propertyId,
+  loanId,
   handleClick,
   likeActive = false,
 }: Props) {
@@ -20,7 +20,7 @@ export default function LoanCard({
   };
   return (
     <div
-      onClick={() => propertyId && handleClick && handleClick(propertyId)}
+      onClick={() => loanId && handleClick && handleClick(loanId)}
       className="h-[180px] w-[100%] cursor-pointer bg-grey-6 rounded-[5px] hover:bg-grey-5"
     >
       <div className="px-[1rem] py-[0.5rem] flex flex-col">

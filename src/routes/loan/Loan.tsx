@@ -16,8 +16,8 @@ const Loan = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
 
-  const handleClickLoanId = (propertyId: number) =>
-    navigate("/loan/detail/" + propertyId);
+  const handleClickLoanId = (loanId: number) =>
+    navigate("/loan/detail/" + loanId);
 
   useEffect(() => {
     setTitle("충무로엘크루메크로시티2"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
@@ -30,7 +30,7 @@ const Loan = () => {
       <div className="py-[5rem]">,</div>
       <LoanHeader />
       <div className="py-[1rem]"></div>
-      <LoanCard handleClick={handleClickLoanId} propertyId={123} />
+      <LoanCard handleClick={handleClickLoanId} loanId={123} />
       <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
         <div>children</div>
       </BottomDrawer>

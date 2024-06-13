@@ -4,21 +4,25 @@ import emptyLike from "../../../assets/image/icons/emptyLike.svg";
 import BottomAlert from "../alert/BottomAlert";
 
 type Props = {
-  handleClick?: () => void;
+  handleClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   isActive?: boolean;
 };
 
 export default function LikeButton({ handleClick, isActive }: Props) {
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleButtonClick = () => {
-    if (handleClick) handleClick();
+  const handleButtonClick = (event) => {
+    event.stopPropagation();
+    if (handleClick) handleClick(event);
     setShowAlert(true);
   };
 
   return (
     <div>
-      <div onClick={handleButtonClick} className="cursor-pointer ">
+      <div
+        onClick={(event) => handleButtonClick(event)}
+        className="cursor-pointer "
+      >
         <img
           src={isActive ? filledLike : emptyLike}
           alt="filledLike"
