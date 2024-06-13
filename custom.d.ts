@@ -19,6 +19,6 @@ declare module "*.gif" {
 }
 
 declare module "*.svg" {
-  const value: string;
-  export default value;
+  const content: any;
+  export default content;
 }
