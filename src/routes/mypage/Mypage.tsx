@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function Mypage() {
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate("/my/loan");
+  const handleToMyProperties = () => navigate("/my/properties");
   return (
     <div className="w-customWidthPercent">
       <div className="flex flex-row items-center">
@@ -38,7 +39,7 @@ export default function Mypage() {
       </div>
       <FavoriteRooms />
       <div className="pb-[1rem]" />
-      <PlusButton handleClick={handleToMyLoan} />
+      <PlusButton handleClick={handleToMyProperties} />
       <div className="py-[2rem]" />
       <div className="font-bold flex items-center flex-row text-[1.2rem] pb-[0.4rem]">
         <img
