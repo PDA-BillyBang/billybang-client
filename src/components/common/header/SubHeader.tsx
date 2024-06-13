@@ -31,7 +31,6 @@ export default function SubHeader() {
           <div className="h-5 sm:h-9 size-4"></div>
         </Navbar>
       </div>
-      {/* <div className="my-[30px]" /> */}
       <Outlet context={{ setTitle }} />
     </div>
   );
