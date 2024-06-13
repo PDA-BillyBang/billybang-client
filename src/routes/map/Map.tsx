@@ -1,7 +1,8 @@
 import Pin from "../../components/map/Pin";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Aim from '../../assets/image/icons/aim.png';
 import ReactDOMServer from 'react-dom/server';
+import ReactDOM from 'react-dom';
 
 type Property = {
   propertyId: number;
@@ -16,10 +17,11 @@ type Property = {
   price: number;
 };
 
-export default function Map() {
+export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number|null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(1);
+  const [map, setMap] = useState<any>(null);
 
   useEffect(() => {
     // 더미 데이터 설정
@@ -69,17 +71,18 @@ export default function Map() {
       center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
       level: 3 // 지도의 확대 레벨
     };
-    const map = new window.kakao.maps.Map(container, options); // 지도를 생성
+    const mapInstance = new window.kakao.maps.Map(container, options); // 지도를 생성
+    setMap(mapInstance);
 
     const getInfo = () => {
       // 지도의 현재 중심좌표를 얻어옵니다 
-      const center = map.getCenter(); 
+      const center = mapInstance.getCenter(); 
       
       // 지도의 현재 레벨을 얻어옵니다
-      const level = map.getLevel();
+      const level = mapInstance.getLevel();
       
       // 지도의 현재 영역을 얻어옵니다 
-      const bounds = map.getBounds();
+      const bounds = mapInstance.getBounds();
       
       // 영역의 남서쪽 좌표를 얻어옵니다 
       const swLatLng = bounds.getSouthWest(); 
@@ -98,20 +101,29 @@ export default function Map() {
       message += '경도의 범위는 ' + lngRange + ' 입니다';
       
       setMapInfo(message);
-    }
+    };
+
     // 지도 로딩 후 정보를 업데이트합니다.
-    map.addControl(new window.kakao.maps.ZoomControl(), window.kakao.maps.ControlPosition.RIGHT);
-    map.addControl(new window.kakao.maps.MapTypeControl(), window.kakao.maps.ControlPosition.TOPRIGHT);
+    mapInstance.addControl(new window.kakao.maps.ZoomControl(), window.kakao.maps.ControlPosition.RIGHT);
+    mapInstance.addControl(new window.kakao.maps.MapTypeControl(), window.kakao.maps.ControlPosition.TOPRIGHT);
     getInfo();
     
     // 지도 이동 시 정보를 업데이트합니다.
-    window.kakao.maps.event.addListener(map, 'center_changed', getInfo);
-    window.kakao.maps.event.addListener(map, 'zoom_changed', getInfo);
+    window.kakao.maps.event.addListener(mapInstance, 'center_changed', getInfo);
+    window.kakao.maps.event.addListener(mapInstance, 'zoom_changed', getInfo);
 
-    // 현재 위치로 이동하는 함수
+    return () => {
+      window.kakao.maps.event.removeListener(mapInstance, 'center_changed', getInfo);
+      window.kakao.maps.event.removeListener(mapInstance, 'zoom_changed', getInfo);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!map) return;
+
     const moveToCurrentLocation = () => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition((position) => {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
           const locPosition = new window.kakao.maps.LatLng(lat, lon);
@@ -120,31 +132,37 @@ export default function Map() {
           map.panTo(locPosition);
         });
       }
-    }
-    moveToCurrentLocation();
+    };
 
-    // 현재 위치로 이동 버튼 클릭 시 현재 위치로 이동
-    document.getElementById('currentLocationImg')?.addEventListener('click', moveToCurrentLocation)
+    document.getElementById('currentLocationImg')?.addEventListener('click', moveToCurrentLocation);
 
     properties.forEach(property => {
       const position = new window.kakao.maps.LatLng(property.latitude, property.longitude);
+      const container = document.createElement('div');
+
+      ReactDOM.render(
+        <Pin 
+          area={property.area1} 
+          price={property.price} 
+          count={property.count}
+          propertyId={property.propertyId}
+          handleClick={setSelectedPropertyId}
+        />,
+        container
+      );
+
       const customOverlay = new window.kakao.maps.CustomOverlay({
         position: position,
-        content: ReactDOMServer.renderToString(
-          <Pin 
-            area={property.area1} 
-            price={property.price} 
-            count={property.count} 
-            handleClick={setSelectedPropertyId}
-            propertyId={property.propertyId}
-          />
-        ),
+        content: container,
         yAnchor: 1,
       });
       customOverlay.setMap(map);
     });
 
-  }, []);
+    return () => {
+      document.getElementById('currentLocationImg')?.removeEventListener('click', moveToCurrentLocation);
+    };
+  }, [map, properties]);
 
   return (
     <div className="pt-16 h-[100vh]">
@@ -155,9 +173,10 @@ export default function Map() {
             src={Aim} 
             alt="현재 위치로 이동" 
             className="w-8 h-8 cursor-pointer"
-          />
+            />
         </div>
       </div>
+      {selectedPropertyId}
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
         {mapInfo}
       </pre>
