@@ -1,7 +1,6 @@
 import Pin from "../../components/map/Pin";
 import React, { useEffect, useState, useRef } from "react";
 import Aim from '../../assets/image/icons/aim.png';
-import ReactDOM from 'react-dom';
 import { createRoot } from "react-dom/client";
 
 type Property = {
@@ -21,7 +20,7 @@ export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
-  const [map, setMap] = useState<any>(null);
+  const [map, setMap] = useState<kakao.maps.Map|null>(null);
   const overlayRef = useRef<{ [key: number]: any }>({});
 
   useEffect(() => {
@@ -80,10 +79,12 @@ export default function MapComponent() {
 
     const container = document.getElementById('map');
     const options = {
-      center: new window.kakao.maps.LatLng(37.53992802945424, 127.05142662693137),
-      // center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
-      level: 1, // 지도의 확대 레벨
+      center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
+      level: 3, // 지도의 확대 레벨
     };
+    if (!container){
+      return
+    }
     const mapInstance = new window.kakao.maps.Map(container, options); // 지도를 생성
     setMap(mapInstance);
 
@@ -167,9 +168,7 @@ export default function MapComponent() {
 
     return () => {
       document.getElementById('currentLocationImg')?.removeEventListener('click', moveToCurrentLocation);
-      // 기존 오버레이들을 모두 제거
       Object.values(overlayRef.current).forEach((overlay) => overlay.setMap(null));
-    
     };
   }, [map, properties, selectedPropertyId]);
 
