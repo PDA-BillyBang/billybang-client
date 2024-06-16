@@ -5,6 +5,7 @@ import { initializeMap } from "./methods/initializeMap";
 import { moveToCurrentLocation } from "./methods/moveToCurrentLocation";
 import { renderProperties } from "./methods/renderProperties";
 import { updateSelectedProperty } from "./methods/updateSelectedProperty";
+import BottomDrawer from "@components/common/button/BottomDrawer";
 
 
 export default function MapComponent() {
@@ -12,6 +13,7 @@ export default function MapComponent() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
   const [map, setMap] = useState<kakao.maps.Map|null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
 
@@ -42,8 +44,19 @@ export default function MapComponent() {
       properties,
       setSelectedPropertyId
     );
+    if (selectedPropertyId !== null) {
+      setIsDrawerOpen(true);
+    } else {
+      setIsDrawerOpen(false);
+    }
   }, [selectedPropertyId, map, properties]);
 
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+    setSelectedPropertyId(null);
+  };
+
+  const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
 
   return (
     <div className="pt-16 h-[100vh]">
@@ -56,8 +69,15 @@ export default function MapComponent() {
             className="w-8 h-8 cursor-pointer"
           />
         </div>
+        {selectedProperty && (
+          <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
+            <div>
+              <div>{selectedProperty.articleName}</div>
+              <div>{selectedProperty.price/100}억원</div>
+            </div>
+          </BottomDrawer>
+        )}
       </div>
-      {selectedPropertyId}
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
         {mapInfo}
       </pre>
