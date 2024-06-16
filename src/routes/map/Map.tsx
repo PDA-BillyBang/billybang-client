@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Aim from '@/assets/image/icons/aim.png';
 import { Property, OverlayData } from "@/utils/types";
 import { initializeMap } from "./methods/initializeMap";
@@ -6,7 +7,9 @@ import { moveToCurrentLocation } from "./methods/moveToCurrentLocation";
 import { renderProperties } from "./methods/renderProperties";
 import { updateSelectedProperty } from "./methods/updateSelectedProperty";
 import BottomDrawer from "@components/common/button/BottomDrawer";
-
+import SmallButton from "@components/common/button/SmallButton";
+import LargeButton from "@components/common/button/LargeButton";
+import mapStatistic from "../../assets/image/icons/mapStatistic.svg";
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
@@ -16,6 +19,7 @@ export default function MapComponent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
+  const navigate = useNavigate();
 
   // 더미데이터, 지도, 지도정보, 지도컨트롤러 생성
   useEffect(() => {
@@ -58,6 +62,10 @@ export default function MapComponent() {
 
   const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
 
+  const onButtonClick = () => {
+    navigate('/statistics/1');
+  };
+
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
@@ -75,8 +83,12 @@ export default function MapComponent() {
               <div>{selectedProperty.articleName}</div>
               <div>{selectedProperty.price/100}억원</div>
             </div>
+            <LargeButton text={"더 많은 대출 상품 보러가기"} customWidth={""} isActive={0} />
           </BottomDrawer>
         )}
+        <div className="absolute bottom-4 right-4 z-10">
+          <SmallButton icon={mapStatistic} text={"성동구"} isActive={false} customWidth="w-20" onClick={onButtonClick}></SmallButton>
+        </div>
       </div>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
         {mapInfo}
