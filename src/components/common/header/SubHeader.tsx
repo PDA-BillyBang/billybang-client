@@ -20,7 +20,7 @@ export default function SubHeader() {
           <div>
             <img
               src={backButton}
-              className="h-5 sm:h-9 size-4"
+              className="h-5 cursor-pointer sm:h-9 size-4"
               alt="Billibang Logo"
               onClick={handleClickBack}
             />
@@ -31,7 +31,6 @@ export default function SubHeader() {
           <div className="h-5 sm:h-9 size-4"></div>
         </Navbar>
       </div>
-      {/* <div className="pt-[1.5rem]" /> */}
       <Outlet context={{ setTitle }} />
     </div>
   );

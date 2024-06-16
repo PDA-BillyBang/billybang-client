@@ -6,11 +6,12 @@ import MypageProperties from "../routes/mypage/MypageProperties";
 import MypageEdit from "../routes/mypage/MypageEdit";
 import MainHeader from "../components/common/header/MainHeader";
 import SubHeader from "../components/common/header/SubHeader";
+import MyHeader from "../components/common/header/MyHeader";
 
 export const mypageRoutes: RouteObject[] = [
   {
-    path: "mypage",
-    element: <MainHeader />,
+    path: "my",
+    element: <MyHeader />,
     children: [
       {
         path: "",
@@ -19,7 +20,7 @@ export const mypageRoutes: RouteObject[] = [
     ],
   },
   {
-    path: "mypage",
+    path: "my",
     element: <SubHeader />,
     children: [
       {

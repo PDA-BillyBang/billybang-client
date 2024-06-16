@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import bankTest from "../../assets/image/test/bank-test.png";
 import upArrow from "../../assets/image/icons/upArrow.svg";
+import downArrow from "../../assets/image/icons/downArrow.svg";
 import LoanSmallButton from "./LoanSmallButton";
 import SelectHeader from "../../components/common/header/SelectHeader";
 import { useState } from "react";
@@ -14,9 +15,14 @@ const LoanCompany = () => {
   }>();
 
   const [selectActive, setSelectActive] = useState<number>(0);
+  const [arrowActive, setArrowActive] = useState<boolean>(true);
 
   const handleSelectActive = (index: number) => {
     setSelectActive(index);
+  };
+
+  const handleArrowActive = () => {
+    setArrowActive((prev) => !prev);
   };
 
   useEffect(() => {
@@ -48,8 +54,10 @@ const LoanCompany = () => {
     "광고 대행업",
   ];
 
+  const visibleItemsCount = arrowActive ? 4 : keyArray.length;
+
   return (
-    <div className="flex flex-col items-center w-[100%] mt-[1rem]">
+    <div className="flex flex-col items-center w-[100%] mt-[80px]">
       <div className="flex flex-col w-customWidthPercent mt-[1rem]">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
@@ -60,20 +68,23 @@ const LoanCompany = () => {
         </div>
         <div className="mt-[1rem] text-[1.2rem] mb-[0.5rem]">기본정보</div>
         <div className="flex flex-col items-center bg-grey-6 py-[0.9rem]">
-          {keyArray.map((key: string, index: number) => (
-            <div
-              key={index}
-              className="text-[0.9rem] py-[0.1rem] flex flex-row w-[90%] border-b-grey-1 border-b-[0.05rem]"
-            >
-              <div className="w-[30%] text-center text-grey-1">{key}</div>
-              <div className="w-[70%] text-center">{valueArray[index]}</div>
-            </div>
-          ))}
+          {keyArray
+            .slice(0, visibleItemsCount)
+            .map((key: string, index: number) => (
+              <div
+                key={index}
+                className="text-[0.9rem] py-[0.1rem] flex flex-row w-[90%] border-b-grey-1 border-b-[0.05rem]"
+              >
+                <div className="w-[30%] text-center text-grey-1">{key}</div>
+                <div className="w-[70%] text-center">{valueArray[index]}</div>
+              </div>
+            ))}
           <div>
             <img
-              src={upArrow}
+              src={arrowActive ? upArrow : downArrow}
               alt="upArrow"
               className="w-[1.5rem] h-[1.5rem] mt-[0.3rem]"
+              onClick={handleArrowActive}
             />
           </div>
         </div>

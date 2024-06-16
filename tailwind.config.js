@@ -46,12 +46,24 @@ module.exports = {
         144: "36rem",
         customWidthPercent: "85%",
         customMargin: "1rem",
-
       },
       borderRadius: {
         "4xl": "2rem",
       },
     },
   },
-  plugins: [flowbite.content()],
+  plugins: [
+    flowbite.content(),
+    function ({ addUtilities }) {
+      addUtilities({
+        ".scroll-hidden": {
+          "scrollbar-width": "none" /* Firefox */,
+          "-ms-overflow-style": "none" /* IE and Edge */,
+        },
+        ".scroll-hidden::-webkit-scrollbar": {
+          display: "none" /* Chrome, Safari, and Opera */,
+        },
+      });
+    },
+  ],
 };
