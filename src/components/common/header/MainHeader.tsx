@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 export default function MainHeader() {
   return (
     <div>
-      <Navbar className="absolute top-0 justify-between w-full">
+      <Navbar className="absolute top-0 justify-between w-full z-50">
         <div className="flex items-center">
           <Navbar.Brand href="https://flowbite-react.com">
             <div className="text-[2rem] font-CWDangamAsac-Bold text-dark-blue-1 mx-2">
