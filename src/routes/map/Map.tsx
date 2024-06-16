@@ -87,7 +87,7 @@ export default function MapComponent() {
           </BottomDrawer>
         )}
         <div className="absolute bottom-4 right-4 z-10">
-          <SmallButton icon={mapStatistic} text={"성동구"} isActive={false} customWidth="w-20" onClick={onButtonClick}></SmallButton>
+          <SmallButton icon={mapStatistic} text={"동대문구"} isActive={false} customWidth="minw-20" onClick={onButtonClick}></SmallButton>
         </div>
       </div>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
