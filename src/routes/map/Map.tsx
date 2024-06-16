@@ -23,6 +23,7 @@ export default function MapComponent() {
   const [map, setMap] = useState<kakao.maps.Map|null>(null);
   const overlayRef = useRef<{ [key: number]: any }>({});
 
+  // 더미데이터, 지도, 지도정보, 지도컨트롤러 생성
   useEffect(() => {
     const dummyProperties: Property[] = [
       {
@@ -120,22 +121,32 @@ export default function MapComponent() {
     };
   }, []);
 
+  // 현재 위치로
+  useEffect(() => {
+    if (map) {
+      const moveToCurrentLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const locPosition = new window.kakao.maps.LatLng(lat, lon);
+            map.panTo(locPosition);
+          });
+        }
+      };
+
+      document.getElementById('currentLocationImg')?.addEventListener('click', moveToCurrentLocation);
+
+      return () => {
+        document.getElementById('currentLocationImg')?.removeEventListener('click', moveToCurrentLocation);
+      };
+    }
+  }, [map]);
+
+  // 매물 그리기, return시 매물 지우기
   useEffect(() => {
     if (!map) return;
     
-    const moveToCurrentLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          const locPosition = new window.kakao.maps.LatLng(lat, lon);
-
-          map.panTo(locPosition);
-        });
-      }
-    };
-
-    document.getElementById('currentLocationImg')?.addEventListener('click', moveToCurrentLocation);
 
     properties.forEach((property) => {
       const position = new window.kakao.maps.LatLng(property.latitude, property.longitude);
@@ -167,7 +178,7 @@ export default function MapComponent() {
     });
 
     return () => {
-      document.getElementById('currentLocationImg')?.removeEventListener('click', moveToCurrentLocation);
+
       Object.values(overlayRef.current).forEach((overlay) => overlay.setMap(null));
     };
   }, [map, properties, selectedPropertyId]);
