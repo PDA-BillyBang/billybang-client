@@ -1,5 +1,4 @@
 import LargeButton from "@components/common/button/LargeButton";
-import React from "react";
 import doubleWhiteRight from "images/doubleWhiteRight.svg";
 import check from "images/check.png";
 export default function UserInfoInputDone() {

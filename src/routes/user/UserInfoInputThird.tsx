@@ -4,12 +4,35 @@ import ProgressBar from "@components/common/progressbar/ProgressBar";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
-export default function UserInfoInputThird() {
-  const [marriageStatus, setMarriageStatus] = useState<boolean>(false);
-  const [marriageYear, setMarriageYear] = useState<number>();
-  const [child, setChild] = useState<number>();
-  const [coupleSalary, setCoupleSalary] = useState<number>();
-  const [coupleAssets, setCoupleAssets] = useState<number>();
+interface Props {
+  marriageStatus: boolean;
+  marriageYear: number | undefined;
+  child: number | undefined;
+  coupleSalary: number | undefined;
+  coupleAssets: number | undefined;
+  pageNum: number;
+  setMarriageStatus: (value: boolean) => void;
+  setMarriageYear: (value: number | undefined) => void;
+  setChild: (value: number | undefined) => void;
+  setCoupleSalary: (value: number | undefined) => void;
+  setCoupleAssets: (value: number | undefined) => void;
+  setPageNum: (value: number) => void;
+}
+
+export default function UserInfoInputThird({
+  pageNum,
+  marriageStatus,
+  marriageYear,
+  child,
+  coupleSalary,
+  coupleAssets,
+  setPageNum,
+  setMarriageStatus,
+  setMarriageYear,
+  setChild,
+  setCoupleSalary,
+  setCoupleAssets,
+}: Props) {
   const [isActive, setIsActive] = useState<number>(3);
 
   const handleMarriageStatusChange = (value: string): void => {
@@ -57,6 +80,12 @@ export default function UserInfoInputThird() {
     }
   }, [child, coupleAssets, coupleSalary, marriageStatus, marriageYear]);
 
+  const handleNextButtonClick = () => {
+    if (isActive === 0) {
+      setPageNum(pageNum + 1);
+    }
+  };
+
   const validateInputs = (): boolean => {
     if (marriageStatus === true)
       return (
@@ -75,7 +104,7 @@ export default function UserInfoInputThird() {
 
   return (
     <div className="flex flex-col min-h-screen items-center">
-      <div className="flex flex-row mt-[3.5rem] w-full">
+      <div className="flex flex-row mt-[4rem] w-full">
         <ProgressBar color={1} />
         <ProgressBar color={1} />
         <ProgressBar color={0} />
@@ -108,7 +137,7 @@ export default function UserInfoInputThird() {
       </div>
 
       {marriageStatus === true ? (
-        <div className="flex flex-col w-customWidthPercent ">
+        <div className="flex flex-col w-customWidthPercent overflow-y-auto max-h-[60vh]">
           <div className="flex flex-col mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
               type="number"
@@ -162,11 +191,13 @@ export default function UserInfoInputThird() {
           text="이전"
           customWidth="w-[50%]"
           isActive={4}
+          handleClick={() => setPageNum(pageNum - 1)}
         ></LargeButton>
         <LargeButton
           text="다음"
           customWidth="w-[50%]"
           isActive={isActive}
+          handleClick={handleNextButtonClick}
         ></LargeButton>
       </div>
     </div>
