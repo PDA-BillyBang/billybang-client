@@ -39,6 +39,7 @@ export default function MypageEdit() {
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
+              onClick={() => navigate("/my/edit/name")}
               alt="edit"
             />
           </div>
@@ -52,6 +53,7 @@ export default function MypageEdit() {
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
               alt="edit"
+              onClick={() => navigate("/my/edit/password")}
             />
           </div>
         </div>
