@@ -27,8 +27,9 @@ export default function MainHeader() {
           </div>
           <img
             src={search}
-            className="mr-3 h-6 sm:h-9 "
+            className="mr-3 h-6 sm:h-9 cursor-pointer"
             alt="Flowbite React Logo"
+            onClick={handleClickSearchField}
           />
         </div>
         <div className="flex md:order-2">
