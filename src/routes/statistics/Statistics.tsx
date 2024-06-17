@@ -18,7 +18,7 @@ export default function Statistics({}: Props) {
     setSelectActive(index);
   };
   return (
-    <div className="w-full flex flex-col items-center mt-[1.5rem]">
+    <div className="w-full flex flex-col items-center mt-[70px]">
       <div className=" w-customWidthPercent">
         <div className="py-[0.4rem]" />
         <SelectHeader
