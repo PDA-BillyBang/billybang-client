@@ -1,10 +1,12 @@
 // src/components/common/MainHeader.tsx
 import { Avatar, Navbar } from "flowbite-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import search from "images/search.svg";
 import { Outlet } from "react-router-dom";
 
 export default function MainHeader() {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar className="absolute top-0 justify-between w-full z-50">
@@ -22,8 +24,9 @@ export default function MainHeader() {
         <div className="flex md:order-2">
           <img
             src={search}
-            className="mr-3 h-6 sm:h-9 mt-2"
+            className="mr-3 h-6 sm:h-9 mt-2 cursor-pointer"
             alt="Flowbite React Logo"
+            onClick={()=>navigate('/search')}
           />
           <Avatar
             alt="User settings"

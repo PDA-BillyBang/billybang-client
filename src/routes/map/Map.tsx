@@ -62,8 +62,8 @@ export default function MapComponent() {
 
   const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
 
-  const onButtonClick = () => {
-    navigate('/statistics/1');
+  const onButtonClick = (link: string) => {
+    navigate(link);
   };
 
   return (
@@ -79,15 +79,19 @@ export default function MapComponent() {
         </div>
         {selectedProperty && (
           <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
-            <div>
-              <div>{selectedProperty.articleName}</div>
-              <div>{selectedProperty.price/100}억원</div>
+            <div className="mx-auto w-customWidthPercent h-full flex flex-col items-center">
+              <div className="w-full text-start">
+                <div className="text-lg">{selectedProperty.articleName}</div>
+                <div>{selectedProperty.price/100}억원</div>
+              </div>
+              <div className="mt-auto w-full flex flex-col items-center mb-4">
+                <LargeButton text="더 많은 대출 상품 보러가기" customWidth="w-full" isActive={0} handleClick={()=>onButtonClick('/loan/recommend/1')} />
+              </div>
             </div>
-            <LargeButton text={"더 많은 대출 상품 보러가기"} customWidth={""} isActive={0} />
           </BottomDrawer>
         )}
         <div className="absolute bottom-4 right-4 z-10">
-          <SmallButton icon={mapStatistic} text={"동대문구"} isActive={false} customWidth="minw-20" onClick={onButtonClick}></SmallButton>
+          <SmallButton icon={mapStatistic} text={"동대문구"} isActive={false} customWidth="minw-20" onClick={()=>onButtonClick('/statistics/1')}></SmallButton>
         </div>
       </div>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
