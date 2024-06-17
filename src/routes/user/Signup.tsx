@@ -98,22 +98,17 @@ export default function SignUp() {
           errorMessage="닉네임은 4자리 이상이어야 합니다."
         />
       </div>
-      <div className="w-customWidthPercent">
-        <div
-          className={`text-${
-            isFocused ? "red" : "grey"
-          }-2 text-[1.5rem] font-bold mb-2`}
-        >
-          생년월일
-        </div>
+      <div className="w-customWidthPercent text-grey-2 hover:text-[black] ">
+        <div className={`text-[1.5rem] font-bold mb-2`}>생년월일</div>
+
         <Datepicker
           onClick={() => {
             setIsFocused(true);
           }}
           onBlur={() => setIsFocused(false)}
-          minDate={new Date(1900, 0, 1)}
-          maxDate={new Date(2023, 3, 30)}
+          language="ko"
           className="hover:text-[black] text-grey-2"
+          style={{ backgroundColor: "white" }}
         />
       </div>
 

@@ -6,12 +6,32 @@ import ProgressBar from "@components/common/progressbar/ProgressBar";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
-export default function UserInfoInputSecond() {
-  const [nation, setNation] = useState<string>("local");
-  const [selectedJob, setSelectedJob] = useState<string>();
+interface Props {
+  pageNum: number;
+  nation: string;
+  selectedJob: string | undefined;
+  employPeriod: number | undefined;
+  companySize: string | undefined;
+  setPageNum: (value: number) => void;
+  setNation: (value: string) => void;
+  setSelectedJob: (value: string | undefined) => void;
+  setEmployPeriod: (value: number | undefined) => void;
+  setCompanySize: (value: string | undefined) => void;
+}
+
+export default function UserInfoInputSecond({
+  nation,
+  selectedJob,
+  employPeriod,
+  companySize,
+  pageNum,
+  setNation,
+  setSelectedJob,
+  setEmployPeriod,
+  setCompanySize,
+  setPageNum,
+}: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [employPeriod, setEmployPeriod] = useState<number>();
-  const [companySize, setCompanySize] = useState<string>();
   const [isActive, setIsActive] = useState<number>(0);
   const handleClick = () => setIsOpen((prev) => !prev);
   const { setTitle } = useOutletContext<{
@@ -52,9 +72,15 @@ export default function UserInfoInputSecond() {
     setCompanySize(size);
   };
 
+  const handleNextButtonClick = () => {
+    if (isActive === 0) {
+      setPageNum(pageNum + 1);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen items-center">
-      <div className="flex flex-row mt-[3.5rem] w-full">
+      <div className="flex flex-row mt-[4rem] w-full">
         <ProgressBar color={1} />
         <ProgressBar color={0} />
         <ProgressBar color={1} />
@@ -136,7 +162,7 @@ export default function UserInfoInputSecond() {
         />
       </div>
       <div className="flex flex-col w-customWidthPercent mt-[2rem] text-grey-2 hover:text-[black]">
-        <div className="text-[1.5rem] font-bold mb-2">직업</div>
+        <div className="text-[1.5rem] font-bold mb-2">기업 규모</div>
         <div className="h-[3rem]">
           <RadioOption
             id="smallCompany"
@@ -164,11 +190,13 @@ export default function UserInfoInputSecond() {
           text="이전"
           customWidth="w-[50%]"
           isActive={4}
+          handleClick={() => setPageNum(pageNum - 1)}
         ></LargeButton>
         <LargeButton
           text="다음"
           customWidth="w-[50%]"
           isActive={isActive}
+          handleClick={handleNextButtonClick}
         ></LargeButton>
       </div>
     </div>

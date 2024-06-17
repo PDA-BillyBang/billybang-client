@@ -3,12 +3,11 @@ import { RouteObject } from "react-router-dom";
 import LoginMain from "../routes/user/LoginMain";
 import LoginPwInput from "../routes/user/LoginPwInput";
 import Signup from "../routes/user/Signup";
-import UserInfoInputFirst from "../routes/user/UserInfoInputFirst";
-import UserInfoInputSecond from "../routes/user/UserInfoInputSecond";
-import UserInfoInputThird from "../routes/user/UserInfoInputThird";
+import UserInfoInput from "../routes/user/UserInfoInput";
 import UserInfoInputDone from "../routes/user/UserInfoInputDone";
 import MainHeader from "../components/common/header/MainHeader";
 import SubHeader from "../components/common/header/SubHeader";
+import MultiRangeSlider from "@components/common/slider/MultiRangeSlider";
 
 export const userRoutes: RouteObject[] = [
   {
@@ -22,16 +21,8 @@ export const userRoutes: RouteObject[] = [
             element: <SubHeader />,
             children: [
               {
-                path: "first",
-                element: <UserInfoInputFirst />,
-              },
-              {
-                path: "second",
-                element: <UserInfoInputSecond />,
-              },
-              {
-                path: "third",
-                element: <UserInfoInputThird />,
+                path: "",
+                element: <UserInfoInput />,
               },
             ],
           },

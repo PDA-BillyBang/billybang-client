@@ -7,6 +7,8 @@ import MypageEdit from "../routes/mypage/MypageEdit";
 import MainHeader from "../components/common/header/MainHeader";
 import SubHeader from "../components/common/header/SubHeader";
 import MyHeader from "../components/common/header/MyHeader";
+import MypageEditName from "../routes/mypage/MypageEditName";
+import MypageEditPW from "../routes/mypage/MypageEditPW";
 
 export const mypageRoutes: RouteObject[] = [
   {
@@ -34,6 +36,14 @@ export const mypageRoutes: RouteObject[] = [
       {
         path: "edit",
         element: <MypageEdit />,
+      },
+      {
+        path: "edit/name",
+        element: <MypageEditName />,
+      },
+      {
+        path: "edit/password",
+        element: <MypageEditPW />,
       },
     ],
   },

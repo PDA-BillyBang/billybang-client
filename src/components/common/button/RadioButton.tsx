@@ -5,7 +5,7 @@ interface RadioOptionProps {
   id: string;
   name: string;
   value: string;
-  selectedOption: string;
+  selectedOption: string | undefined;
   onChange: (value: string) => void;
   label: string;
 }
