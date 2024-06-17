@@ -19,10 +19,10 @@ export default function MainHeader() {
           빌려방
         </Navbar.Brand>
         <div
-          className="flex items-center flex-grow bg-[yellow]"
+          className="flex items-center flex-grow"
           onClick={handleClickSearchField}
         >
-          <div className="text-[1.2rem] text-grey-1 bg-[red] flex flex-col flex-grow">
+          <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow">
             서울시 성동구
           </div>
           <img
