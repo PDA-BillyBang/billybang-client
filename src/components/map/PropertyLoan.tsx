@@ -3,16 +3,28 @@ import LargeButton from '@components/common/button/LargeButton';
 import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
-type Props = {};
+import { useNavigate } from 'react-router-dom';
+type Props = {
+  bottomButton?: boolean;
+};
 
-export default function PropertyLoan({}: Props) {
+export default function PropertyLoan({ bottomButton }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
+  const navigate = useNavigate();
+  const handleClickToLoans = () => {
+    navigate('/loan/recommend/234');
+  };
   const handleLikeClick = () => {
     console.log('like loan card');
     setLikeButtonActive((prev) => !prev);
   };
+  const handleClickToPropertyLoan = () => {
+    navigate('/map/1/2');
+  };
   return (
-    <div className="w-[100%] flex flex-col h-[50vh] justify-between">
+    <div
+      className={`w-[100%] flex flex-col ${bottomButton ? 'h-[50vh]' : 'h-[310px]'}  justify-between`}
+    >
       <div className="flex flex-col">
         <div className="font-bold text-[1.2rem] justify-between flex flex-row">
           <div>롯데캐슬파크</div>
@@ -54,14 +66,18 @@ export default function PropertyLoan({}: Props) {
           <NavigateButton
             text="롯데캐슬파크의 추천 대출 상품 더 보기"
             customWidth="w-[100%]"
+            handleClick={handleClickToLoans}
           />
         </div>
       </div>
-      <LargeButton
-        isActive={3}
-        customWidth="w-[100%]"
-        text="더 많은 매물 보러가기"
-      />
+      {bottomButton && (
+        <LargeButton
+          isActive={3}
+          customWidth="w-[100%]"
+          text="더 많은 매물 보러가기"
+          handleClick={handleClickToPropertyLoan}
+        />
+      )}
     </div>
   );
 }

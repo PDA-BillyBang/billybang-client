@@ -84,7 +84,7 @@ export default function MapComponent() {
             <div>
               {/* <div>{selectedProperty.articleName}</div>
               <div>{selectedProperty.price / 100}억원</div> */}
-              <PropertyLoan />
+              <PropertyLoan bottomButton={true} />
             </div>
           </BottomDrawer>
         )}
