@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Aim from '@/assets/image/map/aim.png';
 import { Property, OverlayData, CategoryCode } from "@/utils/types";
@@ -11,11 +12,7 @@ import SmallButton from "@components/common/button/SmallButton";
 import LargeButton from "@components/common/button/LargeButton";
 import mapStatistic from "../../assets/image/map/mapStatistic.svg";
 import DropDown from "@components/map/Dropdown";
-import store from "@/assets/image/map/store.png";
-import hospital from "@/assets/image/map/hospital.png";
-import bank from "@/assets/image/map/bank.png";
-import school from "@/assets/image/map/school.png";
-import cafe from "@/assets/image/map/cafe.png";
+import { displayPlaces, removeMarkers } from "./methods/placeService";
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
@@ -27,6 +24,7 @@ export default function MapComponent() {
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
   const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
   const markers = useRef<kakao.maps.Marker[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
   const navigate = useNavigate();
 
   // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
@@ -65,6 +63,50 @@ export default function MapComponent() {
     }
   }, [selectedPropertyId, map, properties]);
   
+  // 편의시설 검색 함수
+  const searchPlaces = useCallback(() => {
+    if (!ps || !map || !selectedCategory) return;
+    kakao.maps.services.Status
+    ps.categorySearch(selectedCategory, (data, status) => {
+      if (status !== window.kakao.maps.services.Status.ERROR) {
+        removeMarkers(markers);
+        displayPlaces(map, data, selectedCategory, markers);
+      } else {
+        console.log("지도 검색 중 에러 발생")
+      }
+    }, { useMapBounds: true });
+  }, [ps, map, selectedCategory]);
+
+  // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 업데이트
+  useEffect(() => {
+    if (map) {
+      kakao.maps.event.addListener(map, 'idle', searchPlaces);
+    }
+    return () => {
+      if (map) {
+        kakao.maps.event.removeListener(map, 'idle', searchPlaces);
+      }
+    };
+  }, [map, searchPlaces]);
+
+  // selectedCategory 변경 시 검색
+  useEffect(() => {
+    searchPlaces();
+  }, [selectedCategory, searchPlaces]);
+
+  // 편의시설 카테고리 선택/해제 핸들러
+  const handleCategoryClick = (category: "" | CategoryCode) => {
+    if (!ps || !map) return;
+    
+    if (category === selectedCategory) {
+      setSelectedCategory("");
+      removeMarkers(markers);
+    } else {
+      setSelectedCategory(category);
+    }
+  };
+  
+  // 하단 상세보기 창 닫기
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
     setSelectedPropertyId(null);
@@ -72,62 +114,11 @@ export default function MapComponent() {
 
   const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
 
+  // 페이지 변경 버튼
   const onButtonClick = (link: string) => {
     navigate(link);
   };
-
-  const handleCategoryClick = (category: "" | CategoryCode) => {
-    console.log(category)
-    console.log(ps)
-    if (!ps) return;
-    ps.categorySearch(category, (data, status) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        removeMarkers();
-        displayPlaces(data, category);
-      }
-    }, { useMapBounds: true });
-  };
-
-  // 편의시설 마커 생성
-  const displayPlaces = (places: any[], category: string) => {
-    for (let i = 0; i < places.length; i++) {
-      const marker = addMarker(new window.kakao.maps.LatLng(places[i].y, places[i].x), category);
-      window.kakao.maps.event.addListener(marker, 'click', () => {
-        displayPlaceInfo(places[i]);
-      });
-    }
-  };
   
-  // 생성된 마커를 지도에 삽입
-  const addMarker = (position: kakao.maps.LatLng, category: string) => {
-    const imageSrc = {
-      CS2: store,
-      HP8: hospital,
-      BK9: bank,
-      SC4: school,
-      CE7: cafe
-    }[category as CategoryCode];
-    const imageSize = new kakao.maps.Size(27, 28);
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-    const marker = new kakao.maps.Marker({ position, image: markerImage });
-
-    marker.setMap(map);
-    markers.current.push(marker);
-    return marker;
-  };
-
-  const removeMarkers = () => {
-    markers.current.forEach(marker => marker.setMap(null));
-    markers.current = [];
-  };
-
-  const displayPlaceInfo = (place: any) => {
-    const infowindow = new window.kakao.maps.InfoWindow({
-      content: `<div style="padding:5px;z-index:1;">${place.place_name}</div>`
-    });
-    infowindow.open(map, markers.current);
-  };
-
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
