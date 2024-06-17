@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   message: string;
@@ -24,8 +24,8 @@ export default function BottomAlert({
 
   return (
     <div
-      className={`fixed bottom-0 px-4 py-2 mb-8 transform -translate-x-1/2 rounded-md shadow-md text-white-1 bg-dark-blue-1 left-1/2 transition-opacity transition-transform duration-300 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      className={`z-10 fixed bottom-0 px-8 py-2 mb-8 transform -translate-x-1/2 rounded-[20px] shadow-md text-white-1 bg-grey-1 left-1/2 transition-opacity transition-transform duration-300 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
       {message}

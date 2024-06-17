@@ -82,8 +82,8 @@ export default function MapComponent() {
         {selectedProperty && (
           <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
             <div>
-              <div>{selectedProperty.articleName}</div>
-              <div>{selectedProperty.price / 100}억원</div>
+              {/* <div>{selectedProperty.articleName}</div>
+              <div>{selectedProperty.price / 100}억원</div> */}
               <PropertyLoan />
             </div>
           </BottomDrawer>
