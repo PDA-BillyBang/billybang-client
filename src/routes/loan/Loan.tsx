@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import LoanCard from "../../components/loan/LoanCard";
-import LoanFiltering from "../../components/loan/LoanFiltering";
-import BottomDrawer from "../../components/common/button/BottomDrawer";
-import LoanHeader from "../../components/loan/LoanHeader";
-import { useNavigate } from "react-router-dom";
-import NavigateButton from "../../components/common/button/NavigateButton";
+import React, { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import LoanCard from '../../components/loan/LoanCard';
+import LoanFiltering from '../../components/loan/LoanFiltering';
+import BottomDrawer from '../../components/common/button/BottomDrawer';
+import LoanHeader from '../../components/loan/LoanHeader';
+import { useNavigate } from 'react-router-dom';
+import NavigateButton from '../../components/common/button/NavigateButton';
 
 // recommend/:propertyId
 const Loan = () => {
@@ -18,10 +18,10 @@ const Loan = () => {
   const handleClick = () => setIsOpen((prev) => !prev);
 
   const handleClickLoanId = (loanId: number) =>
-    navigate("/loan/detail/" + loanId);
+    navigate('/loan/detail/' + loanId);
 
   useEffect(() => {
-    setTitle("충무로엘크루메크로시티2"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
+    setTitle('충무로엘크루메크로시티2'); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
   }, [setTitle]);
 
   const data = [1, 2, 3, 4];
@@ -34,7 +34,14 @@ const Loan = () => {
           customWidth="w-[100%]"
         />
         <div className="pb-[10px]" />
-        <LoanFiltering handleClick={handleClick} />
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row text-grey-1">
+            <div className="font-bold text-black-1">9</div>개의 대출상품이
+            추천되었습니다.
+          </div>
+          <LoanFiltering handleClick={handleClick} />
+        </div>
+        <div className="pb-[1rem]" />
         <LoanHeader />
         <div className="py-[1rem]"></div>
         <LoanCard handleClick={handleClickLoanId} loanId={123} />
