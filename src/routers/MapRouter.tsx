@@ -3,8 +3,6 @@ import { RouteObject } from 'react-router-dom';
 import Map from '../routes/map/Map';
 import MapSearch from '../routes/map/MapSearch';
 import MainHeader from '../components/common/header/MainHeader';
-import SubHeader from '@components/common/header/SubHeader';
-import MapPropertyLoan from '@/routes/map/MapPropertyLoan';
 
 export const mapRoutes: RouteObject[] = [
   {
@@ -20,15 +18,5 @@ export const mapRoutes: RouteObject[] = [
   {
     path: 'search',
     element: <MapSearch />,
-  },
-  {
-    path: 'map',
-    element: <SubHeader />,
-    children: [
-      {
-        path: ':px/:py',
-        element: <MapPropertyLoan />,
-      },
-    ],
   },
 ];
