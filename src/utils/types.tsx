@@ -17,3 +17,5 @@ export type OverlayData = {
     root: Root;
     overlay: kakao.maps.CustomOverlay;
 };
+
+export type CategoryCode = "CS2" | "HP8" | "BK9" | "SC4" | "CE7";

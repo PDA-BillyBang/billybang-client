@@ -19,7 +19,7 @@ export default function AreaNews({}: Props) {
             customWidth="w-[60px]"
           />
           <div className="px-[0.1rem]" />
-          <SmallButton isActive={false} text="부동산" customWidth="w-[50px]" />
+          <SmallButton text="부동산" customWidth="w-[50px]" />
         </div>
       </div>
       {data.map((value, index) => (
