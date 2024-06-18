@@ -1,13 +1,13 @@
-import FloatingInputForm1 from "@components/common/form/FloatingInputForm1";
-import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import { Datepicker } from "flowbite-react";
-import LargeButton from "@components/common/button/LargeButton";
+import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
+import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import { Datepicker } from 'flowbite-react';
+import LargeButton from '@components/common/button/LargeButton';
 
 export default function SignUp() {
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isActive, setIsActive] = useState(3); // 기본값은 3으로 설정
@@ -17,7 +17,7 @@ export default function SignUp() {
   }>();
 
   useEffect(() => {
-    setTitle("회원가입");
+    setTitle('회원가입');
   }, [setTitle]);
 
   // 모든 입력 값이 유효한지 확인하는 함수
@@ -46,19 +46,19 @@ export default function SignUp() {
 
   // 상태 업데이트 헬퍼 함수
   const handlePasswordChange = (value: string | number) => {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       setPassword(value);
     }
   };
 
   const handleCheckPasswordChange = (value: string | number) => {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       setCheckPassword(value);
     }
   };
 
   const handleCheckNicnameChange = (value: string | number) => {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       setNickname(value);
     }
   };
@@ -72,7 +72,7 @@ export default function SignUp() {
           text="8자리 이상 입력해주세요"
           value={password}
           onChange={handlePasswordChange}
-          validate={(value) => typeof value === "string" && value.length >= 8}
+          validate={(value) => typeof value === 'string' && value.length >= 8}
           errorMessage="비밀번호는 8자리 이상이어야 합니다."
         />
       </div>
@@ -83,7 +83,7 @@ export default function SignUp() {
           text="8자리 이상 입력해주세요"
           value={checkPassword}
           onChange={handleCheckPasswordChange}
-          validate={(value) => typeof value === "string" && value === password}
+          validate={(value) => typeof value === 'string' && value === password}
           errorMessage="비밀번호가 일치하지 않습니다."
         />
       </div>
@@ -94,7 +94,7 @@ export default function SignUp() {
           text="4자리 이상 입력해주세요"
           value={nickname}
           onChange={handleCheckNicnameChange}
-          validate={(value) => typeof value === "string" && value.length >= 4}
+          validate={(value) => typeof value === 'string' && value.length >= 4}
           errorMessage="닉네임은 4자리 이상이어야 합니다."
         />
       </div>
@@ -107,12 +107,12 @@ export default function SignUp() {
           }}
           onBlur={() => setIsFocused(false)}
           language="ko"
-          className="hover:text-[black] text-grey-2"
-          style={{ backgroundColor: "white" }}
+          className="hover:text-[black] text-grey-2 bg-white-1 z-20"
+          style={{ backgroundColor: 'white' }}
         />
       </div>
 
-      <div className="mt-auto w-customWidthPercent flex flex-col items-center mb-4">
+      <div className="flex flex-col items-center mt-auto mb-4 w-customWidthPercent">
         <LargeButton
           text="계속하기"
           customWidth="w-full"

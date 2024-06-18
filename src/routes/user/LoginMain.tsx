@@ -10,13 +10,13 @@ export default function Login() {
 
   const handleSignUp = async () => {
     try {
-      const response = await signUp(
-        'email',
-        'sample@gmail.com',
-        '12345678',
-        '2024-06-18',
-        'nickname'
-      );
+      const response = await signUp({
+        signUptype: 'email',
+        email: 'sample@gmail.com',
+        password: '12345678',
+        birthDate: '2024-06-18',
+        nickname: 'nickname',
+      });
       console.log('회원가입 성공:', response.data);
     } catch (error) {
       console.error('회원가입 실패:', error);
@@ -41,7 +41,7 @@ export default function Login() {
         <div>나에게 맞는 대출 상품을</div>
         <div>추천받아 볼까요?</div>
       </div>
-      <div className="w-customWidthPercent flex-grow">
+      <div className="flex-grow w-customWidthPercent">
         <div className="bg-white-1 text-grey-2 text-[0.8rem]">
           먼저 로그인, 회원가입이 필요해요!
         </div>
@@ -59,8 +59,8 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="mt-auto w-full flex flex-col items-center">
-        <div className="flex w-customWidthPercent items-center mt-1">
+      <div className="flex flex-col items-center w-full mt-auto">
+        <div className="flex items-center mt-1 w-customWidthPercent">
           <div className="h-[1px] flex-1 mx-2 bg-grey-2"></div>
           <div className="mx-2 text-center text-grey-2 text-[0.8rem] p-2">
             간편 로그인
@@ -68,10 +68,10 @@ export default function Login() {
           <div className="h-[1px] flex-1 mx-2 bg-grey-2"></div>
         </div>
 
-        <div className="flex flex-col w-customWidthPercent mb-4">
+        <div className="flex flex-col mb-4 w-customWidthPercent">
           <button className="flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4">
             <img src={KaKaoBtn} alt="kakao" className="h-6" />
-            <div className="text-center w-full">카카오로 시작하기</div>
+            <div className="w-full text-center">카카오로 시작하기</div>
           </button>
         </div>
       </div>

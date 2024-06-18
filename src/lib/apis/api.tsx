@@ -6,3 +6,7 @@ export const userInstance = axios.create({
   baseURL: BASE_URL + '/users',
   withCredentials: true,
 });
+
+export const myInstance = axios.create({
+  baseURL: BASE_URL + '/',
+});
