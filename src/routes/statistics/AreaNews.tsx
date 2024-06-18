@@ -16,7 +16,7 @@ export default function AreaNews({}: Props) {
           <SmallButton
             isActive={true}
             text="사건 사고"
-            customWidth="w-[60px]"
+            customWidth="min-w-[60px]"
           />
           <div className="px-[0.1rem]" />
           <SmallButton text="부동산" customWidth="w-[50px]" />

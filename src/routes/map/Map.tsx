@@ -13,24 +13,22 @@ import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
 import PropertyLoan from '@components/map/PropertyLoan';
 import { displayPlaces, removeMarkers } from "./methods/placeService";
+import OptionButton from "@components/map/OptionButton";
+import OptionContent from "@components/map/OptionContent";
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
-    null
-  );
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
-    undefined
-  );
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
   const markers = useRef<kakao.maps.Marker[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
   const navigate = useNavigate();
-
+// 전세/매매, 
   // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
     const cleanup = initializeMap(
@@ -65,7 +63,7 @@ export default function MapComponent() {
   // 매물 선택시 스타일 변경
   useEffect(() => {
     updateSelectedProperty(selectedPropertyId, previousSelectedPropertyIdRef, overlayRef, properties, setSelectedPropertyId);
-    setIsDrawerOpen(selectedPropertyId !== null);
+    setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map, properties]);
   
   // 편의시설 검색 함수
@@ -111,7 +109,7 @@ export default function MapComponent() {
   
   // 하단 상세보기 창 닫기
   const handleCloseDrawer = () => {
-    setIsDrawerOpen(false);
+    setIsDrawerOpen(0);
     setSelectedPropertyId(null);
   };
 
@@ -121,11 +119,6 @@ export default function MapComponent() {
     navigate(link);
   };
 
-  // 선택된 매물이 있는지 확인
-  const selectedProperty = properties.find(
-    (property) => property.propertyId === selectedPropertyId
-  );
-  
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
@@ -137,26 +130,34 @@ export default function MapComponent() {
             className="w-8 h-8 cursor-pointer"
           />
         </div>
-        {selectedProperty && (
-          <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
-            <PropertyLoan bottomButton={true} />
-          </BottomDrawer>
-        )}
-        <div className="absolute z-10 bottom-4 right-4">
-          <SmallButton
-            icon={mapStatistic}
-            text={'동대문구'}
-            isActive={false}
-            customWidth="min-w-20"
-            onClick={() => onButtonClick('/statistics/1')}
-          ></SmallButton>
+        <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer}>
+          {isDrawerOpen===2 
+            ? <PropertyLoan bottomButton={true} />
+            : <OptionContent onApplyButtonClick={handleCloseDrawer}/>
+          }
+        </BottomDrawer>
+        <div className="absolute z-10 top-4 left-16">
+          <OptionButton
+            text={'옵션'}
+            isActive={isDrawerOpen===1}
+            customWidth="min-w-16"
+            onClick={() => setIsDrawerOpen(1)}
+            ></OptionButton>
         </div>
         <div className="absolute z-10 flex flex-col space-y-2 top-60 right-1 min-w-12">
           <DropDown
             text="편의"
             customWidth="w-18"
             handleCategoryClick={handleCategoryClick}
-          />
+            />
+        </div>
+        <div className="absolute z-10 bottom-4 right-4" onClick={() => onButtonClick('/statistics/1')}>
+          <SmallButton
+            icon={mapStatistic}
+            text={'동대문구'}
+            isActive={false}
+            customWidth="min-w-20"
+            ></SmallButton>
         </div>
       </div>
       <pre

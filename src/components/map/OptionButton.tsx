@@ -1,25 +1,32 @@
 import React from "react";
+import downArrowGrey from "@/assets/image/map/downArrowGrey.svg"
+import upArrowBlue from "@/assets/image/map/upArrowBlue.svg"
 
 type Props = {
-  icon?: string;
   text: string;
   isActive?: boolean;
   customWidth?: string;
   onClick? : () => void;
 };
 
-export default function SmallButton({ icon, text, isActive, customWidth, onClick }: Props) {
+export default function OptionButton({ text, isActive, customWidth, onClick }: Props) {
   let buttonStyles;
+
+  const handleClick = () =>{
+    if(onClick){
+      onClick();
+    }
+  }
 
   switch (isActive) {
     case true:
-      buttonStyles = `text-center px-2 leading-[30px] text-blue-1 bg-blue-4 border-[0.5px] border-blue-1 ${
+      buttonStyles = `flex items-center justify-center px-2 gap-1 text-center leading-[30px] text-blue-1 bg-blue-4 border-[0.5px] border-blue-1 ${
         customWidth ? customWidth : "w-[46px]"
       } h-[30px] rounded-[20px] text-[12px]`;
       break;
     case false:
       buttonStyles = `flex items-center justify-center px-2 gap-1 text-center leading-[30px] text-grey-1 bg-grey-6 border-[0.5px] border-grey-1 ${
-        customWidth ? customWidth : "min-w-[46px]"
+        customWidth ? customWidth : "w-[46px]"
       } h-[30px] rounded-[20px] text-[12px]`;
       break;
     default:
@@ -30,16 +37,10 @@ export default function SmallButton({ icon, text, isActive, customWidth, onClick
   }
 
   return (
-    <div onClick={onClick}>
+    <div onClick={handleClick}>
       <button className={buttonStyles}>
-        {icon&&
-          <img
-              src={icon}
-              className="h-4 w-4 cursor-pointer"
-              alt="edit"
-            />
-        }
         {text}
+        <img src={isActive? upArrowBlue : downArrowGrey} alt=""/>
       </button>
     </div>
     )
