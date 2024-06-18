@@ -31,10 +31,6 @@ export const userRoutes: RouteObject[] = [
             path: "done",
             element: <UserInfoInputDone />,
           },
-          {
-            path: "임시방편",
-            element: <MultiRangeSlider max={210000000} min={500} />,
-          },
         ],
       },
       {
