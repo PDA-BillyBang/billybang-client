@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'http://13.125.34.161:3000';
+export const BASE_URL = 'http://3.39.52.110:3000';
 
 export const userInstance = axios.create({
   baseURL: BASE_URL + '/users',
