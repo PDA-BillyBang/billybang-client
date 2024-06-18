@@ -49,24 +49,13 @@ export default function MapComponent() {
 
   // 매물 선택시 스타일 변경
   useEffect(() => {
-    updateSelectedProperty(
-      selectedPropertyId,
-      previousSelectedPropertyIdRef,
-      overlayRef,
-      properties,
-      setSelectedPropertyId
-    );
-    if (selectedPropertyId !== null) {
-      setIsDrawerOpen(true);
-    } else {
-      setIsDrawerOpen(false);
-    }
+    updateSelectedProperty(selectedPropertyId, previousSelectedPropertyIdRef, overlayRef, properties, setSelectedPropertyId);
+    setIsDrawerOpen(selectedPropertyId !== null);
   }, [selectedPropertyId, map, properties]);
   
   // 편의시설 검색 함수
   const searchPlaces = useCallback(() => {
     if (!ps || !map || !selectedCategory) return;
-    kakao.maps.services.Status
     ps.categorySearch(selectedCategory, (data, status) => {
       if (status !== window.kakao.maps.services.Status.ERROR) {
         removeMarkers(markers);
@@ -77,7 +66,7 @@ export default function MapComponent() {
     }, { useMapBounds: true });
   }, [ps, map, selectedCategory]);
 
-  // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 업데이트
+  // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 검색
   useEffect(() => {
     if (map) {
       kakao.maps.event.addListener(map, 'idle', searchPlaces);
@@ -96,14 +85,13 @@ export default function MapComponent() {
 
   // 편의시설 카테고리 선택/해제 핸들러
   const handleCategoryClick = (category: "" | CategoryCode) => {
-    if (!ps || !map) return;
-    
-    if (category === selectedCategory) {
-      setSelectedCategory("");
-      removeMarkers(markers);
-    } else {
-      setSelectedCategory(category);
-    }
+    setSelectedCategory((prevCategory) => {
+      if (prevCategory === category) {
+        removeMarkers(markers);
+        return "";
+      }
+      return category;
+    });
   };
   
   // 하단 상세보기 창 닫기

@@ -16,14 +16,14 @@ export const removeMarkers = (markers: React.MutableRefObject<kakao.maps.Marker[
 
 export const displayPlaces = (
   map: kakao.maps.Map | null,
-  places: any[],
+  places: kakao.maps.services.PlacesSearchResultItem[],
   category: string,
   markers: React.MutableRefObject<kakao.maps.Marker[]>
 ) => {
   for (let i = 0; i < places.length; i++) {
-    const marker = addMarker(map, new window.kakao.maps.LatLng(places[i].y, places[i].x), category, markers);
+    const marker = addMarker(map, new window.kakao.maps.LatLng(parseFloat(places[i].y), parseFloat(places[i].x)), category, markers);
     window.kakao.maps.event.addListener(marker, "click", () => {
-      displayPlaceInfo(map, places[i], marker);
+      displayPlaceInfo(map, places[i]);
     });
   }
 };
@@ -52,10 +52,10 @@ const addMarker = (
   return marker;
 };
 
-const displayPlaceInfo = (map: kakao.maps.Map | null, place: any, marker: kakao.maps.Marker) => {
+const displayPlaceInfo = (map: kakao.maps.Map | null, place: kakao.maps.services.PlacesSearchResultItem) => {
   const overlayContent = document.createElement('div');
   const overlay = new window.kakao.maps.CustomOverlay({
-    position: new window.kakao.maps.LatLng(place.y, place.x),
+    position: new window.kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x)),
     content: overlayContent,
   });
 

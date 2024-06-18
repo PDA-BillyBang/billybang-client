@@ -2,15 +2,7 @@ import React from 'react';
 import s from './ConvenientInfo.module.css';
 
 export interface CustomOverlayProps {
-  place: {
-    place_name: string;
-    place_url: string;
-    road_address_name?: string;
-    address_name: string;
-    phone: string;
-    x: number;
-    y: number;
-  };
+  place: kakao.maps.services.PlacesSearchResultItem
   onClose: () => void;
 }
 
