@@ -21,10 +21,8 @@ import PropertyLoan from '@components/map/PropertyLoan';
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
-    null
-  );
-  const [map, setMap] = useState<kakao.maps.Map | null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const [map, setMap] = useState<kakao.maps.Map|null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
@@ -55,13 +53,7 @@ export default function MapComponent() {
 
   // 전체 매물 그리기
   useEffect(() => {
-    const cleanup = renderProperties(
-      map,
-      properties,
-      overlayRef,
-      selectedPropertyId,
-      setSelectedPropertyId
-    );
+    const cleanup = renderProperties(map, properties, overlayRef, selectedPropertyId, setSelectedPropertyId);
     return cleanup;
   }, [map, properties]);
 
@@ -86,9 +78,7 @@ export default function MapComponent() {
     setSelectedPropertyId(null);
   };
 
-  const selectedProperty = properties.find(
-    (property) => property.propertyId === selectedPropertyId
-  );
+  const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
 
   const onButtonClick = (link: string) => {
     navigate(link);
@@ -156,7 +146,7 @@ export default function MapComponent() {
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
-        <div className="absolute z-10 p-1 rounded top-4 left-4 bg-white-2">
+        <div className="absolute top-4 left-4 z-10 p-1 bg-white-2 rounded">
           <img
             id="currentLocationImg"
             src={Aim}
@@ -186,13 +176,7 @@ export default function MapComponent() {
           />
         </div>
       </div>
-      <pre
-        style={{
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          marginTop: '10px',
-        }}
-      >
+      <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
         {mapInfo}
       </pre>
     </div>
