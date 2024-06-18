@@ -1,21 +1,22 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import { Property, OverlayData, CategoryCode } from "@/utils/types";
-import { initializeMap } from "./methods/initializeMap";
-import { moveToCurrentLocation } from "./methods/moveToCurrentLocation";
-import { renderProperties } from "./methods/renderProperties";
-import { updateSelectedProperty } from "./methods/updateSelectedProperty";
-import BottomDrawer from "@components/common/button/BottomDrawer";
-import SmallButton from "@components/common/button/SmallButton";
-import LargeButton from "@components/common/button/LargeButton";
-import mapStatistic from "../../assets/image/map/mapStatistic.svg";
-import DropDown from "@components/map/Dropdown";
-import store from "@/assets/image/map/store.png";
-import hospital from "@/assets/image/map/hospital.png";
-import bank from "@/assets/image/map/bank.png";
-import school from "@/assets/image/map/school.png";
-import cafe from "@/assets/image/map/cafe.png";
+import { Property, OverlayData, CategoryCode } from '@/utils/types';
+import { initializeMap } from './methods/initializeMap';
+import { moveToCurrentLocation } from './methods/moveToCurrentLocation';
+import { renderProperties } from './methods/renderProperties';
+import { updateSelectedProperty } from './methods/updateSelectedProperty';
+import BottomDrawer from '@components/common/button/BottomDrawer';
+import SmallButton from '@components/common/button/SmallButton';
+import LargeButton from '@components/common/button/LargeButton';
+import mapStatistic from '../../assets/image/map/mapStatistic.svg';
+import DropDown from '@components/map/Dropdown';
+import store from '@/assets/image/map/store.png';
+import hospital from '@/assets/image/map/hospital.png';
+import bank from '@/assets/image/map/bank.png';
+import school from '@/assets/image/map/school.png';
+import cafe from '@/assets/image/map/cafe.png';
+import PropertyLoan from '@components/map/PropertyLoan';
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
@@ -25,15 +26,22 @@ export default function MapComponent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
+    undefined
+  );
   const markers = useRef<kakao.maps.Marker[]>([]);
   const navigate = useNavigate();
 
   // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
-    const cleanup = initializeMap(setProperties, setMap, setMapInfo, (psInstance) => {
-      setPs(psInstance)
-    });
+    const cleanup = initializeMap(
+      setProperties,
+      setMap,
+      setMapInfo,
+      (psInstance) => {
+        setPs(psInstance);
+      }
+    );
     return cleanup;
   }, []);
 
@@ -64,7 +72,7 @@ export default function MapComponent() {
       setIsDrawerOpen(false);
     }
   }, [selectedPropertyId, map, properties]);
-  
+
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
     setSelectedPropertyId(null);
@@ -76,28 +84,35 @@ export default function MapComponent() {
     navigate(link);
   };
 
-  const handleCategoryClick = (category: "" | CategoryCode) => {
-    console.log(category)
-    console.log(ps)
+  const handleCategoryClick = (category: '' | CategoryCode) => {
+    console.log(category);
+    console.log(ps);
     if (!ps) return;
-    ps.categorySearch(category, (data, status) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        removeMarkers();
-        displayPlaces(data, category);
-      }
-    }, { useMapBounds: true });
+    ps.categorySearch(
+      category,
+      (data, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          removeMarkers();
+          displayPlaces(data, category);
+        }
+      },
+      { useMapBounds: true }
+    );
   };
 
   // 편의시설 마커 생성
   const displayPlaces = (places: any[], category: string) => {
     for (let i = 0; i < places.length; i++) {
-      const marker = addMarker(new window.kakao.maps.LatLng(places[i].y, places[i].x), category);
+      const marker = addMarker(
+        new window.kakao.maps.LatLng(places[i].y, places[i].x),
+        category
+      );
       window.kakao.maps.event.addListener(marker, 'click', () => {
         displayPlaceInfo(places[i]);
       });
     }
   };
-  
+
   // 생성된 마커를 지도에 삽입
   const addMarker = (position: kakao.maps.LatLng, category: string) => {
     const imageSrc = {
@@ -105,7 +120,7 @@ export default function MapComponent() {
       HP8: hospital,
       BK9: bank,
       SC4: school,
-      CE7: cafe
+      CE7: cafe,
     }[category as CategoryCode];
     const imageSize = new kakao.maps.Size(27, 28);
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -117,13 +132,13 @@ export default function MapComponent() {
   };
 
   const removeMarkers = () => {
-    markers.current.forEach(marker => marker.setMap(null));
+    markers.current.forEach((marker) => marker.setMap(null));
     markers.current = [];
   };
 
   const displayPlaceInfo = (place: any) => {
     const infowindow = new window.kakao.maps.InfoWindow({
-      content: `<div style="padding:5px;z-index:1;">${place.place_name}</div>`
+      content: `<div style="padding:5px;z-index:1;">${place.place_name}</div>`,
     });
     infowindow.open(map, markers.current);
   };
@@ -141,22 +156,24 @@ export default function MapComponent() {
         </div>
         {selectedProperty && (
           <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
-            <div className="mx-auto w-customWidthPercent h-full flex flex-col items-center">
-              <div className="w-full text-start">
-                <div className="text-xl font-bold">{selectedProperty.articleName}</div>
-                <div className="text-md">{selectedProperty.price/100}억원</div>
-              </div>
-              <div className="mt-auto w-full flex flex-col items-center mb-4">
-                <LargeButton text="더 많은 대출 상품 보러가기" customWidth="w-full" isActive={0} handleClick={()=>onButtonClick('/loan/recommend/1')} />
-              </div>
-            </div>
+            <PropertyLoan bottomButton={true} />
           </BottomDrawer>
         )}
-        <div className="absolute bottom-4 right-4 z-10">
-          <SmallButton icon={mapStatistic} text={"동대문구"} isActive={false} customWidth="min-w-20" onClick={()=>onButtonClick('/statistics/1')}></SmallButton>
+        <div className="absolute z-10 bottom-4 right-4">
+          <SmallButton
+            icon={mapStatistic}
+            text={'동대문구'}
+            isActive={false}
+            customWidth="min-w-20"
+            onClick={() => onButtonClick('/statistics/1')}
+          ></SmallButton>
         </div>
-        <div className="absolute top-60 right-1 z-10 flex flex-col space-y-2 min-w-12">
-          <DropDown text="편의" customWidth="w-18" handleCategoryClick={handleCategoryClick} />
+        <div className="absolute z-10 flex flex-col space-y-2 top-60 right-1 min-w-12">
+          <DropDown
+            text="편의"
+            customWidth="w-18"
+            handleCategoryClick={handleCategoryClick}
+          />
         </div>
       </div>
       <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
