@@ -2,36 +2,45 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Aim from '@/assets/image/map/aim.png';
-import { Property, OverlayData, CategoryCode } from "@/utils/types";
-import { initializeMap } from "./methods/initializeMap";
-import { moveToCurrentLocation } from "./methods/moveToCurrentLocation";
-import { renderProperties } from "./methods/renderProperties";
-import { updateSelectedProperty } from "./methods/updateSelectedProperty";
-import BottomDrawer from "@components/common/button/BottomDrawer";
-import SmallButton from "@components/common/button/SmallButton";
-import LargeButton from "@components/common/button/LargeButton";
-import mapStatistic from "../../assets/image/map/mapStatistic.svg";
-import DropDown from "@components/map/Dropdown";
+import { Property, OverlayData, CategoryCode } from '@/utils/types';
+import { initializeMap } from './methods/initializeMap';
+import { moveToCurrentLocation } from './methods/moveToCurrentLocation';
+import { renderProperties } from './methods/renderProperties';
+import { updateSelectedProperty } from './methods/updateSelectedProperty';
+import BottomDrawer from '@components/common/button/BottomDrawer';
+import SmallButton from '@components/common/button/SmallButton';
+import mapStatistic from '../../assets/image/map/mapStatistic.svg';
+import DropDown from '@components/map/Dropdown';
+import PropertyLoan from '@components/map/PropertyLoan';
 import { displayPlaces, removeMarkers } from "./methods/placeService";
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
-  const [map, setMap] = useState<kakao.maps.Map|null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
+    null
+  );
+  const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
+    undefined
+  );
   const markers = useRef<kakao.maps.Marker[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
   const navigate = useNavigate();
 
   // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
-    const cleanup = initializeMap(setProperties, setMap, setMapInfo, (psInstance) => {
-      setPs(psInstance)
-    });
+    const cleanup = initializeMap(
+      setProperties,
+      setMap,
+      setMapInfo,
+      (psInstance) => {
+        setPs(psInstance);
+      }
+    );
     return cleanup;
   }, []);
 
@@ -43,7 +52,13 @@ export default function MapComponent() {
 
   // 전체 매물 그리기
   useEffect(() => {
-    const cleanup = renderProperties(map, properties, overlayRef, selectedPropertyId, setSelectedPropertyId);
+    const cleanup = renderProperties(
+      map,
+      properties,
+      overlayRef,
+      selectedPropertyId,
+      setSelectedPropertyId
+    );
     return cleanup;
   }, [map, properties]);
 
@@ -100,7 +115,9 @@ export default function MapComponent() {
     setSelectedPropertyId(null);
   };
 
-  const selectedProperty = properties.find(property => property.propertyId === selectedPropertyId);
+  const selectedProperty = properties.find(
+    (property) => property.propertyId === selectedPropertyId
+  );
 
   // 페이지 변경 버튼
   const onButtonClick = (link: string) => {
@@ -110,7 +127,7 @@ export default function MapComponent() {
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
-        <div className="absolute top-4 left-4 z-10 p-1 bg-white-2 rounded">
+        <div className="absolute z-10 p-1 rounded top-4 left-4 bg-white-2">
           <img
             id="currentLocationImg"
             src={Aim}
@@ -120,25 +137,33 @@ export default function MapComponent() {
         </div>
         {selectedProperty && (
           <BottomDrawer isOpen={isDrawerOpen} handleClose={handleCloseDrawer}>
-            <div className="mx-auto w-customWidthPercent h-full flex flex-col items-center">
-              <div className="w-full text-start">
-                <div className="text-xl font-bold">{selectedProperty.articleName}</div>
-                <div className="text-md">{selectedProperty.price/100}억원</div>
-              </div>
-              <div className="mt-auto w-full flex flex-col items-center mb-4">
-                <LargeButton text="더 많은 대출 상품 보러가기" customWidth="w-full" isActive={0} handleClick={()=>onButtonClick('/loan/recommend/1')} />
-              </div>
-            </div>
+            <PropertyLoan bottomButton={true} />
           </BottomDrawer>
         )}
-        <div className="absolute bottom-4 right-4 z-10">
-          <SmallButton icon={mapStatistic} text={"동대문구"} isActive={false} customWidth="min-w-20" onClick={()=>onButtonClick('/statistics/1')}></SmallButton>
+        <div className="absolute z-10 bottom-4 right-4">
+          <SmallButton
+            icon={mapStatistic}
+            text={'동대문구'}
+            isActive={false}
+            customWidth="min-w-20"
+            onClick={() => onButtonClick('/statistics/1')}
+          ></SmallButton>
         </div>
-        <div className="absolute top-60 right-1 z-10 flex flex-col space-y-2 min-w-12">
-          <DropDown text="편의" customWidth="w-18" handleCategoryClick={handleCategoryClick} />
+        <div className="absolute z-10 flex flex-col space-y-2 top-60 right-1 min-w-12">
+          <DropDown
+            text="편의"
+            customWidth="w-18"
+            handleCategoryClick={handleCategoryClick}
+          />
         </div>
       </div>
-      <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', marginTop: '10px' }}>
+      <pre
+        style={{
+          whiteSpace: 'pre-wrap',
+          wordWrap: 'break-word',
+          marginTop: '10px',
+        }}
+      >
         {mapInfo}
       </pre>
     </div>
