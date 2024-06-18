@@ -8,38 +8,35 @@ export default function MainHeader() {
   const navigate = useNavigate();
 
   const handleClickSearchField = () => navigate('/search');
+  const handleClickToMy = () => navigate('/my');
 
   return (
     <div>
-      <Navbar className="absolute top-0 w-full z-50 h-16">
-        <Navbar.Brand
-          href="https://flowbite-react.com"
-          className="text-[2rem] font-CWDangamAsac-Bold text-dark-blue-1 mx-2"
-        >
+      <div className="absolute top-0 z-50 flex flex-row justify-center w-full h-16">
+        <div className="text-[2rem] mx-3 flex items-center h-16 leading-[2rem] text-center font-CWDangamAsac-Bold text-dark-blue-1 ">
           빌려방
-        </Navbar.Brand>
-        <div
-          className="flex items-center flex-grow"
-          onClick={handleClickSearchField}
-        >
+        </div>
+        <div className="flex items-center flex-grow ">
           <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow">
             서울시 성동구
           </div>
+        </div>
+        <div className="flex md:order-2 items-center">
           <img
             src={search}
-            className="mr-3 h-6 sm:h-9 cursor-pointer"
+            className="h-6 mr-3 cursor-pointer sm:h-9"
             alt="Flowbite React Logo"
             onClick={handleClickSearchField}
           />
-        </div>
-        <div className="flex md:order-2">
           <Avatar
+            onClick={handleClickToMy}
+            className="mr-3 cursor-pointer "
             alt="User settings"
             img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
             rounded
           />
         </div>
-      </Navbar>
+      </div>
       <Outlet />
     </div>
   );

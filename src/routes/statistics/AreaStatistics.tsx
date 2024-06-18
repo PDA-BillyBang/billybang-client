@@ -1,8 +1,8 @@
-import React from "react";
-import DistrictPopulationDensity from "./charts/DistrictPopulationDensity";
-import DistrictIncome from "./charts/DistrictIncome";
-import AgeGroupPopulation from "./charts/AgeGroupPopulation";
-import CrimeRate from "./charts/CrimeRate";
+import React from 'react';
+import DistrictPopulationDensity from './charts/DistrictPopulationDensity';
+import DistrictIncome from './charts/DistrictIncome';
+import AgeGroupPopulation from './charts/AgeGroupPopulation';
+import CrimeRate from './charts/CrimeRate';
 type Props = {};
 
 export default function AreaStatistics({}: Props) {

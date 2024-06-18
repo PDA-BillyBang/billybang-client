@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import bankTest from "../../assets/image/test/bank-test.png";
-import LikeButton from "../common/button/LikeButton";
+import React, { useState } from 'react';
+import bankTest from '../../assets/image/test/bank-test.png';
+import LikeButton from '../common/button/LikeButton';
 
 type Props = {
   loanId?: number;
@@ -15,7 +15,7 @@ export default function LoanCard({
 }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(likeActive);
   const handleLikeClick = () => {
-    console.log("like loan card");
+    console.log('like loan card');
     setLikeButtonActive((prev) => !prev);
   };
   return (
@@ -39,7 +39,7 @@ export default function LoanCard({
         </div>
         <div className="py-[0.2rem]" />
         <div className="flex flex-col justify-between">
-          <div className="text-black-2 text-[1.1rem]">
+          <div className="text-black-1 text-[1.1rem]">
             iTouch 전세론(주택금융보증)
           </div>
           <div className="py-[0.15rem]" />

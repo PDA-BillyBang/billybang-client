@@ -1,10 +1,10 @@
-import BottomDrawer from "@components/common/button/BottomDrawer";
-import LargeButton from "@components/common/button/LargeButton";
-import RadioOption from "@components/common/button/RadioButton";
-import FloatingInputForm1 from "@components/common/form/FloatingInputForm1";
-import ProgressBar from "@components/common/progressbar/ProgressBar";
-import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import BottomDrawer from '@components/common/button/BottomDrawer';
+import LargeButton from '@components/common/button/LargeButton';
+import RadioOption from '@components/common/button/RadioButton';
+import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
+import ProgressBar from '@components/common/progressbar/ProgressBar';
+import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 interface Props {
   pageNum: number;
@@ -39,7 +39,7 @@ export default function UserInfoInputSecond({
   }>();
 
   useEffect(() => {
-    setTitle("정보 입력");
+    setTitle('정보 입력');
   }, [setTitle]);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function UserInfoInputSecond({
   };
 
   const handleEmployPeriodChange = (month: number | string): void => {
-    if (typeof month === "number") setEmployPeriod(month);
+    if (typeof month === 'number') setEmployPeriod(month);
   };
 
   const handleCompanySize = (size: string) => {
@@ -91,21 +91,21 @@ export default function UserInfoInputSecond({
         <div className="flex space-x-4">
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              nation === "local"
-                ? "bg-[black] text-[white]"
-                : "bg-[white] text-grey-2"
+              nation === 'local'
+                ? 'bg-[black] text-[white]'
+                : 'bg-[white] text-grey-2'
             }`}
-            onClick={() => handleFirstBuyerChange("local")}
+            onClick={() => handleFirstBuyerChange('local')}
           >
             내국인
           </button>
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              nation === "foreigner"
-                ? "bg-[black] text-[white]"
-                : "bg-[white] text-grey-2 "
+              nation === 'foreigner'
+                ? 'bg-[black] text-[white]'
+                : 'bg-[white] text-grey-2 '
             }`}
-            onClick={() => handleFirstBuyerChange("foreigner")}
+            onClick={() => handleFirstBuyerChange('foreigner')}
           >
             외국인
           </button>
@@ -114,11 +114,10 @@ export default function UserInfoInputSecond({
 
       <div className="flex flex-col w-customWidthPercent my-[2rem] text-grey-2 hover:text-[black]">
         <div className="text-[1.5rem] font-bold mb-2">직업</div>
-
         <input
           id="selectedJob"
           type="text"
-          value={selectedJob ? selectedJob : "카테고리중 하나를 선택해주세요"}
+          value={selectedJob ? selectedJob : '카테고리중 하나를 선택해주세요'}
           onClick={handleClick}
           className="w-full h-[3rem] border-b border-grey-2 placeholder-grey-2 focus:outline-none focus:border-[black]"
         />
@@ -128,13 +127,13 @@ export default function UserInfoInputSecond({
         <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
           <div className="flex flex-col h-full justify-center">
             {[
-              "무직",
-              "회계사",
-              "회사원",
-              "공무원",
-              "변호사",
-              "의사",
-              "기타",
+              '무직',
+              '회계사',
+              '회사원',
+              '공무원',
+              '변호사',
+              '의사',
+              '기타',
             ].map((job) => (
               <div key={job} className="h-[3rem]">
                 <RadioOption
@@ -156,8 +155,9 @@ export default function UserInfoInputSecond({
           type="number"
           title="재직 기간"
           text="재직 기간을 숫자로 입력해주세요 (개월)"
+          value={employPeriod}
           onChange={handleEmployPeriodChange}
-          validate={(value) => typeof value == "number" && value >= 0}
+          validate={(value) => typeof value == 'number' && value >= 0}
           errorMessage="정확한 재직 기간을 입력해주세요"
         />
       </div>
