@@ -6,8 +6,8 @@ import hospital from "@/assets/image/map/hospital.png";
 import bank from "@/assets/image/map/bank.png";
 import school from "@/assets/image/map/school.png";
 import cafe from "@/assets/image/map/cafe.png";
-import CustomOverlay from '@/components/map/ConvenientInfo';
-import { CustomOverlayProps } from '@/components/map/ConvenientInfo';
+import ConvenientInfo from '@/components/map/ConvenientInfo';
+import { ConvenientInfoProps } from '@/components/map/ConvenientInfo';
 
 export const removeMarkers = (markers: React.MutableRefObject<kakao.maps.Marker[]>) => {
   markers.current.forEach((marker) => marker.setMap(null));
@@ -64,8 +64,8 @@ const displayPlaceInfo = (map: kakao.maps.Map | null, place: kakao.maps.services
   }
 
   const onClose = () => overlay.setMap(null);
-  const props: CustomOverlayProps = { place, onClose };
+  const props: ConvenientInfoProps = { place, onClose };
 
   const root = createRoot(overlayContent);
-  root.render(<CustomOverlay {...props} />);
+  root.render(<ConvenientInfo {...props} />);
 };

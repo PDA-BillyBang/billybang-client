@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './ConvenientInfo.module.css';
 
-export interface CustomOverlayProps {
+export interface ConvenientInfoProps {
   place: kakao.maps.services.PlacesSearchResultItem
   onClose: () => void;
 }
 
-const CustomOverlay: React.FC<CustomOverlayProps> = ({ place, onClose }) => {
+const CustomOverlay: React.FC<ConvenientInfoProps> = ({ place, onClose }) => {
   return (
     <div className={s.placeinfo_wrap} onClick={onClose}>
       <div className={s.placeinfo}>

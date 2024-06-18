@@ -115,14 +115,16 @@ export default function MapComponent() {
     setSelectedPropertyId(null);
   };
 
-  const selectedProperty = properties.find(
-    (property) => property.propertyId === selectedPropertyId
-  );
-
+  
   // 페이지 변경 버튼
   const onButtonClick = (link: string) => {
     navigate(link);
   };
+
+  // 선택된 매물이 있는지 확인
+  const selectedProperty = properties.find(
+    (property) => property.propertyId === selectedPropertyId
+  );
   
   return (
     <div className="pt-16 h-[100vh]">
