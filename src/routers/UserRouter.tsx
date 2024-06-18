@@ -1,34 +1,33 @@
-import React from "react";
-import { RouteObject } from "react-router-dom";
-import LoginMain from "../routes/user/LoginMain";
-import LoginPwInput from "../routes/user/LoginPwInput";
-import Signup from "../routes/user/Signup";
-import UserInfoInput from "../routes/user/UserInfoInput";
-import UserInfoInputDone from "../routes/user/UserInfoInputDone";
-import MainHeader from "../components/common/header/MainHeader";
-import SubHeader from "../components/common/header/SubHeader";
-import MultiRangeSlider from "@components/common/slider/MultiRangeSlider";
+import React from 'react';
+import { RouteObject } from 'react-router-dom';
+import LoginMain from '../routes/user/LoginMain';
+import LoginPwInput from '../routes/user/LoginPwInput';
+import Signup from '../routes/user/Signup';
+import UserInfoInput from '../routes/user/UserInfoInput';
+import UserInfoInputDone from '../routes/user/UserInfoInputDone';
+import MainHeader from '../components/common/header/MainHeader';
+import SubHeader from '../components/common/header/SubHeader';
 
 export const userRoutes: RouteObject[] = [
   {
-    path: "user",
+    path: 'user',
     children: [
       {
-        path: "info",
+        path: 'info',
         children: [
           {
-            path: "",
+            path: '',
             element: <SubHeader />,
             children: [
               {
-                path: "",
+                path: '',
                 element: <UserInfoInput />,
               },
             ],
           },
 
           {
-            path: "done",
+            path: 'done',
             element: <UserInfoInputDone />,
           },
         ],
@@ -37,7 +36,7 @@ export const userRoutes: RouteObject[] = [
         element: <MainHeader />,
         children: [
           {
-            path: "login",
+            path: 'login',
             element: <LoginMain />,
           },
         ],
@@ -46,11 +45,11 @@ export const userRoutes: RouteObject[] = [
         element: <SubHeader />,
         children: [
           {
-            path: "login/pw",
+            path: 'login/pw',
             element: <LoginPwInput />,
           },
           {
-            path: "signup",
+            path: 'signup',
             element: <Signup />,
           },
         ],
