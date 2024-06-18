@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import bankTest from "../../assets/image/test/bank-test.png";
-import upArrow from "../../assets/image/icons/upArrow.svg";
-import downArrow from "../../assets/image/icons/downArrow.svg";
-import LoanSmallButton from "./LoanSmallButton";
-import SelectHeader from "../../components/common/header/SelectHeader";
-import { useState } from "react";
-import CompanyEvaluation from "./company/CompanyEvaluation";
-import CompanyInfo from "./company/CompanyInfo";
+import React, { useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import bankTest from '../../assets/image/test/bank-test.png';
+import upArrow from '../../assets/image/icons/upArrow.svg';
+import downArrow from '../../assets/image/icons/downArrow.svg';
+import LoanSmallButton from './LoanSmallButton';
+import SelectHeader from '../../components/common/header/SelectHeader';
+import { useState } from 'react';
+import CompanyEvaluation from './company/CompanyEvaluation';
+import CompanyInfo from './company/CompanyInfo';
 
 const LoanCompany = () => {
   const { setTitle } = useOutletContext<{
@@ -26,38 +26,38 @@ const LoanCompany = () => {
   };
 
   useEffect(() => {
-    setTitle("회사정보");
+    setTitle('회사정보');
   }, [setTitle]);
 
   const keyArray = [
-    "대표자",
-    "설립일",
-    "기업규모",
-    "기업형태",
-    "매출액",
-    "영업이익",
-    "당기손익",
-    "신용등급",
-    "사원수",
-    "상세업종",
+    '대표자',
+    '설립일',
+    '기업규모',
+    '기업형태',
+    '매출액',
+    '영업이익',
+    '당기손익',
+    '신용등급',
+    '사원수',
+    '상세업종',
   ];
   const valueArray = [
-    "김철웅/안보근",
-    "2003년 03월 24일",
-    "중소기업",
-    "코스닥",
-    "3,505억",
-    "551억",
-    "489억",
-    "최상 (2024.04)",
-    "291명 (2023.12)",
-    "광고 대행업",
+    '김철웅/안보근',
+    '2003년 03월 24일',
+    '중소기업',
+    '코스닥',
+    '3,505억',
+    '551억',
+    '489억',
+    '최상 (2024.04)',
+    '291명 (2023.12)',
+    '광고 대행업',
   ];
 
   const visibleItemsCount = arrowActive ? 4 : keyArray.length;
 
   return (
-    <div className="flex flex-col items-center w-[100%] mt-[80px]">
+    <div className="flex flex-col items-center w-[100%] mt-[50px]">
       <div className="flex flex-col w-customWidthPercent mt-[1rem]">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
@@ -97,6 +97,7 @@ const LoanCompany = () => {
           rightText="재무평가"
         />
         {selectActive === 0 ? <CompanyInfo /> : <CompanyEvaluation />}
+        <div className="pb-[1rem]" />
       </div>
     </div>
   );
