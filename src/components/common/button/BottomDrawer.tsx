@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { Button, Drawer } from "flowbite-react";
+import React, { ReactNode } from 'react';
+import { Button, Drawer } from 'flowbite-react';
 
 type Props = {
   isOpen: boolean;
