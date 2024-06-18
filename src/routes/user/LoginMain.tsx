@@ -1,15 +1,35 @@
 // src/routes/user/LoginMain.tsx
-import React, { useState } from "react";
-import FloatingInputForm1 from "../../components/common/form/FloatingInputForm1"; // 경로를 프로젝트 구조에 맞게 조정합니다.
-import KaKaoBtn from "images/kakao.png";
-import LargeButton from "@components/common/button/LargeButton";
+import React, { useEffect, useState } from 'react';
+import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
+import KaKaoBtn from 'images/kakao.png';
+import LargeButton from '@components/common/button/LargeButton';
+import { signUp } from '@/lib/apis/user';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
+
+  const handleSignUp = async () => {
+    try {
+      const response = await signUp(
+        'email',
+        'sample@gmail.com',
+        '12345678',
+        '2024-06-18',
+        'nickname'
+      );
+      console.log('회원가입 성공:', response.data);
+    } catch (error) {
+      console.error('회원가입 실패:', error);
+    }
+  };
+
+  useEffect(() => {
+    handleSignUp();
+  }, []);
 
   // 상태 업데이트 헬퍼 함수
   const handleEmailChange = (value: string | number) => {
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       setEmail(value);
     }
   };

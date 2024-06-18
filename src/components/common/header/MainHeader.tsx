@@ -20,14 +20,14 @@ export default function MainHeader() {
           <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow">
             서울시 성동구
           </div>
+        </div>
+        <div className="flex md:order-2 items-center">
           <img
             src={search}
             className="h-6 mr-3 cursor-pointer sm:h-9"
             alt="Flowbite React Logo"
             onClick={handleClickSearchField}
           />
-        </div>
-        <div className="flex md:order-2">
           <Avatar
             onClick={handleClickToMy}
             className="mr-3 cursor-pointer "

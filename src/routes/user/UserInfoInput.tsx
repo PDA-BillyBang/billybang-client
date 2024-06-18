@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import UserInfoInputFirst from "./UserInfoInputFirst";
-import UserInfoInputSecond from "./UserInfoInputSecond";
-import UserInfoInputThird from "./UserInfoInputThird";
-import UserInfoInputDone from "./UserInfoInputDone";
+import React, { useState } from 'react';
+import UserInfoInputFirst from './UserInfoInputFirst';
+import UserInfoInputSecond from './UserInfoInputSecond';
+import UserInfoInputThird from './UserInfoInputThird';
+import UserInfoInputDone from './UserInfoInputDone';
 
 export default function UserInfoInput() {
   //1페이지에 필요한 state
   const [pageNum, setPageNum] = useState<number>(1);
-  const [salary, setSalary] = useState<number>(0);
-  const [assets, setAssets] = useState<number>(0);
-  const [firstBuyerOption, setFirstBuyerOption] = useState<string>("Yes");
-  const [loanOption, setLoanOption] = useState<string>("Yes");
+  const [salary, setSalary] = useState<number>();
+  const [assets, setAssets] = useState<number>();
+  const [firstBuyerOption, setFirstBuyerOption] = useState<string>('Yes');
+  const [loanOption, setLoanOption] = useState<string>('Yes');
 
   //2페이지에 필요한 state
-  const [nation, setNation] = useState<string>("local");
+  const [nation, setNation] = useState<string>('local');
   const [selectedJob, setSelectedJob] = useState<string>();
   const [employPeriod, setEmployPeriod] = useState<number>();
   const [companySize, setCompanySize] = useState<string>();
