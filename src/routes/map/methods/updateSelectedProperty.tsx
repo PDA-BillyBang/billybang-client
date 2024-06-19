@@ -1,5 +1,3 @@
-// src/routes/map/updateSelectedProperty.ts
-
 import { Property, OverlayData } from "@/utils/types";
 import { MutableRefObject } from "react";
 import Pin from "@/components/map/Pin";
