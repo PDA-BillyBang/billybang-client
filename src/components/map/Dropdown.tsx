@@ -29,7 +29,7 @@ export default function DropDown({ text, customWidth, handleCategoryClick }: Pro
         <button className={`flex items-center justify-center px-1 text-center leading-[30px] text-white-1 bg-black-2 border-[0.5px] border-grey-2 ${customWidth ? customWidth : "w-[46px]"} h-[30px] rounded-[20px] text-[12px]`}>
           <div className="ms-2 me-1 flex">
               {text}
-              <img src={downArrowWhite} alt="" />
+              <img src={downArrowWhite} alt="" className={`transition-transform ${showButtons ? "rotate-180" : "rotate-0"}`}/>
           </div>
         </button>
       </div>

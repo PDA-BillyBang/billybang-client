@@ -1,32 +1,37 @@
-import React, { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import bankTest from "../../assets/image/test/bank-test.png";
-import filledLike from "../../assets/image/icons/filledLike.svg";
-import check from "../../assets/image/icons/check.svg";
-import LoanSmallButton from "./LoanSmallButton";
-import LargeButton from "../../components/common/button/LargeButton";
-import { useNavigate } from "react-router-dom";
-import LikeButton from "../../components/common/button/LikeButton";
+import React, { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import bankTest from '../../assets/image/test/bank-test.png';
+import filledLike from '../../assets/image/icons/filledLike.svg';
+import check from '../../assets/image/icons/check.svg';
+import LoanSmallButton from './LoanSmallButton';
+import LargeButton from '../../components/common/button/LargeButton';
+import { useNavigate } from 'react-router-dom';
+import LikeButton from '../../components/common/button/LikeButton';
 
 const LoanDetail = () => {
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
+  const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
+  const handleLikeClick = () => {
+    console.log('like loan card');
+    setLikeButtonActive((prev) => !prev);
+  };
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTitle("상품상세");
+    setTitle('상품상세');
   }, [setTitle]);
 
   const handleToBankUrl = () => {
     window.open(
-      "https://www.kebhana.com/cont/mall/mall08/mall0802/mall080202/1501583_115196.jsp?_menuNo=98786"
+      'https://www.kebhana.com/cont/mall/mall08/mall0802/mall080202/1501583_115196.jsp?_menuNo=98786'
     );
   };
 
   const handleClickToCompanyInfo = () => {
-    navigate("/loan/company/123");
+    navigate('/loan/company/123');
   };
 
   return (
@@ -50,7 +55,10 @@ const LoanDetail = () => {
           <div className="font-bold text-[1.2rem] leading-[1.2rem] text-center">
             iTouch 전세론(주택금융보증)
           </div>
-          <LikeButton />
+          <LikeButton
+            isActive={likeButtonActive}
+            handleClick={handleLikeClick}
+          />
         </header>
         <div className="flex flex-row items-center">
           <div className="w-[1.3rem] h-[1.3rem] bg-blue-1 rounded-full flex items-center justify-center">
