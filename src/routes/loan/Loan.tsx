@@ -7,6 +7,7 @@ import LoanHeader from '../../components/loan/LoanHeader';
 import { useNavigate } from 'react-router-dom';
 import NavigateButton from '../../components/common/button/NavigateButton';
 import MultiRangeSlider from '@components/common/slider/MultiRangeSlider';
+import MultiRangeSliderYear from '@components/common/slider/MultiRangeSliderYear';
 import LargeButton from '@components/common/button/LargeButton';
 
 // recommend/:propertyId
@@ -52,7 +53,7 @@ const Loan = () => {
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
                 <div className="text-sm">대출 기간</div>
-                <MultiRangeSlider min={0} max={1000} />
+                <MultiRangeSliderYear min={0} max={120} />
               </div>
               <div className="py-[1rem]" />
               <hr />
@@ -62,8 +63,8 @@ const Loan = () => {
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">
-              <LargeButton isActive={4} customWidth="w-[35%]" text="초기화" />
-              <LargeButton isActive={0} customWidth="w-[50%]" text="적용" />
+              <LargeButton isActive={4} customWidth="w-[40%]" text="초기화" />
+              <LargeButton isActive={0} customWidth="w-[55%]" text="적용" />
             </div>
           </div>
         </BottomDrawer>
