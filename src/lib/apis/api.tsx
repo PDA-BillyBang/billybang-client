@@ -10,3 +10,8 @@ export const userInstance = axios.create({
 export const myInstance = axios.create({
   baseURL: BASE_URL + '/',
 });
+
+export const loanInstance = axios.create({
+  baseURL: '/api/loans',
+  withCredentials: true,
+});

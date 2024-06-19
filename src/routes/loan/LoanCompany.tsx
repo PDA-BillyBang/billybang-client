@@ -8,6 +8,41 @@ import SelectHeader from '../../components/common/header/SelectHeader';
 import { useState } from 'react';
 import CompanyEvaluation from './company/CompanyEvaluation';
 import CompanyInfo from './company/CompanyInfo';
+import { getLoanProviderById } from '@/lib/apis/loan';
+
+interface financialIndicatorsI {
+  avgValue: number;
+  grade: string;
+  name: string;
+  value: number;
+}
+
+interface providerOverviewI {
+  businessProfit: string;
+  creditLevel: string;
+  employeeCount: string;
+  establishedAt: string;
+  financialTier: number;
+  imgUrl: string;
+  industryDetail: string;
+  netProfit: string;
+  providerName: string;
+  providerSize: string;
+  providerType: string;
+  representativeName: string;
+  salesAmount: string;
+}
+
+export interface financialStatementsI {
+  businessProfit: string;
+  id: number;
+  netProfit: string;
+  salesAmount: string;
+  totalAssets: string;
+  totalCapital: string;
+  totalLiabilities: string;
+  year: number;
+}
 
 const LoanCompany = () => {
   const { setTitle } = useOutletContext<{
@@ -16,6 +51,23 @@ const LoanCompany = () => {
 
   const [selectActive, setSelectActive] = useState<number>(0);
   const [arrowActive, setArrowActive] = useState<boolean>(true);
+  const [financialIndicators, setFinancialIndicators] =
+    useState<financialIndicatorsI[]>();
+  const [providerOverview, setProviderOverview] = useState<providerOverviewI>();
+  const [financialStatements, setFinancialStatements] =
+    useState<financialStatementsI[]>();
+
+  const handleLoanProviderById = async () => {
+    try {
+      const result = await getLoanProviderById(1);
+      console.log('[SUCCESS]', result.data.response);
+      setFinancialIndicators(result.data.response.financialIndicators);
+      setProviderOverview(result.data.response.providerOverview);
+      setFinancialStatements(result.data.response.financialStatements);
+    } catch (error) {
+      console.log('[ERROR]', error);
+    }
+  };
 
   const handleSelectActive = (index: number) => {
     setSelectActive(index);
@@ -29,6 +81,10 @@ const LoanCompany = () => {
     setTitle('회사정보');
   }, [setTitle]);
 
+  useEffect(() => {
+    handleLoanProviderById();
+  }, []);
+
   const keyArray = [
     '대표자',
     '설립일',
@@ -41,18 +97,20 @@ const LoanCompany = () => {
     '사원수',
     '상세업종',
   ];
-  const valueArray = [
-    '김철웅/안보근',
-    '2003년 03월 24일',
-    '중소기업',
-    '코스닥',
-    '3,505억',
-    '551억',
-    '489억',
-    '최상 (2024.04)',
-    '291명 (2023.12)',
-    '광고 대행업',
-  ];
+  const valueArray = providerOverview
+    ? [
+        providerOverview.representativeName,
+        providerOverview.establishedAt,
+        providerOverview.providerSize,
+        providerOverview.providerType,
+        providerOverview.salesAmount,
+        providerOverview.businessProfit,
+        providerOverview.netProfit,
+        providerOverview.creditLevel,
+        providerOverview.employeeCount,
+        providerOverview.industryDetail,
+      ]
+    : [];
 
   const visibleItemsCount = arrowActive ? 4 : keyArray.length;
 
@@ -61,8 +119,13 @@ const LoanCompany = () => {
       <div className="flex flex-col w-customWidthPercent mt-[1rem]">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
-            <img src={bankTest} className="w-[2.5rem] h-[2.5rem]" />
-            <div className="text-[1.2rem] pl-[0.25rem]">우리은행</div>
+            <img
+              src={providerOverview && providerOverview.imgUrl}
+              className="w-[2.5rem] h-[2.5rem]"
+            />
+            <div className="text-[1.2rem] pl-[0.25rem]">
+              {providerOverview && providerOverview.providerName}
+            </div>
           </div>
           <LoanSmallButton text="홈페이지" />
         </div>
@@ -96,7 +159,11 @@ const LoanCompany = () => {
           leftText="재무제표"
           rightText="재무평가"
         />
-        {selectActive === 0 ? <CompanyInfo /> : <CompanyEvaluation />}
+        {selectActive === 0 && financialStatements ? (
+          <CompanyInfo financialStatements={financialStatements} />
+        ) : (
+          <CompanyEvaluation />
+        )}
         <div className="pb-[1rem]" />
       </div>
     </div>
