@@ -6,6 +6,8 @@ import BottomDrawer from '../../components/common/button/BottomDrawer';
 import LoanHeader from '../../components/loan/LoanHeader';
 import { useNavigate } from 'react-router-dom';
 import NavigateButton from '../../components/common/button/NavigateButton';
+import MultiRangeSlider from '@components/common/slider/MultiRangeSlider';
+import LargeButton from '@components/common/button/LargeButton';
 
 // recommend/:propertyId
 const Loan = () => {
@@ -46,7 +48,24 @@ const Loan = () => {
         <div className="py-[1rem]"></div>
         <LoanCard handleClick={handleClickLoanId} loanId={123} />
         <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
-          <div>children</div>
+          <div className="w-[100%] h-[50vh] flex flex-col justify-between">
+            <div className="w-[100%]">
+              <div className="h-[30%] my-4">
+                <div className="text-sm">대출 기간</div>
+                <MultiRangeSlider min={0} max={1000} />
+              </div>
+              <div className="py-[1rem]" />
+              <hr />
+              <div className="h-[30%] my-4">
+                <div className="text-sm">최소 대출 금액</div>
+                <MultiRangeSlider min={0} max={3000} />
+              </div>
+            </div>
+            <div className="flex justify-around pb-[1rem]">
+              <LargeButton isActive={4} customWidth="w-[35%]" text="초기화" />
+              <LargeButton isActive={0} customWidth="w-[50%]" text="적용" />
+            </div>
+          </div>
         </BottomDrawer>
       </div>
     </div>
