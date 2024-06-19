@@ -26,7 +26,7 @@ export default function Mypage() {
   return (
     <div className="w-customWidthPercent">
       <div className="flex flex-row items-center">
-        <div className="w-[20%]">
+        <div className="w-[20%] mr-3">
           <img
             src={profileTest}
             alt="profile-test"
