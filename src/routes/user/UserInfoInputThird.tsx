@@ -1,8 +1,8 @@
-import LargeButton from "@components/common/button/LargeButton";
-import FloatingInputForm1 from "@components/common/form/FloatingInputForm1";
-import ProgressBar from "@components/common/progressbar/ProgressBar";
-import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import LargeButton from '@components/common/button/LargeButton';
+import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
+import ProgressBar from '@components/common/progressbar/ProgressBar';
+import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 interface Props {
   marriageStatus: boolean;
@@ -36,7 +36,7 @@ export default function UserInfoInputThird({
   const [isActive, setIsActive] = useState<number>(3);
 
   const handleMarriageStatusChange = (value: string): void => {
-    if (value === "marriage") {
+    if (value === 'marriage') {
       setMarriageStatus(true);
     } else {
       setMarriageStatus(false);
@@ -44,23 +44,31 @@ export default function UserInfoInputThird({
   };
 
   const handleMarrageYear = (value: number | string): void => {
-    if (value == "") setMarriageYear(undefined);
-    else if (typeof value === "number") setMarriageYear(value);
+    const numericValue: number =
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setMarriageYear(0);
+    return setMarriageYear(numericValue);
   };
 
   const handleChild = (value: number | string): void => {
-    if (value == "") setChild(undefined);
-    else if (typeof value === "number") setChild(value);
+    const numericValue: number =
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setChild(0);
+    return setChild(numericValue);
   };
 
   const handleCoupleAssets = (value: number | string): void => {
-    if (value == "") setCoupleAssets(undefined);
-    else if (typeof value === "number") setCoupleAssets(value);
+    const numericValue: number =
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setCoupleAssets(0);
+    return setCoupleAssets(numericValue);
   };
 
   const handleCoupleSalary = (value: number | string): void => {
-    if (value == "") setCoupleSalary(undefined);
-    else if (typeof value === "number") setCoupleSalary(value);
+    const numericValue: number =
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setCoupleSalary(0);
+    return setCoupleSalary(numericValue);
   };
 
   const { setTitle } = useOutletContext<{
@@ -68,7 +76,7 @@ export default function UserInfoInputThird({
   }>();
 
   useEffect(() => {
-    setTitle("정보 입력");
+    setTitle('정보 입력');
   }, [setTitle]);
 
   useEffect(() => {
@@ -89,13 +97,13 @@ export default function UserInfoInputThird({
   const validateInputs = (): boolean => {
     if (marriageStatus === true)
       return (
-        typeof marriageYear === "number" &&
+        typeof marriageYear === 'number' &&
         marriageYear >= 1900 &&
-        typeof child === "number" &&
+        typeof child === 'number' &&
         child >= 0 &&
-        typeof coupleSalary === "number" &&
+        typeof coupleSalary === 'number' &&
         coupleSalary >= 0 &&
-        typeof coupleAssets === "number"
+        typeof coupleAssets === 'number'
       );
     else {
       return true;
@@ -116,20 +124,20 @@ export default function UserInfoInputThird({
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
               marriageStatus === false
-                ? "bg-[black] text-[white]"
-                : "bg-[white] text-grey-2"
+                ? 'bg-[black] text-[white]'
+                : 'bg-[white] text-grey-2'
             }`}
-            onClick={() => handleMarriageStatusChange("solo")}
+            onClick={() => handleMarriageStatusChange('solo')}
           >
             미혼
           </button>
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
               marriageStatus === true
-                ? "bg-[black] text-[white]"
-                : "bg-[white] text-grey-2 "
+                ? 'bg-[black] text-[white]'
+                : 'bg-[white] text-grey-2 '
             }`}
-            onClick={() => handleMarriageStatusChange("marriage")}
+            onClick={() => handleMarriageStatusChange('marriage')}
           >
             기혼
           </button>
@@ -140,50 +148,62 @@ export default function UserInfoInputThird({
         <div className="flex flex-col w-customWidthPercent overflow-y-auto max-h-[60vh]">
           <div className="flex flex-col mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
-              type="number"
+              type="text"
               title="혼인신고 연도"
               text="혼인신고를 한 연도를 입력해주세요"
+              value={marriageYear}
               onChange={handleMarrageYear}
-              validate={(value) => typeof value == "number" && value >= 1900}
+              validate={() =>
+                typeof marriageYear == 'number' && marriageYear >= 1900
+              }
               errorMessage="정확한 연도를 입력해주세요"
+              unit="년"
             />
           </div>
 
           <div className="flex flex-col mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
-              type="number"
+              type="text"
               title="자녀 수"
               text="자녀의 수를 입력해주세요(명)"
+              value={child}
               onChange={handleChild}
-              validate={(value) => typeof value == "number" && value >= 0}
+              validate={() => typeof child == 'number' && child >= 0}
               errorMessage="정확한 수를 입력해주세요"
+              unit="명"
             />
           </div>
 
           <div className="flex flex-col mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
-              type="number"
+              type="text"
               title="부부합산 연소득"
               text="부부합산 연소득을 입력해주세요 (원)"
+              value={coupleSalary?.toLocaleString()}
               onChange={handleCoupleSalary}
-              validate={(value) => typeof value == "number" && value >= 0}
-              errorMessage="정확한 금액을 입력해주세요"
+              validate={() =>
+                typeof coupleSalary == 'number' && coupleSalary >= 0
+              }
+              errorMessage="정확한 연소득을 입력해주세요"
+              unit="원"
             />
           </div>
 
           <div className="flex flex-col t mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
-              type="number"
+              type="text"
               title="부부합산 총 자산"
               text="자녀의 수를 입력해주세요 (원)"
+              value={coupleAssets?.toLocaleString()}
               onChange={handleCoupleAssets}
-              validate={(value) => typeof value == "number" && value >= 0}
+              validate={(value) => typeof value == 'number' && value >= 0}
               errorMessage="정확한 금액을 입력해주세요"
+              unit="원"
             />
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
 
       <div className="mt-auto w-customWidthPercent flex gap-2 items-center mb-4">

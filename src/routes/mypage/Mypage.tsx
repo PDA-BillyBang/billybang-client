@@ -6,23 +6,23 @@ import FavoriteLoans from '../../components/mypage/FavoriteLoans';
 import home from '../../assets/image/icons/home.svg';
 import loan from '../../assets/image/icons/loan.svg';
 import { useNavigate } from 'react-router-dom';
-import { test } from '@/lib/apis/my';
+// import { test } from '@/lib/apis/my';
 
 export default function Mypage() {
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
   const handleToMyProperties = () => navigate('/my/properties');
-  const handleSignUp = async () => {
-    try {
-      const response = await test();
-      console.log('회원가입 성공:', response.data);
-    } catch (error) {
-      console.error('회원가입 실패:', error);
-    }
-  };
-  useEffect(() => {
-    handleSignUp();
-  }, []);
+  // const handleSignUp = async () => {
+  //   try {
+  //     const response = await test();
+  //     console.log('회원가입 성공:', response.data);
+  //   } catch (error) {
+  //     console.error('회원가입 실패:', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   handleSignUp();
+  // }, []);
   return (
     <div className="w-customWidthPercent">
       <div className="flex flex-row items-center">

@@ -65,7 +65,10 @@ export default function UserInfoInputSecond({
   };
 
   const handleEmployPeriodChange = (month: number | string): void => {
-    if (typeof month === 'number') setEmployPeriod(month);
+    const numericValue: number =
+      typeof month === 'string' ? parseFloat(month.replace(/,/g, '')) : month;
+    if (isNaN(numericValue)) return setEmployPeriod(0);
+    return setEmployPeriod(numericValue);
   };
 
   const handleCompanySize = (size: string) => {
@@ -152,13 +155,14 @@ export default function UserInfoInputSecond({
 
       <div className="flex flex-col w-customWidthPercent mt-[2rem] mb-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="재직 기간"
           text="재직 기간을 숫자로 입력해주세요 (개월)"
-          value={employPeriod}
+          value={employPeriod?.toLocaleString()}
           onChange={handleEmployPeriodChange}
-          validate={(value) => typeof value == 'number' && value >= 0}
+          validate={() => typeof employPeriod == 'number' && employPeriod >= 0}
           errorMessage="정확한 재직 기간을 입력해주세요"
+          unit="개월"
         />
       </div>
       <div className="flex flex-col w-customWidthPercent mt-[2rem] text-grey-2 hover:text-[black]">

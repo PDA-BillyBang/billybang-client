@@ -7,8 +7,8 @@ import { useOutletContext } from 'react-router-dom';
 
 interface Props {
   pageNum: number;
-  salary: number;
-  assets: number;
+  salary: number | undefined;
+  assets: number | undefined;
   firstBuyerOption: string;
   loanOption: string;
   setPageNum: (value: number) => void;
@@ -48,8 +48,6 @@ export default function UserInfoInputFirst({
   }, [salary, assets, firstBuyerOption, loanOption]);
 
   const validateInputs = (): boolean => {
-    console.log('salary', salary);
-    console.log('assets', assets);
     return (
       salary !== undefined &&
       typeof salary === 'number' &&
@@ -62,15 +60,16 @@ export default function UserInfoInputFirst({
 
   const handleSalaryChange = (value: string | number): void => {
     const numericValue: number =
-      typeof value === 'number' ? value : parseFloat(value);
-    setSalary(numericValue);
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setSalary(0);
+    return setSalary(numericValue);
   };
 
   const handleAssetsChange = (value: string | number): void => {
     const numericValue: number =
-      typeof value === 'number' ? value : parseFloat(value);
-
-    setAssets(numericValue);
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setAssets(0);
+    return setAssets(numericValue);
   };
 
   const handleFirstBuyerChange = (option: string): void => {
@@ -79,6 +78,12 @@ export default function UserInfoInputFirst({
 
   const handleLoanChange = (option: string): void => {
     setLoanOption(option);
+  };
+
+  const handleClickButton = (): void => {
+    if (isActive === 0) {
+      setPageNum(pageNum + 1);
+    }
   };
 
   return (
@@ -91,25 +96,27 @@ export default function UserInfoInputFirst({
 
       <div className="flex flex-col w-customWidthPercent mt-[2rem] mb-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="연간소득금액"
           text="연간 소득 금액을 입력해주세요 (원)"
-          value={salary}
+          value={salary?.toLocaleString()}
           onChange={handleSalaryChange}
-          validate={(value) => typeof value == 'number' && value >= 0}
+          validate={() => typeof salary == 'number' && salary >= 0}
           errorMessage="정확한 소득을 입력해주세요"
+          unit="원"
         />
       </div>
 
       <div className="flex flex-col w-customWidthPercent my-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="개인 보유자산"
           text="보유 자산을 입력해주세요 (원)"
-          value={assets}
+          value={assets?.toLocaleString()}
           onChange={handleAssetsChange}
-          validate={(value) => typeof value === 'number' && value >= 1}
-          errorMessage="정확학 연간소득금액을 입력해주세요"
+          validate={() => typeof assets === 'number' && assets >= 0}
+          errorMessage="정확한 자산을 입력해주세요"
+          unit="원"
         />
       </div>
 
@@ -158,7 +165,7 @@ export default function UserInfoInputFirst({
           text="계속하기"
           customWidth="w-full"
           isActive={isActive}
-          handleClick={() => setPageNum(pageNum + 1)}
+          handleClick={handleClickButton}
         />
       </div>
     </div>

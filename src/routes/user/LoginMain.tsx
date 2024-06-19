@@ -3,19 +3,26 @@ import React, { useEffect, useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
-import { signUp } from '@/lib/apis/user';
+import { kakaoLogin, login, signUp } from '@/lib/apis/user';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
+  const handleKakaoLogin = () => {
+    window.location.href =
+      'http://3.39.52.110:3000/api/users/oauth2/authorization/kakao';
+  };
+
+  const handleLogin = () => {};
   const handleSignUp = async () => {
     try {
       const response = await signUp({
-        signUptype: 'email',
-        email: 'sample@gmail.com',
+        email: 'sss2@gmail.com',
         password: '12345678',
         birthDate: '2024-06-18',
-        nickname: 'nickname',
+        nickname: 'nickname7',
       });
       console.log('회원가입 성공:', response.data);
     } catch (error) {
@@ -69,7 +76,10 @@ export default function Login() {
         </div>
 
         <div className="flex flex-col mb-4 w-customWidthPercent">
-          <button className="flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4">
+          <button
+            className="flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
+            onClick={handleKakaoLogin}
+          >
             <img src={KaKaoBtn} alt="kakao" className="h-6" />
             <div className="w-full text-center">카카오로 시작하기</div>
           </button>
