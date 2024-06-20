@@ -15,3 +15,8 @@ export const loanInstance = axios.create({
   baseURL: '/api/loans',
   withCredentials: true,
 });
+
+export const statisticsInstance = axios.create({
+  baseURL: '/api/districts',
+  withCredentials: true,
+});

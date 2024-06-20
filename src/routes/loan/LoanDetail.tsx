@@ -31,17 +31,17 @@ const LoanDetail = () => {
   };
 
   const handleClickToCompanyInfo = () => {
-    navigate('/loan/company/123');
+    navigate('/loan/company/3');
   };
 
   return (
-    <div className="flex flex-col items-center mt-[80px] ">
+    <div className="flex flex-col items-center mt-[50px] ">
       <div className="py-[0.5rem]" />
       <div className=" w-customWidthPercent">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
             <img src={bankTest} className="w-[2.5rem] h-[2.5rem]" />
-            <div className="text-[1.2rem] pl-[0.25rem]">우리은행</div>
+            <div className="text-[1.2rem] pl-[0.25rem] font-bold">우리은행</div>
           </div>
           <LoanSmallButton
             handleClick={handleClickToCompanyInfo}

@@ -31,7 +31,7 @@ const transformData = (financialStatements: financialStatementsI[]) => {
   ];
 
   return {
-    headers: ['구분', ...years.map((year) => `${year}`)],
+    headers: ['구분', ...years.map((year) => `${year}년`)],
     rows: [
       salesAmount,
       businessProfit,
