@@ -7,6 +7,7 @@ import { getStatisticsByDistrictId } from '@/lib/apis/statistics';
 import { crimeCountI } from './charts/CrimeRate';
 import { populationCountI } from './charts/AgeGroupPopulation';
 import { individualIncomeI } from './charts/DistrictIncome';
+import ChartSkeleton from './charts/ChartSkeleton';
 type Props = { areaId: string };
 
 export default function AreaStatistics({ areaId }: Props) {
@@ -37,23 +38,31 @@ export default function AreaStatistics({ areaId }: Props) {
     <div className="">
       <div className="pt-[1rem]" />
       <div className="text-[1rem] font-bold">동별 인구 밀도</div>
-      {populationDensityList && (
+      {populationDensityList ? (
         <DistrictPopulationDensity populationDensity={populationDensityList} />
+      ) : (
+        <ChartSkeleton />
       )}
       <div className="pt-[1rem]" />
       <div className="text-[1rem] font-bold">구별 근로소득</div>
-      {individualIncomeList && (
+      {individualIncomeList ? (
         <DistrictIncome individualIncome={individualIncomeList} />
+      ) : (
+        <ChartSkeleton />
       )}
       <div className="pt-[1rem]" />
       <div className="text-[1rem] font-bold">연령별 인구 수</div>
-      {populationCountList && (
+      {populationCountList ? (
         <AgeGroupPopulation populationCount={populationCountList} />
+      ) : (
+        <ChartSkeleton />
       )}
       <div className="pt-[1rem]" />
       <div className="text-[1rem] font-bold">범죄율</div>
-      {crimeCountList && areaId && (
+      {crimeCountList && areaId ? (
         <CrimeRate areaId={areaId} crimeCountList={crimeCountList} />
+      ) : (
+        <ChartSkeleton />
       )}
       <div className="pt-[1rem]" />
     </div>
