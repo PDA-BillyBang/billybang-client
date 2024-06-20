@@ -31,7 +31,6 @@ export default function CrimeRate({ crimeCountList, areaId }: Props) {
 
   return (
     <div className="overflow-x-auto">
-      {targetDistrict}
       <div style={{ minWidth: '600px' }}>
         <ResponsiveContainer
           width="100%"
