@@ -43,21 +43,24 @@ export default function AreaStatistics({ areaId }: Props) {
       ) : (
         <ChartSkeleton />
       )}
-      <div className="pt-[1rem]" />
+      <div className="pt-[2rem]" />
       <div className="text-[1rem] font-bold">구별 근로소득</div>
       {individualIncomeList ? (
-        <DistrictIncome individualIncome={individualIncomeList} />
+        <DistrictIncome
+          areaId={areaId}
+          individualIncome={individualIncomeList}
+        />
       ) : (
         <ChartSkeleton />
       )}
-      <div className="pt-[1rem]" />
+      <div className="pt-[2rem]" />
       <div className="text-[1rem] font-bold">연령별 인구 수</div>
       {populationCountList ? (
         <AgeGroupPopulation populationCount={populationCountList} />
       ) : (
         <ChartSkeleton />
       )}
-      <div className="pt-[1rem]" />
+      <div className="pt-[2rem]" />
       <div className="text-[1rem] font-bold">범죄율</div>
       {crimeCountList && areaId ? (
         <CrimeRate areaId={areaId} crimeCountList={crimeCountList} />

@@ -18,26 +18,22 @@ export interface populationCountI {
 
 // Define a color map for age groups
 const colorMap: { [key: string]: string } = {
-  '10s': '#5084D9',
-  '20s': '#2C6BD1',
-  '30s': '#004CC7',
-  '40s': '#003FA5',
-  '50s': '#003488',
-  '60s': '#004CC7',
-  '70over': '#2C6BD1',
+  '0s': '#004CC7',
+  '10s': '#3773D3',
+  '20s': '#5286D9',
+  '30s': '#6D99DF',
+  '40s': '#89ACE5',
+  '50s': '#A4BFEB',
+  '60s': '#DAE5F7',
+  '70over': '#E0E9F9',
 };
 
 export default function AgeGroupPopulation({ populationCount }: Props) {
-  // Reverse the populationCount array and map to the format required by Funnel
   const data = populationCount.map((item) => ({
     name: item.age,
     value: item.count,
     fill: colorMap[item.age] || '#003488', // Default color if not in colorMap
   }));
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div>
