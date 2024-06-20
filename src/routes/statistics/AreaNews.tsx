@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SmallButton from '../../components/common/button/SmallButton';
 import NewsCard from './NewsCard';
 import { getNewsByDistrictId } from '@/lib/apis/statistics';
+import NewsCardSkeleton from './NewsCardSkeleton';
 
 type Props = { districtId: string };
 export interface newsDataI {
@@ -18,6 +19,7 @@ const data = [1, 2, 3, 4, 5];
 
 export default function AreaNews({ districtId }: Props) {
   const [newsData, setNewsData] = useState<newsDataI[]>();
+  const [loading, setLoading] = useState<boolean>(true);
   const handleNewByDistrictId = async (districtNum: number) => {
     try {
       const result = await getNewsByDistrictId(districtNum);
@@ -25,6 +27,8 @@ export default function AreaNews({ districtId }: Props) {
       setNewsData(result.data.response);
     } catch (error) {
       console.log('[ERROR]', error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -44,8 +48,18 @@ export default function AreaNews({ districtId }: Props) {
           <SmallButton text="부동산" customWidth="w-[50px]" /> */}
         </div>
       </div>
-      {newsData &&
-        newsData.map((news: newsDataI, index: number) => (
+      {loading ? (
+        <>
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+        </>
+      ) : (
+        newsData &&
+        newsData.map((news: newsDataI) => (
           <div key={news.id} className="py-[0.3rem]">
             <NewsCard
               id={news.id}
@@ -57,7 +71,8 @@ export default function AreaNews({ districtId }: Props) {
               newsTitle={news.newsTitle}
             />
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 }
