@@ -7,3 +7,7 @@ export async function getLoansByPropertyId(propertyId: number) {
 export async function getLoanProviderById(providerId: number) {
   return await loanInstance.get(`/providers/${providerId}`);
 }
+
+export async function getLoanDetailByLoanId(loanId: number) {
+  return await loanInstance.get('/' + loanId);
+}

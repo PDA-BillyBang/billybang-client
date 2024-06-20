@@ -1,19 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import bankTest from '../../assets/image/test/bank-test.png';
-import filledLike from '../../assets/image/icons/filledLike.svg';
 import check from '../../assets/image/icons/check.svg';
 import LoanSmallButton from './LoanSmallButton';
 import LargeButton from '../../components/common/button/LargeButton';
 import { useNavigate } from 'react-router-dom';
 import LikeButton from '../../components/common/button/LikeButton';
+import { getLoanDetailByLoanId } from '@/lib/apis/loan';
+
+export interface loanDetailI {
+  guaranteeAgencyName: string | null;
+  interestRateType: string;
+  isStarred: boolean;
+  loanLimit: number;
+  loanType: string;
+  ltv: number | null;
+  maxInterestRate: number;
+  maxTerm: number;
+  minInterestRate: number;
+  minTerm: number;
+  preferentialItems: any[];
+  productDesc: string;
+  productName: string;
+  providerId: number;
+  providerImgUrl: string;
+  providerName: string;
+}
 
 // /loan/detail/:loanId
 const LoanDetail = () => {
+  const { loanId } = useParams<{ loanId: string }>();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
+  const [loanDetailResult, setLoanDetailResult] = useState<loanDetailI>();
   const handleLikeClick = () => {
     console.log('like loan card');
     setLikeButtonActive((prev) => !prev);
@@ -21,6 +42,19 @@ const LoanDetail = () => {
 
   const navigate = useNavigate();
 
+  const handleGetLoanDetailByLoanId = async () => {
+    try {
+      const result = await getLoanDetailByLoanId(Number(loanId));
+      console.log(result.data.response);
+      setLoanDetailResult(result.data.response);
+      setLikeButtonActive(result.data.response.isStarred);
+    } catch (error) {
+      console.log('[ERROR]', error);
+    }
+  };
+  useEffect(() => {
+    handleGetLoanDetailByLoanId();
+  }, []);
   useEffect(() => {
     setTitle('상품상세');
   }, [setTitle]);
@@ -41,8 +75,13 @@ const LoanDetail = () => {
       <div className=" w-customWidthPercent">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
-            <img src={bankTest} className="w-[2.5rem] h-[2.5rem]" />
-            <div className="text-[1.2rem] pl-[0.25rem] font-bold">우리은행</div>
+            <img
+              src={loanDetailResult?.providerImgUrl}
+              className="w-[2.5rem] h-[2.5rem]"
+            />
+            <div className="text-[1.2rem] pl-[0.25rem] font-bold">
+              {loanDetailResult?.providerName}
+            </div>
           </div>
           <LoanSmallButton
             handleClick={handleClickToCompanyInfo}
@@ -54,7 +93,7 @@ const LoanDetail = () => {
       <div className="w-customWidthPercent">
         <header className="flex flex-row items-center justify-between ">
           <div className="font-bold text-[1.2rem] leading-[1.2rem] text-center">
-            iTouch 전세론(주택금융보증)
+            {loanDetailResult?.productName}
           </div>
           <LikeButton
             isActive={likeButtonActive}
@@ -70,10 +109,12 @@ const LoanDetail = () => {
             HF 보증
           </div>
         </div>
-        <div className="text-red-1 pt-[0.7rem] font-bold">2.3~3.5%</div>
+        <div className="text-red-1 pt-[0.7rem] font-bold">
+          {loanDetailResult?.minInterestRate}~
+          {loanDetailResult?.maxInterestRate}%
+        </div>
         <div className="text-grey-1 pt-[1.6rem]">
-          주택금융공사 주택신용보증서 담보(90%보증)로 영업점 방문없이 인터넷상담
-          및 대출 실행이 가능한 전세대출
+          {loanDetailResult?.productDesc}
         </div>
         <div className="flex flex-row mt-[1.5rem] bg-grey-6 rounded-[10px]">
           <div className="flex flex-col w-[30%] items-center text-grey-1">
@@ -84,10 +125,12 @@ const LoanDetail = () => {
             <div className="py-[1rem]">우대조건</div>
           </div>
           <div className="flex flex-col w-[70%]">
-            <div className="pt-[1rem]">주택담보대출</div>
+            <div className="pt-[1rem]">{loanDetailResult?.loanType}</div>
             <div className="pt-[1rem]">2억원</div>
-            <div className="pt-[1rem]">70%</div>
-            <div className="pt-[1rem]">1년~ 10년</div>
+            <div className="pt-[1rem]">{loanDetailResult?.ltv}%</div>
+            <div className="pt-[1rem]">
+              {loanDetailResult?.minTerm}년~ {loanDetailResult?.maxTerm}년
+            </div>
             <div className="py-[1rem]">신혼, 부부합산소득, 자녀여부</div>
           </div>
         </div>
