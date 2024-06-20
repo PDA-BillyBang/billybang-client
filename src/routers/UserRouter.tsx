@@ -45,7 +45,7 @@ export const userRoutes: RouteObject[] = [
         element: <SubHeader />,
         children: [
           {
-            path: 'login/pw',
+            path: 'login/pw/:email',
             element: <LoginPwInput />,
           },
           {

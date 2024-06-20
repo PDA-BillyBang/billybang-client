@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Datepicker } from 'flowbite-react';
 import LargeButton from '@components/common/button/LargeButton';
+import { signUp } from '@/lib/apis/user';
 
 export default function SignUp() {
   const [password, setPassword] = useState('');
@@ -19,6 +20,24 @@ export default function SignUp() {
   useEffect(() => {
     setTitle('회원가입');
   }, [setTitle]);
+
+  useEffect(() => {
+    handleSignUp();
+  }, []);
+
+  const handleSignUp = async () => {
+    try {
+      const response = await signUp({
+        email: 's@gmail.com',
+        password: '12345678',
+        birthDate: '2024-06-18',
+        nickname: 'nickname',
+      });
+      console.log('회원가입 성공:', response.data);
+    } catch (error) {
+      console.error('회원가입 실패:', error);
+    }
+  };
 
   // 모든 입력 값이 유효한지 확인하는 함수
   const checkValidity = () => {

@@ -14,11 +14,15 @@ export async function signUp(data: {
 //   return await userInstance.get('/oauth2/authroization/kakao');
 // }
 
-export async function login() {
-  const response = await userInstance.get('/login'); // 수정된 URL로 요청을 보냅니다.
-  console.log(response);
-}
-
 export async function test() {
   return await userInstance.get('/test');
+}
+export async function login(data: { email: string; password: string }) {
+  const s = await userInstance.post('/login', data);
+  console.log(s);
+  return s;
+}
+
+export async function isEmailRegistered(email: string) {
+  return await userInstance.get(`/validate-email?email=${email}`);
 }

@@ -22,16 +22,16 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
 
   // Function to convert number to currency format (e.g., 1천만원)
   const formatCurrency = (value: number): string => {
-    if (value >= 100000000) {
-      const 억 = Math.floor(value / 100000000);
-      const 천만원 = value % 100000000;
+    if (value >= 100) {
+      const 억 = Math.floor(value / 100);
+      const 천만원 = value % 100;
       if (천만원 === 0) {
         return `${억}억`;
       } else {
-        return `${억}억 ${Math.floor(천만원 / 10000000)}천만원`;
+        return `${억}억 ${Math.floor(천만원 / 10)}천만원`;
       }
-    } else if (value >= 10000000) {
-      const 천만원 = value / 10000000;
+    } else if (value >= 10) {
+      const 천만원 = value / 10;
       return `${Math.floor(천만원)}천만원`;
     } else {
       return `${value}원`;
@@ -40,7 +40,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
 
   // Convert to nearest 1000만원 (10,000,000)
   const roundToNearest10M = (value: number): number => {
-    return Math.round(value / 10000000) * 10000000;
+    return Math.round(value / 10) * 10;
   };
 
   // Convert to percentage
@@ -77,7 +77,8 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
           <span>전체</span>
         ) : (
           <span>
-            {formatCurrency(minVal)} ~ {formatCurrency(maxVal)}
+            {formatCurrency(minVal)} ~{" "}
+            {maxVal === max ? `${formatCurrency(maxVal)}+` : formatCurrency(maxVal)}
           </span>
         )}
       </div>
@@ -94,7 +95,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
               minValRef.current = value;
             }}
             className={`${styles.thumb} ${styles.thumbLeft} `}
-            style={{ zIndex: minVal > max - 10000000 ? 5 : 3 }}
+            style={{ zIndex: minVal > max - 10 ? 5 : 3 }}
           />
           <input
             type="range"
@@ -117,7 +118,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
             {formatCurrency(minVal)}
           </div>
           <div className={styles.slider__right_value}>
-            {formatCurrency(maxVal)}
+            {maxVal === max ? `${formatCurrency(maxVal)}+` : formatCurrency(maxVal)}
           </div>
         </div>
       </div>

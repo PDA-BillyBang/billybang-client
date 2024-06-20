@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
-import { kakaoLogin, login, signUp } from '@/lib/apis/user';
+import { isEmailRegistered, login, signUp } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -15,24 +15,14 @@ export default function Login() {
       'http://3.39.52.110:3000/api/users/oauth2/authorization/kakao';
   };
 
-  const handleLogin = () => {};
-  const handleSignUp = async () => {
-    try {
-      const response = await signUp({
-        email: 'sss2@gmail.com',
-        password: '12345678',
-        birthDate: '2024-06-18',
-        nickname: 'nickname7',
-      });
-      console.log('회원가입 성공:', response.data);
-    } catch (error) {
-      console.error('회원가입 실패:', error);
-    }
+  const isExistedUser = async () => {
+    const response = await isEmailRegistered(email);
+    console.log(response.data.response);
+    if (response.data.response.existsByEmail) navigate(`pw/${email}`);
+    else navigate('/user/signup');
   };
 
-  useEffect(() => {
-    handleSignUp();
-  }, []);
+  useEffect(() => {}, []);
 
   // 상태 업데이트 헬퍼 함수
   const handleEmailChange = (value: string | number) => {
@@ -62,6 +52,7 @@ export default function Login() {
             text="계속하기"
             customWidth="w-full"
             isActive={0}
+            handleClick={isExistedUser}
           ></LargeButton>
         </div>
       </div>
