@@ -34,7 +34,7 @@ export default function BottomDrawerUp({
         <img
           src={drawerUpDown}
           alt="drawerUp"
-          className="h-[2rem] rounded-full border-[0.1rem] border-grey-1 bg-white-1 w-[2rem] cursor-pointer absolute top-2 left-1/2 transform -translate-x-1/2"
+          className="h-[2rem] rounded-lg border-[0.01rem] border-grey-1 bg-white-1 w-[3rem] cursor-pointer absolute top-2 left-1/2 transform -translate-x-1/2"
           onClick={handleClickHeight}
         />
         <div
