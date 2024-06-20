@@ -35,14 +35,10 @@ export default function LoginPwInput() {
       setError('이메일이 필요합니다.');
       return false;
     }
-    console.log('1');
     try {
-      const resp = await login({ email, password });
-      console.log('2');
-      console.log(resp);
+      await login({ email, password });
       navigate('/'); // 로그인 성공 후 이동할 경로
     } catch (error: unknown) {
-      console.log('3');
       const errorResponse = error as AxiosError<ErrorResponseI>;
       console.log(errorResponse);
       if (errorResponse.response && errorResponse.response.status === 400) {
