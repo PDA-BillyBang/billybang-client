@@ -1,7 +1,7 @@
 import { loanInstance } from './api';
 
-export async function getLoansByPropertyId() {
-  return await loanInstance.get('/');
+export async function getLoansByPropertyId(propertyId: number) {
+  return await loanInstance.get(`/loans?propertyId=${propertyId}`);
 }
 
 export async function getLoanProviderById(providerId: number) {

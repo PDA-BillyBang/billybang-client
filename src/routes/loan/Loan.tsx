@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import LoanCard from '../../components/loan/LoanCard';
 import LoanFiltering from '../../components/loan/LoanFiltering';
 import BottomDrawer from '../../components/common/button/BottomDrawer';
@@ -16,6 +16,7 @@ const Loan = () => {
     setTitle: (title: string) => void;
   }>();
   const navigate = useNavigate();
+  const { propertyId } = useParams<{ propertyId: string }>();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
