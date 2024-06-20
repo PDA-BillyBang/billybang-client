@@ -20,3 +20,8 @@ export const statisticsInstance = axios.create({
   baseURL: '/api/districts',
   withCredentials: true,
 });
+
+export const baseInstance = axios.create({
+  baseURL: '/api',
+  withCredentials: true,
+});

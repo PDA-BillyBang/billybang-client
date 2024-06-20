@@ -8,6 +8,7 @@ import LargeButton from '../../components/common/button/LargeButton';
 import { useNavigate } from 'react-router-dom';
 import LikeButton from '../../components/common/button/LikeButton';
 
+// /loan/detail/:loanId
 const LoanDetail = () => {
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
