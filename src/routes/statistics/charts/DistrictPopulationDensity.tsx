@@ -9,7 +9,12 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-type Props = {};
+type Props = { populationDensity: populationDensityI[] };
+
+export interface populationDensityI {
+  areaName: string;
+  density: number;
+}
 
 const data = [
   {
@@ -50,7 +55,9 @@ const data = [
   },
 ];
 
-export default function DistrictPopulationDensity({}: Props) {
+export default function DistrictPopulationDensity({
+  populationDensity,
+}: Props) {
   return (
     <div className="overflow-x-auto">
       <div style={{ minWidth: '600px' }}>
@@ -62,7 +69,7 @@ export default function DistrictPopulationDensity({}: Props) {
           <AreaChart
             width={730}
             height={250}
-            data={data}
+            data={populationDensity}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <defs>
@@ -71,13 +78,13 @@ export default function DistrictPopulationDensity({}: Props) {
                 <stop offset="95%" stopColor="#004CC7" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="name" />
+            <XAxis dataKey="areaName" />
             <YAxis width={50} />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="pv"
+              dataKey="density"
               stroke="#004CC7"
               fillOpacity={1}
               fill="url(#colorPv)"

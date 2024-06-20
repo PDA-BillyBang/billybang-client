@@ -29,11 +29,9 @@ export default function Statistics({}: Props) {
           handleClick={handleSelectActive}
           selectActive={selectActive}
         />
-        {selectActive === 0 ? (
-          <AreaStatistics />
-        ) : (
-          areaId && <AreaNews districtId={areaId} />
-        )}
+        {selectActive === 0
+          ? areaId && <AreaStatistics areaId={areaId} />
+          : areaId && <AreaNews districtId={areaId} />}
       </div>
     </div>
   );
