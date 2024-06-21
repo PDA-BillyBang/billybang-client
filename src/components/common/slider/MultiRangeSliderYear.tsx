@@ -13,43 +13,34 @@ interface MultiRangeSliderProps {
   max: number;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
+const MultiRangeSliderYear: FC<MultiRangeSliderProps> = ({ min, max }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef<HTMLDivElement>(null);
 
-  // Function to convert number to currency format (e.g., 1천만원)
   const formatCurrency = (value: number): string => {
-    if (value >= 100) {
-      const 억 = Math.floor(value / 100);
-      const 천만원 = value % 100;
-      if (천만원 === 0) {
-        return `${억}억`;
-      } else {
-        return `${억}억 ${Math.floor(천만원 / 10)}천만원`;
-      }
-    } else if (value >= 10) {
-      const 천만원 = value / 10;
-      return `${Math.floor(천만원)}천만원`;
+    const year = Math.floor(value / 12);
+    const month = value % 12;
+    if (month == 0) {
+      return `${year}년`;
+    } else if (year == 0) {
+      return `${month}개월`;
     } else {
-      return `${value}원`;
+      return `${year}년 ${month}개월`;
     }
   };
 
-  // Convert to nearest 1000만원 (10,000,000)
   const roundToNearest10M = (value: number): number => {
-    return Math.round(value / 10) * 10;
+    return value;
   };
 
-  // Convert to percentage
   const getPercent = useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
 
-  // Set width of the range to decrease from the left side
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxValRef.current);
@@ -130,4 +121,4 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
   );
 };
 
-export default MultiRangeSlider;
+export default MultiRangeSliderYear;

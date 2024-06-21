@@ -1,53 +1,50 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import {
   FunnelChart,
   Funnel,
   LabelList,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
-type Props = {};
+type Props = {
+  populationCount: populationCountI[];
+};
 
-const data = [
-  {
-    value: 70,
-    name: "80세~",
-    fill: "#003488",
-  },
-  {
-    value: 80,
-    name: "60~80세",
-    fill: "#003FA5",
-  },
-  {
-    value: 50,
-    name: "40~60세",
-    fill: "#004CC7",
-  },
-  {
-    value: 40,
-    name: "20~40세",
-    fill: "#2C6BD1",
-  },
-  {
-    value: 60,
-    name: "~20세",
-    fill: "#5084D9",
-  },
-];
+export interface populationCountI {
+  age: string;
+  count: number;
+}
 
-export default function AgeGroupPopulation({}: Props) {
+// Define a color map for age groups
+const colorMap: { [key: string]: string } = {
+  '0s': '#004CC7',
+  '10s': '#3773D3',
+  '20s': '#5286D9',
+  '30s': '#6D99DF',
+  '40s': '#89ACE5',
+  '50s': '#A4BFEB',
+  '60s': '#DAE5F7',
+  '70over': '#E0E9F9',
+};
+
+export default function AgeGroupPopulation({ populationCount }: Props) {
+  const data = populationCount.map((item) => ({
+    name: item.age,
+    value: item.count,
+    fill: colorMap[item.age] || '#003488', // Default color if not in colorMap
+  }));
+
   return (
     <div>
       <ResponsiveContainer
         width="100%"
         height={300}
-        className=" rounded-[10px] my-[0.5rem] py-[0.2rem] pl-[-1rem]"
+        className="rounded-[10px] my-[0.5rem] py-[0.2rem]"
       >
         <FunnelChart width={730} height={250}>
           <Tooltip />
-          <Funnel dataKey="value" data={data} isAnimationActive>
+          <Funnel dataKey="value" data={data.reverse()} isAnimationActive>
             <LabelList
               position="right"
               fill="#000"

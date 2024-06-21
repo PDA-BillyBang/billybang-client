@@ -1,19 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { newsDataI } from './AreaNews';
 
-type Props = {};
+export default function NewsCard({
+  company,
+  date,
+  id,
+  imgUrl,
+  newsSummary,
+  newsTitle,
+  newsUrl,
+}: newsDataI) {
+  const [truncatedTitle, setTruncatedTitle] = useState(newsTitle);
+  const [truncatedSummary, setTruncatedSummary] = useState(newsSummary);
 
-export default function NewsCard({}: Props) {
+  const handleToNewsUrl = () => {
+    window.open(newsUrl);
+  };
+
+  const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+  };
+
+  const updateTextLengths = () => {
+    const width = window.innerWidth;
+    if (width < 400) {
+      setTruncatedTitle(truncateText(newsTitle, 15));
+      setTruncatedSummary(truncateText(newsSummary, 35));
+    } else if (width < 600) {
+      setTruncatedTitle(truncateText(newsTitle, 20));
+      setTruncatedSummary(truncateText(newsSummary, 40));
+    } else if (width < 900) {
+      setTruncatedTitle(truncateText(newsTitle, 30));
+      setTruncatedSummary(truncateText(newsSummary, 100));
+    } else {
+      setTruncatedTitle(truncateText(newsTitle, 40));
+      setTruncatedSummary(truncateText(newsSummary, 100));
+    }
+  };
+
+  useEffect(() => {
+    updateTextLengths();
+    window.addEventListener('resize', updateTextLengths);
+    return () => {
+      window.removeEventListener('resize', updateTextLengths);
+    };
+  }, [newsTitle, newsSummary]);
+
   return (
-    <div className="w-full hover:bg-grey-5 cursor-pointer bg-grey-6 rounded-[5px] h-[100px] px-[0.8rem] items-center justify-between flex">
-      <img
-        className="w-[20%] h-[80px]"
-        src="https://img7.yna.co.kr/etc/inner/KR/2024/06/10/AKR20240610147300004_01_i_P4.jpg"
-      />
-      <div className="flex flex-col w-[75%] items-start justify-start h-[80px]">
-        <div className="pb-[0.2rem]">뉴스 제목 어쩌구</div>
+    <div
+      onClick={handleToNewsUrl}
+      className="w-full hover:bg-grey-5 cursor-pointer bg-grey-6 rounded-[5px] h-[140px] px-[0.8rem] items-center justify-between flex"
+    >
+      <img className="w-[25%] h-[120px]" src={imgUrl} />
+      <div className="flex flex-col w-[70%] h-[120px] justify-between">
+        <div className="flex flex-col w-[100%] items-start justify-start h-[80px]">
+          <div className="pb-[0.2rem]">{truncatedTitle}</div>
+          <div className="text-[0.8rem] text-grey-1">{truncatedSummary}</div>
+        </div>
         <div className="text-[0.8rem] text-grey-1">
-          뉴스 내용 어쩌구 어ㅓ구어저라쩌도구더 거ㅏ나다라ㅏ 마바사 어쩌구
-          가나다라 마다라 엊쩌구..........
+          {date} | {company}
         </div>
       </div>
     </div>

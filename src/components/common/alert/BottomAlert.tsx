@@ -24,7 +24,7 @@ export default function BottomAlert({
 
   return (
     <div
-      className={`fixed bottom-0 px-4 py-2 mb-8 transform -translate-x-1/2 rounded-md shadow-md text-white-1 bg-grey-1 z-50 left-1/2 transition-opacity transition-transform duration-300 ${
+      className={`fixed bottom-0 text-[1rem] px-4 py-2 mb-8 transform -translate-x-1/2 rounded-md shadow-md text-white-1 bg-grey-1 z-50 left-1/2 transition-opacity transition-transform duration-300 ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
