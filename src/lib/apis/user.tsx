@@ -34,9 +34,11 @@ export async function signUp(data: {
   return await userInstance.post('/sign-up', data);
 }
 
-// export async function kakaoLogin() {
-//   return await userInstance.get('/oauth2/authroization/kakao');
-// }
+export async function kakaoLogin() {
+  const s = await userInstance.get('/oauth2/authorization/kakao');
+  console.log(s);
+  return s;
+}
 
 export async function test() {
   return await userInstance.get('/test');
@@ -49,7 +51,9 @@ export async function login(data: { email: string; password: string }) {
 
 //로그아웃(POST)
 export async function logout() {
-  return await userInstance.post('/logout');
+  const s = await userInstance.post('/logout');
+  console.log(s);
+  return s;
 }
 
 //이메일 중복 확인(GET)
