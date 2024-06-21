@@ -6,8 +6,6 @@ export const userInstance = axios.create({
   baseURL: '/api/users',
   withCredentials: true,
 });
-<<<<<<< feat/login
-=======
 
 export const myInstance = axios.create({
   baseURL: BASE_URL + '/',
@@ -27,4 +25,3 @@ export const baseInstance = axios.create({
   baseURL: '/api',
   withCredentials: true,
 });
->>>>>>> develop
