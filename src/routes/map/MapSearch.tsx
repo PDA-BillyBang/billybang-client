@@ -18,7 +18,7 @@ export default function MapSearch({}: Props) {
 
   return (
     <div>
-      <Navbar className="flex h-16">
+      <div className="flex h-16">
         <div className="flex w-full">
           <input
             className="flex-grow ml-2 text-[1.2rem] px-2 py-1"
@@ -27,11 +27,15 @@ export default function MapSearch({}: Props) {
             required
             style={{ minWidth: '200px' }}
           />
-          <div className="flex items-center px-2">
-            <img className="h-6" src={search} alt="Search Icon" />
+          <div className="flex md:order-2 items-center px-2">
+            <img
+              className="flex h-[2rem] cursor-pointer"
+              src={search}
+              alt="Search Icon"
+            />
           </div>
         </div>
-      </Navbar>
+      </div>
       <div>
         <ul>
           {array.map((element, index) => (

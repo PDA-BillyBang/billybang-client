@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserInfoInputFirst from './UserInfoInputFirst';
 import UserInfoInputSecond from './UserInfoInputSecond';
 import UserInfoInputThird from './UserInfoInputThird';
 import UserInfoInputDone from './UserInfoInputDone';
-import { registerAdditionalUserInfo } from '@/lib/apis/user';
-import { useNavigate } from 'react-router-dom';
+import {
+  getUserInfo,
+  registerAdditionalUserInfo,
+  updateUserInfo,
+} from '@/lib/apis/user';
+import { Params, useNavigate, useParams } from 'react-router-dom';
 import { ErrorResponseI } from '@/utils/errorTypes';
 import { AxiosError } from 'axios';
 
 export default function UserInfoInput() {
   const navigate = useNavigate();
+  const { option } = useParams<Params>();
+
+  useEffect(() => {}, [option]);
 
   //1페이지에 필요한 state
   const [pageNum, setPageNum] = useState<number>(1);
@@ -31,9 +38,40 @@ export default function UserInfoInput() {
   const [totalMarriedIncome, setTotalMarriedIncome] = useState<number>();
   const [totalMarriedAssets, setTotalMarriedAssets] = useState<number>();
 
-  const AddUserInfo = async () => {
+  useEffect(() => {
+    if (option === '1') {
+      const fetchUserInfo = async () => {
+        try {
+          const response = await getUserInfo();
+          const userInfo = response.data.response.userInfo;
+          console.log(userInfo);
+          setIndividualAssets(userInfo.individualAssets);
+          setIndividualIncome(userInfo.individualIncome);
+          setIsFirstHouseBuyer(userInfo.isFirstHouseBuyer);
+          setHasOtherLoans(userInfo.hasOtherLoans);
+
+          setIsForeign(userInfo.isForeign);
+          setOccupation(userInfo.occupation);
+          setEmploymentDuration(userInfo.employmentDuration);
+          setCompanySize(userInfo.companySize);
+
+          setIsMarried(userInfo.isMarried);
+          setYearsOfMarriage(userInfo.yearsOfMarriage);
+          setChildrenCount(userInfo.childrenCount);
+          setTotalMarriedAssets(userInfo.totalMarriedAssets);
+          setTotalMarriedIncome(userInfo.totalMarriedIncome);
+        } catch (error) {
+          console.error('Failed to fetch user info:', error);
+        }
+      };
+
+      fetchUserInfo();
+    }
+  }, []);
+
+  const AddOrUpdateUserInfo = async () => {
     try {
-      await registerAdditionalUserInfo({
+      const data = {
         occupation,
         companySize,
         employmentDuration,
@@ -47,7 +85,12 @@ export default function UserInfoInput() {
         isMarried,
         yearsOfMarriage,
         hasOtherLoans,
-      });
+      };
+      if (option === '2') {
+        await registerAdditionalUserInfo(data);
+      } else if (option === '1') {
+        await updateUserInfo(data);
+      }
 
       navigate('/'); // 로그인 성공 후 이동할 경로
     } catch (error: unknown) {
@@ -56,7 +99,7 @@ export default function UserInfoInput() {
       if (errorResponse.response && errorResponse.response.status === 500) {
         console.log(errorResponse.response.data.response.message);
       } else {
-        console.error('로그인 에러:', error);
+        console.error('정보 입력 실패:', error);
       }
     }
   };
@@ -108,7 +151,7 @@ export default function UserInfoInput() {
             setTotalMarriedAssets={setTotalMarriedAssets}
             pageNum={pageNum}
             setPageNum={setPageNum}
-            AddUserInfo={AddUserInfo}
+            AddUserInfo={AddOrUpdateUserInfo}
           />
         );
       case 4:

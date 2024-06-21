@@ -15,13 +15,15 @@ export default function Login() {
   const handleKakaoLogin = async () => {
     try {
       await kakaoLogin();
-      navigate('/');
+      // navigate('/');
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
       if (errorResponse.response) {
         console.error(errorResponse.response.data.response);
       }
       navigate('/user/login');
+    } finally {
+      navigate('/');
     }
   };
 
@@ -94,15 +96,15 @@ export default function Login() {
         </div>
 
         <div className="flex flex-col mb-4 w-customWidthPercent">
-          <a href="http://3.39.52.110:3000/api/oauth2/authorization/kakao">
-            <button
-              className=" w-full flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
-              // onClick={handleKakaoLogin}
-            >
-              <img src={KaKaoBtn} alt="kakao" className="h-6" />
-              <div className="w-full text-center">카카오로 시작하기</div>
-            </button>
-          </a>
+          {/* <a href="http://3.39.52.110:3000/api/oauth2/authorization/kakao"> */}
+          <button
+            className=" w-full flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
+            onClick={handleKakaoLogin}
+          >
+            <img src={KaKaoBtn} alt="kakao" className="h-6" />
+            <div className="w-full text-center">카카오로 시작하기</div>
+          </button>
+          {/* </a> */}
         </div>
       </div>
     </div>
