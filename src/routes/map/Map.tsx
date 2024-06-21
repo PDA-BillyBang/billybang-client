@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import { Property, OverlayData, CategoryCode } from '@/utils/types';
+import { PropertyGroup, Property, OverlayData, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { moveToCurrentLocation } from './methods/moveToCurrentLocation';
 import { renderProperties } from './methods/renderProperties';
@@ -16,9 +16,11 @@ import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
 import MapPropertyLoan from './MapPropertyLoan';
-import { getProperties } from '@/lib/apis/property';
+import { getPropertyDetails } from '@/lib/apis/property';
+import { getDetailedProperties } from './methods/fetchPropertyDetail';
 
 export default function MapComponent() {
+  const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
     null
@@ -39,7 +41,7 @@ export default function MapComponent() {
   // 지도 생성 관련 : 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
     const cleanup = initializeMap(
-      setProperties,
+      setPropertyGroups,
       setMap,
       (psInstance) => {
         setPs(psInstance);
@@ -60,80 +62,36 @@ export default function MapComponent() {
   useEffect(() => {
     const cleanup = renderProperties(
       map,
-      properties,
+      propertyGroups,
       overlayRef,
       selectedPropertyId,
       setSelectedPropertyId
     );
     return cleanup;
-  }, [map, properties]);
+  }, [map, propertyGroups]);
 
-  // 매물 선택시 스타일 변경
+  // 매물 그룹 선택시 스타일 변경 및 자세한 매물 데이터 가져오기
   useEffect(() => {
+    if (selectedPropertyId !== null) {
+      const selectedGroup = propertyGroups.find(group => group.representativeId === selectedPropertyId);
+      if (selectedGroup) {
+        getDetailedProperties(selectedGroup, setProperties);
+      }
+    } else {
+      setProperties([]);
+    }
+
     updateSelectedProperty(
       selectedPropertyId,
       previousSelectedPropertyIdRef,
       overlayRef,
-      properties,
+      propertyGroups,
       setSelectedPropertyId
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
-  }, [selectedPropertyId, map, properties]);
+  }, [selectedPropertyId, map, getDetailedProperties]);
 
-  // 매물 데이터 가져오기
-  const fetchProperties = useCallback(async () => {
-    if (!map) return;
 
-    const bounds = map.getBounds();
-    const swLatLng = bounds.getSouthWest();
-    const neLatLng = bounds.getNorthEast();
-
-    const params = {
-      realEstateType: 'APT',
-      tradeType: 'DEAL',
-      priceMin: 0,
-      priceMax: 3000,
-      leftLon: swLatLng.getLng(),
-      rightLon: neLatLng.getLng(),
-      topLat: neLatLng.getLat(),
-      bottomLat: swLatLng.getLat(),
-    };
-
-    try {
-      const response = await getProperties(params);
-      if (response.data.success) {
-        setProperties(response.data.response.map((item: any) => ({
-          propertyId: item.representativeId,
-          articleName: "", // Add appropriate value if available
-          latitude: item.latitude,
-          longitude: item.longitude,
-          buildingName: "", // Add appropriate value if available
-          realEstateType: "아파트", // Adjust according to your logic
-          area1: item.area,
-          area2: 0, // Add appropriate value if available
-          count: item.cnt,
-          price: item.price,
-        })));
-      } else {
-        console.error('Failed to fetch properties');
-      }
-    } catch (error) {
-      console.error('Error fetching properties', error);
-    }
-  }, [map]);
-
-  // 지도 중심이나 줌 레벨이 변경될 때마다 매물 데이터 가져오기
-  useEffect(() => {
-    if (map) {
-      kakao.maps.event.addListener(map, 'idle', fetchProperties);
-    }
-    return () => {
-      if (map) {
-        kakao.maps.event.removeListener(map, 'idle', fetchProperties);
-      }
-    };
-  }, [map, fetchProperties]);
-  
   // 편의시설 검색 함수 - 선택 카테고리가 변경될 때마다 재정의
   const searchPlaces = useCallback(() => {
     if (!ps || !map || !selectedCategory) return;
@@ -230,15 +188,6 @@ export default function MapComponent() {
           ></SmallButton>
         </div>
       </div>
-      {/* <pre
-        style={{
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          marginTop: '10px',
-        }}
-      >
-        {mapInfo}
-      </pre> */}
     </div>
   );
 }

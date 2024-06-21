@@ -1,8 +1,9 @@
-import { Property } from "@/utils/types";
+import { PropertyGroup } from "@/utils/types";
 import { Dispatch, SetStateAction } from "react";
+import { fetchPropertyGroups } from "./fetchPropertyGroups";
 
 export const initializeMap = (
-  setProperties: (properties: Property[]) => void,
+  setPropertyGroups: (properties: PropertyGroup[]) => void,
   setMap: (map: kakao.maps.Map | null) => void,
   setPs: (ps: kakao.maps.services.Places) => void,
   setIsDrawerOpen: Dispatch<SetStateAction<number>>,
@@ -27,24 +28,29 @@ export const initializeMap = (
         setIsDrawerOpen(0);
     };
     
+    // 편의시설 상세정보 지우기
     const removeCovenientInfo = () => {
         if (customOverlayRef){
           customOverlayRef.current?.setMap(null)
         }
     };
 
+    // 매물 지도에 그리기
+    const handleFetchPropertyGroup = () => {
+      fetchPropertyGroups(mapInstance, setPropertyGroups);
+    }
+
     mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
-    // 여기서 매물 요청보내기
-    // kakao.maps.event.addListener(mapInstance, 'center_changed', );
-    // kakao.maps.event.addListener(mapInstance, 'zoom_changed', );
+    kakao.maps.event.addListener(mapInstance, 'idle', handleFetchPropertyGroup);
+    kakao.maps.event.addListener(mapInstance, 'zoom_changed', handleFetchPropertyGroup);
     kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
 
     return () => {
-      // kakao.maps.event.removeListener(mapInstance, 'center_changed', );
-      // kakao.maps.event.removeListener(mapInstance, 'zoom_changed', );
+      kakao.maps.event.removeListener(mapInstance, 'idle', handleFetchPropertyGroup);
+      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', handleFetchPropertyGroup);
       kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
       kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
     };

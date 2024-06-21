@@ -1,5 +1,14 @@
 import { Root } from "react-dom/client";
 
+export type PropertyGroup = {
+    representativeId : number,
+    cnt: number,
+    price : number,
+    area : number,
+    latitude : number,
+    longitude : number,
+}
+
 export type Property = {
     propertyId: number;
     articleName: string;

@@ -11,7 +11,16 @@ interface GetPropertiesParams {
   bottomLat: number;
 }
 
-export async function getProperties(params: GetPropertiesParams) {
+interface GetPropertyDetailsParams {
+  realEstateType: string;
+  tradeType: string;
+  priceMin: number;
+  priceMax: number;
+  latitude: number;
+  longitude: number;
+}
+
+export async function getPropertyGroups(params: GetPropertiesParams) {
   const {
     realEstateType,
     tradeType,
@@ -23,7 +32,7 @@ export async function getProperties(params: GetPropertiesParams) {
     bottomLat,
   } = params;
 
-  return propertyInstance.get(``, {
+  return propertyInstance.get('', {
     params: {
       realEstateType,
       tradeType,
@@ -33,6 +42,28 @@ export async function getProperties(params: GetPropertiesParams) {
       rightLon,
       topLat,
       bottomLat,
+    },
+  });
+}
+
+export async function getPropertyDetails(params: GetPropertyDetailsParams) {
+  const {
+    realEstateType,
+    tradeType,
+    priceMin,
+    priceMax,
+    latitude,
+    longitude,
+  } = params;
+
+  return propertyInstance.get('/details', {
+    params: {
+      realEstateType,
+      tradeType,
+      priceMin,
+      priceMax,
+      latitude,
+      longitude,
     },
   });
 }

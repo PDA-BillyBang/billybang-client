@@ -1,9 +1,9 @@
-import { Property } from "@/utils/types";
-import { getProperties } from '@/lib/apis/property';
+import { PropertyGroup } from "@/utils/types";
+import { getPropertyGroups } from '@/lib/apis/property';
 
-export const fetchProperties = async (
+export const fetchPropertyGroups = async (
   map: kakao.maps.Map | null,
-  setProperties: (properties: Property[]) => void
+  setPropertyGroups: (properties: PropertyGroup[]) => void
 ) => {
   if (!map) return;
 
@@ -23,18 +23,15 @@ export const fetchProperties = async (
   };
 
   try {
-    const response = await getProperties(params);
+    const response = await getPropertyGroups(params);
     if (response.data.success) {
-      setProperties(response.data.response.map((item: any) => ({
-        propertyId: item.representativeId,
-        articleName: "", // Add appropriate value if available
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setPropertyGroups(response.data.response.map((item: any) => ({
+        representativeId: item.representativeId,
         latitude: item.latitude,
         longitude: item.longitude,
-        buildingName: "", // Add appropriate value if available
-        realEstateType: "아파트", // Adjust according to your logic
-        area1: item.area,
-        area2: 0, // Add appropriate value if available
-        count: item.cnt,
+        area: item.area,
+        cnt: item.cnt,
         price: item.price,
       })));
     } else {
