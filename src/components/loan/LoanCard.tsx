@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import bankTest from '../../assets/image/test/bank-test.png';
 import LikeButton from '../common/button/LikeButton';
 import { loanI } from '@/routes/loan/Loan';
 
@@ -16,6 +15,27 @@ type Props = {
   productName?: string;
   providerImgUrl?: string;
   providerName?: string;
+};
+
+const formatLoanLimit = (loanLimit: number | undefined) => {
+  if (loanLimit === undefined || loanLimit === null) return '';
+
+  const billion = Math.floor(loanLimit / 100);
+  const million = loanLimit % 100;
+
+  let formattedLimit = '';
+
+  if (billion > 0) {
+    formattedLimit += `${billion}억`;
+  }
+
+  if (million > 0) {
+    formattedLimit += ` ${million / 10}천만`;
+  }
+
+  formattedLimit += '원';
+
+  return formattedLimit.trim();
 };
 
 export default function LoanCard({
@@ -40,6 +60,9 @@ export default function LoanCard({
   const truncateDescription = (desc: string) => {
     return desc.length > 40 ? desc.substring(0, 40) + '...' : desc;
   };
+
+  const formattedLoanLimit = formatLoanLimit(loanLimit);
+
   return (
     <div
       onClick={() => loanId && handleClick && handleClick(loanId)}
@@ -69,10 +92,9 @@ export default function LoanCard({
           <div className="py-[0.15rem]" />
           <div className="flex flex-row justify-between text-[0.9rem]">
             <div className="text-grey-1">
-              {loanLimit}억 {ltv && ` | LTV ${ltv}%이내`}
+              {formattedLoanLimit} {ltv && ` | LTV ${ltv}%이내`}
             </div>
             <div className="font-bold text-blue-1">
-              {' '}
               {minInterestRate}~{maxInterestRate}%
             </div>
           </div>
