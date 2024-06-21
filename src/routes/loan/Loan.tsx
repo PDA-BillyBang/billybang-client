@@ -9,6 +9,7 @@ import MultiRangeSliderYear from '@components/common/slider/MultiRangeSliderYear
 import LargeButton from '@components/common/button/LargeButton';
 import { getLoansByPropertyId } from '@/lib/apis/loan';
 import LoanHeaderCardList from './LoanHeaderCardList';
+import LoanSkeleton from './LoanSkeleton';
 
 export interface loanI {
   isStarred: boolean;
@@ -41,6 +42,7 @@ const Loan = () => {
     setTitle: (title: string) => void;
   }>();
   const [loanResult, setLoanResult] = useState<loanByPropertyIdI>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [navigationText, setNavigationText] = useState<string>(
     '나에게 맞는 대출 상품이 궁금하다면 정보 입력하기'
   );
@@ -57,6 +59,8 @@ const Loan = () => {
       }
     } catch (error) {
       console.log('[ERROR]', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,7 +78,16 @@ const Loan = () => {
     setTitle('충무로엘크루메크로시티2'); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
   }, [setTitle]);
 
-  const data = [1, 2, 3, 4];
+  if (loading) {
+    return (
+      <div className="flex flex-col w-[100%] items-center mt-[80px]">
+        <div className=" w-customWidthPercent">
+          <NavigateButton text={navigationText} customWidth="w-[100%]" />
+          <LoanSkeleton />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center mt-[80px]">

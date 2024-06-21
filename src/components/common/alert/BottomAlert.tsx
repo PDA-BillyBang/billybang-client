@@ -8,7 +8,7 @@ type Props = {
 
 export default function BottomAlert({
   message,
-  duration = 3000,
+  duration = 2000,
   onClose,
 }: Props) {
   const [visible, setVisible] = useState(false);
@@ -17,15 +17,17 @@ export default function BottomAlert({
     setVisible(true);
     const timer = setTimeout(() => {
       setVisible(false);
-      setTimeout(onClose, 300);
+      setTimeout(onClose, 400);
     }, duration);
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
   return (
     <div
-      className={`fixed bottom-0 text-[1rem] px-4 py-2 mb-8 transform -translate-x-1/2 rounded-md shadow-md text-white-1 bg-grey-1 z-50 left-1/2 transition-opacity transition-transform duration-300 ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      className={`fixed bottom-0  px-4 py-2 mb-8 transform -translate-x-1/2 font-[0.9rem] font-bold rounded-md shadow-lg text-black-1 opacity-90 bg-blue-4 z-50 left-1/2 transition-all duration-300 ${
+        visible
+          ? 'opacity-100 translate-y-0 scale-100'
+          : 'opacity-0 translate-y-4 scale-75'
       }`}
     >
       {message}
