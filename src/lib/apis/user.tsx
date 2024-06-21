@@ -69,7 +69,7 @@ export async function getUserInfo() {
 }
 
 //회원정보 수정(PUT)
-export async function updateUserInfo(data: User) {
+export async function updateUserInfo(data: UserInfo) {
   return await userInstance.put('/user-info', data);
 }
 

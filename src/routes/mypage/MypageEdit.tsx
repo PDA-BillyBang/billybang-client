@@ -30,7 +30,6 @@ export default function MypageEdit() {
       try {
         await isvalidateToken();
         const userInfo = await getUserInfo();
-        console.log(userInfo);
         setUser(userInfo.data.response);
       } catch (error: unknown) {
         const errorResponse = error as AxiosError<ErrorResponseI>;
@@ -50,6 +49,7 @@ export default function MypageEdit() {
 
   const handleClickedUserInfoButton = async () => {
     const resp = await getUserInfo();
+    console.log(resp);
     if (resp.data.response.userInfo) navigate('/user/info/1');
     else navigate('/user/info/2');
   };

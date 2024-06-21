@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import profileTest from '../../assets/image/test/profile-test.svg';
 import FavoriteRooms from '../../components/mypage/FavoriteRooms';
 import PlusButton from '../../components/common/button/PlusButton';
@@ -6,9 +6,22 @@ import FavoriteLoans from '../../components/mypage/FavoriteLoans';
 import home from '../../assets/image/icons/home.svg';
 import loan from '../../assets/image/icons/loan.svg';
 import { useNavigate } from 'react-router-dom';
+import { getUserInfo, isvalidateToken } from '@/lib/apis/user';
+import { AxiosError } from 'axios';
+import { ErrorResponseI } from '@/utils/errorTypes';
 // import { test } from '@/lib/apis/my';
 
+interface UserInfo {
+  birthDate: string;
+  email: string;
+  nickname: string;
+  userId: number;
+  userInfo: any; // Modify this type based on the actual structure
+}
+
 export default function Mypage() {
+  const [user, setUser] = useState<UserInfo | null>(null);
+
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
   const handleToMyProperties = () => navigate('/my/properties');
@@ -20,9 +33,29 @@ export default function Mypage() {
       console.error('회원가입 실패:', error);
     }
   };
+
   useEffect(() => {
     // handleSignUp();
   }, []);
+
+  useEffect(() => {
+    const validateAndFetchUserInfo = async () => {
+      try {
+        await isvalidateToken();
+        const userInfo = await getUserInfo();
+        setUser(userInfo.data.response);
+      } catch (error: unknown) {
+        const errorResponse = error as AxiosError<ErrorResponseI>;
+        if (errorResponse.response) {
+          console.log(errorResponse.response.data.response);
+        }
+        navigate('/user/login');
+      }
+    };
+
+    validateAndFetchUserInfo();
+  }, [navigate]);
+
   return (
     <div className="w-customWidthPercent">
       <div className="flex flex-row items-center">
@@ -34,10 +67,8 @@ export default function Mypage() {
           />
         </div>
         <div className="flex flex-col w-[80%]">
-          <div className="font-bold text-[1.2rem]">김영석</div>
-          <div className="text-[1rem] text-grey-1">
-            kimyoungseok15@gmail.com
-          </div>
+          <div className="font-bold text-[1.2rem]">{user?.nickname}</div>
+          <div className="text-[1rem] text-grey-1">{user?.email}</div>
         </div>
       </div>
       <div className="py-[1rem] " />

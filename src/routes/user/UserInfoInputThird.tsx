@@ -1,8 +1,9 @@
+import { getUserInfo } from '@/lib/apis/user';
 import LargeButton from '@components/common/button/LargeButton';
 import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
 import ProgressBar from '@components/common/progressbar/ProgressBar';
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { Params, useOutletContext, useParams } from 'react-router-dom';
 
 interface Props {
   isMarried: boolean;
@@ -36,6 +37,28 @@ export default function UserInfoInputThird({
   AddUserInfo,
 }: Props) {
   const [isActive, setIsActive] = useState<number>(3);
+  const { option } = useParams<Params>();
+
+  useEffect(() => {
+    if (option === '1') {
+      const fetchUserInfo = async () => {
+        try {
+          const response = await getUserInfo();
+          const userInfo = response.data.response.userInfo;
+          console.log(userInfo);
+          setIsMarried(userInfo.isMarried);
+          setYearsOfMarriage(userInfo.yearsOfMarriage);
+          setChildrenCount(userInfo.childrenCount);
+          setTotalMarriedAssets(userInfo.totalMarriedAssets);
+          setTotalMarriedIncome(userInfo.totalMarriedIncome);
+        } catch (error) {
+          console.error('Failed to fetch user info:', error);
+        }
+      };
+
+      fetchUserInfo();
+    }
+  }, [option]);
 
   const handleMarriageStatusChange = (value: string): void => {
     if (value === 'marriage') {

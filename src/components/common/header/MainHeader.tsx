@@ -39,7 +39,7 @@ export default function MainHeader() {
           />
           <Avatar
             onClick={handleClickToMy}
-            className="mr-3 cursor-pointer "
+            className="mr-3 cursor-pointer"
             alt="User settings"
             img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
             rounded
