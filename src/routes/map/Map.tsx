@@ -36,7 +36,7 @@ export default function MapComponent() {
   const viewportSize = GetViewportSize();
   const navigate = useNavigate();
 
-  // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
+  // 지도 생성 관련 : 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
     const cleanup = initializeMap(
       setProperties,
@@ -46,6 +46,7 @@ export default function MapComponent() {
         setPs(psInstance);
       },
       setIsDrawerOpen,
+      customOverlayRef
     );
     return cleanup;
   }, []);
