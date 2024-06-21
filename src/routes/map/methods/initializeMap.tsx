@@ -1,10 +1,12 @@
 import { Property } from "@/utils/types";
+import { Dispatch, SetStateAction } from "react";
 
 export const initializeMap = (
   setProperties: (properties: Property[]) => void,
   setMap: (map: kakao.maps.Map | null) => void,
   setMapInfo: (info: string) => void,
-  setPs: (ps: kakao.maps.services.Places) => void
+  setPs: (ps: kakao.maps.services.Places) => void,
+  setIsDrawerOpen: Dispatch<SetStateAction<number>>,
 ) => {
   const dummyProperties: Property[] = [
     {
@@ -80,16 +82,22 @@ export const initializeMap = (
       setMapInfo(message);
     };
 
-    mapInstance.addControl(new window.kakao.maps.ZoomControl(), window.kakao.maps.ControlPosition.RIGHT);
-    mapInstance.addControl(new window.kakao.maps.MapTypeControl(), window.kakao.maps.ControlPosition.TOPRIGHT);
+    const closeDrawer = () => {
+        setIsDrawerOpen(0);
+    };
+
+    mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
+    mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
     getInfo();
 
-    window.kakao.maps.event.addListener(mapInstance, 'center_changed', getInfo);
-    window.kakao.maps.event.addListener(mapInstance, 'zoom_changed', getInfo);
+    kakao.maps.event.addListener(mapInstance, 'center_changed', getInfo);
+    kakao.maps.event.addListener(mapInstance, 'zoom_changed', getInfo);
+    kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
 
     return () => {
-      window.kakao.maps.event.removeListener(mapInstance, 'center_changed', getInfo);
-      window.kakao.maps.event.removeListener(mapInstance, 'zoom_changed', getInfo);
+      kakao.maps.event.removeListener(mapInstance, 'center_changed', getInfo);
+      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', getInfo);
+      kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
     };
   });
 };

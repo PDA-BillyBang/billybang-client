@@ -1,5 +1,3 @@
-// src/routes/map/renderProperties.ts
-
 import { createRoot } from "react-dom/client";
 import Pin from "@/components/map/Pin";
 import { Property, OverlayData } from "@/utils/types";

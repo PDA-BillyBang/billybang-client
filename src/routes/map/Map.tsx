@@ -12,11 +12,10 @@ import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
 import PropertyLoan from '@components/map/PropertyLoan';
-import { displayPlaces, removeMarkers } from './methods/placeService';
-import OptionButton from '@components/map/OptionButton';
-import OptionContent from '@components/map/OptionContent';
-import BottomDrawerUp from '@components/common/button/BottomDrawerUp';
-import MapPropertyLoanBottom from './MapPropertyLoanBottom';
+import { displayPlaces, removeMarkers } from "./methods/placeService";
+import OptionButton from "@components/map/OptionButton";
+import OptionContent from "@components/map/OptionContent";
+import GetViewportSize from "@/utils/hooks/GetViewportSize";
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
@@ -32,11 +31,11 @@ export default function MapComponent() {
     undefined
   );
   const markers = useRef<kakao.maps.Marker[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(
-    ''
-  );
+  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
+  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);
+  const viewportSize = GetViewportSize();
   const navigate = useNavigate();
-  // 전세/매매,
+
   // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
     const cleanup = initializeMap(
@@ -45,7 +44,8 @@ export default function MapComponent() {
       setMapInfo,
       (psInstance) => {
         setPs(psInstance);
-      }
+      },
+      setIsDrawerOpen,
     );
     return cleanup;
   }, []);
@@ -79,22 +79,17 @@ export default function MapComponent() {
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map, properties]);
-
-  // 편의시설 검색 함수
+  // 편의시설 검색 함수 - 선택 카테고리가 변경될 때마다 재정의
   const searchPlaces = useCallback(() => {
     if (!ps || !map || !selectedCategory) return;
-    ps.categorySearch(
-      selectedCategory,
-      (data, status) => {
-        if (status !== window.kakao.maps.services.Status.ERROR) {
-          removeMarkers(markers);
-          displayPlaces(map, data, selectedCategory, markers);
-        } else {
-          console.log('지도 검색 중 에러 발생');
-        }
-      },
-      { useMapBounds: true }
-    );
+    ps.categorySearch(selectedCategory, (data, status) => {
+      if (status !== window.kakao.maps.services.Status.ERROR) {
+        removeMarkers(markers);
+        displayPlaces(map, data, selectedCategory, markers, customOverlayRef);
+      } else {
+        console.log("지도 검색 중 에러 발생")
+      }
+    }, { useMapBounds: true });
   }, [ps, map, selectedCategory]);
 
   // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 검색
@@ -126,15 +121,17 @@ export default function MapComponent() {
   };
 
   // 하단 상세보기 창 닫기
-  const handleCloseDrawer = () => {
+  const handleCloseDrawer = useCallback(() => {
     setIsDrawerOpen(0);
     setSelectedPropertyId(null);
-  };
+  }, [])
 
   // 페이지 변경 버튼
-  const onButtonClick = (link: string) => {
+  const onButtonClick = useCallback((link: string) => {
     navigate(link);
-  };
+  }, [navigate]);
+
+  const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
 
   return (
     <div className="pt-16 h-[100vh]">
@@ -147,16 +144,12 @@ export default function MapComponent() {
             className="w-8 h-8 cursor-pointer"
           />
         </div>
-        <BottomDrawerUp
-          isOpen={isDrawerOpen !== 0}
-          handleClose={handleCloseDrawer}
-        >
-          {isDrawerOpen === 2 ? (
-            <MapPropertyLoanBottom />
-          ) : (
-            <OptionContent onApplyButtonClick={handleCloseDrawer} />
-          )}
-        </BottomDrawerUp>
+        <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
+          {isDrawerOpen===2 
+            ? <PropertyLoan bottomButton={true} />
+            : <OptionContent onApplyButtonClick={handleCloseDrawer}/>
+          }
+        </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
           <OptionButton
             text={'옵션'}

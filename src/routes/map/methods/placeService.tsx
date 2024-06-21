@@ -18,12 +18,13 @@ export const displayPlaces = (
   map: kakao.maps.Map | null,
   places: kakao.maps.services.PlacesSearchResultItem[],
   category: string,
-  markers: React.MutableRefObject<kakao.maps.Marker[]>
+  markers: React.MutableRefObject<kakao.maps.Marker[]>,
+  customOverlayRef: React.MutableRefObject<kakao.maps.CustomOverlay | null>
 ) => {
   for (let i = 0; i < places.length; i++) {
     const marker = addMarker(map, new window.kakao.maps.LatLng(parseFloat(places[i].y), parseFloat(places[i].x)), category, markers);
     window.kakao.maps.event.addListener(marker, "click", () => {
-      displayPlaceInfo(map, places[i]);
+      displayPlaceInfo(map, places[i], customOverlayRef);
     });
   }
 };
@@ -52,12 +53,22 @@ const addMarker = (
   return marker;
 };
 
-const displayPlaceInfo = (map: kakao.maps.Map | null, place: kakao.maps.services.PlacesSearchResultItem) => {
+const displayPlaceInfo = (
+  map: kakao.maps.Map | null,
+  place: kakao.maps.services.PlacesSearchResultItem,
+  customOverlayRef: React.MutableRefObject<kakao.maps.CustomOverlay | null>
+) => {
+  if (customOverlayRef.current) {
+    customOverlayRef.current.setMap(null);
+  }
+
   const overlayContent = document.createElement('div');
   const overlay = new window.kakao.maps.CustomOverlay({
     position: new window.kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x)),
     content: overlayContent,
   });
+
+  customOverlayRef.current = overlay;
 
   if (map) {
     overlay.setMap(map);
