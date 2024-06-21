@@ -80,6 +80,8 @@ export default function LoanCard({
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}
+            isLoan={true}
+            loanId={loanId}
           />
         </div>
         <div className="py-[0.2rem]" />
