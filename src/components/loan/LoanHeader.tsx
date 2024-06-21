@@ -1,15 +1,18 @@
-import React from "react";
+import React from 'react';
 
-type Props = {};
+type Props = { text?: string; count?: number };
 
-export default function LoanHeader({}: Props) {
+export default function LoanHeader({
+  text = '주택담보대출',
+  count = 2,
+}: Props) {
   return (
     <div className="w-[100%] flex flex-col items-center">
       <div className="flex flex-row justify-between w-[100%]">
         <div className="flex flex-row items-end text-center">
-          <div className="text-[1.2rem] leading-[1.2rem]">주택담보대출</div>
+          <div className="text-[1.2rem] leading-[1.2rem]">{text}</div>
           <div className="px-[0.15rem]" />
-          <div className="text-[0.9rem] leading-[0.9rem]">(2)</div>
+          <div className="text-[0.9rem] leading-[0.9rem]">({count})</div>
         </div>
         <button className="text-[0.8rem] leading-[0.8rem] flex items-center justify-center text-center w-[55px] h-[30px] text-grey-1 border rounded-[20px] border-grey-2 bg-grey-6">
           출시순

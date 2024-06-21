@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import SelectHeader from "../../components/common/header/SelectHeader";
-import { useState } from "react";
-import AreaStatistics from "./AreaStatistics";
-import AreaNews from "./AreaNews";
+import React, { useEffect } from 'react';
+import { useOutletContext, useParams } from 'react-router-dom';
+import SelectHeader from '../../components/common/header/SelectHeader';
+import { useState } from 'react';
+import AreaStatistics from './AreaStatistics';
+import AreaNews from './AreaNews';
+import { districtsName } from '@/utils/districtsName';
 type Props = {};
 
 export default function Statistics({}: Props) {
+  const { areaId } = useParams<{ areaId: string }>();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
   useEffect(() => {
-    setTitle("서대문구"); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
+    areaId && setTitle(`${districtsName[Number(areaId)]}`);
   }, [setTitle]);
   const [selectActive, setSelectActive] = useState(0);
   const handleSelectActive = (index: number) => {
@@ -28,7 +30,9 @@ export default function Statistics({}: Props) {
           handleClick={handleSelectActive}
           selectActive={selectActive}
         />
-        {selectActive === 0 ? <AreaStatistics /> : <AreaNews />}
+        {selectActive === 0
+          ? areaId && <AreaStatistics areaId={areaId} />
+          : areaId && <AreaNews districtId={areaId} />}
       </div>
     </div>
   );

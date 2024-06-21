@@ -8,61 +8,53 @@ import {
   Bar,
   Tooltip,
   ResponsiveContainer,
+  Cell,
 } from 'recharts';
+import { districtsName } from '@/utils/districtsName';
 
-type Props = {};
+type Props = {
+  crimeCountList: crimeCountI[];
+  areaId: string;
+};
 
-const data = [
-  {
-    name: '강남구',
-    구: 40,
-  },
-  {
-    name: '서초구',
-    구: 30,
-  },
-  {
-    name: '용산구',
-    구: 20,
-  },
-  {
-    name: '서대문구',
-    구: 28,
-  },
-  {
-    name: '강남구',
-    구: 40,
-  },
-  {
-    name: '서초구',
-    구: 30,
-  },
-  {
-    name: '용산구',
-    구: 20,
-  },
-  {
-    name: '서대문구',
-    구: 28,
-  },
-];
+export interface crimeCountI {
+  districtName: string;
+  count: number;
+}
 
-export default function CrimeRate({}: Props) {
+export default function CrimeRate({ crimeCountList, areaId }: Props) {
+  const targetDistrict = districtsName[Number(areaId)];
+
+  const sortedCrimeCountList = [...crimeCountList].sort(
+    (a, b) => a.count - b.count
+  );
+
   return (
     <div className="overflow-x-auto">
       <div style={{ minWidth: '600px' }}>
         <ResponsiveContainer
           width="100%"
           height={300}
-          className=" rounded-[10px] my-[0.5rem] py-[0.2rem] pl-[-1rem]"
+          className="rounded-[10px] my-[0.5rem] py-[0.2rem] pl-[-1rem]"
         >
-          <BarChart data={data}>
+          <BarChart data={sortedCrimeCountList}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis width={25} />
+            <XAxis dataKey="districtName" />
+            <YAxis width={35} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="구" fill="#004CC7" />
+            <Bar dataKey="count">
+              {sortedCrimeCountList.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={
+                    entry.districtName === targetDistrict
+                      ? '#004CC7'
+                      : '#DAE5F7'
+                  }
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>

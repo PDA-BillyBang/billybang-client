@@ -12,7 +12,7 @@ export default function PropertyLoan({ bottomButton }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
   const navigate = useNavigate();
   const handleClickToLoans = () => {
-    navigate('/loan/recommend/234');
+    navigate('/loan/recommend/2422196145');
   };
   const handleLikeClick = () => {
     console.log('like loan card');
