@@ -200,10 +200,8 @@ export default function MapComponent() {
           />
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
-          {isDrawerOpen===2 
-            ? <MapPropertyLoan />
-            : <OptionContent onApplyButtonClick={handleCloseDrawer}/>
-          }
+          {isDrawerOpen===2 && <MapPropertyLoan />}
+          {isDrawerOpen===1 && <OptionContent onApplyButtonClick={handleCloseDrawer}/>}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
           <OptionButton
