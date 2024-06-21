@@ -1,19 +1,29 @@
-import React, { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import profileTest from "../../assets/image/test/profile-test.svg";
-import editGrey from "../../assets/image/icons/editGrey.svg";
-import rightArrowGrey from "../../assets/image/icons/rightArrowGrey.svg";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import profileTest from '../../assets/image/test/profile-test.svg';
+import editGrey from '../../assets/image/icons/editGrey.svg';
+import rightArrowGrey from '../../assets/image/icons/rightArrowGrey.svg';
+import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from '@/lib/apis/user';
 
 export default function MypageEdit() {
   const navigate = useNavigate();
+
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
 
   useEffect(() => {
-    setTitle("설정");
+    setTitle('설정');
   }, [setTitle]);
+
+  const handleClickedUserInfoButton = async () => {
+    const resp = await getUserInfo();
+    console.log(resp.data.response.userInfo);
+    if (resp.data.response.userInfo) navigate('/user/info/1');
+    else navigate('/user/info/2');
+  };
+
   return (
     <div className="pt-[80px] w-[100%] flex flex-col items-center">
       <div className=" w-customWidthPercent">
@@ -39,7 +49,7 @@ export default function MypageEdit() {
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
-              onClick={() => navigate("/my/edit/name")}
+              onClick={() => navigate('/my/edit/name')}
               alt="edit"
             />
           </div>
@@ -53,7 +63,7 @@ export default function MypageEdit() {
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
               alt="edit"
-              onClick={() => navigate("/my/edit/password")}
+              onClick={() => navigate('/my/edit/password')}
             />
           </div>
         </div>
@@ -62,7 +72,7 @@ export default function MypageEdit() {
 
       <div className="flex flex-col items-center w-customWidthPercent">
         <div
-          onClick={() => navigate("/user/info/first")}
+          onClick={handleClickedUserInfoButton}
           className="w-[100%] text-grey-1 flex flex-row justify-between"
         >
           <div className="w-[20%]">정보수정</div>

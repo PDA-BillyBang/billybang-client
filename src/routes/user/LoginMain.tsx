@@ -1,28 +1,41 @@
 // src/routes/user/LoginMain.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
-import { isEmailRegistered, login, signUp } from '@/lib/apis/user';
+import { isEmailRegistered } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleKakaoLogin = () => {
+  const handleKakaoLogin = async () => {
     window.location.href =
-      'http://3.39.52.110:3000/api/users/oauth2/authorization/kakao';
+      'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
   };
 
   const isExistedUser = async () => {
-    const response = await isEmailRegistered(email);
-    console.log(response.data.response);
-    if (response.data.response.existsByEmail) navigate(`pw/${email}`);
-    else navigate('/user/signup');
+    try {
+      const response = await isEmailRegistered(email);
+      console.log(response.data.response);
+      if (response.data.response.existsByEmail) {
+        navigate(`pw/${email}`);
+      } else {
+        navigate(`/user/signup/${email}`);
+      }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.error(
+          'Error checking email registration:',
+          error.response?.data
+        );
+      } else {
+        console.error('Unexpected error:', error);
+      }
+    }
   };
-
-  useEffect(() => {}, []);
 
   // 상태 업데이트 헬퍼 함수
   const handleEmailChange = (value: string | number) => {

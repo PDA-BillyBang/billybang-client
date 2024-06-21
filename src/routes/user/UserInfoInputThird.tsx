@@ -5,70 +5,72 @@ import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 interface Props {
-  marriageStatus: boolean;
-  marriageYear: number | undefined;
-  child: number | undefined;
-  coupleSalary: number | undefined;
-  coupleAssets: number | undefined;
+  isMarried: boolean;
+  yearsOfMarriage: number | undefined;
+  childrenCount: number | undefined;
+  totalMarriedIncome: number | undefined;
+  totalMarriedAssets: number | undefined;
   pageNum: number;
-  setMarriageStatus: (value: boolean) => void;
-  setMarriageYear: (value: number | undefined) => void;
-  setChild: (value: number | undefined) => void;
-  setCoupleSalary: (value: number | undefined) => void;
-  setCoupleAssets: (value: number | undefined) => void;
+  setYearsOfMarriage: (value: number | undefined) => void;
+  setIsMarried: (value: boolean) => void;
+  setChildrenCount: (value: number | undefined) => void;
+  setTotalMarriedIncome: (value: number | undefined) => void;
+  setTotalMarriedAssets: (value: number | undefined) => void;
   setPageNum: (value: number) => void;
+  AddUserInfo: () => Promise<void>; // AddUserInfo 타입 정의 추가
 }
 
 export default function UserInfoInputThird({
   pageNum,
-  marriageStatus,
-  marriageYear,
-  child,
-  coupleSalary,
-  coupleAssets,
+  isMarried,
+  yearsOfMarriage,
+  childrenCount,
+  totalMarriedIncome,
+  totalMarriedAssets,
+  setIsMarried,
+  setYearsOfMarriage,
+  setChildrenCount,
   setPageNum,
-  setMarriageStatus,
-  setMarriageYear,
-  setChild,
-  setCoupleSalary,
-  setCoupleAssets,
+  setTotalMarriedIncome,
+  setTotalMarriedAssets,
+  AddUserInfo,
 }: Props) {
   const [isActive, setIsActive] = useState<number>(3);
 
   const handleMarriageStatusChange = (value: string): void => {
     if (value === 'marriage') {
-      setMarriageStatus(true);
+      setIsMarried(true);
     } else {
-      setMarriageStatus(false);
+      setIsMarried(false);
     }
   };
 
   const handleMarrageYear = (value: number | string): void => {
     const numericValue: number =
       typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
-    if (isNaN(numericValue)) return setMarriageYear(0);
-    return setMarriageYear(numericValue);
+    if (isNaN(numericValue)) return setYearsOfMarriage(undefined);
+    return setYearsOfMarriage(numericValue);
   };
 
   const handleChild = (value: number | string): void => {
     const numericValue: number =
       typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
-    if (isNaN(numericValue)) return setChild(0);
-    return setChild(numericValue);
+    if (isNaN(numericValue)) return setChildrenCount(0);
+    return setChildrenCount(numericValue);
   };
 
   const handleCoupleAssets = (value: number | string): void => {
     const numericValue: number =
       typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
-    if (isNaN(numericValue)) return setCoupleAssets(0);
-    return setCoupleAssets(numericValue);
+    if (isNaN(numericValue)) return setTotalMarriedAssets(0);
+    return setTotalMarriedAssets(numericValue);
   };
 
-  const handleCoupleSalary = (value: number | string): void => {
+  const handleTotalMarriageIncome = (value: number | string): void => {
     const numericValue: number =
       typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
-    if (isNaN(numericValue)) return setCoupleSalary(0);
-    return setCoupleSalary(numericValue);
+    if (isNaN(numericValue)) return setTotalMarriedIncome(0);
+    return setTotalMarriedIncome(numericValue);
   };
 
   const { setTitle } = useOutletContext<{
@@ -80,30 +82,36 @@ export default function UserInfoInputThird({
   }, [setTitle]);
 
   useEffect(() => {
-    console.log(child);
     if (validateInputs()) {
       setIsActive(0);
     } else {
       setIsActive(1);
     }
-  }, [child, coupleAssets, coupleSalary, marriageStatus, marriageYear]);
+  }, [
+    childrenCount,
+    totalMarriedAssets,
+    totalMarriedIncome,
+    isMarried,
+    yearsOfMarriage,
+  ]);
 
   const handleNextButtonClick = () => {
     if (isActive === 0) {
+      AddUserInfo();
       setPageNum(pageNum + 1);
     }
   };
 
   const validateInputs = (): boolean => {
-    if (marriageStatus === true)
+    if (isMarried === true)
       return (
-        typeof marriageYear === 'number' &&
-        marriageYear >= 1900 &&
-        typeof child === 'number' &&
-        child >= 0 &&
-        typeof coupleSalary === 'number' &&
-        coupleSalary >= 0 &&
-        typeof coupleAssets === 'number'
+        typeof yearsOfMarriage === 'number' &&
+        yearsOfMarriage >= 1900 &&
+        typeof childrenCount === 'number' &&
+        childrenCount >= 0 &&
+        typeof totalMarriedIncome === 'number' &&
+        totalMarriedIncome >= 0 &&
+        typeof totalMarriedAssets === 'number'
       );
     else {
       return true;
@@ -123,7 +131,7 @@ export default function UserInfoInputThird({
         <div className="flex space-x-4">
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              marriageStatus === false
+              isMarried === false
                 ? 'bg-[black] text-[white]'
                 : 'bg-[white] text-grey-2'
             }`}
@@ -133,7 +141,7 @@ export default function UserInfoInputThird({
           </button>
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              marriageStatus === true
+              isMarried === true
                 ? 'bg-[black] text-[white]'
                 : 'bg-[white] text-grey-2 '
             }`}
@@ -144,17 +152,17 @@ export default function UserInfoInputThird({
         </div>
       </div>
 
-      {marriageStatus === true ? (
+      {isMarried === true ? (
         <div className="flex flex-col w-customWidthPercent overflow-y-auto max-h-[60vh]">
           <div className="flex flex-col mt-[2rem] mb-[1rem]">
             <FloatingInputForm1
               type="text"
               title="혼인신고 연도"
               text="혼인신고를 한 연도를 입력해주세요"
-              value={marriageYear}
+              value={yearsOfMarriage}
               onChange={handleMarrageYear}
               validate={() =>
-                typeof marriageYear == 'number' && marriageYear >= 1900
+                typeof yearsOfMarriage == 'number' && yearsOfMarriage >= 1900
               }
               errorMessage="정확한 연도를 입력해주세요"
               unit="년"
@@ -166,9 +174,11 @@ export default function UserInfoInputThird({
               type="text"
               title="자녀 수"
               text="자녀의 수를 입력해주세요(명)"
-              value={child}
+              value={childrenCount}
               onChange={handleChild}
-              validate={() => typeof child == 'number' && child >= 0}
+              validate={() =>
+                typeof childrenCount == 'number' && childrenCount >= 0
+              }
               errorMessage="정확한 수를 입력해주세요"
               unit="명"
             />
@@ -179,10 +189,10 @@ export default function UserInfoInputThird({
               type="text"
               title="부부합산 연소득"
               text="부부합산 연소득을 입력해주세요 (원)"
-              value={coupleSalary?.toLocaleString()}
-              onChange={handleCoupleSalary}
+              value={totalMarriedIncome?.toLocaleString()}
+              onChange={handleTotalMarriageIncome}
               validate={() =>
-                typeof coupleSalary == 'number' && coupleSalary >= 0
+                typeof totalMarriedIncome == 'number' && totalMarriedIncome >= 0
               }
               errorMessage="정확한 연소득을 입력해주세요"
               unit="원"
@@ -194,7 +204,7 @@ export default function UserInfoInputThird({
               type="text"
               title="부부합산 총 자산"
               text="자녀의 수를 입력해주세요 (원)"
-              value={coupleAssets?.toLocaleString()}
+              value={totalMarriedAssets?.toLocaleString()}
               onChange={handleCoupleAssets}
               validate={(value) => typeof value == 'number' && value >= 0}
               errorMessage="정확한 금액을 입력해주세요"

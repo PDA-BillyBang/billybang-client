@@ -40,7 +40,7 @@ export default function LoginPwInput() {
       navigate('/'); // 로그인 성공 후 이동할 경로
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
-      console.log(errorResponse);
+
       if (errorResponse.response && errorResponse.response.status === 400) {
         setError('아이디나 비밀번호가 일치하지 않습니다.');
       } else {

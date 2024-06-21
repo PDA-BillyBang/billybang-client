@@ -3,12 +3,21 @@ import { Avatar, Navbar } from 'flowbite-react';
 import React from 'react';
 import search from 'images/search.svg';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { isvalidateToken } from '@/lib/apis/user';
 
 export default function MainHeader() {
   const navigate = useNavigate();
 
   const handleClickSearchField = () => navigate('/search');
-  const handleClickToMy = () => navigate('/my');
+  const handleClickToMy = async () => {
+    try {
+      const resp = await isvalidateToken();
+      if (resp.data.response.isValid === true) navigate('/my');
+      else navigate('/user/login');
+    } catch (error) {
+      navigate('/user/login');
+    }
+  };
 
   return (
     <div>
