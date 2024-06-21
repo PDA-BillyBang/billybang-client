@@ -1,19 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import profileTest from '../../assets/image/test/profile-test.svg';
 import editGrey from '../../assets/image/icons/editGrey.svg';
 import rightArrowGrey from '../../assets/image/icons/rightArrowGrey.svg';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo, logout } from '@/lib/apis/user';
+import { getUserInfo, isvalidateToken, logout } from '@/lib/apis/user';
 import { ErrorResponseI } from '@/utils/errorTypes';
 import { AxiosError } from 'axios';
 
+interface UserInfo {
+  birthDate: string;
+  email: string;
+  nickname: string;
+  userId: number;
+  userInfo: any; // Modify this type based on the actual structure
+}
+
 export default function MypageEdit() {
+  const [user, setUser] = useState<UserInfo | null>(null);
+
   const navigate = useNavigate();
 
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
+
+  useEffect(() => {
+    const validateAndFetchUserInfo = async () => {
+      try {
+        await isvalidateToken();
+        const userInfo = await getUserInfo();
+        console.log(userInfo);
+        setUser(userInfo.data.response);
+      } catch (error: unknown) {
+        const errorResponse = error as AxiosError<ErrorResponseI>;
+        if (errorResponse.response) {
+          console.log(errorResponse.response.data.response);
+        }
+        navigate('/user/login');
+      }
+    };
+
+    validateAndFetchUserInfo();
+  }, [navigate]);
 
   useEffect(() => {
     setTitle('설정');
@@ -48,10 +77,10 @@ export default function MypageEdit() {
             className="w-[100px] h-[100px]"
           />
 
-          <div className="font-bold text-[1rem] pt-[0.3rem]">영석몬</div>
-          <div className="text-grey-1 text-[0.9rem]">
-            kimyoungseok15@gmail.com
+          <div className="font-bold text-[1rem] pt-[0.3rem]">
+            {user?.nickname}
           </div>
+          <div className="text-grey-1 text-[0.9rem]">{user?.email}</div>
         </div>
       </div>
       <div className="w-[100%] bg-grey-5 h-[10px] my-[1rem]" />
@@ -59,7 +88,7 @@ export default function MypageEdit() {
         <div className="w-[100%] text-grey-1 flex flex-row justify-between">
           <div className="w-[20%]">닉네임</div>
           <div className="flex flex-row w-[30%] justify-between">
-            <div>영석몬</div>
+            <div>{user?.nickname}</div>
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
@@ -71,8 +100,7 @@ export default function MypageEdit() {
         <div className="py-[0.8rem]" />
         <div className="w-[100%] text-grey-1 flex flex-row justify-between">
           <div className="w-[20%]">비밀번호</div>
-          <div className="flex flex-row w-[30%] justify-between">
-            <div>000000</div>
+          <div className="flex flex-row justify-between">
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
