@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import filledLike from '../../../assets/image/icons/filledLike.svg';
 import emptyLike from '../../../assets/image/icons/emptyLike.svg';
 import BottomAlert from '../alert/BottomAlert';
-import { likeLoan } from '@/lib/apis/loan';
+import { likeLoan, deleteLikeLoan } from '@/lib/apis/loan';
 
 type Props = {
   handleClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -21,8 +21,13 @@ export default function LikeButton({
 
   const handleLikeLoan = async () => {
     try {
-      const result = await likeLoan(loanId);
-      console.log(result.data.response);
+      if (isActive) {
+        const result = await deleteLikeLoan(loanId);
+        console.log('찜취소:', result);
+      } else {
+        const result = await likeLoan(loanId);
+        console.log('찜등록:', result);
+      }
     } catch (error) {
       console.log('[ERROR]', error);
     }

@@ -15,3 +15,7 @@ export async function getLoanDetailByLoanId(loanId: number) {
 export async function likeLoan(loanId: number) {
   return await loanInstance.post('/stars', { loanId: loanId });
 }
+
+export async function deleteLikeLoan(loanId: number) {
+  return await loanInstance.delete(`/stars?loanId=${loanId}`);
+}
