@@ -17,7 +17,7 @@ export default function BottomAlert({
     setVisible(true);
     const timer = setTimeout(() => {
       setVisible(false);
-      setTimeout(onClose, 300);
+      setTimeout(onClose, 400);
     }, duration);
     return () => clearTimeout(timer);
   }, [duration, onClose]);
