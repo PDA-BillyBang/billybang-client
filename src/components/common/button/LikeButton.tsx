@@ -19,7 +19,7 @@ export default function LikeButton({
   loanId = 1,
 }: Props) {
   const [showAlert, setShowAlert] = useState(false);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>('TEST');
 
   const handleLikeLoan = async () => {
     try {
