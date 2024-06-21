@@ -10,12 +10,13 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-import { displayPlaces, removeMarkers } from "./methods/placeService";
+import { removeMarkers } from "./methods/renderPlaces";
 import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
 import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { getDetailedProperties } from './methods/fetchPropertyDetail';
+import { searchPlaces } from './methods/searchPlaces';
 
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);
@@ -78,35 +79,19 @@ export default function MapComponent() {
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map]);
 
-  // 카테고리 선택시 편의시설 검색
-  const searchPlaces = useCallback(() => {
+  // 편의시설 카테고리 변경시 검색
+  useEffect(() => {
     if (!ps || !map || !selectedCategory) return;
-    ps.categorySearch(selectedCategory, (data, status) => {
-      if (status !== window.kakao.maps.services.Status.ERROR) {
-        removeMarkers(markers);
-        displayPlaces(map, data, selectedCategory, markers, customOverlayRef);
-      } else {
-        console.log("지도 검색 중 에러 발생")
-      }
-    }, { useMapBounds: true });
-  }, [ps, map, selectedCategory]);
-
-  // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 검색
-  useEffect(() => {
-    if (map) {
-      kakao.maps.event.addListener(map, 'idle', searchPlaces);
+    if (customOverlayRef)customOverlayRef.current?.setMap(null);
+    const triggerSearchPlaces = () => {
+      searchPlaces(ps, map, selectedCategory, markers, customOverlayRef);
     }
+    triggerSearchPlaces();
+    kakao.maps.event.addListener(map, 'idle', triggerSearchPlaces);
     return () => {
-      if (map) {
-        kakao.maps.event.removeListener(map, 'idle', searchPlaces);
-      }
-    };
-  }, [map, searchPlaces]);
-
-  // selectedCategory 변경 시 검색
-  useEffect(() => {
-    searchPlaces();
-  }, [selectedCategory, searchPlaces]);
+      kakao.maps.event.removeListener(map, 'idle', triggerSearchPlaces);
+    }
+  }, [selectedCategory, map, ps]);
 
   // 편의시설 카테고리 선택/해제 핸들러
   const handleCategoryClick = (category: '' | CategoryCode) => {
