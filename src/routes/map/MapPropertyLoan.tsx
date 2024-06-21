@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import React from 'react';
 import PropertyLoan from '@components/map/PropertyLoan';
-type Props = {};
 
 const data = [1, 2, 3, 4, 5];
 
-export default function MapPropertyLoan({}: Props) {
-  const { setTitle } = useOutletContext<{
-    setTitle: (title: string) => void;
-  }>();
-  useEffect(() => {
-    setTitle('롯데캐슬파크');
-  }, [setTitle]);
+export default function MapPropertyLoan() {
   return (
-    <div className="pt-[80px] w-[100%] flex flex-col items-center">
+    <div className=" w-[100%] flex flex-col items-center">
       {data.map((value, index) => {
         return (
           <div className="w-[100%] flex flex-col items-center" key={index}>
-            <div className=" w-customWidthPercent">
+            <div className=" w-[100%]">
               <PropertyLoan bottomButton={false} />
             </div>
             <div className="mb-[40px] w-[100%] h-[8px] bg-grey-6" />

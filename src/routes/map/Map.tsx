@@ -11,14 +11,14 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-import PropertyLoan from '@components/map/PropertyLoan';
 import { displayPlaces, removeMarkers } from "./methods/placeService";
 import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
+import MapPropertyLoan from './MapPropertyLoan';
+import { getProperties } from '@/lib/apis/property';
 
 export default function MapComponent() {
-  const [mapInfo, setMapInfo] = useState<string>('');
   const [properties, setProperties] = useState<Property[]>([]);
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
     null
@@ -36,16 +36,16 @@ export default function MapComponent() {
   const viewportSize = GetViewportSize();
   const navigate = useNavigate();
 
-  // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
+  // 지도 생성 관련 : 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
   useEffect(() => {
     const cleanup = initializeMap(
       setProperties,
       setMap,
-      setMapInfo,
       (psInstance) => {
         setPs(psInstance);
       },
       setIsDrawerOpen,
+      customOverlayRef
     );
     return cleanup;
   }, []);
@@ -79,6 +79,61 @@ export default function MapComponent() {
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map, properties]);
+
+  // 매물 데이터 가져오기
+  const fetchProperties = useCallback(async () => {
+    if (!map) return;
+
+    const bounds = map.getBounds();
+    const swLatLng = bounds.getSouthWest();
+    const neLatLng = bounds.getNorthEast();
+
+    const params = {
+      realEstateType: 'APT',
+      tradeType: 'DEAL',
+      priceMin: 0,
+      priceMax: 3000,
+      leftLon: swLatLng.getLng(),
+      rightLon: neLatLng.getLng(),
+      topLat: neLatLng.getLat(),
+      bottomLat: swLatLng.getLat(),
+    };
+
+    try {
+      const response = await getProperties(params);
+      if (response.data.success) {
+        setProperties(response.data.response.map((item: any) => ({
+          propertyId: item.representativeId,
+          articleName: "", // Add appropriate value if available
+          latitude: item.latitude,
+          longitude: item.longitude,
+          buildingName: "", // Add appropriate value if available
+          realEstateType: "아파트", // Adjust according to your logic
+          area1: item.area,
+          area2: 0, // Add appropriate value if available
+          count: item.cnt,
+          price: item.price,
+        })));
+      } else {
+        console.error('Failed to fetch properties');
+      }
+    } catch (error) {
+      console.error('Error fetching properties', error);
+    }
+  }, [map]);
+
+  // 지도 중심이나 줌 레벨이 변경될 때마다 매물 데이터 가져오기
+  useEffect(() => {
+    if (map) {
+      kakao.maps.event.addListener(map, 'idle', fetchProperties);
+    }
+    return () => {
+      if (map) {
+        kakao.maps.event.removeListener(map, 'idle', fetchProperties);
+      }
+    };
+  }, [map, fetchProperties]);
+  
   // 편의시설 검색 함수 - 선택 카테고리가 변경될 때마다 재정의
   const searchPlaces = useCallback(() => {
     if (!ps || !map || !selectedCategory) return;
@@ -146,7 +201,7 @@ export default function MapComponent() {
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 
-            ? <PropertyLoan bottomButton={true} />
+            ? <MapPropertyLoan />
             : <OptionContent onApplyButtonClick={handleCloseDrawer}/>
           }
         </BottomDrawer>
