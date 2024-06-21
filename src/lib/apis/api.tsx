@@ -3,9 +3,11 @@ import axios from 'axios';
 export const BASE_URL = 'http://3.39.52.110:3000';
 
 export const userInstance = axios.create({
-  baseURL: BASE_URL + '/users',
+  baseURL: '/api/users',
   withCredentials: true,
 });
+<<<<<<< feat/login
+=======
 
 export const myInstance = axios.create({
   baseURL: BASE_URL + '/',
@@ -25,3 +27,4 @@ export const baseInstance = axios.create({
   baseURL: '/api',
   withCredentials: true,
 });
+>>>>>>> develop

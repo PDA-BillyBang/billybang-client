@@ -6,7 +6,7 @@ import FavoriteLoans from '../../components/mypage/FavoriteLoans';
 import home from '../../assets/image/icons/home.svg';
 import loan from '../../assets/image/icons/loan.svg';
 import { useNavigate } from 'react-router-dom';
-import { test } from '@/lib/apis/my';
+// import { test } from '@/lib/apis/my';
 
 export default function Mypage() {
   const navigate = useNavigate();

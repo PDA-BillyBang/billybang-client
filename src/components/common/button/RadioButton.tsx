@@ -1,12 +1,12 @@
-import React from "react";
-import { Radio, Label } from "flowbite-react";
+import React from 'react';
+import { Radio, Label } from 'flowbite-react';
 
 interface RadioOptionProps {
   id: string;
   name: string;
-  value: string;
-  selectedOption: string | undefined;
-  onChange: (value: string) => void;
+  value: string | boolean;
+  selectedOption: string | boolean | undefined;
+  onChange: (value: string | boolean | undefined) => void;
   label: string;
 }
 
