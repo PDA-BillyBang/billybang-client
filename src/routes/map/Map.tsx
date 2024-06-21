@@ -11,11 +11,11 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-import PropertyLoan from '@components/map/PropertyLoan';
 import { displayPlaces, removeMarkers } from "./methods/placeService";
 import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
+import MapPropertyLoan from './MapPropertyLoan';
 
 export default function MapComponent() {
   const [mapInfo, setMapInfo] = useState<string>('');
@@ -146,7 +146,7 @@ export default function MapComponent() {
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 
-            ? <PropertyLoan bottomButton={true} />
+            ? <MapPropertyLoan />
             : <OptionContent onApplyButtonClick={handleCloseDrawer}/>
           }
         </BottomDrawer>
