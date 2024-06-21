@@ -147,11 +147,11 @@ const LoanDetail = () => {
             <div className="pt-[1rem]">{loanDetailResult.ltv}%</div>
             <div className="pt-[1rem]">
               {loanDetailResult.minTerm === null ? (
-                <div>{loanDetailResult.maxTerm / 12}년</div>
+                <div>{Math.floor(loanDetailResult.maxTerm / 12)}년</div>
               ) : (
                 <div>
-                  {loanDetailResult.minTerm / 12}년~{' '}
-                  {loanDetailResult.maxTerm / 12}년
+                  {Math.floor(loanDetailResult.minTerm / 12)}년~{' '}
+                  {Math.floor(loanDetailResult.maxTerm / 12)}년
                 </div>
               )}
             </div>
