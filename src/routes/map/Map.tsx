@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import { PropertyGroup, Property, OverlayData, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
-import { moveToCurrentLocation } from './methods/moveToCurrentLocation';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
 import BottomDrawer from '@components/common/button/BottomDrawer';
@@ -15,30 +14,25 @@ import { displayPlaces, removeMarkers } from "./methods/placeService";
 import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
-import MapPropertyLoan from './MapPropertyLoan';
-import { getPropertyDetails } from '@/lib/apis/property';
+import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { getDetailedProperties } from './methods/fetchPropertyDetail';
 
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);
   const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
-    null
-  );
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});
   const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
-    undefined
-  );
   const markers = useRef<kakao.maps.Marker[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);
   const viewportSize = GetViewportSize();
   const navigate = useNavigate();
 
-  // 지도 생성 관련 : 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
+  // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
       setPropertyGroups,
@@ -52,13 +46,7 @@ export default function MapComponent() {
     return cleanup;
   }, []);
 
-  // 현재 위치로 아이콘 생성
-  useEffect(() => {
-    const cleanup = moveToCurrentLocation(map);
-    return cleanup;
-  }, [map]);
-
-  // 전체 매물 그리기
+  // 매물 업데이트시 그리기
   useEffect(() => {
     const cleanup = renderProperties(
       map,
@@ -68,9 +56,9 @@ export default function MapComponent() {
       setSelectedPropertyId
     );
     return cleanup;
-  }, [map, propertyGroups]);
+  }, [propertyGroups, map]);
 
-  // 매물 그룹 선택시 스타일 변경 및 자세한 매물 데이터 가져오기
+  // 매물 그룹 선택시 (스타일 변경, 자세한 매물 데이터 가져오기)
   useEffect(() => {
     if (selectedPropertyId !== null) {
       const selectedGroup = propertyGroups.find(group => group.representativeId === selectedPropertyId);
@@ -80,7 +68,6 @@ export default function MapComponent() {
     } else {
       setProperties([]);
     }
-
     updateSelectedProperty(
       selectedPropertyId,
       previousSelectedPropertyIdRef,
@@ -89,10 +76,9 @@ export default function MapComponent() {
       setSelectedPropertyId
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
-  }, [selectedPropertyId, map, getDetailedProperties]);
+  }, [selectedPropertyId, map]);
 
-
-  // 편의시설 검색 함수 - 선택 카테고리가 변경될 때마다 재정의
+  // 카테고리 선택시 편의시설 검색
   const searchPlaces = useCallback(() => {
     if (!ps || !map || !selectedCategory) return;
     ps.categorySearch(selectedCategory, (data, status) => {
@@ -145,7 +131,7 @@ export default function MapComponent() {
   }, [navigate]);
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
-
+  console.log(properties)
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">

@@ -1,6 +1,7 @@
 import { PropertyGroup } from "@/utils/types";
 import { Dispatch, SetStateAction } from "react";
 import { fetchPropertyGroups } from "./fetchPropertyGroups";
+import { moveToCurrentLocation } from "./moveToCurrentLocation";
 
 export const initializeMap = (
   setPropertyGroups: (properties: PropertyGroup[]) => void,
@@ -18,9 +19,11 @@ export const initializeMap = (
     return;
   }
   kakao.maps.load(() => {
-    const mapInstance = new kakao.maps.Map(container, options); // 지도를 생성
+    // 지도 생성
+    const mapInstance = new kakao.maps.Map(container, options); 
     setMap(mapInstance);
 
+    // 편의시설 검색 객체 생성
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
 
@@ -35,14 +38,19 @@ export const initializeMap = (
         }
     };
 
-    // 매물 지도에 그리기
+    // 매물 가져오기
     const handleFetchPropertyGroup = () => {
       fetchPropertyGroups(mapInstance, setPropertyGroups);
     }
 
+    // 현재 위치로 아이콘 부착
+    moveToCurrentLocation(mapInstance)
+
+    // 줌, 항공뷰 컨트롤러 부착
     mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
+    // 지도 이벤트 핸들링
     kakao.maps.event.addListener(mapInstance, 'idle', handleFetchPropertyGroup);
     kakao.maps.event.addListener(mapInstance, 'zoom_changed', handleFetchPropertyGroup);
     kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)

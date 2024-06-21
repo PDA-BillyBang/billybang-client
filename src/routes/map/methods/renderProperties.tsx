@@ -32,6 +32,7 @@ export const renderProperties = (
       position: position,
       content: container,
       yAnchor: 1,
+      clickable: true,
     });
 
     customOverlay.setMap(map);

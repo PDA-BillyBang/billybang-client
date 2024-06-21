@@ -25,8 +25,8 @@ export const fetchPropertyGroups = async (
   try {
     const response = await getPropertyGroups(params);
     if (response.data.success) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        setPropertyGroups(response.data.response.map((item: any) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+        setPropertyGroups(response.data.response.map((item: any) => ({ // 추후 API 응답 인터페이스 제작할 것
         representativeId: item.representativeId,
         latitude: item.latitude,
         longitude: item.longitude,
