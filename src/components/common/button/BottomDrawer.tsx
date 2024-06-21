@@ -13,7 +13,7 @@ type Props = {
 
 export default function BottomDrawer({ isOpen, handleClose, children, isBackDropped, position }: Props) {
   const positionClass = position ? position : 'bottom';
-  const isBackDropClass = isBackDropped ? isBackDropped : true;
+  const isBackDropClass = isBackDropped===false ? isBackDropped : true;
   const [height, setHeight] = useState<string>('h-[50vh]');
 
   useEffect(() => {
