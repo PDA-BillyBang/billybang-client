@@ -7,28 +7,28 @@ import { useOutletContext } from 'react-router-dom';
 
 interface Props {
   pageNum: number;
-  salary: number;
-  assets: number;
-  firstBuyerOption: string;
-  loanOption: string;
+  individualIncome: number | undefined;
+  individualAssets: number | undefined;
+  isFirstHouseBuyer: boolean;
+  hasOtherLoans: boolean;
+  setIsFirstHouseBuyer: (value: boolean) => void;
   setPageNum: (value: number) => void;
-  setSalary: (value: number) => void;
-  setAssets: (value: number) => void;
-  setFirstBuyerOption: (value: string) => void;
-  setLoanOption: (value: string) => void;
+  setIndividualAssets: (value: number) => void;
+  setIndividualIncome: (value: number) => void;
+  setHasOtherLoans: (value: boolean) => void;
 }
 
 export default function UserInfoInputFirst({
   pageNum,
-  salary,
-  assets,
-  firstBuyerOption,
-  loanOption,
+  individualIncome,
+  individualAssets,
+  isFirstHouseBuyer,
+  hasOtherLoans,
   setPageNum,
-  setSalary,
-  setAssets,
-  setFirstBuyerOption,
-  setLoanOption,
+  setIndividualIncome,
+  setIndividualAssets,
+  setIsFirstHouseBuyer,
+  setHasOtherLoans,
 }: Props) {
   const [isActive, setIsActive] = useState<number>(2);
   const { setTitle } = useOutletContext<{
@@ -45,40 +45,47 @@ export default function UserInfoInputFirst({
     } else {
       setIsActive(1);
     }
-  }, [salary, assets, firstBuyerOption, loanOption]);
+  }, [individualIncome, individualAssets, isFirstHouseBuyer, hasOtherLoans]);
 
   const validateInputs = (): boolean => {
-    console.log('salary', salary);
-    console.log('assets', assets);
     return (
-      salary !== undefined &&
-      typeof salary === 'number' &&
-      salary >= 0 &&
-      assets !== undefined &&
-      typeof assets === 'number' &&
-      assets >= 0
+      individualIncome !== undefined &&
+      typeof individualIncome === 'number' &&
+      individualIncome >= 0 &&
+      individualAssets !== undefined &&
+      typeof individualAssets === 'number' &&
+      individualAssets >= 0
     );
   };
 
   const handleSalaryChange = (value: string | number): void => {
     const numericValue: number =
-      typeof value === 'number' ? value : parseFloat(value);
-    setSalary(numericValue);
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setIndividualIncome(0);
+    return setIndividualIncome(numericValue);
   };
 
   const handleAssetsChange = (value: string | number): void => {
     const numericValue: number =
-      typeof value === 'number' ? value : parseFloat(value);
-
-    setAssets(numericValue);
+      typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
+    if (isNaN(numericValue)) return setIndividualAssets(0);
+    return setIndividualAssets(numericValue);
   };
 
-  const handleFirstBuyerChange = (option: string): void => {
-    setFirstBuyerOption(option);
+  const handleFirstBuyerChange = (
+    value: boolean | string | undefined
+  ): void => {
+    if (typeof value === 'boolean') setIsFirstHouseBuyer(value);
   };
 
-  const handleLoanChange = (option: string): void => {
-    setLoanOption(option);
+  const handleHasOtherLoans = (option: boolean | string | undefined): void => {
+    if (typeof option === 'boolean') setHasOtherLoans(option);
+  };
+
+  const handleClickButton = (): void => {
+    if (isActive === 0) {
+      setPageNum(pageNum + 1);
+    }
   };
 
   return (
@@ -91,25 +98,31 @@ export default function UserInfoInputFirst({
 
       <div className="flex flex-col w-customWidthPercent mt-[2rem] mb-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="연간소득금액"
           text="연간 소득 금액을 입력해주세요 (원)"
-          value={salary}
+          value={individualIncome?.toLocaleString()}
           onChange={handleSalaryChange}
-          validate={(value) => typeof value == 'number' && value >= 0}
+          validate={() =>
+            typeof individualIncome == 'number' && individualIncome >= 0
+          }
           errorMessage="정확한 소득을 입력해주세요"
+          unit="원"
         />
       </div>
 
       <div className="flex flex-col w-customWidthPercent my-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="개인 보유자산"
           text="보유 자산을 입력해주세요 (원)"
-          value={assets}
+          value={individualAssets?.toLocaleString()}
           onChange={handleAssetsChange}
-          validate={(value) => typeof value === 'number' && value >= 1}
-          errorMessage="정확학 연간소득금액을 입력해주세요"
+          validate={() =>
+            typeof individualAssets === 'number' && individualAssets >= 0
+          }
+          errorMessage="정확한 자산을 입력해주세요"
+          unit="원"
         />
       </div>
 
@@ -118,16 +131,16 @@ export default function UserInfoInputFirst({
         <RadioOption
           id="firstBuyerYes"
           name="firstBuyerOption"
-          value="Yes"
-          selectedOption={firstBuyerOption}
+          value={true}
+          selectedOption={isFirstHouseBuyer}
           onChange={handleFirstBuyerChange}
           label="예"
         />
         <RadioOption
           id="firstBuyerNo"
           name="firstBuyerOption"
-          value="No"
-          selectedOption={firstBuyerOption}
+          value={false}
+          selectedOption={isFirstHouseBuyer}
           onChange={handleFirstBuyerChange}
           label="아니오"
         />
@@ -138,17 +151,17 @@ export default function UserInfoInputFirst({
         <RadioOption
           id="loanYes"
           name="loanOption"
-          value="Yes"
-          selectedOption={loanOption}
-          onChange={handleLoanChange}
+          value={false}
+          selectedOption={hasOtherLoans}
+          onChange={handleHasOtherLoans}
           label="예"
         />
         <RadioOption
           id="loanNo"
           name="loanOption"
-          value="No"
-          selectedOption={loanOption}
-          onChange={handleLoanChange}
+          value={true}
+          selectedOption={hasOtherLoans}
+          onChange={handleHasOtherLoans}
           label="아니오"
         />
       </div>
@@ -158,7 +171,7 @@ export default function UserInfoInputFirst({
           text="계속하기"
           customWidth="w-full"
           isActive={isActive}
-          handleClick={() => setPageNum(pageNum + 1)}
+          handleClick={handleClickButton}
         />
       </div>
     </div>

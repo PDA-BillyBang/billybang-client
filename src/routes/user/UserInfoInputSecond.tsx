@@ -8,26 +8,26 @@ import { useOutletContext } from 'react-router-dom';
 
 interface Props {
   pageNum: number;
-  nation: string;
-  selectedJob: string | undefined;
-  employPeriod: number | undefined;
+  isForeign: boolean;
+  occupation: string | undefined;
+  employmentDuration: number | undefined;
   companySize: string | undefined;
   setPageNum: (value: number) => void;
-  setNation: (value: string) => void;
-  setSelectedJob: (value: string | undefined) => void;
-  setEmployPeriod: (value: number | undefined) => void;
+  setIsForeign: (value: boolean) => void;
+  setOccupation: (value: string | undefined) => void;
+  setEmploymentDuration: (value: number | undefined) => void;
   setCompanySize: (value: string | undefined) => void;
 }
 
 export default function UserInfoInputSecond({
-  nation,
-  selectedJob,
-  employPeriod,
+  isForeign,
+  occupation,
+  employmentDuration,
   companySize,
   pageNum,
-  setNation,
-  setSelectedJob,
-  setEmployPeriod,
+  setIsForeign,
+  setOccupation,
+  setEmploymentDuration,
   setCompanySize,
   setPageNum,
 }: Props) {
@@ -44,10 +44,10 @@ export default function UserInfoInputSecond({
 
   useEffect(() => {
     checkValidity();
-  }, [nation, selectedJob, employPeriod]);
+  }, [isForeign, occupation, employmentDuration]);
 
   const checkValidity = () => {
-    const isSelectedJobValid = selectedJob !== undefined;
+    const isSelectedJobValid = occupation !== undefined;
     if (isSelectedJobValid) {
       setIsActive(0);
     } else {
@@ -55,21 +55,25 @@ export default function UserInfoInputSecond({
     }
   };
 
-  const handleFirstBuyerChange = (option: string) => {
-    setNation(option);
+  const handleFirstBuyerChange = (option: boolean) => {
+    setIsForeign(option);
   };
 
-  const handleJobSelect = (job: string) => {
-    setSelectedJob(job);
+  const handleJobSelect = (job: string | undefined | boolean) => {
+    if (typeof job === 'string') setOccupation(job);
     setIsOpen(false);
   };
 
   const handleEmployPeriodChange = (month: number | string): void => {
-    if (typeof month === 'number') setEmployPeriod(month);
+    const numericValue: number =
+      typeof month === 'string' ? parseFloat(month.replace(/,/g, '')) : month;
+    if (isNaN(numericValue)) return setEmploymentDuration(0);
+    return setEmploymentDuration(numericValue);
   };
 
-  const handleCompanySize = (size: string) => {
-    setCompanySize(size);
+  const handleCompanySize = (size: string | boolean | undefined) => {
+    if (typeof size === 'string') setCompanySize(size);
+    else if (size === undefined) setCompanySize(undefined);
   };
 
   const handleNextButtonClick = () => {
@@ -91,21 +95,21 @@ export default function UserInfoInputSecond({
         <div className="flex space-x-4">
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              nation === 'local'
+              isForeign === false
                 ? 'bg-[black] text-[white]'
                 : 'bg-[white] text-grey-2'
             }`}
-            onClick={() => handleFirstBuyerChange('local')}
+            onClick={() => handleFirstBuyerChange(false)}
           >
             내국인
           </button>
           <button
             className={`px-4 py-2 w-[50%] border rounded ${
-              nation === 'foreigner'
+              isForeign === true
                 ? 'bg-[black] text-[white]'
                 : 'bg-[white] text-grey-2 '
             }`}
-            onClick={() => handleFirstBuyerChange('foreigner')}
+            onClick={() => handleFirstBuyerChange(true)}
           >
             외국인
           </button>
@@ -117,7 +121,7 @@ export default function UserInfoInputSecond({
         <input
           id="selectedJob"
           type="text"
-          value={selectedJob ? selectedJob : '카테고리중 하나를 선택해주세요'}
+          value={occupation ? occupation : '카테고리중 하나를 선택해주세요'}
           onClick={handleClick}
           className="w-full h-[3rem] border-b border-grey-2 placeholder-grey-2 focus:outline-none focus:border-[black]"
         />
@@ -127,22 +131,26 @@ export default function UserInfoInputSecond({
         <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
           <div className="flex flex-col h-full justify-center">
             {[
-              '무직',
-              '회계사',
-              '회사원',
-              '공무원',
-              '변호사',
-              '의사',
-              '기타',
+              ['일반직', 'GENERAL'],
+              ['금융', 'FINANCE'],
+              ['교육', 'EDUCATION'],
+              ['공무원', 'PUBLIC'],
+              ['의료', 'MEDICAL'],
+              ['IT', 'IT'],
+              ['서비스', 'SERVICE'],
+              ['영업', 'SALES'],
+              ['아트', 'ART'],
+              ['법률', 'LEGAL'],
+              ['기타', 'ETC'],
             ].map((job) => (
-              <div key={job} className="h-[3rem]">
+              <div key={job[1]} className="h-[3rem]">
                 <RadioOption
-                  id={job}
+                  id={job[1]}
                   name="jobOption"
-                  value={job}
-                  selectedOption={selectedJob}
+                  value={job[1]}
+                  selectedOption={occupation ? occupation : 'GENERAL'}
                   onChange={handleJobSelect}
-                  label={job}
+                  label={job[0]}
                 />
               </div>
             ))}
@@ -152,13 +160,16 @@ export default function UserInfoInputSecond({
 
       <div className="flex flex-col w-customWidthPercent mt-[2rem] mb-[1rem]">
         <FloatingInputForm1
-          type="number"
+          type="text"
           title="재직 기간"
           text="재직 기간을 숫자로 입력해주세요 (개월)"
-          value={employPeriod}
+          value={employmentDuration?.toLocaleString()}
           onChange={handleEmployPeriodChange}
-          validate={(value) => typeof value == 'number' && value >= 0}
+          validate={() =>
+            typeof employmentDuration == 'number' && employmentDuration >= 0
+          }
           errorMessage="정확한 재직 기간을 입력해주세요"
+          unit="개월"
         />
       </div>
       <div className="flex flex-col w-customWidthPercent mt-[2rem] text-grey-2 hover:text-[black]">
@@ -167,7 +178,7 @@ export default function UserInfoInputSecond({
           <RadioOption
             id="smallCompany"
             name="companySizeOption"
-            value="중소기업"
+            value="INTERMEDIATE"
             selectedOption={companySize}
             onChange={handleCompanySize}
             label="중소기업"
@@ -177,8 +188,8 @@ export default function UserInfoInputSecond({
           <RadioOption
             id="majorCompany"
             name="companySizeOption"
-            value="대기업"
-            selectedOption={companySize}
+            value="LARGE"
+            selectedOption={companySize ? companySize : 'LARGE'}
             onChange={handleCompanySize}
             label="대기업"
           />

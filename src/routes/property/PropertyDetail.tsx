@@ -74,34 +74,34 @@ export default function PropertyDetail({}: Props) {
 
         <div className="flex flex-col bg-grey-5 my-3 gap-y-4 items-center py-5 rounded-[5px] ">
           <div className="flex w-customWidthPercent h-8">
-            <div className="w-[20%] text-grey-1">매매가</div>
+            <div className="w-[20%] text-grey-1 ">매매가</div>
             <div className="w-[80%]">9억 3,000만원</div>
           </div>
           <div className="flex w-customWidthPercent h-8">
-            <div className="w-[20%] text-grey-1">방향</div>
+            <div className="w-[20%] text-grey-1 ">방향</div>
             <div className="w-[80%]">남동향</div>
           </div>
           <div className="flex w-customWidthPercent h-8">
-            <div className="w-[20%] text-grey-1">동호수</div>
+            <div className="w-[20%] text-grey-1 ">동호수</div>
             <div className="w-[80%]">102동</div>
           </div>
           <div className="flex w-customWidthPercent h-8">
-            <div className="w-[20%] text-grey-1">면적</div>
+            <div className="w-[20%] text-grey-1 ">면적</div>
             <div className="w-[80%]">84 / 110 m2</div>
           </div>
           <div className="flex w-customWidthPercent h-8">
-            <div className="w-[20%] text-grey-1">해당층</div>
+            <div className="w-[20%] text-grey-1 ">해당층</div>
             <div className="w-[80%]">3 / 12 층</div>
           </div>
           <div className="flex w-customWidthPercent items-center">
-            <div className="w-[20%] text-grey-1">소개</div>
+            <div className="w-[20%] text-grey-1 ">소개</div>
             <div className="w-[80%]">
               대지지분29.5 .입주가능. 관리잘된세대 깨끗합니다.
             </div>
           </div>
           <div className="flex w-customWidthPercent items-center">
             <div className="w-[20%] text-grey-1 ">부동산</div>
-            <div className="flex flex-col w-[80%]">
+            <div className="flex flex-col w-[80%] underline decoration-blue-2">
               <div className="flex-col text-blue-2">
                 강일탑신도시공인중개사사무소
               </div>

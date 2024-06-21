@@ -3,17 +3,32 @@ import { Avatar, Navbar } from 'flowbite-react';
 import React from 'react';
 import search from 'images/search.svg';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { isvalidateToken } from '@/lib/apis/user';
 
 export default function MainHeader() {
   const navigate = useNavigate();
 
   const handleClickSearchField = () => navigate('/search');
-  const handleClickToMy = () => navigate('/my');
+  const handleClickToMy = async () => {
+    try {
+      const resp = await isvalidateToken();
+      if (resp.data.response.isValid === true) navigate('/my');
+      else navigate('/user/login');
+    } catch (error) {
+      navigate('/user/login');
+    }
+  };
+  const handleClickToMain = () => {
+    navigate('/');
+  };
 
   return (
     <div>
       <div className="absolute top-0 z-50 flex flex-row justify-center w-full h-16">
-        <div className="text-[2rem] mx-3 flex items-center h-16 leading-[2rem] text-center font-CWDangamAsac-Bold text-dark-blue-1 ">
+        <div
+          onClick={handleClickToMain}
+          className="text-[2rem] mx-3 flex cursor-pointer items-center h-16 leading-[2rem] text-center font-CWDangamAsac-Bold text-dark-blue-1 "
+        >
           빌려방
         </div>
         <div className="flex items-center flex-grow ">
@@ -21,7 +36,7 @@ export default function MainHeader() {
             서울시 성동구
           </div>
         </div>
-        <div className="flex md:order-2 items-center">
+        <div className="flex items-center md:order-2">
           <img
             src={search}
             className="h-6 mr-3 cursor-pointer sm:h-9"
@@ -30,7 +45,7 @@ export default function MainHeader() {
           />
           <Avatar
             onClick={handleClickToMy}
-            className="mr-3 cursor-pointer "
+            className="mr-3 cursor-pointer"
             alt="User settings"
             img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
             rounded
