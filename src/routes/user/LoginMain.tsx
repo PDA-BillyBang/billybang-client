@@ -96,7 +96,7 @@ export default function Login() {
         <div className="flex flex-col mb-4 w-customWidthPercent">
           <a href="http://3.39.52.110:3000/api/oauth2/authorization/kakao">
             <button
-              className="flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
+              className=" w-full flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
               // onClick={handleKakaoLogin}
             >
               <img src={KaKaoBtn} alt="kakao" className="h-6" />
