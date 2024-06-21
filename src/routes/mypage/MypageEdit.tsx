@@ -4,7 +4,9 @@ import profileTest from '../../assets/image/test/profile-test.svg';
 import editGrey from '../../assets/image/icons/editGrey.svg';
 import rightArrowGrey from '../../assets/image/icons/rightArrowGrey.svg';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo } from '@/lib/apis/user';
+import { getUserInfo, logout } from '@/lib/apis/user';
+import { ErrorResponseI } from '@/utils/errorTypes';
+import { AxiosError } from 'axios';
 
 export default function MypageEdit() {
   const navigate = useNavigate();
@@ -19,9 +21,21 @@ export default function MypageEdit() {
 
   const handleClickedUserInfoButton = async () => {
     const resp = await getUserInfo();
-    console.log(resp.data.response.userInfo);
     if (resp.data.response.userInfo) navigate('/user/info/1');
     else navigate('/user/info/2');
+  };
+
+  const handleClickedUserLogoutButton = async () => {
+    try {
+      const resp = await logout();
+      console.log(resp);
+      navigate('/');
+    } catch (error: unknown) {
+      const errorResponse = error as AxiosError<ErrorResponseI>;
+      if (errorResponse.response) {
+        console.error(errorResponse.response.data.response);
+      }
+    }
   };
 
   return (
@@ -83,7 +97,10 @@ export default function MypageEdit() {
           />
         </div>
         <div className="py-[0.8rem]" />
-        <div className="w-[100%] text-grey-1 flex flex-row justify-between">
+        <div
+          className="w-[100%] text-grey-1 flex flex-row justify-between"
+          onClick={handleClickedUserLogoutButton}
+        >
           <div className="w-[20%]">로그아웃</div>
           <img
             src={rightArrowGrey}
