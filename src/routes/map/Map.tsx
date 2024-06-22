@@ -32,7 +32,7 @@ export default function MapComponent() {
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);
   const viewportSize = GetViewportSize();
   const navigate = useNavigate();
-
+  
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
@@ -130,14 +130,14 @@ export default function MapComponent() {
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 && <MapPropertyLoan />}
-          {isDrawerOpen===1 && <OptionContent onApplyButtonClick={handleCloseDrawer}/>}
+          {isDrawerOpen===1 && <OptionContent onApplyButtonClick={handleCloseDrawer} />}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
           <OptionButton
             text={'옵션'}
             isActive={isDrawerOpen === 1}
             customWidth="min-w-16"
-            onClick={() => setIsDrawerOpen(1)}
+            onClick={() => setIsDrawerOpen(isDrawerOpen===1?0:1)}
           ></OptionButton>
         </div>
         <div className="absolute z-10 flex flex-col space-y-2 top-60 right-1 min-w-12">

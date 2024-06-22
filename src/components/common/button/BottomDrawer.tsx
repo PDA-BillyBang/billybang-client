@@ -46,7 +46,7 @@ export default function BottomDrawer({ isOpen, handleClose, children, isBackDrop
         {children}
       </div>
     </div>
-    :<Drawer.Items className="h-[50vh] w-full">{children}</Drawer.Items>
+    :<Drawer.Items className={`${positionClass==='left'?'':'h-[50vh]'} w-full`}>{children}</Drawer.Items>
     }
 
     </Drawer>

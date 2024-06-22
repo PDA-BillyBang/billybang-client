@@ -25,34 +25,35 @@ export default function OptionContent({ onApplyButtonClick }:Props) {
       };
     
   return (
-    <div className={`w-[100%] h-[100%] flex flex-col`}>
-        <div className="flex-1">
+    <div className='w-[100%] flex flex-col'>
+        <div className="flex-1 mb-10">
             <div className="flex gap-3 mb-4">
                 <SmallButton text={'전세'} isActive={selectedPropertyType['전세']} onClick={()=>handlePropertyButtonClick('전세')} customWidth='min-w-12' />
                 <SmallButton text={'매매'} isActive={selectedPropertyType['매매']} onClick={()=>handlePropertyButtonClick('매매')} customWidth='min-w-12'/>
             </div>
             <hr />
-            <div className="flex gap-3 my-4">
+            <div className='flex flex-wrap gap-3 my-4'>
                 <SmallButton text={'원룸'} isActive={selectedCategory['원룸']} onClick={()=>handleCategoryButtonClick('원룸')} customWidth='min-w-12' />
-                <SmallButton text={'오피스텔'} isActive={selectedCategory['오피스텔']} onClick={()=>handleCategoryButtonClick('오피스텔')} customWidth='min-w-12'/>
-                <SmallButton text={'아파트'} isActive={selectedCategory['아파트']} onClick={()=>handleCategoryButtonClick('아파트')} customWidth='min-w-12'/>
+                <SmallButton text={'오피스텔'} isActive={selectedCategory['오피스텔']} onClick={()=>handleCategoryButtonClick('오피스텔')} customWidth='min-w-20'/>
+                <SmallButton text={'아파트'} isActive={selectedCategory['아파트']} onClick={()=>handleCategoryButtonClick('아파트')} customWidth='min-w-14'/>
                 <SmallButton text={'빌라'} isActive={selectedCategory['빌라']} onClick={()=>handleCategoryButtonClick('빌라')} customWidth='min-w-12'/>
                 <SmallButton text={'주택'} isActive={selectedCategory['주택']} onClick={()=>handleCategoryButtonClick('주택')} customWidth='min-w-12'/>
             </div>
-            <hr />
+            <hr/>
             <div className="h-[30%] my-4">
                 <div className="text-sm">
                     보증금(전세금)
                 </div>
                 <MultiRangeSlider min={0} max={1000} />
             </div>
-            <hr />
+            <hr className='mt-14' />
             <div className="h-[30%] my-4">
                 <div className="text-sm">
                     매매가
                 </div>
                 <MultiRangeSlider min={0} max={3000} />
             </div>
+            <hr className="mt-14" />
         </div>
         <div className="flex justify-around">
             <LargeButton
