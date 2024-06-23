@@ -1,4 +1,4 @@
-import { PropertyGroup } from "@/utils/types";
+import { PropertyGroup, PropertyOption } from "@/utils/types";
 import { Dispatch, SetStateAction } from "react";
 import { fetchPropertyGroups } from "./fetchPropertyGroups";
 import { moveToCurrentLocation } from "./moveToCurrentLocation";
@@ -8,7 +8,8 @@ export const initializeMap = (
   setMap: (map: kakao.maps.Map | null) => void,
   setPs: (ps: kakao.maps.services.Places) => void,
   setIsDrawerOpen: Dispatch<SetStateAction<number>>,
-  customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>
+  customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>,
+  propertyOption : PropertyOption,
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -39,11 +40,7 @@ export const initializeMap = (
     };
 
     // 매물 가져오기
-    const handleFetchPropertyGroup = () => {
-      fetchPropertyGroups(mapInstance, setPropertyGroups);
-    }
-
-    handleFetchPropertyGroup();
+    fetchPropertyGroups(mapInstance, setPropertyGroups, propertyOption);
 
     // 현재 위치로 아이콘 부착
     moveToCurrentLocation(mapInstance)
@@ -53,14 +50,10 @@ export const initializeMap = (
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
     // 지도 이벤트 핸들링
-    kakao.maps.event.addListener(mapInstance, 'idle', handleFetchPropertyGroup);
-    kakao.maps.event.addListener(mapInstance, 'zoom_changed', handleFetchPropertyGroup);
     kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
 
     return () => {
-      kakao.maps.event.removeListener(mapInstance, 'idle', handleFetchPropertyGroup);
-      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', handleFetchPropertyGroup);
       kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
       kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
     };

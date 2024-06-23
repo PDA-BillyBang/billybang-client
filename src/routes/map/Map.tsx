@@ -17,6 +17,7 @@ import GetViewportSize from "@/utils/hooks/GetViewportSize";
 import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
+import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
 
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);  // 매물 묶음 데이터
@@ -44,7 +45,8 @@ export default function MapComponent() {
         setPs(psInstance);
       },
       setIsDrawerOpen,
-      customOverlayRef
+      customOverlayRef,
+      propertyOption
     );
     return cleanup;
   }, []);
@@ -94,6 +96,21 @@ export default function MapComponent() {
       kakao.maps.event.removeListener(map, 'idle', triggerSearchPlaces);
     }
   }, [selectedCategory, map, ps]);
+
+  // propertyOption 변경시 매물 정보 다시 가져오기
+  useEffect(() => {
+    if (!map) return;
+    const handleFetchPropertyGroups = () => {
+      fetchPropertyGroups(map, setPropertyGroups, propertyOption);
+    };
+    handleFetchPropertyGroups();
+    kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
+    kakao.maps.event.addListener(map, 'zoom_changed', handleFetchPropertyGroups);
+    return () => {
+      kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
+      kakao.maps.event.removeListener(map, 'zoom_changed', handleFetchPropertyGroups);
+    };
+  }, [propertyOption, map]);
 
   // 편의시설 카테고리 선택/해제 핸들러
   const handleCategoryClick = (category: '' | CategoryCode) => {
