@@ -17,7 +17,7 @@ type Props = {
   providerName?: string;
 };
 
-const formatLoanLimit = (loanLimit: number | undefined) => {
+export const formatLoanLimit = (loanLimit: number | undefined) => {
   if (loanLimit === undefined || loanLimit === null) return '';
 
   const billion = Math.floor(loanLimit / 100);

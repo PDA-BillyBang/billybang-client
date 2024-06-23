@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import profileTest from '../../assets/image/test/profile-test.svg';
 import FavoriteRooms from '../../components/mypage/FavoriteRooms';
 import PlusButton from '../../components/common/button/PlusButton';
@@ -9,33 +9,43 @@ import { useNavigate } from 'react-router-dom';
 import { getUserInfo, isvalidateToken } from '@/lib/apis/user';
 import { AxiosError } from 'axios';
 import { ErrorResponseI } from '@/utils/errorTypes';
-// import { test } from '@/lib/apis/my';
+import { getLikeLoans } from '@/lib/apis/loan';
+import { loanI } from '../loan/Loan';
+import EmptyFavorite from '@components/mypage/EmptyFavorite';
 
 interface UserInfo {
   birthDate: string;
   email: string;
   nickname: string;
   userId: number;
-  userInfo: any; // Modify this type based on the actual structure
+  userInfo: any;
+}
+
+export interface LikeLoansI {
+  loanType: string;
+  loans: loanI[];
 }
 
 export default function Mypage() {
   const [user, setUser] = useState<UserInfo | null>(null);
+  const [likeLoans, setLikeLoans] = useState<LikeLoansI[]>([]);
 
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
   const handleToMyProperties = () => navigate('/my/properties');
-  const handleSignUp = async () => {
+
+  const handleGetLikeLoans = async () => {
     try {
-      const response = await test();
-      console.log('회원가입 성공:', response.data);
+      const result = await getLikeLoans();
+      console.log('LIKE LOANS', result.data.response);
+      setLikeLoans(result.data.response);
     } catch (error) {
-      console.error('회원가입 실패:', error);
+      console.log('[ERROR]', error);
     }
   };
 
   useEffect(() => {
-    // handleSignUp();
+    handleGetLikeLoans();
   }, []);
 
   useEffect(() => {
@@ -71,7 +81,7 @@ export default function Mypage() {
           <div className="text-[1rem] text-grey-1">{user?.email}</div>
         </div>
       </div>
-      <div className="py-[1rem] " />
+      <div className="py-[1rem]" />
       <div className="font-bold flex items-center flex-row text-[1.2rem] pb-[0.4rem]">
         <img
           src={home}
@@ -92,7 +102,13 @@ export default function Mypage() {
         />
         찜한 대출상품
       </div>
-      <FavoriteLoans />
+      {likeLoans.length > 0 ? (
+        <FavoriteLoans likeLoans={likeLoans[0]} />
+      ) : (
+        <div className="w-[100%] ">
+          <EmptyFavorite />
+        </div>
+      )}
       <div className="pb-[1rem]" />
       <PlusButton handleClick={handleToMyLoan} />
       <div className="py-[1rem]" />
