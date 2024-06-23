@@ -24,8 +24,8 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
 }) => {
   const [minVal, setMinVal] = useState(minValue);
   const [maxVal, setMaxVal] = useState(maxValue);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+  const minValRef = useRef(minValue);
+  const maxValRef = useRef(maxValue);
   const range = useRef<HTMLDivElement>(null);
 
   // Function to convert number to currency format (e.g., 1천만원)
@@ -79,8 +79,15 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
   }, [maxVal, getPercent]);
 
   useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
+    if (minVal !== minValue || maxVal !== maxValue) {
+      onChange({ min: minVal, max: maxVal });
+    }
+  }, [minVal, maxVal, minValue, maxValue, onChange]);
+
+  useEffect(() => {
+    setMinVal(minValue);
+    setMaxVal(maxValue);
+  }, [minValue, maxValue]);
 
   return (
     <div className="flex flex-col">
