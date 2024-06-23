@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import { PropertyGroup, Property, OverlayData, CategoryCode, SelectedTradeCategory, initialTradeCategory, SelectedBuildingCategory, initialBuildingCategory } from '@/utils/types';
+import { PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
@@ -26,10 +26,8 @@ export default function MapComponent() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
   const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
   const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");  // 편의시설 카테고리
-  const [selectedTradeCategory, setSelectedTradeCategory] = useState<SelectedTradeCategory>(initialTradeCategory);  // 전세 or 매매
-  const [selectedPropertyCategory, setSelectedPropertyCategory] = useState<SelectedBuildingCategory>(initialBuildingCategory);  // 원룸 or 주택 등
-  const [tempSelectedTradeCategory, setTempSelectedTradeCategory] = useState<SelectedTradeCategory>(initialTradeCategory);  // 옵션 선택시 적용 전 임시
-  const [tempSelectedPropertyCategory, setTempSelectedPropertyCategory] = useState<SelectedBuildingCategory>(initialBuildingCategory); // 이하 동일
+  const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
+  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});  // 매물 그룹들의 컴포넌트
   const previousSelectedPropertyIdRef = useRef<number | null>(null);  // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
@@ -135,14 +133,10 @@ export default function MapComponent() {
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 && <MapPropertyLoan properties={properties} />}
           {isDrawerOpen===1 && <OptionContent 
-            selectedTradeCategory={selectedTradeCategory}
-            setSelectedTradeCategory={setSelectedTradeCategory}
-            tempSelectedTradeCategory={tempSelectedTradeCategory}
-            setTempSelectedTradeCategory={setTempSelectedTradeCategory}
-            selectedPropertyCategory={selectedPropertyCategory}
-            setSelectedPropertyCategory={setSelectedPropertyCategory}
-            tempSelectedPropertyCategory={tempSelectedPropertyCategory}
-            setTempSelectedPropertyCategory={setTempSelectedPropertyCategory}
+            propertyOption = {propertyOption}
+            setPropertyOption = {setPropertyOption}
+            tempPropertyOption = {tempPropertyOption}
+            setTempPropertyOption = {setTempPropertyOption}
             onApplyButtonClick={() => setIsDrawerOpen(0)}
             />}
         </BottomDrawer>
