@@ -1,6 +1,5 @@
 import React, {
   ChangeEvent,
-  FC,
   useCallback,
   useEffect,
   useState,
@@ -11,17 +10,26 @@ import styles from './multiRangeSlider.module.css';
 interface MultiRangeSliderProps {
   min: number;
   max: number;
+  minValue: number;
+  maxValue: number;
+  onChange: ({ min, max }: { min: number; max: number }) => void;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
+  min,
+  max,
+  minValue,
+  maxValue,
+  onChange,
+}) => {
+  const [minVal, setMinVal] = useState(minValue);
+  const [maxVal, setMaxVal] = useState(maxValue);
   const minValRef = useRef(min);
   const maxValRef = useRef(max);
   const range = useRef<HTMLDivElement>(null);
 
   // Function to convert number to currency format (e.g., 1천만원)
-  const formatCurrency = (value: number): string => {
+  const formatCurrency = useCallback((value: number): string => {
     if (value >= 100) {
       const 억 = Math.floor(value / 100);
       const 천만원 = value % 100;
@@ -36,12 +44,12 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
     } else {
       return `${value}원`;
     }
-  };
+  },[]);
 
   // Convert to nearest 1000만원 (10,000,000)
-  const roundToNearest10M = (value: number): number => {
+  const roundToNearest10M = useCallback((value: number): number => {
     return Math.round(value / 10) * 10;
-  };
+  },[])
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -69,6 +77,10 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [maxVal, getPercent]);
+
+  useEffect(() => {
+    onChange({ min: minVal, max: maxVal });
+  }, [minVal, maxVal, onChange]);
 
   return (
     <div className="flex flex-col">

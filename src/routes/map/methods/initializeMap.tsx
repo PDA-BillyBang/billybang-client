@@ -1,12 +1,15 @@
-import { Property } from "@/utils/types";
+import { PropertyGroup, PropertyOption } from "@/utils/types";
 import { Dispatch, SetStateAction } from "react";
+import { fetchPropertyGroups } from "./fetchPropertyGroups";
+import { moveToCurrentLocation } from "./moveToCurrentLocation";
 
 export const initializeMap = (
-  setProperties: (properties: Property[]) => void,
+  setPropertyGroups: (properties: PropertyGroup[]) => void,
   setMap: (map: kakao.maps.Map | null) => void,
   setPs: (ps: kakao.maps.services.Places) => void,
   setIsDrawerOpen: Dispatch<SetStateAction<number>>,
-  customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>
+  customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>,
+  propertyOption : PropertyOption,
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -17,35 +20,36 @@ export const initializeMap = (
     return;
   }
   kakao.maps.load(() => {
-    const mapInstance = new kakao.maps.Map(container, options); // 지도를 생성
+    // 지도 생성
+    const mapInstance = new kakao.maps.Map(container, options); 
     setMap(mapInstance);
 
+    // 편의시설 검색 객체 생성
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
 
-    const closeDrawer = () => {
-        setIsDrawerOpen(0);
-    };
-    
+    // 편의시설 상세정보 지우기
     const removeCovenientInfo = () => {
+      setIsDrawerOpen(0);
         if (customOverlayRef){
           customOverlayRef.current?.setMap(null)
         }
     };
 
+    // 매물 가져오기
+    fetchPropertyGroups(mapInstance, setPropertyGroups, propertyOption);
+
+    // 현재 위치로 아이콘 부착
+    moveToCurrentLocation(mapInstance)
+
+    // 줌, 항공뷰 컨트롤러 부착
     mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
-    // 여기서 매물 요청보내기
-    // kakao.maps.event.addListener(mapInstance, 'center_changed', );
-    // kakao.maps.event.addListener(mapInstance, 'zoom_changed', );
-    kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
+    // 지도 이벤트 핸들링
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
 
     return () => {
-      // kakao.maps.event.removeListener(mapInstance, 'center_changed', );
-      // kakao.maps.event.removeListener(mapInstance, 'zoom_changed', );
-      kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
       kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
     };
   });

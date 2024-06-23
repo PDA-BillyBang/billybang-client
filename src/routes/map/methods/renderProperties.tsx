@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import Pin from "@/components/map/Pin";
-import { Property, OverlayData } from "@/utils/types";
+import { OverlayData, PropertyGroup } from "@/utils/types";
 
 export const renderProperties = (
   map: kakao.maps.Map | null,
-  properties: Property[],
+  properties: PropertyGroup[],
   overlayRef: React.MutableRefObject<{ [key: number]: OverlayData }>,
   selectedPropertyId: number | null,
   setSelectedPropertyId: (id: number) => void
@@ -17,14 +17,14 @@ export const renderProperties = (
     const root = createRoot(container);
     root.render(
       <Pin
-        area={property.area1}
+        area={property.area}
         price={property.price}
-        count={property.count}
-        propertyId={property.propertyId}
+        count={property.cnt}
+        propertyId={property.representativeId}
         handleClick={(id: number) => {
           setSelectedPropertyId(id);
         }}
-        isSelected={selectedPropertyId === property.propertyId}
+        isSelected={selectedPropertyId === property.representativeId}
       />,
     );
 
@@ -32,11 +32,12 @@ export const renderProperties = (
       position: position,
       content: container,
       yAnchor: 1,
+      clickable: true,
     });
 
     customOverlay.setMap(map);
 
-    overlayRef.current[property.propertyId] = { overlay: customOverlay, root };
+    overlayRef.current[property.representativeId] = { overlay: customOverlay, root };
   });
 
   return () => {
