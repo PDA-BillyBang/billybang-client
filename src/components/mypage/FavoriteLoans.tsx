@@ -1,17 +1,17 @@
-import React from "react";
-import FavoriteLoanCard from "./FavoriteLoanCard";
-type Props = {};
+import React from 'react';
+import FavoriteLoanCard from './FavoriteLoanCard';
+import { LikeLoansI } from '@/routes/mypage/Mypage';
+import { loanI } from '@/routes/loan/Loan';
+type Props = { likeLoans: LikeLoansI };
 
-const data = [1, 2, 3, 4, 5];
-
-export default function FavoriteLoans({}: Props) {
+export default function FavoriteLoans({ likeLoans }: Props) {
   return (
     <div className="w-[100%]">
       <div className="flex flex-row overflow-auto scroll-hidden">
-        {data.map((value, index) => {
+        {likeLoans.loans.map((loan: loanI, index: number) => {
           return (
             <div key={index} className="mr-[0.4rem]">
-              <FavoriteLoanCard />
+              <FavoriteLoanCard loan={loan} />
             </div>
           );
         })}
