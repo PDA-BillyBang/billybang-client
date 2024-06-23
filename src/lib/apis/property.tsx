@@ -9,6 +9,7 @@ interface GetPropertiesParams {
   rightLon: number;
   topLat: number;
   bottomLat: number;
+  zoom: number;
 }
 
 interface GetPropertyDetailsParams {
@@ -31,6 +32,7 @@ export async function getPropertyGroups(params: GetPropertiesParams) {
     rightLon,
     topLat,
     bottomLat,
+    zoom,
   } = params;
 
   return propertyInstance.get('', {
@@ -43,6 +45,7 @@ export async function getPropertyGroups(params: GetPropertiesParams) {
       rightLon,
       topLat,
       bottomLat,
+      zoom,
     },
   });
 }

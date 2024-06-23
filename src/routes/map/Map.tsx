@@ -68,7 +68,7 @@ export default function MapComponent() {
     if (selectedPropertyId !== null) {
       const selectedGroup = propertyGroups.find(group => group.representativeId === selectedPropertyId);
       if (selectedGroup) {
-        fetchPropertyDetail(selectedGroup, setProperties);
+        fetchPropertyDetail(selectedGroup, setProperties, propertyOption);
       }
     } else {
       setProperties([]);
@@ -105,10 +105,8 @@ export default function MapComponent() {
     };
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
-    kakao.maps.event.addListener(map, 'zoom_changed', handleFetchPropertyGroups);
     return () => {
       kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
-      kakao.maps.event.removeListener(map, 'zoom_changed', handleFetchPropertyGroups);
     };
   }, [propertyOption, map]);
 
@@ -154,7 +152,7 @@ export default function MapComponent() {
             setPropertyOption = {setPropertyOption}
             tempPropertyOption = {tempPropertyOption}
             setTempPropertyOption = {setTempPropertyOption}
-            onApplyButtonClick={() => setIsDrawerOpen(0)}
+            closeDrawer={() => setIsDrawerOpen(0)}
             />}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">

@@ -4,6 +4,7 @@ import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
+
 type Props = {
   bottomButton?: boolean;
   property: Property;
@@ -20,15 +21,21 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
   };
 
   const priceFormatter = (price: number): string => {
-    const billion = Math.floor(price / 100);
-    const tenMillion = (price % 100) / 10;
-    const million = price % 10;
+    const 억 = Math.floor(price / 100);
+    const 천만 = Math.floor((price % 100) / 10)
+    const 백만 = price % 10;
   
-    if (tenMillion === 0) {
-      return `${billion}억`;
+    if (억 === 0) {
+      return `${천만},${백만}00만`;
     }
-  
-    return `${billion}억 ${tenMillion},${million}00`;
+    if (천만 === 0){
+      if (백만 === 0){
+        return `${억}억`
+      }
+      return `${억}억 ${백만}00만`
+    }
+
+    return `${억}억 ${천만},${백만}00만`;
   };
   
   return (
@@ -45,7 +52,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
         </div>
         <div className="text-[0.8rem]">서울시 성동구 성수동2가 (property.jibeonAddress)</div>
         <div className="text-[0.8rem]">
-          604세대 | {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용 {property.area2}㎡
+          {getRealEstateTypeString(property.realEstateType)} | {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용 {property.area2}㎡
         </div>
         <div className="py-[0.2rem]" />
         <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center">
@@ -83,3 +90,26 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
     </div>
   );
 }
+
+const getRealEstateTypeString = (realEstateType: string): string => {
+  switch (realEstateType) {
+    case 'APT':
+      return '아파트';
+    case 'VL':
+      return '빌라';
+    case 'DDDGG':
+      return '단독주택';
+    case 'SGJT':
+      return '상가주택';
+    case 'OPST':
+      return '오피스텔';
+    case 'OR':
+      return '원룸';
+    case 'HOJT':
+      return '한옥주택';
+    case 'JWJT':
+      return '전원주택';
+    default:
+      return realEstateType;
+  }
+};

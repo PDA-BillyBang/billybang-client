@@ -28,12 +28,9 @@ export const initializeMap = (
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
 
-    const closeDrawer = () => {
-        setIsDrawerOpen(0);
-    };
-    
     // 편의시설 상세정보 지우기
     const removeCovenientInfo = () => {
+      setIsDrawerOpen(0);
         if (customOverlayRef){
           customOverlayRef.current?.setMap(null)
         }
@@ -50,11 +47,9 @@ export const initializeMap = (
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
     // 지도 이벤트 핸들링
-    kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
 
     return () => {
-      kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
       kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
     };
   });

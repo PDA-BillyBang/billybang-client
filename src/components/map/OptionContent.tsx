@@ -8,8 +8,8 @@ type OptionContentProps = {
   propertyOption: PropertyOption;
   setPropertyOption: (option: PropertyOption) => void;
   tempPropertyOption: PropertyOption;
-  setTempPropertyOption: (option: PropertyOption) => void;
-  onApplyButtonClick: () => void;
+  setTempPropertyOption: React.Dispatch<React.SetStateAction<PropertyOption>>
+  closeDrawer: () => void;
 };
 
 export default function OptionContent({
@@ -17,7 +17,7 @@ export default function OptionContent({
   setPropertyOption,
   tempPropertyOption,
   setTempPropertyOption,
-  onApplyButtonClick,
+  closeDrawer,
 }:OptionContentProps){
 
   const handleTradeTypeButtonClick = (clickedTradeType: keyof SelectedTradeCategory) => {
@@ -40,14 +40,22 @@ export default function OptionContent({
     });
   };
 
+  const handlePriceRangeChange = (min: number, max: number) => {
+    setTempPropertyOption((prev) => ({
+      ...prev,
+      priceMin: min,
+      priceMax: max,
+    }));
+  };
+
   const handleCancelOptions = () => {
     setTempPropertyOption(propertyOption);
-    onApplyButtonClick();
+    closeDrawer();
   };
 
   const handleApplyOptions = () => {
     setPropertyOption(tempPropertyOption);
-    onApplyButtonClick();
+    closeDrawer();
   };
 
   return (
@@ -70,14 +78,26 @@ export default function OptionContent({
           <div className="text-sm">
             보증금(전세금)
           </div>
-          <MultiRangeSlider min={0} max={1000} />
+          <MultiRangeSlider
+            min={0}
+            max={1000}
+            minValue={tempPropertyOption.priceMin}
+            maxValue={tempPropertyOption.priceMax}
+            onChange={({ min, max }) => handlePriceRangeChange(min, max)}
+          />
         </div>
         <hr className='mt-14' />
         <div className="h-[30%] my-4">
           <div className="text-sm">
             매매가
           </div>
-          <MultiRangeSlider min={0} max={3000} />
+          {/* <MultiRangeSlider
+            min={0}
+            max={3000}
+            minValue={tempPropertyOption.priceMin}
+            maxValue={tempPropertyOption.priceMax}
+            onChange={({ min, max }) => handlePriceRangeChange(min, max)}
+          /> */}
         </div>
         <hr className="mt-14" />
       </div>
