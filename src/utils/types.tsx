@@ -10,17 +10,32 @@ export type PropertyGroup = {
 }
 
 export type Property = {
-    propertyId: number;
-    articleName: string;
-    latitude: number;
-    longitude: number;
-    buildingName: string;
-    realEstateType: string;
-    area1: number;
-    area2: number;
-    count: number;
-    price: number;
-  };
+  propertyId: number;
+  articleName: string;
+  buildingName: string;
+  realEstateType: string;
+  tradeType: string;
+  articleFeatureDesc: string;
+  articleConfirmYmd: string;
+  areaName: string;
+  area1: number;
+  area2: number;
+  floorInfo: string;
+  price: number;
+  jibeonAddress: string | null;
+  roadAddress: string | null;
+  latitude: number;
+  longitude: number;
+  articleUrl: string;
+  representativeImgUrl: string;
+  sameAddrCnt: number;
+  realtorName: string;
+  cpName: string;
+  tags: string;
+  direction: string;
+  isStarred: boolean | null;
+};
+
   
 export type OverlayData = {
     root: Root;

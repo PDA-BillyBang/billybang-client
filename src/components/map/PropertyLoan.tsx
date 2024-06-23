@@ -1,52 +1,62 @@
 import React, { useState } from 'react';
-import LargeButton from '@components/common/button/LargeButton';
 import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
+import { Property } from '@/utils/types';
 type Props = {
   bottomButton?: boolean;
+  property: Property;
 };
 
-export default function PropertyLoan({ bottomButton }: Props) {
+export default function PropertyLoan({ bottomButton, property }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
   const navigate = useNavigate();
   const handleClickToLoans = () => {
-    navigate('/loan/recommend/2422196145');
+    navigate(`/loan/recommend/${property.propertyId}`);
   };
   const handleLikeClick = () => {
-    console.log('like loan card');
     setLikeButtonActive((prev) => !prev);
   };
-  const handleClickToPropertyLoan = () => {
-    navigate('/map/1/2');
+
+  const priceFormatter = (price: number): string => {
+    const billion = Math.floor(price / 100);
+    const tenMillion = (price % 100) / 10;
+    const million = price % 10;
+  
+    if (tenMillion === 0) {
+      return `${billion}억`;
+    }
+  
+    return `${billion}억 ${tenMillion},${million}00`;
   };
+  
   return (
     <div
       className={`w-[100%] flex flex-col ${bottomButton ? 'h-[50vh]' : 'h-[310px]'}  justify-between`}
     >
       <div className="flex flex-col">
         <div className="font-bold text-[1.2rem] justify-between flex flex-row">
-          <div>롯데캐슬파크</div>
+          <div>{property.articleName}</div>
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}
           />
         </div>
-        <div className="text-[0.8rem]">서울시 성동구 성수동2가</div>
+        <div className="text-[0.8rem]">서울시 성동구 성수동2가 (property.jibeonAddress)</div>
         <div className="text-[0.8rem]">
-          604세대 | 14층 / 25층 | 58.49m~117.17m
+          604세대 | {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용 {property.area2}㎡
         </div>
         <div className="py-[0.2rem]" />
         <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center">
           <div className="flex flex-col w-[50%] items-center">
             <div className="font-bold text-blue-2 text-[0.9rem]">매매가</div>
-            <div className="font-bold">14억 9,000</div>
+            <div className="font-bold">{property.tradeType === 'DEAL' ? priceFormatter(property.price) : "-"}</div>
           </div>
           <div className="bg-grey-1 w-[0.01rem] h-[3.5rem]" />
           <div className="flex flex-col w-[50%] items-center">
             <div className="font-bold text-red-1 text-[0.9rem]">전세가</div>
-            <div className="font-bold">14억 9,000</div>
+            <div className="font-bold">{property.tradeType === 'LEASE' ? priceFormatter(property.price) : "-"}</div>
           </div>
         </div>
         <div className="pb-[0.6rem]" />
@@ -70,14 +80,6 @@ export default function PropertyLoan({ bottomButton }: Props) {
           />
         </div>
       </div>
-      {bottomButton && (
-        <LargeButton
-          isActive={3}
-          customWidth="w-[100%]"
-          text="더 많은 매물 보러가기"
-          handleClick={handleClickToPropertyLoan}
-        />
-      )}
     </div>
   );
 }

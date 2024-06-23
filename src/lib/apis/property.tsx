@@ -18,6 +18,7 @@ interface GetPropertyDetailsParams {
   priceMax: number;
   latitude: number;
   longitude: number;
+  size: number;
 }
 
 export async function getPropertyGroups(params: GetPropertiesParams) {
@@ -54,6 +55,7 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
     priceMax,
     latitude,
     longitude,
+    size,
   } = params;
 
   return propertyInstance.get('/details', {
@@ -64,6 +66,7 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
       priceMax,
       latitude,
       longitude,
+      size,
     },
   });
 }

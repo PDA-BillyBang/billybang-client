@@ -14,7 +14,6 @@ export default function DropDown({ text, customWidth, handleCategoryClick }: Pro
   const [activeButtonIdx, setActiveButtonIdx] = useState<number|null>(null);
   const toggleButtons = () => {
     setShowButtons(!showButtons);
-    setActiveButtonIdx(null);
   };
   const handleButtonClick = (index:number) => {
     if (index === activeButtonIdx){

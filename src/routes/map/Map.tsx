@@ -15,7 +15,7 @@ import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
 import GetViewportSize from "@/utils/hooks/GetViewportSize";
 import MapPropertyLoan from '../../components/map/MapPropertyLoan';
-import { getDetailedProperties } from './methods/fetchPropertyDetail';
+import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 
 export default function MapComponent() {
@@ -64,7 +64,7 @@ export default function MapComponent() {
     if (selectedPropertyId !== null) {
       const selectedGroup = propertyGroups.find(group => group.representativeId === selectedPropertyId);
       if (selectedGroup) {
-        getDetailedProperties(selectedGroup, setProperties);
+        fetchPropertyDetail(selectedGroup, setProperties);
       }
     } else {
       setProperties([]);
@@ -129,7 +129,7 @@ export default function MapComponent() {
           />
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
-          {isDrawerOpen===2 && <MapPropertyLoan />}
+          {isDrawerOpen===2 && <MapPropertyLoan properties={properties} />}
           {isDrawerOpen===1 && <OptionContent onApplyButtonClick={handleCloseDrawer} />}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
