@@ -73,3 +73,11 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
     },
   });
 }
+
+export async function likeProperty(propertyId: number) {
+  return await propertyInstance.post('/stars', { propertyId: propertyId });
+}
+
+export async function deleteProperty(propertyId: number) {
+  return await propertyInstance.delete(`/stars?loanId=${propertyId}`);
+}
