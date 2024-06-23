@@ -1,5 +1,4 @@
-import React from "react";
-import FavoriteRoomCard from "./FavoriteRoomCard";
+import FavoriteRoomCard from './FavoriteRoomCard';
 type Props = {};
 
 const data = [1, 2, 3, 4, 5];

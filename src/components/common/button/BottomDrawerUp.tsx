@@ -1,6 +1,5 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Drawer } from 'flowbite-react';
-import drawerUpDown from '@/assets/image/drawer/drawerUpDown.svg';
 import drawerUp from '@/assets/image/drawer/drawerUp.svg';
 import drawerDown from '@/assets/image/drawer/drawerDown.svg';
 

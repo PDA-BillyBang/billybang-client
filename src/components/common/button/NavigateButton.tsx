@@ -1,4 +1,3 @@
-import React from 'react';
 import doubleBlueRight from '../../../assets/image/icons/doubleBlueRight.svg';
 
 type Props = {
