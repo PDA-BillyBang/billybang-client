@@ -122,7 +122,7 @@ const Loan = () => {
               <hr />
               <div className="h-[30%] my-4">
                 <div className="text-sm">최소 대출 금액</div>
-                <MultiRangeSlider min={0} max={3000} />
+                <MultiRangeSlider min={0} max={3000} onChange={() => {}} minValue={0} maxValue={3000}/>
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">
