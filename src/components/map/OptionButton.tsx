@@ -29,11 +29,6 @@ export default function OptionButton({ text, isActive, customWidth, onClick }: P
         customWidth ? customWidth : "w-[46px]"
       } h-[30px] rounded-[20px] text-[12px]`;
       break;
-    default:
-      buttonStyles = `text-center leading-[30px] text-grey-2 bg-grey-6 border-[0.5px] border-grey-2 ${
-        customWidth ? customWidth : "w-[46px]"
-      } h-[30px] rounded-[20px] text-[12px]`;
-      break;
   }
 
   return (

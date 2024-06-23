@@ -44,7 +44,7 @@ export type OverlayData = {
 
 export type CategoryCode = "CS2" | "HP8" | "BK9" | "SC4" | "CE7";
 
-export type SelectedCategoryType = {
+export type SelectedBuildingCategory = {
   원룸 : boolean,
   오피스텔 : boolean,
   아파트 : boolean,
@@ -52,7 +52,7 @@ export type SelectedCategoryType = {
   주택 : boolean
 }
 
-export const initialSelectedCategory: SelectedCategoryType = {
+export const initialBuildingCategory: SelectedBuildingCategory = {
   원룸 : true,
   오피스텔 : false,
   아파트 : false,
@@ -60,12 +60,12 @@ export const initialSelectedCategory: SelectedCategoryType = {
   주택 : false
 };
 
-export type SelectedPropertyType = {
+export type SelectedTradeCategory = {
   전세 : boolean,
   매매 : boolean
 }
 
-export const initialSelectedProperty: SelectedPropertyType = {
+export const initialTradeCategory: SelectedTradeCategory = {
   전세 : true,
   매매 : false,
 };

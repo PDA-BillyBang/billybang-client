@@ -43,6 +43,8 @@ export const initializeMap = (
       fetchPropertyGroups(mapInstance, setPropertyGroups);
     }
 
+    handleFetchPropertyGroup();
+
     // 현재 위치로 아이콘 부착
     moveToCurrentLocation(mapInstance)
 

@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import { PropertyGroup, Property, OverlayData, CategoryCode } from '@/utils/types';
+import { PropertyGroup, Property, OverlayData, CategoryCode, SelectedTradeCategory, initialTradeCategory, SelectedBuildingCategory, initialBuildingCategory } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
@@ -19,18 +19,22 @@ import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 
 export default function MapComponent() {
-  const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);  // 매물 묶음 데이터
+  const [properties, setProperties] = useState<Property[]>([]);  // 매물 상세 데이터들
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
-  const [map, setMap] = useState<kakao.maps.Map | null>(null);
+  const [map, setMap] = useState<kakao.maps.Map | null>(null);  
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
   const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
-  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");
-  const overlayRef = useRef<{ [key: number]: OverlayData }>({});
-  const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const markers = useRef<kakao.maps.Marker[]>([]);
-  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);
-  const viewportSize = GetViewportSize();
+  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");  // 편의시설 카테고리
+  const [selectedTradeCategory, setSelectedTradeCategory] = useState<SelectedTradeCategory>(initialTradeCategory);  // 전세 or 매매
+  const [selectedPropertyCategory, setSelectedPropertyCategory] = useState<SelectedBuildingCategory>(initialBuildingCategory);  // 원룸 or 주택 등
+  const [tempSelectedTradeCategory, setTempSelectedTradeCategory] = useState<SelectedTradeCategory>(initialTradeCategory);  // 옵션 선택시 적용 전 임시
+  const [tempSelectedPropertyCategory, setTempSelectedPropertyCategory] = useState<SelectedBuildingCategory>(initialBuildingCategory); // 이하 동일
+  const overlayRef = useRef<{ [key: number]: OverlayData }>({});  // 매물 그룹들의 컴포넌트
+  const previousSelectedPropertyIdRef = useRef<number | null>(null);  // 직전에 선택한 매물그룹의 propertyId
+  const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
+  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);  // 편의시설 상세정보 UI
+  const viewportSize = GetViewportSize();  // viewport 변경 감지
   const navigate = useNavigate();
   
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
@@ -120,17 +124,27 @@ export default function MapComponent() {
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
-        <div className="absolute z-10 p-1 rounded top-4 left-4 bg-white-2">
+        <div className="absolute z-10 p-1 rounded-full top-3.5 left-3.5 bg-white-2 select-none">
           <img
             id="currentLocationImg"
             src={Aim}
             alt="현재 위치로 이동"
-            className="w-8 h-8 cursor-pointer"
+            className="w-7 h-7 cursor-pointer"
           />
         </div>
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 && <MapPropertyLoan properties={properties} />}
-          {isDrawerOpen===1 && <OptionContent onApplyButtonClick={handleCloseDrawer} />}
+          {isDrawerOpen===1 && <OptionContent 
+            selectedTradeCategory={selectedTradeCategory}
+            setSelectedTradeCategory={setSelectedTradeCategory}
+            tempSelectedTradeCategory={tempSelectedTradeCategory}
+            setTempSelectedTradeCategory={setTempSelectedTradeCategory}
+            selectedPropertyCategory={selectedPropertyCategory}
+            setSelectedPropertyCategory={setSelectedPropertyCategory}
+            tempSelectedPropertyCategory={tempSelectedPropertyCategory}
+            setTempSelectedPropertyCategory={setTempSelectedPropertyCategory}
+            onApplyButtonClick={() => setIsDrawerOpen(0)}
+            />}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
           <OptionButton
