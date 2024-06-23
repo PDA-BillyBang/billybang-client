@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import roomTest from '../../assets/image/test/room-test.svg';
-import filledLike from '../../assets/image/icons/filledLike.svg';
 import LikeButton from '../common/button/LikeButton';
 type Props = {};
 
 export default function FavoriteDetailRoomCard({}: Props) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [likeActive, setLikeActive] = useState<boolean>(true);
+
+  console.log(isSmallScreen);
 
   useEffect(() => {
     const handleResize = () => {

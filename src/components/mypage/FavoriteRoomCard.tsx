@@ -1,4 +1,3 @@
-import React from 'react';
 import roomTest from '../../assets/image/test/room-test.svg';
 type Props = {};
 

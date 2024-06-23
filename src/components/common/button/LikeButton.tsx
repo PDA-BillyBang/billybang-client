@@ -25,9 +25,11 @@ export default function LikeButton({
     try {
       if (isActive) {
         const result = await deleteLikeLoan(loanId);
+        console.log(result);
         setMessage('✅ 찜을 취소했어요!');
       } else {
         const result = await likeLoan(loanId);
+        console.log(result);
         setMessage('❤️ 상품을 찜했어요!');
       }
     } catch (error) {
