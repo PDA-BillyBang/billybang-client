@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import {
   PropertyGroup,
@@ -35,22 +35,25 @@ export default function MapComponent() {
   );
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
-
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
-  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");  // 편의시설 카테고리
-  const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
-  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
+    undefined
+  );
+  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(
+    ''
+  ); // 편의시설 카테고리
+  const [propertyOption, setPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
+  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
   const [gu, setGu] = useState<string>('');
   const [guCode, setGuCode] = useState<string>('');
-  const overlayRef = useRef<{ [key: number]: OverlayData }>({});  // 매물 그룹들의 컴포넌트
-  const previousSelectedPropertyIdRef = useRef<number | null>(null);  // 직전에 선택한 매물그룹의 propertyId
-  const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
-  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);  // 편의시설 상세정보 UI
-  const viewportSize = GetViewportSize();  // viewport 변경 감지
-    
-  const location = useLocation();
-  const { lat, lon } = location.state || { lat: null, lon: null };
-
+  const overlayRef = useRef<{ [key: number]: OverlayData }>({}); // 매물 그룹들의 컴포넌트
+  const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
+  const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
+  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
+  const viewportSize = GetViewportSize(); // viewport 변경 감지
 
   const navigate = useNavigate();
 
@@ -65,8 +68,6 @@ export default function MapComponent() {
       setIsDrawerOpen,
       customOverlayRef,
       propertyOption,
-      lat,
-      lon,
       setGu,
       setGuCode
     );
@@ -169,7 +170,7 @@ export default function MapComponent() {
             id="currentLocationImg"
             src={Aim}
             alt="현재 위치로 이동"
-            className="w-7 h-7 cursor-pointer"
+            className="cursor-pointer w-7 h-7"
           />
         </div>
 
