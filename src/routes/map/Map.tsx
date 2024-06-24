@@ -26,7 +26,7 @@ import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
 
-export default function MapComponent() {
+export default function Map() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
   const [properties, setProperties] = useState<Property[]>([]); // 매물 상세 데이터들
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
@@ -42,6 +42,7 @@ export default function MapComponent() {
   const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
+  const infoWindowRef = useRef<kakao.maps.InfoWindow | null>(null); // 구 정보 창
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,7 +64,8 @@ export default function MapComponent() {
       setGuCode,
       setAddress,
       lat,
-      lon
+      lon,
+      infoWindowRef
     );
     return cleanup;
   }, []);

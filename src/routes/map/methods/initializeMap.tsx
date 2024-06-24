@@ -5,6 +5,7 @@ import { fetchPropertyGroups } from './fetchPropertyGroups';
 import { moveToCurrentLocation } from './moveToCurrentLocation';
 import guData from '@/assets/json/gu2.json';
 import dongData from '@/assets/json/dong2.json';
+import { districtsLocation } from '@/utils/districtsLocation';
 
 export const initializeMap = (
   setPropertyGroups: (properties: PropertyGroup[]) => void,
@@ -17,7 +18,8 @@ export const initializeMap = (
   setGuCode: React.Dispatch<React.SetStateAction<string>>,
   setAddress: (title: string) => void,
   lat: number,
-  lon: number
+  lon: number,
+  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -87,6 +89,24 @@ export const initializeMap = (
     };
     getGu();
 
+    // 구 hover시 구명 보기
+    const infoWindow = new kakao.maps.InfoWindow({});
+    infoWindowRef.current = infoWindow;
+
+    // 폴리곤 hover 이벤트 등록
+    const handlePolygonHover = (polygon: kakao.maps.Polygon, name: string) => {
+      return () => {
+        if (!infoWindowRef.current) return;
+
+        const content = `<div style="padding:5px;z-index:1;">${name}</div>`;
+
+        const position = new kakao.maps.LatLng(districtsLocation[name][1], districtsLocation[name][0]);
+        infoWindowRef.current.setContent(content);
+        infoWindowRef.current.setPosition(position);
+        infoWindowRef.current.open(mapInstance);
+      };
+    };
+
     // 다각형을 저장할 배열
     const guPolygons: kakao.maps.Polygon[] = [];
     const dongPolygons: kakao.maps.Polygon[] = [];
@@ -94,7 +114,6 @@ export const initializeMap = (
     // 구 다각형 생성
     const createGuPolygons = (geojson: any) => {
       geojson.features.forEach((feature: any) => {
-        console.log(feature.properties.SIG_KOR_NM)
         const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
         const polygon = new kakao.maps.Polygon({
           path: coordinates,
@@ -102,28 +121,25 @@ export const initializeMap = (
           strokeColor: '#39DE2A',
           strokeOpacity: 0.8,
           fillColor: '#A2FF99',
-          fillOpacity: 0.7
+          fillOpacity: 0.7,
         });
         
         // hover 시 다각형 스타일 변경
         kakao.maps.event.addListener(polygon, 'mouseover', function() {
           polygon.setOptions({ fillColor: '#66ccff' });
+          mapInstance.setCursor('pointer');
 
-          // InfoWindow 설정
-          const position = (feature.geometry.coordinates[0][0][1], feature.geometry.coordinates[0][0][0]); // 다각형의 중심 좌표를 InfoWindow 위치로 사용
           const guName = feature.properties.SIG_KOR_NM; // 구 이름 가져오기
 
-          const infoWindow = new kakao.maps.InfoWindow({
-            content: guName,
-            map: mapInstance,
-            position: position,
-          });
+          // InfoWindow 설정
+          handlePolygonHover(polygon, guName)();
 
           // InfoWindow 열기
           infoWindow.open(mapInstance);
 
           // mouseout 이벤트 리스너
-          kakao.maps.event.addListener(polygon, 'mouseout', function() {
+          kakao.maps.event.addListener(polygon, 'mouseout', () => {
+            mapInstance.setCursor('');
             infoWindow.close(); // InfoWindow 닫기
             polygon.setOptions({ fillColor: '#A2FF99' }); // 다각형 색상 원래대로 복원
           });
@@ -132,7 +148,6 @@ export const initializeMap = (
         guPolygons.push(polygon);
       });
     };
-
 
     // 동 다각형 생성
     const createDongPolygons = (geojson: any) => {
@@ -187,6 +202,9 @@ export const initializeMap = (
 
     // 줌 레벨 변경 이벤트 핸들러
     const onZoomChanged = () => {
+      if (infoWindowRef.current) {
+        infoWindowRef.current.close();
+      }
       const level = mapInstance.getLevel();
       if (level <= 4) {
         hideGuPolygons();
