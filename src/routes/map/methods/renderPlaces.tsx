@@ -14,6 +14,7 @@ export const removeMarkers = (markers: React.MutableRefObject<kakao.maps.Marker[
   markers.current = [];
 };
 
+// 아래 두 함수를 이용해서 지도에 마커 그리기
 export const displayPlaces = (
   map: kakao.maps.Map | null,
   places: kakao.maps.services.PlacesSearchResultItem[],
@@ -29,6 +30,7 @@ export const displayPlaces = (
   }
 };
 
+// 지도에 마커 그리기
 const addMarker = (
   map: kakao.maps.Map | null,
   position: kakao.maps.LatLng,
@@ -53,6 +55,7 @@ const addMarker = (
   return marker;
 };
 
+// 클릭시 상세보기
 const displayPlaceInfo = (
   map: kakao.maps.Map | null,
   place: kakao.maps.services.PlacesSearchResultItem,
@@ -66,6 +69,7 @@ const displayPlaceInfo = (
   const overlay = new window.kakao.maps.CustomOverlay({
     position: new window.kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x)),
     content: overlayContent,
+    clickable: true,
   });
 
   customOverlayRef.current = overlay;

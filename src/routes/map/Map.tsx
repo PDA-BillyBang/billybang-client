@@ -2,118 +2,117 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import { Property, OverlayData, CategoryCode } from '@/utils/types';
+import { PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
-import { moveToCurrentLocation } from './methods/moveToCurrentLocation';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
 import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-import PropertyLoan from '@components/map/PropertyLoan';
-import { displayPlaces, removeMarkers } from './methods/placeService';
-import OptionButton from '@components/map/OptionButton';
-import OptionContent from '@components/map/OptionContent';
-import GetViewportSize from '@/utils/hooks/GetViewportSize';
+
+import { removeMarkers } from "./methods/renderPlaces";
+import OptionButton from "@components/map/OptionButton";
+import OptionContent from "@components/map/OptionContent";
+import GetViewportSize from "@/utils/hooks/GetViewportSize";
+import MapPropertyLoan from '../../components/map/MapPropertyLoan';
+import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
+import { searchPlaces } from './methods/searchPlaces';
+import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
+
 
 export default function MapComponent() {
-  const [mapInfo, setMapInfo] = useState<string>('');
-  const [properties, setProperties] = useState<Property[]>([]);
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
-    null
-  );
-  const [map, setMap] = useState<kakao.maps.Map | null>(null);
+  const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);  // 매물 묶음 데이터
+  const [properties, setProperties] = useState<Property[]>([]);  // 매물 상세 데이터들
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const [map, setMap] = useState<kakao.maps.Map | null>(null);  
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
-  const overlayRef = useRef<{ [key: number]: OverlayData }>({});
-  const previousSelectedPropertyIdRef = useRef<number | null>(null);
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
-    undefined
-  );
-  const markers = useRef<kakao.maps.Marker[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(
-    ''
-  );
-  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);
-  const viewportSize = GetViewportSize();
-  const navigate = useNavigate();
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");  // 편의시설 카테고리
+  const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
+  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
+  const overlayRef = useRef<{ [key: number]: OverlayData }>({});  // 매물 그룹들의 컴포넌트
+  const previousSelectedPropertyIdRef = useRef<number | null>(null);  // 직전에 선택한 매물그룹의 propertyId
+  const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
+  const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);  // 편의시설 상세정보 UI
+  const viewportSize = GetViewportSize();  // viewport 변경 감지
 
-  // 더미데이터, 지도, 지도정보, 지도컨트롤러, 편의시설 검색체 생성
+  const navigate = useNavigate();
+  
+  // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
-      setProperties,
+      setPropertyGroups,
       setMap,
-      setMapInfo,
       (psInstance) => {
         setPs(psInstance);
       },
-      setIsDrawerOpen
+      setIsDrawerOpen,
+      customOverlayRef,
+      propertyOption
     );
     return cleanup;
   }, []);
 
-  // 현재 위치로 아이콘 생성
-  useEffect(() => {
-    const cleanup = moveToCurrentLocation(map);
-    return cleanup;
-  }, [map]);
-
-  // 전체 매물 그리기
+  // 매물 업데이트시 그리기
   useEffect(() => {
     const cleanup = renderProperties(
       map,
-      properties,
+      propertyGroups,
       overlayRef,
       selectedPropertyId,
       setSelectedPropertyId
     );
     return cleanup;
-  }, [map, properties]);
+  }, [propertyGroups, map]);
 
-  // 매물 선택시 스타일 변경
+  // 매물 그룹 선택시 (스타일 변경, 자세한 매물 데이터 가져오기)
   useEffect(() => {
+    if (selectedPropertyId !== null) {
+      const selectedGroup = propertyGroups.find(group => group.representativeId === selectedPropertyId);
+      if (selectedGroup) {
+        fetchPropertyDetail(selectedGroup, setProperties, propertyOption);
+      }
+    } else {
+      setProperties([]);
+    }
     updateSelectedProperty(
       selectedPropertyId,
       previousSelectedPropertyIdRef,
       overlayRef,
-      properties,
+      propertyGroups,
       setSelectedPropertyId
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
-  }, [selectedPropertyId, map, properties]);
-  // 편의시설 검색 함수 - 선택 카테고리가 변경될 때마다 재정의
-  const searchPlaces = useCallback(() => {
+  }, [selectedPropertyId, map]);
+
+
+  // 편의시설 카테고리 변경시 검색
+  useEffect(() => {
     if (!ps || !map || !selectedCategory) return;
-    ps.categorySearch(
-      selectedCategory,
-      (data, status) => {
-        if (status !== window.kakao.maps.services.Status.ERROR) {
-          removeMarkers(markers);
-          displayPlaces(map, data, selectedCategory, markers, customOverlayRef);
-        } else {
-          console.log('지도 검색 중 에러 발생');
-        }
-      },
-      { useMapBounds: true }
-    );
-  }, [ps, map, selectedCategory]);
-
-  // 지도 중심이나 줌 레벨이 변경될 때마다 편의시설 검색
-  useEffect(() => {
-    if (map) {
-      kakao.maps.event.addListener(map, 'idle', searchPlaces);
+    if (customOverlayRef)customOverlayRef.current?.setMap(null);
+    const triggerSearchPlaces = () => {
+      searchPlaces(ps, map, selectedCategory, markers, customOverlayRef);
     }
+    triggerSearchPlaces();
+    kakao.maps.event.addListener(map, 'idle', triggerSearchPlaces);
     return () => {
-      if (map) {
-        kakao.maps.event.removeListener(map, 'idle', searchPlaces);
-      }
-    };
-  }, [map, searchPlaces]);
+      kakao.maps.event.removeListener(map, 'idle', triggerSearchPlaces);
+    }
+  }, [selectedCategory, map, ps]);
 
-  // selectedCategory 변경 시 검색
+  // propertyOption 변경시 매물 정보 다시 가져오기
   useEffect(() => {
-    searchPlaces();
-  }, [selectedCategory, searchPlaces]);
+    if (!map) return;
+    const handleFetchPropertyGroups = () => {
+      fetchPropertyGroups(map, setPropertyGroups, propertyOption);
+    };
+    handleFetchPropertyGroups();
+    kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
+    return () => {
+      kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
+    };
+  }, [propertyOption, map]);
 
   // 편의시설 카테고리 선택/해제 핸들러
   const handleCategoryClick = (category: '' | CategoryCode) => {
@@ -141,36 +140,35 @@ export default function MapComponent() {
   );
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
-
+  console.log(properties)
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
-        <div className="absolute z-10 p-1 rounded top-4 left-4 bg-white-2">
+        <div className="absolute z-10 p-1 rounded-full top-3.5 left-3.5 bg-white-2 select-none">
           <img
             id="currentLocationImg"
             src={Aim}
             alt="현재 위치로 이동"
-            className="w-8 h-8 cursor-pointer"
+            className="w-7 h-7 cursor-pointer"
           />
         </div>
-        <BottomDrawer
-          isOpen={isDrawerOpen !== 0}
-          handleClose={handleCloseDrawer}
-          isBackDropped={false}
-          position={drawerPosition}
-        >
-          {isDrawerOpen === 2 ? (
-            <PropertyLoan bottomButton={true} />
-          ) : (
-            <OptionContent onApplyButtonClick={handleCloseDrawer} />
-          )}
+
+        <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
+          {isDrawerOpen===2 && <MapPropertyLoan properties={properties} />}
+          {isDrawerOpen===1 && <OptionContent 
+            propertyOption = {propertyOption}
+            setPropertyOption = {setPropertyOption}
+            tempPropertyOption = {tempPropertyOption}
+            setTempPropertyOption = {setTempPropertyOption}
+            closeDrawer={() => setIsDrawerOpen(0)}
+            />}
         </BottomDrawer>
         <div className="absolute z-10 top-4 left-16">
           <OptionButton
             text={'옵션'}
             isActive={isDrawerOpen === 1}
             customWidth="min-w-16"
-            onClick={() => setIsDrawerOpen(1)}
+            onClick={() => setIsDrawerOpen(isDrawerOpen===1?0:1)}
           ></OptionButton>
         </div>
         <div className="absolute z-10 flex flex-col space-y-2 top-60 right-1 min-w-12">
@@ -192,15 +190,6 @@ export default function MapComponent() {
           ></SmallButton>
         </div>
       </div>
-      {/* <pre
-        style={{
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          marginTop: '10px',
-        }}
-      >
-        {mapInfo}
-      </pre> */}
     </div>
   );
 }

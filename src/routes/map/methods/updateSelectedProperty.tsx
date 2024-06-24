@@ -1,4 +1,4 @@
-import { Property, OverlayData } from "@/utils/types";
+import { OverlayData, PropertyGroup } from "@/utils/types";
 import { MutableRefObject } from "react";
 import Pin from "@/components/map/Pin";
 
@@ -6,20 +6,20 @@ export const updateSelectedProperty = (
   selectedPropertyId: number | null,
   previousSelectedPropertyIdRef: MutableRefObject<number | null>,
   overlayRef: MutableRefObject<{ [key: number]: OverlayData }>,
-  properties: Property[],
+  properties: PropertyGroup[],
   setSelectedPropertyId: (id: number) => void
 ) => {
   if (selectedPropertyId === null) return;
 
   const previousSelectedPropertyId = previousSelectedPropertyIdRef.current;
-  let previousSelectedProperty: Property | undefined;
-  let currentSelectedProperty: Property | undefined;
+  let previousSelectedProperty: PropertyGroup | undefined;
+  let currentSelectedProperty: PropertyGroup| undefined;
 
   for (const property of properties) {
-    if (property.propertyId === previousSelectedPropertyId) {
+    if (property.representativeId === previousSelectedPropertyId) {
       previousSelectedProperty = property;
     }
-    if (property.propertyId === selectedPropertyId) {
+    if (property.representativeId === selectedPropertyId) {
       currentSelectedProperty = property;
     }
     if (previousSelectedProperty && currentSelectedProperty) {
@@ -31,9 +31,9 @@ export const updateSelectedProperty = (
     const { root } = overlayRef.current[previousSelectedPropertyId];
     root.render(
       <Pin
-        area={previousSelectedProperty.area1}
+        area={previousSelectedProperty.area}
         price={previousSelectedProperty.price}
-        count={previousSelectedProperty.count}
+        count={previousSelectedProperty.cnt}
         propertyId={previousSelectedPropertyId}
         handleClick={(id: number) => {
           setSelectedPropertyId(id);
@@ -47,9 +47,9 @@ export const updateSelectedProperty = (
     const { root } = overlayRef.current[selectedPropertyId];
     root.render(
       <Pin
-        area={currentSelectedProperty.area1}
+        area={currentSelectedProperty.area}
         price={currentSelectedProperty.price}
-        count={currentSelectedProperty.count}
+        count={currentSelectedProperty.cnt}
         propertyId={selectedPropertyId}
         handleClick={(id: number) => {
           setSelectedPropertyId(id);

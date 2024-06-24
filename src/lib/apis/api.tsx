@@ -25,3 +25,8 @@ export const baseInstance = axios.create({
   baseURL: '/api',
   withCredentials: true,
 });
+
+export const propertyInstance = axios.create({
+  baseURL: '/api/properties',
+  withCredentials: true,
+});

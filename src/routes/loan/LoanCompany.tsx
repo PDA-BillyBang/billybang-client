@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
-import bankTest from '../../assets/image/test/bank-test.png';
 import upArrow from '../../assets/image/icons/upArrow.svg';
 import downArrow from '../../assets/image/icons/downArrow.svg';
 import LoanSmallButton from './LoanSmallButton';
@@ -9,7 +8,7 @@ import { useState } from 'react';
 import CompanyEvaluation from './company/CompanyEvaluation';
 import CompanyInfo from './company/CompanyInfo';
 import { getLoanProviderById } from '@/lib/apis/loan';
-import { Spinner } from 'flowbite-react';
+import LoanCompanySkeleton from './LoanCompanySkeleton';
 
 export interface financialIndicatorsI {
   avgValue: number;
@@ -50,7 +49,6 @@ const LoanCompany = () => {
     setTitle: (title: string) => void;
   }>();
   const { companyId } = useParams<{ companyId: string }>();
-
   const [selectActive, setSelectActive] = useState<number>(0);
   const [arrowActive, setArrowActive] = useState<boolean>(true);
   const [financialIndicators, setFinancialIndicators] =
@@ -122,15 +120,9 @@ const LoanCompany = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center mt-[100px] h-full">
-        <div role="status" className="max-w-sm animate-pulse">
-          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-          <span className="sr-only">Loading...</span>
+      <div className="flex items-center flex-col  mt-[100px] w-full">
+        <div className=" w-customWidthPercent">
+          <LoanCompanySkeleton />
         </div>
       </div>
     );

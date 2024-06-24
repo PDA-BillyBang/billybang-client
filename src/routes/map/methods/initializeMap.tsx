@@ -1,103 +1,56 @@
-import { Property } from "@/utils/types";
+import { PropertyGroup, PropertyOption } from "@/utils/types";
 import { Dispatch, SetStateAction } from "react";
+import { fetchPropertyGroups } from "./fetchPropertyGroups";
+import { moveToCurrentLocation } from "./moveToCurrentLocation";
 
 export const initializeMap = (
-  setProperties: (properties: Property[]) => void,
+  setPropertyGroups: (properties: PropertyGroup[]) => void,
   setMap: (map: kakao.maps.Map | null) => void,
-  setMapInfo: (info: string) => void,
   setPs: (ps: kakao.maps.services.Places) => void,
   setIsDrawerOpen: Dispatch<SetStateAction<number>>,
+  customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>,
+  propertyOption : PropertyOption,
 ) => {
-  const dummyProperties: Property[] = [
-    {
-      propertyId: 1,
-      articleName: "102동 305호",
-      latitude: 37.54597011866081,
-      longitude: 127.0576325066247,
-      buildingName: "위례자이",
-      realEstateType: "아파트",
-      area1: 30,
-      area2: 27,
-      count: 5,
-      price: 500,
-    },
-    {
-      propertyId: 2,
-      articleName: "103동 307호",
-      latitude: 37.54697011866081,
-      longitude: 127.0586325066247,
-      buildingName: "위례자이",
-      realEstateType: "아파트",
-      area1: 28,
-      area2: 25,
-      count: 3,
-      price: 850,
-    },
-    {
-      propertyId: 3,
-      articleName: "104동 309호",
-      latitude: 37.547970118660814,
-      longitude: 127.0596325066247,
-      buildingName: "위례자이",
-      realEstateType: "아파트",
-      area1: 32,
-      area2: 29,
-      count: 1,
-      price: 1100,
-    }
-  ];
-  setProperties(dummyProperties);
-
   const container = document.getElementById('map');
   const options = {
     center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
-    level: 3, // 지도의 확대 레벨
+    level: 2, // 지도의 확대 레벨
   };
   if (!container) {
     return;
   }
   kakao.maps.load(() => {
-    const mapInstance = new kakao.maps.Map(container, options); // 지도를 생성
+    // 지도 생성
+    const mapInstance = new kakao.maps.Map(container, options); 
     setMap(mapInstance);
 
+    // 편의시설 검색 객체 생성
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
 
-    const getInfo = () => {
-      const center = mapInstance.getCenter();
-      const level = mapInstance.getLevel();
-      const bounds = mapInstance.getBounds();
-      const swLatLng = bounds.getSouthWest();
-      const neLatLng = bounds.getNorthEast();
-
-      const latRange = swLatLng.getLat() + ' ~ ' + neLatLng.getLat();
-      const lngRange = swLatLng.getLng() + ' ~ ' + neLatLng.getLng();
-
-      let message = '지도 중심좌표는 위도 ' + center.getLat() + ', \n';
-      message += '경도 ' + center.getLng() + ' 이고 \n';
-      message += '지도 레벨은 ' + level + ' 입니다 \n\n';
-      message += '위도의 범위는 ' + latRange + ' 이고 \n';
-      message += '경도의 범위는 ' + lngRange + ' 입니다';
-
-      setMapInfo(message);
+    // 편의시설 상세정보 지우기
+    const removeCovenientInfo = () => {
+      setIsDrawerOpen(0);
+        if (customOverlayRef){
+          customOverlayRef.current?.setMap(null)
+        }
     };
 
-    const closeDrawer = () => {
-        setIsDrawerOpen(0);
-    };
+    // 매물 가져오기
+    fetchPropertyGroups(mapInstance, setPropertyGroups, propertyOption);
 
+    // 현재 위치로 아이콘 부착
+    moveToCurrentLocation(mapInstance)
+
+    // 줌, 항공뷰 컨트롤러 부착
     mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
-    getInfo();
 
-    kakao.maps.event.addListener(mapInstance, 'center_changed', getInfo);
-    kakao.maps.event.addListener(mapInstance, 'zoom_changed', getInfo);
-    kakao.maps.event.addListener(mapInstance, 'click', closeDrawer)
+    // 지도 이벤트 핸들링
+    kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
 
     return () => {
-      kakao.maps.event.removeListener(mapInstance, 'center_changed', getInfo);
-      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', getInfo);
-      kakao.maps.event.removeListener(mapInstance, 'click', closeDrawer)
+      kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
     };
   });
 };
