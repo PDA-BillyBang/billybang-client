@@ -52,12 +52,11 @@ const Loan = () => {
   const handleGetLoansByPropertyId = async () => {
     try {
       const result = await getLoansByPropertyId(Number(propertyId));
-      console.log(propertyId, '-', result.data.response);
+      console.log(result.data.response);
       setLoanResult(result.data.response);
       if (result.data.response.userStatus === 'UNAUTHORIZED') {
         setNavigationText('나에게 맞는 대출 상품이 궁금하다면 로그인하기');
       }
-      setTitle(result.data.response.buildingName);
     } catch (error) {
       console.log('[ERROR]', error);
     } finally {
@@ -74,6 +73,10 @@ const Loan = () => {
 
   const handleClickLoanId = (loanId: number) =>
     navigate('/loan/detail/' + loanId);
+
+  useEffect(() => {
+    setTitle('충무로엘크루메크로시티2'); // 실제로는 api로 propertyId에 해당하는 제목을 받아와서 갈아끼우기
+  }, [setTitle]);
 
   if (loading) {
     return (
@@ -119,13 +122,7 @@ const Loan = () => {
               <hr />
               <div className="h-[30%] my-4">
                 <div className="text-sm">최소 대출 금액</div>
-                <MultiRangeSlider
-                  min={0}
-                  max={3000}
-                  onChange={() => {}}
-                  minValue={0}
-                  maxValue={3000}
-                />
+                <MultiRangeSlider min={0} max={3000} onChange={() => {}} minValue={0} maxValue={3000}/>
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">

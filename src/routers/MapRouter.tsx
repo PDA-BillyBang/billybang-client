@@ -25,10 +25,10 @@ export const mapRoutes: RouteObject[] = [
     path: 'map',
     element: <SubHeader />,
     children: [
-      // {
-      //   path: ':px/:py',
-      //   element: <MapPropertyLoan />,
-      // },
+      {
+        path: ':px/:py',
+        element: <MapPropertyLoan />,
+      },
     ],
   },
 ];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
@@ -11,9 +11,7 @@ type Props = {
 };
 
 export default function PropertyLoan({ bottomButton, property }: Props) {
-  const [likeButtonActive, setLikeButtonActive] = useState<boolean>(
-    property.isStarred ?? false
-  );
+  const [likeButtonActive, setLikeButtonActive] = useState<boolean>(true);
   const navigate = useNavigate();
   const handleClickToLoans = () => {
     navigate(`/loan/recommend/${property.propertyId}`);
@@ -24,26 +22,22 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
 
   const priceFormatter = (price: number): string => {
     const 억 = Math.floor(price / 100);
-    const 천만 = Math.floor((price % 100) / 10);
+    const 천만 = Math.floor((price % 100) / 10)
     const 백만 = price % 10;
-
+  
     if (억 === 0) {
       return `${천만},${백만}00만`;
     }
-    if (천만 === 0) {
-      if (백만 === 0) {
-        return `${억}억`;
+    if (천만 === 0){
+      if (백만 === 0){
+        return `${억}억`
       }
-      return `${억}억 ${백만}00만`;
+      return `${억}억 ${백만}00만`
     }
 
     return `${억}억 ${천만},${백만}00만`;
   };
-
-  useEffect(() => {
-    console.log('[property]', property);
-  }, []);
-
+  
   return (
     <div
       className={`w-[100%] flex flex-col ${bottomButton ? 'h-[50vh]' : 'h-[310px]'}  justify-between`}
@@ -54,36 +48,22 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}
-            isLoan={false}
-            propertyId={property.propertyId}
           />
         </div>
+        <div className="text-[0.8rem]">서울시 성동구 성수동2가 (property.jibeonAddress)</div>
         <div className="text-[0.8rem]">
-          서울시 성동구 성수동2가 (property.jibeonAddress)
-        </div>
-        <div className="text-[0.8rem]">
-          {getRealEstateTypeString(property.realEstateType)} |{' '}
-          {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용{' '}
-          {property.area2}㎡
+          {getRealEstateTypeString(property.realEstateType)} | {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용 {property.area2}㎡
         </div>
         <div className="py-[0.2rem]" />
         <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center">
           <div className="flex flex-col w-[50%] items-center">
             <div className="font-bold text-blue-2 text-[0.9rem]">매매가</div>
-            <div className="font-bold">
-              {property.tradeType === 'DEAL'
-                ? priceFormatter(property.price)
-                : '-'}
-            </div>
+            <div className="font-bold">{property.tradeType === 'DEAL' ? priceFormatter(property.price) : "-"}</div>
           </div>
           <div className="bg-grey-1 w-[0.01rem] h-[3.5rem]" />
           <div className="flex flex-col w-[50%] items-center">
             <div className="font-bold text-red-1 text-[0.9rem]">전세가</div>
-            <div className="font-bold">
-              {property.tradeType === 'LEASE'
-                ? priceFormatter(property.price)
-                : '-'}
-            </div>
+            <div className="font-bold">{property.tradeType === 'LEASE' ? priceFormatter(property.price) : "-"}</div>
           </div>
         </div>
         <div className="pb-[0.6rem]" />
