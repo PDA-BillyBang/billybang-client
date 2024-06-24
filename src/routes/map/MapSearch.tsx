@@ -75,7 +75,7 @@ export default function MapSearch({}: Props) {
   };
 
   return (
-    <div>
+    <div className="font-NanumSquareRound">
       <div className="flex h-16">
         <div className="flex w-full">
           <input
@@ -101,7 +101,7 @@ export default function MapSearch({}: Props) {
           {filteredArray.map((element, index) => (
             <li
               key={index}
-              className="h-12 flex flex-col justify-center hover:bg-grey-4"
+              className="h-12 flex flex-col justify-center hover:bg-grey-4 cursor-pointer"
               onClick={() =>
                 handleClickedSearchButtion(element.latitude, element.longitude)
               }
