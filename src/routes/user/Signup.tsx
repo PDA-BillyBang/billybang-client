@@ -53,6 +53,7 @@ export default function SignUp() {
 
     try {
       if (email !== undefined && birthDate !== undefined) {
+        console.log({ email, password, birthDate, nickname });
         await signUp({ email, password, birthDate, nickname });
 
         Swal.fire({

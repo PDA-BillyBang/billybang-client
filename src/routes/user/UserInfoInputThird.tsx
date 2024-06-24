@@ -7,12 +7,12 @@ import { Params, useOutletContext, useParams } from 'react-router-dom';
 
 interface Props {
   isMarried: boolean;
-  yearsOfMarriage: number | undefined;
+  yearOfMarriage: number | undefined;
   childrenCount: number | undefined;
   totalMarriedIncome: number | undefined;
   totalMarriedAssets: number | undefined;
   pageNum: number;
-  setYearsOfMarriage: (value: number | undefined) => void;
+  setYearOfMarriage: (value: number | undefined) => void;
   setIsMarried: (value: boolean) => void;
   setChildrenCount: (value: number | undefined) => void;
   setTotalMarriedIncome: (value: number | undefined) => void;
@@ -24,12 +24,12 @@ interface Props {
 export default function UserInfoInputThird({
   pageNum,
   isMarried,
-  yearsOfMarriage,
+  yearOfMarriage,
   childrenCount,
   totalMarriedIncome,
   totalMarriedAssets,
   setIsMarried,
-  setYearsOfMarriage,
+  setYearOfMarriage,
   setChildrenCount,
   setPageNum,
   setTotalMarriedIncome,
@@ -47,7 +47,7 @@ export default function UserInfoInputThird({
           const userInfo = response.data.response.userInfo;
           console.log(userInfo);
           setIsMarried(userInfo.isMarried);
-          setYearsOfMarriage(userInfo.yearsOfMarriage);
+          setYearOfMarriage(userInfo.yearOfMarriage);
           setChildrenCount(userInfo.childrenCount);
           setTotalMarriedAssets(userInfo.totalMarriedAssets);
           setTotalMarriedIncome(userInfo.totalMarriedIncome);
@@ -71,8 +71,8 @@ export default function UserInfoInputThird({
   const handleMarrageYear = (value: number | string): void => {
     const numericValue: number =
       typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) : value;
-    if (isNaN(numericValue)) return setYearsOfMarriage(undefined);
-    return setYearsOfMarriage(numericValue);
+    if (isNaN(numericValue)) return;
+    return setYearOfMarriage(numericValue);
   };
 
   const handleChild = (value: number | string): void => {
@@ -115,7 +115,7 @@ export default function UserInfoInputThird({
     totalMarriedAssets,
     totalMarriedIncome,
     isMarried,
-    yearsOfMarriage,
+    yearOfMarriage,
   ]);
 
   const handleNextButtonClick = () => {
@@ -128,8 +128,8 @@ export default function UserInfoInputThird({
   const validateInputs = (): boolean => {
     if (isMarried === true)
       return (
-        typeof yearsOfMarriage === 'number' &&
-        yearsOfMarriage >= 1900 &&
+        typeof yearOfMarriage === 'number' &&
+        yearOfMarriage >= 1900 &&
         typeof childrenCount === 'number' &&
         childrenCount >= 0 &&
         typeof totalMarriedIncome === 'number' &&
@@ -182,10 +182,10 @@ export default function UserInfoInputThird({
               type="text"
               title="혼인신고 연도"
               text="혼인신고를 한 연도를 입력해주세요"
-              value={yearsOfMarriage}
+              value={yearOfMarriage}
               onChange={handleMarrageYear}
               validate={() =>
-                typeof yearsOfMarriage == 'number' && yearsOfMarriage >= 1900
+                typeof yearOfMarriage == 'number' && yearOfMarriage >= 1900
               }
               errorMessage="정확한 연도를 입력해주세요"
               unit="년"
