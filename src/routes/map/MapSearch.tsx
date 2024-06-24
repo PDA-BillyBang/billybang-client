@@ -1,20 +1,73 @@
-import { Navbar } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import search from 'images/search.svg';
 import pin from 'images/pin.svg';
+import jsonData from '../../assets/json/output.json'; // JSON 파일 경로에 맞게 수정하십시오.
 
 type Props = {};
 
+interface Location {
+  code: string;
+  attempt: string;
+  city: string;
+  district: string;
+  sub_district: string;
+  latitude: string;
+  longitude: string;
+  code_type: string;
+}
+
 export default function MapSearch({}: Props) {
   const navigate = useNavigate();
-  const [array, setArray] = useState<string[]>([
-    '서울특별시 성동구 성수동1가',
-    '서울특별시 성동구 성수동2가',
-    '서울특별시 성동구 성수동3가',
-    '서울특별시 성동구 성수동4가',
-    '서울특별시 성동구 성수동5가',
-  ]);
+  const [query, setQuery] = useState<string>('');
+  const [filteredArray, setFilteredArray] = useState<Location[]>([]);
+
+  useEffect(() => {
+    if (query.length > 0) {
+      const filtered = jsonData.filter((item: Location) =>
+        `${item.attempt} ${item.city} ${item.district} ${item.sub_district}`
+          .toLowerCase()
+          .includes(query.toLowerCase())
+      );
+      setFilteredArray(filtered);
+    } else {
+      setFilteredArray([]);
+    }
+  }, [query]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  // MapSearch 컴포넌트 내에 highlightSearchText 함수 정의
+  const highlightSearchText = (text: string, query: string) => {
+    // 검색어가 없으면 그냥 반환
+    if (!query || query.length === 0) {
+      return text;
+    }
+
+    // 검색어와 일치하는 부분을 파란색으로 하이라이트 처리
+    const lowerCaseQuery = query.toLowerCase();
+    const lowerCaseText = text.toLowerCase();
+
+    // 정규식을 사용하여 모든 일치하는 부분을 파란색으로 하이라이트 처리
+    const regex = new RegExp(`(${lowerCaseQuery})`, 'gi');
+    const parts = text.split(regex);
+
+    return parts.map((part, index) =>
+      regex.test(part.toLowerCase()) ? (
+        <span key={index} className="text-blue-1">
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    );
+  };
+
+  const handleClickedSearchButtion = () => {
+    // navigate('/', state:{});
+  };
 
   return (
     <div>
@@ -24,6 +77,8 @@ export default function MapSearch({}: Props) {
             className="flex-grow ml-2 text-[1.2rem] px-2 py-1"
             type="search"
             placeholder="자치구 or 행정동을 입력하세요"
+            value={query}
+            onChange={handleInputChange}
             required
             style={{ minWidth: '200px' }}
           />
@@ -38,11 +93,17 @@ export default function MapSearch({}: Props) {
       </div>
       <div>
         <ul>
-          {array.map((element, index) => (
+          {filteredArray.map((element, index) => (
             <li key={index} className="h-12 flex flex-col justify-center">
               <div className="flex text-[1.2rem] pl-3 items-center">
                 <img className="mr-2" src={pin} alt="Pin Icon" />
-                <div>{element}</div>
+                <div>
+                  {/* 검색어와 일치하는 부분을 파란색으로 하이라이트 처리 */}
+                  {highlightSearchText(
+                    `${element.attempt} ${element.city} ${element.district} ${element.sub_district}`,
+                    query
+                  )}
+                </div>
               </div>
             </li>
           ))}

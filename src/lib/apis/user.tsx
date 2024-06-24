@@ -51,9 +51,7 @@ export async function login(data: { email: string; password: string }) {
 
 //로그아웃(POST)
 export async function logout() {
-  const s = await userInstance.post('/logout');
-  console.log(s);
-  return s;
+  return await userInstance.post('/logout');
 }
 
 //이메일 중복 확인(GET)
@@ -63,9 +61,7 @@ export async function isEmailRegistered(email: string) {
 
 //회원정보 조회(GET)
 export async function getUserInfo() {
-  const s = await userInstance.get('/user-info');
-  console.log(s);
-  return s;
+  return await userInstance.get('/user-info');
 }
 
 //회원정보 수정(PUT)
@@ -80,7 +76,15 @@ export async function registerAdditionalUserInfo(data: UserInfo) {
 }
 
 export async function isvalidateToken() {
-  const s = await userInstance.get('/validate-token');
-  console.log(s);
-  return s;
+  return await userInstance.get('/validate-token');
+}
+
+// 비밀번호 수정(PUT)
+export async function updatePassword(data: { password: string }) {
+  return await userInstance.put('/password', data);
+}
+
+//닉네임 수정(PUT)
+export async function updateNickname(nickname: string) {
+  return await userInstance.put('/nickname', { nickname });
 }
