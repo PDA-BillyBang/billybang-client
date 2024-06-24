@@ -10,7 +10,6 @@ export const renderProperties = (
   setSelectedPropertyId: (id: number) => void
 ) => {
   if (!map) return;
-
   properties.forEach((property) => {
     const position = new window.kakao.maps.LatLng(property.latitude, property.longitude);
     const container = document.createElement('div');
@@ -31,7 +30,6 @@ export const renderProperties = (
     const customOverlay = new window.kakao.maps.CustomOverlay({
       position: position,
       content: container,
-      yAnchor: 1,
       clickable: true,
     });
 

@@ -22,8 +22,8 @@ export default function AreaNews({ districtId }: Props) {
       const result = await getNewsByDistrictId(districtNum);
       console.log(result.data.response);
       setNewsData(result.data.response);
-    } catch (error) {
-      console.log('[ERROR]', error);
+    } catch (error: any) {
+      console.log('??', error);
     } finally {
       setLoading(false);
     }
@@ -31,6 +31,14 @@ export default function AreaNews({ districtId }: Props) {
   useEffect(() => {
     handleNewByDistrictId(Number(districtId));
   }, []);
+  if (newsData?.length == 0) {
+    return (
+      <div className="mt-[10rem] text-center text-red-500 flex flex-col justify-center items-center">
+        <div className="text-[1.3rem] pb-[0.3rem]">✔️</div>
+        뉴스 제공 지역이 아닙니다
+      </div>
+    );
+  }
   return (
     <div className="pt-[1rem]">
       <div className="flex flex-row items-center justify-between">

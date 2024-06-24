@@ -58,9 +58,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
             propertyId={property.propertyId}
           />
         </div>
-        <div className="text-[0.8rem]">
-          서울시 성동구 성수동2가 (property.jibeonAddress)
-        </div>
+        <div className="text-[0.8rem]">{property.jibeonAddress}</div>
         <div className="text-[0.8rem]">
           {getRealEstateTypeString(property.realEstateType)} |{' '}
           {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용{' '}

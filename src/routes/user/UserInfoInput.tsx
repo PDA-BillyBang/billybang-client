@@ -33,7 +33,7 @@ export default function UserInfoInput() {
 
   //3페이지에 필요한 state
   const [isMarried, setIsMarried] = useState<boolean>(false);
-  const [yearsOfMarriage, setYearsOfMarriage] = useState<number>();
+  const [yearOfMarriage, setYearOfMarriage] = useState<number>();
   const [childrenCount, setChildrenCount] = useState<number>();
   const [totalMarriedIncome, setTotalMarriedIncome] = useState<number>();
   const [totalMarriedAssets, setTotalMarriedAssets] = useState<number>();
@@ -56,7 +56,7 @@ export default function UserInfoInput() {
           setCompanySize(userInfo.companySize);
 
           setIsMarried(userInfo.isMarried);
-          setYearsOfMarriage(userInfo.yearsOfMarriage);
+          setYearOfMarriage(userInfo.yearOfMarriage);
           setChildrenCount(userInfo.childrenCount);
           setTotalMarriedAssets(userInfo.totalMarriedAssets);
           setTotalMarriedIncome(userInfo.totalMarriedIncome);
@@ -83,7 +83,7 @@ export default function UserInfoInput() {
         isForeign,
         isFirstHouseBuyer,
         isMarried,
-        yearsOfMarriage,
+        yearOfMarriage,
         hasOtherLoans,
       };
       if (option === '2') {
@@ -91,8 +91,6 @@ export default function UserInfoInput() {
       } else if (option === '1') {
         await updateUserInfo(data);
       }
-
-      navigate('/'); // 로그인 성공 후 이동할 경로
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
       console.log(errorResponse);
@@ -141,8 +139,8 @@ export default function UserInfoInput() {
           <UserInfoInputThird
             isMarried={isMarried}
             setIsMarried={setIsMarried}
-            yearsOfMarriage={yearsOfMarriage}
-            setYearsOfMarriage={setYearsOfMarriage}
+            yearOfMarriage={yearOfMarriage}
+            setYearOfMarriage={setYearOfMarriage}
             childrenCount={childrenCount}
             setChildrenCount={setChildrenCount}
             totalMarriedIncome={totalMarriedIncome}

@@ -1,0 +1,5 @@
+.kakaoMapsDrawablePolygon {
+    stroke: none !important; /* 선 제거 */
+    cursor: pointer; /* 마우스 오버 시 포인터로 변경 */
+  }
+  

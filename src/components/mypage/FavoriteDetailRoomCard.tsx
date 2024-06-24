@@ -57,7 +57,7 @@ export default function FavoriteDetailRoomCard({ property }: Props) {
           />
         )}
       </div>
-      <div className="w-[1%]" />
+      <div className="w-[3%]" />
       <div className="flex flex-col justify-between w-[59%] py-[10px]">
         <div>
           <div className="font-bold w-[100%] justify-between items-center pr-[0.8rem] text-[1rem] flex flex-row">
