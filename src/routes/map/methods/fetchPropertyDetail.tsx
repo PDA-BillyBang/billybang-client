@@ -9,8 +9,10 @@ export const fetchPropertyDetail = async (group : PropertyGroup, setProperties: 
     const params = {
       realEstateType : realEstateType,
       tradeType: tradeType,
-      priceMin : 0,
-      priceMax : 3000,
+      dealPriceMin: propertyOption.dealPriceMin,
+      dealPriceMax: propertyOption.dealPriceMax,
+      leasePriceMin: propertyOption.leasePriceMin,
+      leasePriceMax: propertyOption.leasePriceMax,
       latitude : group.latitude,
       longitude : group.longitude,
       size : group.cnt

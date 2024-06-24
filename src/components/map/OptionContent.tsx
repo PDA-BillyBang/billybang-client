@@ -19,7 +19,7 @@ export default function OptionContent({
   setTempPropertyOption,
   closeDrawer,
 }:OptionContentProps){
-
+  console.log(tempPropertyOption)
   const handleTradeTypeButtonClick = (clickedTradeType: keyof SelectedTradeCategory) => {
     setTempPropertyOption({
       ...tempPropertyOption,
@@ -40,11 +40,19 @@ export default function OptionContent({
     });
   };
 
-  const handlePriceRangeChange = (min: number, max: number) => {
+  const handleDealPriceRangeChange = (min: number, max: number) => {
     setTempPropertyOption((prev) => ({
       ...prev,
-      priceMin: min,
-      priceMax: max,
+      dealPriceMin: min,
+      dealPriceMax: max,
+    }));
+  };
+  
+  const handleLeasePriceRangeChange = (min: number, max: number) => {
+    setTempPropertyOption((prev) => ({
+      ...prev,
+      leasePriceMin: min,
+      leasePriceMax: max,
     }));
   };
 
@@ -81,9 +89,9 @@ export default function OptionContent({
           <MultiRangeSlider
             min={0}
             max={1000}
-            minValue={tempPropertyOption.priceMin}
-            maxValue={tempPropertyOption.priceMax}
-            onChange={({ min, max }) => handlePriceRangeChange(min, max)}
+            minValue={tempPropertyOption.leasePriceMin}
+            maxValue={tempPropertyOption.leasePriceMax}
+            onChange={({ min, max }) => handleLeasePriceRangeChange(min, max)}
           />
         </div>
         <hr className='mt-14' />
@@ -91,13 +99,13 @@ export default function OptionContent({
           <div className="text-sm">
             매매가
           </div>
-          {/* <MultiRangeSlider
+          <MultiRangeSlider
             min={0}
             max={3000}
-            minValue={tempPropertyOption.priceMin}
-            maxValue={tempPropertyOption.priceMax}
-            onChange={({ min, max }) => handlePriceRangeChange(min, max)}
-          /> */}
+            minValue={tempPropertyOption.dealPriceMin}
+            maxValue={tempPropertyOption.dealPriceMax}
+            onChange={({ min, max }) => handleDealPriceRangeChange(min, max)}
+          />
         </div>
         <hr className="mt-14" />
       </div>
