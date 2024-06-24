@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import LoanFiltering from '../../components/loan/LoanFiltering';
 import BottomDrawer from '../../components/common/button/BottomDrawer';
 // import { useNavigate } from 'react-router-dom';
@@ -38,6 +38,7 @@ export interface loanByPropertyIdI {
 
 // recommend/:propertyId
 const Loan = () => {
+  const navigate = useNavigate();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
@@ -46,6 +47,8 @@ const Loan = () => {
   const [navigationText, setNavigationText] = useState<string>(
     '나에게 맞는 대출 상품이 궁금하다면 정보 입력하기'
   );
+  const [navigationRoute, setNavigationRoute] =
+    useState<string>('/user/info/1');
   const [minMoney, setMinMoney] = useState(0);
   const [maxMoney, setMaxMoney] = useState(1000);
   const [minYear, setMinYear] = useState(0);
@@ -70,6 +73,7 @@ const Loan = () => {
       setLoanResult(result.data.response);
       if (result.data.response.userStatus === 'UNAUTHORIZED') {
         setNavigationText('나에게 맞는 대출 상품이 궁금하다면 로그인하기');
+        setNavigationRoute('/user/login');
       }
       setTitle(result.data.response.buildingName);
     } catch (error) {
@@ -119,7 +123,11 @@ const Loan = () => {
   return (
     <div className="flex flex-col items-center mt-[80px]">
       <div className=" w-customWidthPercent">
-        <NavigateButton text={navigationText} customWidth="w-[100%]" />
+        <NavigateButton
+          text={navigationText}
+          customWidth="w-[100%]"
+          handleClick={() => navigate(navigationRoute)}
+        />
         <div className="pb-[10px]" />
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row text-grey-1">
