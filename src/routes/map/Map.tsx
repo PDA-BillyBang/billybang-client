@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import {
   PropertyGroup,
@@ -56,6 +56,8 @@ export default function MapComponent() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { lat, lon } = location.state || { lat: 37.5449, lon: 127.0566 };
 
   const { setAddress } = useOutletContext<{
     setAddress: (title: string) => void;
@@ -74,7 +76,9 @@ export default function MapComponent() {
       propertyOption,
       setGu,
       setGuCode,
-      setAddress
+      setAddress,
+      lat,
+      lon
     );
     return cleanup;
   }, []);
