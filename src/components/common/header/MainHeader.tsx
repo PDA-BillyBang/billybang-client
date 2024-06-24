@@ -8,7 +8,7 @@ import { isvalidateToken } from '@/lib/apis/user';
 export default function MainHeader() {
   const navigate = useNavigate();
   const [address, setAddress] = useState<string>('');
-  console.log(address)
+  console.log(address);
   const handleClickSearchField = () => navigate('/search');
   const handleClickToMy = async () => {
     try {
@@ -33,7 +33,7 @@ export default function MainHeader() {
           빌려방
         </div>
         <div className="flex items-center flex-grow ">
-          <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow">
+          <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow font-NanumSquareRound">
             {address}
           </div>
         </div>
