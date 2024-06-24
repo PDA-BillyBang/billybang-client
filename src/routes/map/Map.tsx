@@ -29,13 +29,15 @@ export default function MapComponent() {
   const [selectedCategory, setSelectedCategory] = useState<"" | CategoryCode>("");  // 편의시설 카테고리
   const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
   const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption); 
+  const [gu, setGu] = useState<string>('');
+  const [guCode, setGuCode] = useState<string>('');
   const overlayRef = useRef<{ [key: number]: OverlayData }>({});  // 매물 그룹들의 컴포넌트
   const previousSelectedPropertyIdRef = useRef<number | null>(null);  // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);  // 편의시설 상세정보 UI
   const viewportSize = GetViewportSize();  // viewport 변경 감지
   const navigate = useNavigate();
-  
+
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
@@ -46,7 +48,9 @@ export default function MapComponent() {
       },
       setIsDrawerOpen,
       customOverlayRef,
-      propertyOption
+      propertyOption,
+      setGu,
+      setGuCode
     );
     return cleanup;
   }, []);
@@ -172,11 +176,11 @@ export default function MapComponent() {
         </div>
         <div
           className="absolute z-10 bottom-4 right-4"
-          onClick={() => onButtonClick('/statistics/1')}
+          onClick={() => onButtonClick(`/statistics/${guCode}`)}
         >
           <SmallButton
             icon={mapStatistic}
-            text={'동대문구'}
+            text={gu}
             isActive={false}
             customWidth="min-w-20"
           ></SmallButton>
