@@ -23,3 +23,17 @@ export async function deleteLikeLoan(loanId: number) {
 export async function getLikeLoans() {
   return await loanInstance.get('/stars');
 }
+
+export async function getBestLoans(data: {
+  propertyId: number;
+  tradeType: string;
+  area2: number;
+  price: number;
+}) {
+  console.log(data);
+  const s = await loanInstance.post('/best', {
+    properties: [data],
+  });
+  console.log(s);
+  return s;
+}

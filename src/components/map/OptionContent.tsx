@@ -2,13 +2,17 @@ import React from 'react';
 import LargeButton from '@components/common/button/LargeButton';
 import MultiRangeSlider from '@components/common/slider/MultiRangeSlider';
 import SmallButton from '@components/common/button/SmallButton';
-import { PropertyOption, SelectedBuildingCategory, SelectedTradeCategory } from '@/utils/types';
+import {
+  PropertyOption,
+  SelectedBuildingCategory,
+  SelectedTradeCategory,
+} from '@/utils/types';
 
 type OptionContentProps = {
   propertyOption: PropertyOption;
   setPropertyOption: (option: PropertyOption) => void;
   tempPropertyOption: PropertyOption;
-  setTempPropertyOption: React.Dispatch<React.SetStateAction<PropertyOption>>
+  setTempPropertyOption: React.Dispatch<React.SetStateAction<PropertyOption>>;
   closeDrawer: () => void;
 };
 
@@ -18,24 +22,30 @@ export default function OptionContent({
   tempPropertyOption,
   setTempPropertyOption,
   closeDrawer,
-}:OptionContentProps){
-  console.log(tempPropertyOption)
-  const handleTradeTypeButtonClick = (clickedTradeType: keyof SelectedTradeCategory) => {
+}: OptionContentProps) {
+  console.log(tempPropertyOption);
+  const handleTradeTypeButtonClick = (
+    clickedTradeType: keyof SelectedTradeCategory
+  ) => {
     setTempPropertyOption({
       ...tempPropertyOption,
       SelectedTradeCategory: {
         ...tempPropertyOption.SelectedTradeCategory,
-        [clickedTradeType]: !tempPropertyOption.SelectedTradeCategory[clickedTradeType],
+        [clickedTradeType]:
+          !tempPropertyOption.SelectedTradeCategory[clickedTradeType],
       },
     });
   };
 
-  const handleBuildingCategoryButtonClick = (clickedBuildingType: keyof SelectedBuildingCategory) => {
+  const handleBuildingCategoryButtonClick = (
+    clickedBuildingType: keyof SelectedBuildingCategory
+  ) => {
     setTempPropertyOption({
       ...tempPropertyOption,
       SelectedBuildingCategory: {
         ...tempPropertyOption.SelectedBuildingCategory,
-        [clickedBuildingType]: !tempPropertyOption.SelectedBuildingCategory[clickedBuildingType],
+        [clickedBuildingType]:
+          !tempPropertyOption.SelectedBuildingCategory[clickedBuildingType],
       },
     });
   };
@@ -47,7 +57,7 @@ export default function OptionContent({
       dealPriceMax: max,
     }));
   };
-  
+
   const handleLeasePriceRangeChange = (min: number, max: number) => {
     setTempPropertyOption((prev) => ({
       ...prev,
@@ -67,25 +77,58 @@ export default function OptionContent({
   };
 
   return (
-    <div className='w-[100%] flex flex-col select-none'>
+    <div className="w-[100%] flex flex-col select-none">
       <div className="flex-1 mb-10">
         <div className="flex gap-3 mb-4">
-          <SmallButton text={'전세'} isActive={tempPropertyOption.SelectedTradeCategory['전세']} onClick={() => handleTradeTypeButtonClick('전세')} customWidth='min-w-12' />
-          <SmallButton text={'매매'} isActive={tempPropertyOption.SelectedTradeCategory['매매']} onClick={() => handleTradeTypeButtonClick('매매')} customWidth='min-w-12' />
+          <SmallButton
+            text={'전세'}
+            isActive={tempPropertyOption.SelectedTradeCategory['전세']}
+            onClick={() => handleTradeTypeButtonClick('전세')}
+            customWidth="min-w-12"
+          />
+          <SmallButton
+            text={'매매'}
+            isActive={tempPropertyOption.SelectedTradeCategory['매매']}
+            onClick={() => handleTradeTypeButtonClick('매매')}
+            customWidth="min-w-12"
+          />
         </div>
         <hr />
-        <div className='flex flex-wrap gap-3 my-4'>
-          <SmallButton text={'원룸'} isActive={tempPropertyOption.SelectedBuildingCategory['원룸']} onClick={() => handleBuildingCategoryButtonClick('원룸')} customWidth='min-w-12' />
-          <SmallButton text={'오피스텔'} isActive={tempPropertyOption.SelectedBuildingCategory['오피스텔']} onClick={() => handleBuildingCategoryButtonClick('오피스텔')} customWidth='min-w-20' />
-          <SmallButton text={'아파트'} isActive={tempPropertyOption.SelectedBuildingCategory['아파트']} onClick={() => handleBuildingCategoryButtonClick('아파트')} customWidth='min-w-14' />
-          <SmallButton text={'빌라'} isActive={tempPropertyOption.SelectedBuildingCategory['빌라']} onClick={() => handleBuildingCategoryButtonClick('빌라')} customWidth='min-w-12' />
-          <SmallButton text={'주택'} isActive={tempPropertyOption.SelectedBuildingCategory['주택']} onClick={() => handleBuildingCategoryButtonClick('주택')} customWidth='min-w-12' />
+        <div className="flex flex-wrap gap-3 my-4">
+          <SmallButton
+            text={'원룸'}
+            isActive={tempPropertyOption.SelectedBuildingCategory['원룸']}
+            onClick={() => handleBuildingCategoryButtonClick('원룸')}
+            customWidth="min-w-12"
+          />
+          <SmallButton
+            text={'오피스텔'}
+            isActive={tempPropertyOption.SelectedBuildingCategory['오피스텔']}
+            onClick={() => handleBuildingCategoryButtonClick('오피스텔')}
+            customWidth="min-w-20"
+          />
+          <SmallButton
+            text={'아파트'}
+            isActive={tempPropertyOption.SelectedBuildingCategory['아파트']}
+            onClick={() => handleBuildingCategoryButtonClick('아파트')}
+            customWidth="min-w-14"
+          />
+          <SmallButton
+            text={'빌라'}
+            isActive={tempPropertyOption.SelectedBuildingCategory['빌라']}
+            onClick={() => handleBuildingCategoryButtonClick('빌라')}
+            customWidth="min-w-12"
+          />
+          <SmallButton
+            text={'주택'}
+            isActive={tempPropertyOption.SelectedBuildingCategory['주택']}
+            onClick={() => handleBuildingCategoryButtonClick('주택')}
+            customWidth="min-w-12"
+          />
         </div>
         <hr />
         <div className="h-[30%] my-4">
-          <div className="text-sm">
-            보증금(전세금)
-          </div>
+          <div className="text-sm">보증금(전세금)</div>
           <MultiRangeSlider
             min={0}
             max={1000}
@@ -94,11 +137,9 @@ export default function OptionContent({
             onChange={({ min, max }) => handleLeasePriceRangeChange(min, max)}
           />
         </div>
-        <hr className='mt-14' />
+        <hr className="mt-14" />
         <div className="h-[30%] my-4">
-          <div className="text-sm">
-            매매가
-          </div>
+          <div className="text-sm">매매가</div>
           <MultiRangeSlider
             min={0}
             max={3000}

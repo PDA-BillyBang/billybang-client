@@ -88,8 +88,8 @@ export default function MypageEdit() {
       <div className="flex flex-col items-center w-customWidthPercent">
         <div className="w-[100%] text-grey-1 flex flex-row justify-between">
           <div className="w-[20%]">닉네임</div>
-          <div className="flex flex-row w-[30%] justify-between">
-            <div>{user?.nickname}</div>
+          <div className="flex flex-row w-[80%] justify-between items-center">
+            <div className="ml-auto mr-3">{user?.nickname}</div>
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
@@ -100,8 +100,8 @@ export default function MypageEdit() {
         </div>
         <div className="py-[0.8rem]" />
         <div className="w-[100%] text-grey-1 flex flex-row justify-between">
-          <div className="w-[20%]">비밀번호</div>
-          <div className="flex flex-row justify-between">
+          <div className="w-[30%]">비밀번호</div>
+          <div className="flex flex-row justify-between items-center">
             <img
               src={editGrey}
               className="h-[1rem] w-[1rem] cursor-pointer"
@@ -118,7 +118,7 @@ export default function MypageEdit() {
           onClick={handleClickedUserInfoButton}
           className="w-[100%] text-grey-1 flex flex-row justify-between"
         >
-          <div className="w-[20%]">정보수정</div>
+          <div className="w-[30%]">정보수정</div>
           <img
             src={rightArrowGrey}
             className="h-[1.5rem] w-[1.5rem] cursor-pointer"
@@ -130,7 +130,7 @@ export default function MypageEdit() {
           className="w-[100%] text-grey-1 flex flex-row justify-between"
           onClick={handleClickedUserLogoutButton}
         >
-          <div className="w-[20%]">로그아웃</div>
+          <div className="w-[30%]">로그아웃</div>
           <img
             src={rightArrowGrey}
             className="h-[1.5rem] w-[1.5rem] cursor-pointer"
@@ -139,7 +139,7 @@ export default function MypageEdit() {
         </div>
         <div className="py-[0.8rem]" />
         <div className="w-[100%] text-grey-1 flex flex-row justify-between">
-          <div className="w-[20%]">회원탈퇴</div>
+          <div className="w-[30%]">회원탈퇴</div>
           <img
             src={rightArrowGrey}
             className="h-[1.5rem] w-[1.5rem] cursor-pointer"
