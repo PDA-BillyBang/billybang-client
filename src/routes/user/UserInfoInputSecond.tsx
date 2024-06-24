@@ -82,7 +82,7 @@ export default function UserInfoInputSecond({
     setIsForeign(option);
   };
 
-  const handleJobSelect = (job: string | undefined) => {
+  const handleJobSelect = (job: string | undefined | boolean) => {
     const selectedJob = jobOptions.find((j) => j[0] === job);
     if (selectedJob) {
       setOccupation(selectedJob[1]);

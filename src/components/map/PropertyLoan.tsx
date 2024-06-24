@@ -4,20 +4,53 @@ import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
+import { getBestLoans } from '@/lib/apis/loan';
 
 type Props = {
   bottomButton?: boolean;
   property: Property;
 };
 
+interface BestLoan {
+  loanId: number;
+  loanLimit: number;
+  ltv: number;
+  maxInterestRate: number;
+  minInterestRate: number;
+  productName: string;
+  providerImgUrl: string;
+  providerName: string;
+}
+
 export default function PropertyLoan({ bottomButton, property }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(
     property.isStarred ?? false
   );
+
+  const [bestLoan, setBestLoan] = useState<BestLoan>();
   const navigate = useNavigate();
-  const handleClickToLoans = () => {
+  const handleClickToLoans = async () => {
     navigate(`/loan/recommend/${property.propertyId}`);
   };
+
+  useEffect(() => {
+    async function fetchBestLoan() {
+      try {
+        const result = await getBestLoans({
+          propertyId: property.propertyId,
+          tradeType: property.tradeType,
+          area2: property.area2,
+          price: property.price,
+        });
+        setBestLoan(result.data.response[0].loan);
+      } catch (error) {
+        console.error('Error fetching best loan:', error);
+      }
+    }
+
+    fetchBestLoan();
+  }, [property]);
+
   const handleLikeClick = () => {
     setLikeButtonActive((prev) => !prev);
   };
@@ -59,7 +92,8 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
           />
         </div>
         <div className="text-[0.8rem]">
-          서울시 성동구 성수동2가 (property.jibeonAddress)
+          {property.roadAddress}
+          {/* {property.jibeonAddress} */}
         </div>
         <div className="text-[0.8rem]">
           {getRealEstateTypeString(property.realEstateType)} |{' '}
@@ -67,7 +101,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
           {property.area2}㎡
         </div>
         <div className="py-[0.2rem]" />
-        <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center">
+        <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center shadow-md">
           <div className="flex flex-col w-[50%] items-center">
             <div className="font-bold text-blue-2 text-[0.9rem]">매매가</div>
             <div className="font-bold">
@@ -87,21 +121,31 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
           </div>
         </div>
         <div className="pb-[0.6rem]" />
-        <div className="bg-grey-5 flex flex-col pt-[0.3rem] px-[0.8rem] h-[7rem] rounded-[10px]">
-          <div className="flex flex-row ">
-            <img src={shin} className="w-[20px] h-[20px] mr-[0.2rem]" />
+        <div className="bg-grey-5 flex flex-col py-[0.4rem] px-[0.8rem] h-[7.5rem] rounded-[10px] shadow-md">
+          <div className="flex flex-row">
+            <img
+              src={bestLoan?.providerImgUrl}
+              className="w-[20px] h-[20px] mr-[0.1rem] mt-[0.2rem]"
+            />
             <div className="ml-[0.4rem] flex flex-col w-[100%]">
-              <div className="font-bold text-[1rem]">신한은행</div>
-              <div className="text-[1rem]">iTouch 전세론(주택금융보증)</div>
+              <div className="font-bold text-[1rem]">
+                {bestLoan?.providerName}
+              </div>
+              <div className="text-[1rem]">{bestLoan?.productName}</div>
               <div className="flex flex-row justify-between">
-                <div className="text-[0.8rem]">2.4억, LTV 70%이내</div>
-                <div className="text-[0.8rem] font-bold">2.3~3.5%</div>
+                <div className="text-[0.8rem]">
+                  {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}
+                  , LTV {bestLoan?.ltv}%이내
+                </div>
+                <div className="text-[0.8rem] font-bold">
+                  {bestLoan?.minInterestRate}~{bestLoan?.maxInterestRate}%
+                </div>
               </div>
             </div>
           </div>
-          <div className="pt-[0.2rem]" />
+          <div className="pt-[0.5rem]" />
           <NavigateButton
-            text="롯데캐슬파크의 추천 대출 상품 더 보기"
+            text={`${property.buildingName}의 추천 대출 상품 더 보기`}
             customWidth="w-[100%]"
             handleClick={handleClickToLoans}
           />
