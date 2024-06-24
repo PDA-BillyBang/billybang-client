@@ -48,7 +48,7 @@ export default function MapSearch({}: Props) {
 
     // 검색어와 일치하는 부분을 파란색으로 하이라이트 처리
     const lowerCaseQuery = query.toLowerCase();
-    const lowerCaseText = text.toLowerCase();
+    // const lowerCaseText = text.toLowerCase();
 
     // 정규식을 사용하여 모든 일치하는 부분을 파란색으로 하이라이트 처리
     const regex = new RegExp(`(${lowerCaseQuery})`, 'gi');
@@ -65,8 +65,13 @@ export default function MapSearch({}: Props) {
     );
   };
 
-  const handleClickedSearchButtion = () => {
-    // navigate('/', state:{});
+  const handleClickedSearchButtion = (lat: string, lon: string) => {
+    const state = {
+      lat: Number(lat),
+      lon: Number(lon),
+    };
+
+    navigate('/', { state });
   };
 
   return (
@@ -94,8 +99,14 @@ export default function MapSearch({}: Props) {
       <div>
         <ul>
           {filteredArray.map((element, index) => (
-            <li key={index} className="h-12 flex flex-col justify-center">
-              <div className="flex text-[1.2rem] pl-3 items-center">
+            <li
+              key={index}
+              className="h-12 flex flex-col justify-center"
+              onClick={() =>
+                handleClickedSearchButtion(element.latitude, element.longitude)
+              }
+            >
+              <div className="flex text-[1.2rem] pl-3 items-center ">
                 <img className="mr-2" src={pin} alt="Pin Icon" />
                 <div>
                   {/* 검색어와 일치하는 부분을 파란색으로 하이라이트 처리 */}

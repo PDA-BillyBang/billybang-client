@@ -1,7 +1,7 @@
-import { PropertyGroup, PropertyOption } from "@/utils/types";
-import { Dispatch, SetStateAction } from "react";
-import { fetchPropertyGroups } from "./fetchPropertyGroups";
-import { moveToCurrentLocation } from "./moveToCurrentLocation";
+import { PropertyGroup, PropertyOption } from '@/utils/types';
+import { Dispatch, SetStateAction } from 'react';
+import { fetchPropertyGroups } from './fetchPropertyGroups';
+import { moveToCurrentLocation } from './moveToCurrentLocation';
 
 export const initializeMap = (
   setPropertyGroups: (properties: PropertyGroup[]) => void,
@@ -12,10 +12,12 @@ export const initializeMap = (
   propertyOption : PropertyOption,
   setGu : React.Dispatch<React.SetStateAction<string>>,
   setGuCode : React.Dispatch<React.SetStateAction<string>>,
+  lat: number = 37.5449, // 기본값 설정
+  lon: number = 127.0566 // 기본값 설정
 ) => {
   const container = document.getElementById('map');
   const options = {
-    center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
+    center: new window.kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
     level: 3, // 지도의 확대 레벨
   };
   if (!container) {
@@ -23,7 +25,7 @@ export const initializeMap = (
   }
   kakao.maps.load(() => {
     // 지도 생성
-    const mapInstance = new kakao.maps.Map(container, options); 
+    const mapInstance = new kakao.maps.Map(container, options);
     setMap(mapInstance);
 
     // 편의시설 검색 객체 생성
@@ -35,20 +37,26 @@ export const initializeMap = (
     // 편의시설 상세정보 지우기
     const removeCovenientInfo = () => {
       setIsDrawerOpen(0);
-        if (customOverlayRef){
-          customOverlayRef.current?.setMap(null)
-        }
+      if (customOverlayRef) {
+        customOverlayRef.current?.setMap(null);
+      }
     };
 
     // 매물 가져오기
     fetchPropertyGroups(mapInstance, setPropertyGroups, propertyOption);
 
     // 현재 위치로 아이콘 부착
-    moveToCurrentLocation(mapInstance)
+    moveToCurrentLocation(mapInstance);
 
     // 줌, 항공뷰 컨트롤러 부착
-    mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-    mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+    mapInstance.addControl(
+      new kakao.maps.ZoomControl(),
+      kakao.maps.ControlPosition.RIGHT
+    );
+    mapInstance.addControl(
+      new kakao.maps.MapTypeControl(),
+      kakao.maps.ControlPosition.TOPRIGHT
+    );
 
     // 현재 '구' 가져오기
     const getGu = () => {
