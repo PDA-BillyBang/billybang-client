@@ -1,6 +1,6 @@
 // src/components/common/MainHeader.tsx
-import { Avatar, Navbar } from 'flowbite-react';
 import React from 'react';
+import { Avatar, Navbar } from 'flowbite-react';
 import search from 'images/search.svg';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { isvalidateToken } from '@/lib/apis/user';
