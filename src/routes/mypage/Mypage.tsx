@@ -12,6 +12,8 @@ import { ErrorResponseI } from '@/utils/errorTypes';
 import { getLikeLoans } from '@/lib/apis/loan';
 import { loanI } from '../loan/Loan';
 import EmptyFavorite from '@components/mypage/EmptyFavorite';
+import { getLikeProperties } from '@/lib/apis/property';
+import MySkeleton from './MySkeleton';
 
 interface UserInfo {
   birthDate: string;
@@ -26,9 +28,37 @@ export interface LikeLoansI {
   loans: loanI[];
 }
 
+export interface PropertyI {
+  area1: number;
+  area2: number;
+  areaName: string | null;
+  articleConfirmYmd: string;
+  articleFeatureDesc: string;
+  articleName: string;
+  articleUrl: string;
+  buildingName: string;
+  cpName: string;
+  direction: string;
+  floorInfo: string;
+  id: number;
+  jibeonAddress: string | null;
+  latitude: number;
+  longitude: number;
+  price: number;
+  realEstateType: string;
+  realtorName: string;
+  representativeImgUrl: string;
+  roadAddress: string | null;
+  sameAddrCnt: number;
+  tags: string;
+  tradeType: string;
+}
+
 export default function Mypage() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [likeLoans, setLikeLoans] = useState<LikeLoansI[]>([]);
+  const [likeProperties, setLikeProperties] = useState<PropertyI[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
@@ -44,27 +74,45 @@ export default function Mypage() {
     }
   };
 
-  useEffect(() => {
-    handleGetLikeLoans();
-  }, []);
+  const handleGetLikeProperties = async () => {
+    try {
+      const result = await getLikeProperties();
+      console.log('LIKE PRO', result.data.response);
+      setLikeProperties(result.data.response);
+    } catch (error) {
+      console.log('[ERROR]', error);
+    }
+  };
 
   useEffect(() => {
-    const validateAndFetchUserInfo = async () => {
+    const loadData = async () => {
       try {
         await isvalidateToken();
         const userInfo = await getUserInfo();
         setUser(userInfo.data.response);
+
+        await Promise.all([handleGetLikeLoans(), handleGetLikeProperties()]);
       } catch (error: unknown) {
         const errorResponse = error as AxiosError<ErrorResponseI>;
         if (errorResponse.response) {
           console.log(errorResponse.response.data.response);
         }
         navigate('/user/login');
+      } finally {
+        setLoading(false);
       }
     };
 
-    validateAndFetchUserInfo();
+    loadData();
   }, [navigate]);
+
+  if (loading) {
+    return (
+      <div className="pb-[10rem] w-full flex items-center justify-center flex-col">
+        <MySkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="w-customWidthPercent">
@@ -90,9 +138,17 @@ export default function Mypage() {
         />
         찜한 방
       </div>
-      <FavoriteRooms />
+      {likeProperties.length > 0 ? (
+        <FavoriteRooms likeProperties={likeProperties} />
+      ) : (
+        <div className="w-[100%] ">
+          <EmptyFavorite />
+        </div>
+      )}
       <div className="pb-[1rem]" />
-      <PlusButton handleClick={handleToMyProperties} />
+      {likeProperties.length > 0 && (
+        <PlusButton handleClick={handleToMyProperties} />
+      )}
       <div className="py-[2rem]" />
       <div className="font-bold flex items-center flex-row text-[1.2rem] pb-[0.4rem]">
         <img
@@ -110,7 +166,7 @@ export default function Mypage() {
         </div>
       )}
       <div className="pb-[1rem]" />
-      <PlusButton handleClick={handleToMyLoan} />
+      {likeLoans.length > 0 && <PlusButton handleClick={handleToMyLoan} />}
       <div className="py-[1rem]" />
     </div>
   );

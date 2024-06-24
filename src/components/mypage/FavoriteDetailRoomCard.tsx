@@ -1,68 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import roomTest from '../../assets/image/test/room-test.svg';
-import filledLike from '../../assets/image/icons/filledLike.svg';
+import { useState, useEffect } from 'react';
+import home from '@/assets/image/my/home.svg';
 import LikeButton from '../common/button/LikeButton';
-type Props = {};
+import { PropertyI } from '@/routes/mypage/Mypage';
+import { useNavigate } from 'react-router-dom';
+type Props = { property: PropertyI };
 
-export default function FavoriteDetailRoomCard({}: Props) {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+export default function FavoriteDetailRoomCard({ property }: Props) {
   const [likeActive, setLikeActive] = useState<boolean>(true);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 450);
-    };
-
-    handleResize(); // Check screen size initially
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const navigate = useNavigate();
 
   const handleLikeClick = () => {
     console.log('like');
     setLikeActive((prev) => !prev);
   };
 
+  const priceFormatter = (price: number): string => {
+    const 억 = Math.floor(price / 100);
+    const 천만 = Math.floor((price % 100) / 10);
+    const 백만 = price % 10;
+
+    if (억 === 0) {
+      return `${천만},${백만}00만`;
+    }
+    if (천만 === 0) {
+      if (백만 === 0) {
+        return `${억}억`;
+      }
+      return `${억}억 ${백만}00만`;
+    }
+
+    return `${억}억 ${천만},${백만}00만`;
+  };
+
   return (
-    <div className="w-[100%] hover:bg-grey-5 bg-grey-6 h-[150px] flex flex-row rounded-[10px]">
+    <div
+      onClick={() => navigate('/property/' + property.id)}
+      className="w-[100%] hover:bg-grey-5 bg-grey-6 h-[150px] cursor-pointer flex flex-row rounded-[10px]"
+    >
       <div className="w-[40%] pl-[0.3rem] flex justify-center items-center">
-        <img
-          src={roomTest}
-          className="h-[120px] w-[90%] rounded-[5px] object-cover"
-          alt="room"
-        />
+        {property.representativeImgUrl == null ? (
+          <div className="flex items-center justify-center w-full h-full rounded-lg bg-grey-5">
+            <img
+              src={home}
+              alt="roomTest"
+              className="object-cover w-[40px] h-[40px]"
+            />
+          </div>
+        ) : (
+          <img
+            src={
+              'https://landthumb-phinf.pstatic.net/' +
+              property.representativeImgUrl
+            }
+            alt="roomTest"
+            className="object-cover w-full h-full"
+          />
+        )}
       </div>
       <div className="w-[1%]" />
       <div className="flex flex-col justify-between w-[59%] py-[10px]">
         <div>
           <div className="font-bold w-[100%] justify-between items-center pr-[0.8rem] text-[1rem] flex flex-row">
-            <div>두산위브파빌리온</div>
-            <LikeButton handleClick={handleLikeClick} isActive={likeActive} />
+            <div>{property.buildingName}</div>
+            <LikeButton
+              handleClick={handleLikeClick}
+              isActive={likeActive}
+              isLoan={false}
+              propertyId={property.id}
+            />
           </div>
           <div className="flex flex-row items-baseline">
-            <div className="text-grey-1 text-[1rem] font-bold">매매</div>
+            <div className="text-grey-1 text-[1rem] font-bold pr-[0.1rem]">
+              {property.tradeType === 'LEASE' ? '전세' : '매매'}{' '}
+            </div>
             <div className="text-grey-1 text-[0.9rem] font-bold text-end pl-[0.1rem]">
-              4억 8,000
+              {priceFormatter(property.price)}
             </div>
           </div>
         </div>
         <div>
-          <div className="text-[0.9rem]">아파트</div>
-          <div className="text-[0.9rem]">106/76m²</div>
-          <div className="text-[0.9rem]">40/44층</div>
+          <div className="text-[0.9rem]">{property.articleName}</div>
+          <div className="text-[0.9rem]">
+            {property.area1}/{property.area2}m²
+          </div>
+          <div className="text-[0.9rem]">{property.floorInfo}층</div>
         </div>
-        {/* <div className="flex flex-row flex-wrap">
-          <div className="bg-grey-1 mb-[0.2rem] mr-[0.3rem] text-white-1 text-center leading-[1.5rem] h-[1.5rem] rounded-[1rem] text-[0.7rem] w-[2.5rem]">
-            아파트
-          </div>
-          <div className="bg-grey-1 mb-[0.2rem] mr-[0.3rem] text-white-1 text-center leading-[1.5rem] h-[1.5rem] rounded-[1rem] text-[0.7rem] w-[3.5rem]">
-            106/76m²
-          </div>
-          <div className="bg-grey-1 mr-[0.3rem] text-white-1 text-center leading-[1.5rem] h-[1.5rem] rounded-[1rem] text-[0.7rem] w-[3.5rem]">
-            40/44층
-          </div>
-        </div> */}
       </div>
     </div>
   );
