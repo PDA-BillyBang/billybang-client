@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import {
   PropertyGroup,
@@ -57,6 +57,10 @@ export default function MapComponent() {
 
   const navigate = useNavigate();
 
+  const { setAddress } = useOutletContext<{
+    setAddress: (title: string) => void;
+  }>();
+
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
@@ -69,7 +73,8 @@ export default function MapComponent() {
       customOverlayRef,
       propertyOption,
       setGu,
-      setGuCode
+      setGuCode,
+      setAddress
     );
     return cleanup;
   }, []);
