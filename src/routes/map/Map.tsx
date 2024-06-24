@@ -17,7 +17,6 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-
 import { removeMarkers } from './methods/renderPlaces';
 import OptionButton from '@components/map/OptionButton';
 import OptionContent from '@components/map/OptionContent';

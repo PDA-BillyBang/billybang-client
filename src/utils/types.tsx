@@ -74,14 +74,18 @@ export const initialTradeCategory: SelectedTradeCategory = {
 
 export type PropertyOption = {
   SelectedBuildingCategory : SelectedBuildingCategory,
-  SelectedTradeCategory : SelectedTradeCategory
-  priceMin: number;
-  priceMax: number;
+  SelectedTradeCategory : SelectedTradeCategory,
+  dealPriceMin: number,
+  dealPriceMax: number,
+  leasePriceMin: number,
+  leasePriceMax: number,
 };
 
 export const initialPropertyOption: PropertyOption = {
   SelectedBuildingCategory: initialBuildingCategory,
   SelectedTradeCategory: initialTradeCategory,
-  priceMin: 0,
-  priceMax: 1000,
+  dealPriceMin: 0,
+  dealPriceMax: 3000,
+  leasePriceMin: 0,
+  leasePriceMax: 1000,
 };
