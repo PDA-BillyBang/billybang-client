@@ -20,8 +20,8 @@ export const fetchPropertyGroups = async (
   const params = {
     realEstateType,
     tradeType,
-    priceMin: 0,
-    priceMax: 3000,
+    priceMin: propertyOption.priceMin,
+    priceMax: propertyOption.priceMax,
     leftLon: swLatLng.getLng(),
     rightLon: neLatLng.getLng(),
     topLat: neLatLng.getLat(),

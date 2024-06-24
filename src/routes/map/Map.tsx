@@ -35,6 +35,7 @@ export default function MapComponent() {
   );
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
+
   const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
     undefined
   );
@@ -55,12 +56,10 @@ export default function MapComponent() {
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
   const viewportSize = GetViewportSize(); // viewport 변경 감지
 
-  const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || {
-    lat: 37.5449,
-    lon: 127.0566,
-  };
+  const { lat, lon } = location.state || { lat: null, lon: null };
+
+  const navigate = useNavigate();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
