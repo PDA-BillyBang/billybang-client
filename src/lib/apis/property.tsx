@@ -85,3 +85,24 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
     },
   });
 }
+
+export async function likeProperty(propertyId: number) {
+  return await propertyInstance.post('/stars', { propertyId: propertyId });
+}
+
+export async function deleteProperty(propertyId: number) {
+  return await propertyInstance.request({
+    method: 'DELETE',
+    url: '/stars',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: {
+      propertyId: propertyId,
+    },
+  });
+}
+
+export async function getLikeProperties() {
+  return await propertyInstance.get('/stars');
+}

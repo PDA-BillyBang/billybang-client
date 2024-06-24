@@ -1,5 +1,6 @@
 import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import {
   Params,
   useNavigate,
@@ -53,6 +54,14 @@ export default function SignUp() {
     try {
       if (email !== undefined && birthDate !== undefined) {
         await signUp({ email, password, birthDate, nickname });
+
+        Swal.fire({
+          title: '회원가입 성공',
+          text: '회원가입이 완료 되었습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+
         navigate('/');
         console.log(1);
       }

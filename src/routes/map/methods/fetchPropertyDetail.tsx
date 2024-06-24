@@ -1,10 +1,16 @@
-import { getPropertyDetails } from "@/lib/apis/property";
-import { Property, PropertyGroup, PropertyOption } from "@/utils/types";
-import { getRealEstateTypeString, getTradeTypeString } from "./fetchMethods";
+import { getPropertyDetails } from '@/lib/apis/property';
+import { Property, PropertyGroup, PropertyOption } from '@/utils/types';
+import { getRealEstateTypeString, getTradeTypeString } from './fetchMethods';
 
-export const fetchPropertyDetail = async (group : PropertyGroup, setProperties: React.Dispatch<React.SetStateAction<Property[]>>, propertyOption: PropertyOption) => {
-    const realEstateType = getRealEstateTypeString(propertyOption.SelectedBuildingCategory);
-    const tradeType = getTradeTypeString(propertyOption.SelectedTradeCategory);
+export const fetchPropertyDetail = async (
+  group: PropertyGroup,
+  setProperties: React.Dispatch<React.SetStateAction<Property[]>>,
+  propertyOption: PropertyOption
+) => {
+  const realEstateType = getRealEstateTypeString(
+    propertyOption.SelectedBuildingCategory
+  );
+  const tradeType = getTradeTypeString(propertyOption.SelectedTradeCategory);
 
     const params = {
       realEstateType : realEstateType,
