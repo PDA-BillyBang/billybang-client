@@ -46,17 +46,26 @@ const Loan = () => {
   const [navigationText, setNavigationText] = useState<string>(
     '나에게 맞는 대출 상품이 궁금하다면 정보 입력하기'
   );
+  const [minMoney, setMinMoney] = useState(0);
+  const [maxMoney, setMaxMoney] = useState(1000);
+  const [minYear, setMinYear] = useState(0);
+  const [maxYear, setMaxYear] = useState(50);
   // const navigate = useNavigate();
   const { propertyId } = useParams<{ propertyId: string }>();
 
-  const handleGetLoansByPropertyId = async () => {
+  const handleGetLoansByPropertyId = async (
+    minTerm: number,
+    maxTerm: number,
+    minPrice: number,
+    maxPrice: number
+  ) => {
     try {
       const result = await getLoansByPropertyId(
         Number(propertyId),
-        0,
-        600,
-        0,
-        1000
+        minTerm,
+        maxTerm,
+        minPrice,
+        maxPrice
       );
       console.log(propertyId, '-', result.data.response);
       setLoanResult(result.data.response);
@@ -72,11 +81,21 @@ const Loan = () => {
   };
 
   useEffect(() => {
-    handleGetLoansByPropertyId();
+    handleGetLoansByPropertyId(0, 600, 0, 1000);
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
+  const handleGetLoansFiltering = () => {
+    console.log('적용 money', minMoney, maxMoney);
+    console.log('적용 year', minYear, maxYear);
+    handleGetLoansByPropertyId(minYear, maxYear, minMoney, maxMoney);
+  };
+
+  const handleMoneyFilter = (min: number, max: number) => {
+    setMinMoney(min);
+    setMaxMoney(max);
+  };
 
   // const handleClickLoanId = (loanId: number) =>
   //   navigate('/loan/detail/' + loanId);
@@ -119,7 +138,7 @@ const Loan = () => {
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
                 <div className="text-sm">대출 기간</div>
-                <MultiRangeSliderYear min={0} max={120} />
+                <MultiRangeSliderYear min={0} max={50} />
               </div>
               <div className="py-[1rem]" />
               <hr />
@@ -127,16 +146,23 @@ const Loan = () => {
                 <div className="text-sm">최소 대출 금액</div>
                 <MultiRangeSlider
                   min={0}
-                  max={3000}
-                  onChange={() => {}}
-                  minValue={0}
-                  maxValue={3000}
+                  max={1000}
+                  onChange={({ min, max }) => {
+                    handleMoneyFilter(min, max);
+                  }}
+                  minValue={minMoney}
+                  maxValue={maxMoney}
                 />
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">
               <LargeButton isActive={4} customWidth="w-[40%]" text="초기화" />
-              <LargeButton isActive={0} customWidth="w-[55%]" text="적용" />
+              <LargeButton
+                isActive={0}
+                customWidth="w-[55%]"
+                text="적용"
+                handleClick={handleGetLoansFiltering}
+              />
             </div>
           </div>
         </BottomDrawer>

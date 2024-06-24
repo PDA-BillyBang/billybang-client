@@ -7,6 +7,9 @@ export async function getLoansByPropertyId(
   minPrice: number,
   maxPrice: number
 ) {
+  console.log(
+    `/loans?propertyId=${propertyId}&minTerm=${minTerm}&maxTerm=${maxTerm}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+  );
   return await baseInstance.get(
     `/loans?propertyId=${propertyId}&minTerm=${minTerm}&maxTerm=${maxTerm}&minPrice=${minPrice}&maxPrice=${maxPrice}`
   );
