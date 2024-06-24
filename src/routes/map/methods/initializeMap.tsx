@@ -10,11 +10,13 @@ export const initializeMap = (
   setIsDrawerOpen: Dispatch<SetStateAction<number>>,
   customOverlayRef : React.MutableRefObject<kakao.maps.CustomOverlay | null>,
   propertyOption : PropertyOption,
+  setGu : React.Dispatch<React.SetStateAction<string>>,
+  setGuCode : React.Dispatch<React.SetStateAction<string>>,
 ) => {
   const container = document.getElementById('map');
   const options = {
     center: new window.kakao.maps.LatLng(37.5449, 127.0566), // 지도의 중심좌표
-    level: 2, // 지도의 확대 레벨
+    level: 3, // 지도의 확대 레벨
   };
   if (!container) {
     return;
@@ -27,6 +29,8 @@ export const initializeMap = (
     // 편의시설 검색 객체 생성
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
+
+    const geocoder = new kakao.maps.services.Geocoder();
 
     // 편의시설 상세정보 지우기
     const removeCovenientInfo = () => {
@@ -46,11 +50,29 @@ export const initializeMap = (
     mapInstance.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     mapInstance.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 
-    // 지도 이벤트 핸들링
-    kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo)
+    // 현재 '구' 가져오기
+    const getGu = () => {
+      const center = mapInstance.getCenter();
+      geocoder.coord2RegionCode(center.getLng(), center.getLat(), (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          const gu = result[0].region_2depth_name;
+          const guCode = result[0].code.slice(0, 5);
+          setGu(gu);
+          setGuCode(guCode)
+        } else {
+          console.error('Geocoder failed due to: ' + status);
+        }
+      });
+    }
+    getGu();
 
+    // 지도 이벤트 핸들링
+    kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo);
+    kakao.maps.event.addListener(mapInstance, 'idle', getGu);
+    
     return () => {
       kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo)
+      kakao.maps.event.removeListener(mapInstance, 'idle', getGu)
     };
   });
 };

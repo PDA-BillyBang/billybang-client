@@ -24,8 +24,8 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
 }) => {
   const [minVal, setMinVal] = useState(minValue);
   const [maxVal, setMaxVal] = useState(maxValue);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+  const minValRef = useRef(minValue);
+  const maxValRef = useRef(maxValue);
   const range = useRef<HTMLDivElement>(null);
 
   // Function to convert number to currency format (e.g., 1천만원)
@@ -79,8 +79,15 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
   }, [maxVal, getPercent]);
 
   useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
+    if (minVal !== minValue || maxVal !== maxValue) {
+      onChange({ min: minVal, max: maxVal });
+    }
+  }, [minVal, maxVal, minValue, maxValue, onChange]);
+
+  useEffect(() => {
+    setMinVal(minValue);
+    setMaxVal(maxValue);
+  }, [minValue, maxValue]);
 
   return (
     <div className="flex flex-col">
@@ -105,8 +112,13 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
             value={minVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMinVal(value);
-              minValRef.current = value;
+              if (value <= maxVal) {
+                setMinVal(value);
+                minValRef.current = value;
+              } else {
+                setMinVal(maxVal - 10);
+                minValRef.current = maxVal - 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbLeft} `}
             style={{ zIndex: minVal > max - 10 ? 5 : 3 }}
@@ -118,8 +130,13 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
             value={maxVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMaxVal(value);
-              maxValRef.current = value;
+              if (value >= minVal) {
+                setMaxVal(value);
+                maxValRef.current = value;
+              } else {
+                setMaxVal(minVal + 10); // Ensure maxVal stays above minVal
+                maxValRef.current = minVal + 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbRight}`}
           />
