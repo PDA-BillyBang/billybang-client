@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import home from '@/assets/image/my/home.svg';
 import LikeButton from '../common/button/LikeButton';
 import { PropertyI } from '@/routes/mypage/Mypage';

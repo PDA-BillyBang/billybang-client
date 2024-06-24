@@ -1,6 +1,3 @@
-import React from "react";
-import { Button } from "flowbite-react";
-
 type Props = {
   text: string;
   handleClick?: () => void;

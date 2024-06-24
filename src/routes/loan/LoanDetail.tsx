@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
-import bankTest from '../../assets/image/test/bank-test.png';
 import check from '../../assets/image/icons/check.svg';
 import LoanSmallButton from './LoanSmallButton';
 import LargeButton from '../../components/common/button/LargeButton';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { newsDataI } from './AreaNews';
 
 export default function NewsCard({
@@ -12,6 +12,7 @@ export default function NewsCard({
 }: newsDataI) {
   const [truncatedTitle, setTruncatedTitle] = useState(newsTitle);
   const [truncatedSummary, setTruncatedSummary] = useState(newsSummary);
+  console.log(id);
 
   const handleToNewsUrl = () => {
     window.open(newsUrl);

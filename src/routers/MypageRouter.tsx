@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouteObject } from 'react-router-dom';
 import Mypage from '../routes/mypage/Mypage';
 import MypageLoan from '../routes/mypage/MypageLoan';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import profileTest from '../../assets/image/test/profile-test.svg';
 import editGrey from '../../assets/image/icons/editGrey.svg';

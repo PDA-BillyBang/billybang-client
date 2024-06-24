@@ -1,5 +1,5 @@
 // src/components/common/MainHeader.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Avatar } from 'flowbite-react';
 import search from 'images/search.svg';
 import { Outlet, useNavigate } from 'react-router-dom';

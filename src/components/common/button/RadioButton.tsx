@@ -18,14 +18,18 @@ const RadioOption: React.FC<RadioOptionProps> = ({
   onChange,
   label,
 }) => {
+  // Convert boolean to string for the Radio component
+  const stringValue = value.toString();
+  const selectedStringValue = selectedOption?.toString();
+
   return (
-    <div className="flex w-full items-center gap-2">
+    <div className="flex items-center w-full gap-2">
       <Radio
         className="h-[2.5rem]"
         id={id}
         name={name}
-        value={value}
-        checked={selectedOption === value}
+        value={stringValue}
+        checked={selectedStringValue === stringValue}
         onChange={() => onChange(value)}
       />
       <Label className="text-[1.2rem]" htmlFor={id}>

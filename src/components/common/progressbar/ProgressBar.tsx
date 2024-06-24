@@ -1,5 +1,4 @@
 // src/components/common/progressbar/ProgressBar.tsx
-import React from "react";
 
 type Props = {
   color?: number;

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import SmallButton from '../../components/common/button/SmallButton';
+import { useEffect, useState } from 'react';
 import NewsCard from './NewsCard';
 import { getNewsByDistrictId } from '@/lib/apis/statistics';
 import NewsCardSkeleton from './NewsCardSkeleton';
@@ -14,8 +13,6 @@ export interface newsDataI {
   newsTitle: string;
   newsUrl: string;
 }
-
-const data = [1, 2, 3, 4, 5];
 
 export default function AreaNews({ districtId }: Props) {
   const [newsData, setNewsData] = useState<newsDataI[]>();
