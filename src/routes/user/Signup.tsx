@@ -79,13 +79,6 @@ export default function SignUp() {
     const isCheckPasswordValid =
       checkPassword.length >= 8 && checkPassword === password;
     const isDateValid = birthDate !== null; // 생년월일이 선택되었는지 확인
-    console.log(
-      isPasswordValid,
-      isNicknameValid,
-      isCheckPasswordValid,
-      isDateValid
-    );
-    console.log(isActive);
 
     if (
       isPasswordValid &&
@@ -158,7 +151,7 @@ export default function SignUp() {
           text="2자리 이상 입력해주세요"
           value={nickname}
           onChange={handleCheckNicnameChange}
-          validate={(value) => typeof value === 'string' && value.length >= 4}
+          validate={(value) => typeof value === 'string' && value.length >= 2}
           errorMessage="닉네임은 2자리 이상이어야 합니다."
         />
       </div>
