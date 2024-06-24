@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import LoanCard from '../../components/loan/LoanCard';
-import LoanHeader from '../../components/loan/LoanHeader';
 import { useNavigate } from 'react-router-dom';
 import { getLikeLoans } from '@/lib/apis/loan';
 import { loanCategoriesI } from '../loan/Loan';
@@ -31,14 +30,13 @@ export default function MypageLoan() {
     setTitle('찜한 대출상품');
   }, [setTitle]);
 
-  const handleClickLoanId = (loanId: number) =>
-    navigate('/loan/detail/' + loanId);
+  // const handleClickLoanId = (loanId: number) =>
+  //   navigate('/loan/detail/' + loanId);
 
-  const data = [1, 2, 3, 6, 7];
   return (
     <div className="pt-[80px] w-[100%] flex flex-col items-center">
       <div className="w-customWidthPercent">
-        {likeLoans.map((value, index) => {
+        {likeLoans.map((value) => {
           return value.loans.map((loan, idx) => {
             const handleClick = (loanId: number) => {
               navigate('/loan/detail/' + loanId);

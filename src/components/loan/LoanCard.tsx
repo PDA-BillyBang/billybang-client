@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LikeButton from '../common/button/LikeButton';
-import { loanI } from '@/routes/loan/Loan';
 
 type Props = {
   loanId?: number;
@@ -41,7 +40,7 @@ export const formatLoanLimit = (loanLimit: number | undefined) => {
 export default function LoanCard({
   loanId,
   handleClick,
-  likeActive = false,
+  // likeActive = false,
   isStarred = true,
   loanLimit,
   ltv,
@@ -53,6 +52,7 @@ export default function LoanCard({
   providerName = '우리은행',
 }: Props) {
   const [likeButtonActive, setLikeButtonActive] = useState<boolean>(isStarred);
+  // console.log(likeActive);
   const handleLikeClick = () => {
     console.log('like loan card');
     setLikeButtonActive((prev) => !prev);

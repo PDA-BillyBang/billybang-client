@@ -18,7 +18,7 @@ export default function UserInfoInputDone() {
           customWidth="w-full"
           isActive={3}
           image={doubleWhiteRight}
-          handleClick={() => navigate('/user/login')}
+          handleClick={() => navigate('/')}
         />
       </div>
     </div>

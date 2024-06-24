@@ -75,11 +75,11 @@ export default function MapSearch({}: Props) {
   };
 
   return (
-    <div>
+    <div className="font-NanumSquareRound">
       <div className="flex h-16">
         <div className="flex w-full">
           <input
-            className="flex-grow ml-2 text-[1.2rem] px-2 py-1"
+            className="flex-grow text-[1.2rem] px-2 py-1"
             type="search"
             placeholder="자치구 or 행정동을 입력하세요"
             value={query}
@@ -101,7 +101,7 @@ export default function MapSearch({}: Props) {
           {filteredArray.map((element, index) => (
             <li
               key={index}
-              className="h-12 flex flex-col justify-center"
+              className="h-12 flex flex-col justify-center hover:bg-grey-4 cursor-pointer"
               onClick={() =>
                 handleClickedSearchButtion(element.latitude, element.longitude)
               }

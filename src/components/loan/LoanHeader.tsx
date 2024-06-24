@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = { text?: string; count?: number };
 
 export default function LoanHeader({

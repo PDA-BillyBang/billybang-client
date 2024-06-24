@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   AreaChart,
   CartesianGrid,
@@ -15,45 +14,6 @@ export interface populationDensityI {
   areaName: string;
   density: number;
 }
-
-const data = [
-  {
-    name: '사직동',
-    pv: 2400,
-  },
-  {
-    name: '삼천동',
-    pv: 1398,
-  },
-  {
-    name: '부암동',
-    pv: 9800,
-  },
-  {
-    name: '평창동',
-    pv: 3908,
-  },
-  {
-    name: '교남동',
-    pv: 4800,
-  },
-  {
-    name: '무악동',
-    pv: 3800,
-  },
-  {
-    name: '가나동',
-    pv: 2200,
-  },
-  {
-    name: '라마동',
-    pv: 1300,
-  },
-  {
-    name: '바사동',
-    pv: 3240,
-  },
-];
 
 export default function DistrictPopulationDensity({
   populationDensity,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props {
   text: string;
   customWidth: string;
@@ -40,7 +38,7 @@ export default function LargeButton({
       {isActive === 3 && image ? (
         <div className="flex items-center justify-center w-full">
           <span>{text}</span>
-          <img src={image} alt="" className="absolute  right-4" />
+          <img src={image} alt="" className="absolute right-4" />
         </div>
       ) : (
         text

@@ -2,7 +2,7 @@ import LargeButton from '@components/common/button/LargeButton';
 import RadioOption from '@components/common/button/RadioButton';
 import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
 import ProgressBar from '@components/common/progressbar/ProgressBar';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 interface Props {
@@ -89,7 +89,7 @@ export default function UserInfoInputFirst({
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center">
+    <div className="flex flex-col items-center min-h-screen">
       <div className="flex flex-row mt-[4rem] w-full">
         <ProgressBar color={0} />
         <ProgressBar color={1} />
@@ -166,7 +166,7 @@ export default function UserInfoInputFirst({
         />
       </div>
 
-      <div className="mt-auto w-customWidthPercent flex flex-col items-center mb-4">
+      <div className="flex flex-col items-center mt-auto mb-4 w-customWidthPercent">
         <LargeButton
           text="계속하기"
           customWidth="w-full"

@@ -33,10 +33,25 @@ export default function UserInfoInputSecond({
 }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<number>(0);
+  const [selectedJobLabel, setSelectedJobLabel] = useState<string>('');
   const handleClick = () => setIsOpen((prev) => !prev);
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
+
+  const jobOptions = [
+    ['일반직', 'GENERAL'],
+    ['금융', 'FINANCE'],
+    ['교육', 'EDUCATION'],
+    ['공무원', 'PUBLIC'],
+    ['의료', 'MEDICAL'],
+    ['IT', 'IT'],
+    ['서비스', 'SERVICE'],
+    ['영업', 'SALES'],
+    ['아트', 'ART'],
+    ['법률', 'LEGAL'],
+    ['기타', 'ETC'],
+  ];
 
   useEffect(() => {
     setTitle('정보 입력');
@@ -45,6 +60,14 @@ export default function UserInfoInputSecond({
   useEffect(() => {
     checkValidity();
   }, [isForeign, occupation, employmentDuration]);
+
+  useEffect(() => {
+    if (occupation) {
+      const jobLabel =
+        jobOptions.find((job) => job[1] === occupation)?.[0] || '';
+      setSelectedJobLabel(jobLabel);
+    }
+  }, [occupation]);
 
   const checkValidity = () => {
     const isSelectedJobValid = occupation !== undefined;
@@ -59,8 +82,12 @@ export default function UserInfoInputSecond({
     setIsForeign(option);
   };
 
-  const handleJobSelect = (job: string | undefined | boolean) => {
-    if (typeof job === 'string') setOccupation(job);
+  const handleJobSelect = (job: string | undefined) => {
+    const selectedJob = jobOptions.find((j) => j[0] === job);
+    if (selectedJob) {
+      setOccupation(selectedJob[1]);
+      setSelectedJobLabel(selectedJob[0]);
+    }
     setIsOpen(false);
   };
 
@@ -121,34 +148,24 @@ export default function UserInfoInputSecond({
         <input
           id="selectedJob"
           type="text"
-          value={occupation ? occupation : '카테고리중 하나를 선택해주세요'}
+          value={selectedJobLabel || '카테고리 중 하나를 선택해주세요'}
           onClick={handleClick}
+          onChange={() => {}}
           className="w-full h-[3rem] border-b border-grey-2 placeholder-grey-2 focus:outline-none focus:border-[black]"
+          readOnly
         />
       </div>
 
       <div className="flex flex-col">
         <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
           <div className="flex flex-col h-full justify-center">
-            {[
-              ['일반직', 'GENERAL'],
-              ['금융', 'FINANCE'],
-              ['교육', 'EDUCATION'],
-              ['공무원', 'PUBLIC'],
-              ['의료', 'MEDICAL'],
-              ['IT', 'IT'],
-              ['서비스', 'SERVICE'],
-              ['영업', 'SALES'],
-              ['아트', 'ART'],
-              ['법률', 'LEGAL'],
-              ['기타', 'ETC'],
-            ].map((job) => (
+            {jobOptions.map((job) => (
               <div key={job[1]} className="h-[3rem]">
                 <RadioOption
-                  id={job[1]}
+                  id={job[0]}
                   name="jobOption"
-                  value={job[1]}
-                  selectedOption={occupation ? occupation : 'GENERAL'}
+                  value={job[0]}
+                  selectedOption={selectedJobLabel || 'GENERAL'}
                   onChange={handleJobSelect}
                   label={job[0]}
                 />
@@ -166,7 +183,7 @@ export default function UserInfoInputSecond({
           value={employmentDuration?.toLocaleString()}
           onChange={handleEmployPeriodChange}
           validate={() =>
-            typeof employmentDuration == 'number' && employmentDuration >= 0
+            typeof employmentDuration === 'number' && employmentDuration >= 0
           }
           errorMessage="정확한 재직 기간을 입력해주세요"
           unit="개월"
@@ -189,7 +206,7 @@ export default function UserInfoInputSecond({
             id="majorCompany"
             name="companySizeOption"
             value="LARGE"
-            selectedOption={companySize ? companySize : 'LARGE'}
+            selectedOption={companySize || 'LARGE'}
             onChange={handleCompanySize}
             label="대기업"
           />

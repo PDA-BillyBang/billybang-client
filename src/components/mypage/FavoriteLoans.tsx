@@ -1,4 +1,3 @@
-import React from 'react';
 import FavoriteLoanCard from './FavoriteLoanCard';
 import { LikeLoansI } from '@/routes/mypage/Mypage';
 import { loanI } from '@/routes/loan/Loan';

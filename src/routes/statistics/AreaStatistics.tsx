@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DistrictPopulationDensity from './charts/DistrictPopulationDensity';
 import DistrictIncome from './charts/DistrictIncome';
 import AgeGroupPopulation from './charts/AgeGroupPopulation';
@@ -8,6 +8,7 @@ import { crimeCountI } from './charts/CrimeRate';
 import { populationCountI } from './charts/AgeGroupPopulation';
 import { individualIncomeI } from './charts/DistrictIncome';
 import ChartSkeleton from './charts/ChartSkeleton';
+
 type Props = { areaId: string };
 
 export default function AreaStatistics({ areaId }: Props) {
@@ -17,6 +18,8 @@ export default function AreaStatistics({ areaId }: Props) {
   const [individualIncomeList, setIndividualIncomeList] =
     useState<individualIncomeI[]>();
   const [populationDensityList, setPopulationDensityList] = useState();
+  const [isError, setIsError] = useState(false);
+
   const handleStatisticsByDistrictId = async () => {
     try {
       const result = await getStatisticsByDistrictId(Number(areaId));
@@ -25,14 +28,29 @@ export default function AreaStatistics({ areaId }: Props) {
       setPopulationCountList(result.data.response.populationCount);
       setIndividualIncomeList(result.data.response.individualIncome);
       setPopulationDensityList(result.data.response.populationDensity);
-    } catch (error) {
-      console.log('[ERROR]', error);
+      setIsError(false); // Reset error state if request succeeds
+    } catch (error: any) {
+      if (error.response && error.response.status === 500) {
+        console.log('Internal Server Error: Status code 500');
+        setIsError(true); // Set error state if a 500 error occurs
+      } else {
+        console.log('[ERROR]', error);
+      }
     }
   };
 
   useEffect(() => {
     handleStatisticsByDistrictId();
-  }, []);
+  }, [areaId]);
+
+  if (isError) {
+    return (
+      <div className="mt-[10rem] text-center text-red-500 flex flex-col justify-center items-center">
+        <div className="text-[1.3rem] pb-[0.3rem]">✔️</div>
+        통계 제공 지역이 아닙니다
+      </div>
+    );
+  }
 
   return (
     <div className="">

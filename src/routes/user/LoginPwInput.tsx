@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Params,
   useNavigate,
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export default function LoginPwInput() {
   const [password, setPassword] = useState<string>('');
   const { email } = useParams<Params>();
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
@@ -82,8 +82,8 @@ export default function LoginPwInput() {
           errorMessage="비밀번호는 8자리 이상이어야 합니다."
         />
       </div>
-      <div className="mt-auto w-customWidthPercent flex flex-col items-center mb-4">
-        {error !== null ? <div className="text-blue-1">{error}</div> : <></>}
+      <div className="flex flex-col items-center mt-auto mb-4 w-customWidthPercent">
+        {/* {error !== null ? <div className="text-blue-1">{error}</div> : <></>} */}
         {password.length >= 8 ? (
           <LargeButton
             text="계속하기"

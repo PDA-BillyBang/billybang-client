@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import SelectHeader from '../../components/common/header/SelectHeader';
 import { useState } from 'react';
@@ -13,8 +13,13 @@ export default function Statistics({}: Props) {
     setTitle: (title: string) => void;
   }>();
   useEffect(() => {
-    areaId && setTitle(`${districtsName[Number(areaId)]}`);
-  }, [setTitle]);
+    if (areaId) {
+      const districtName = districtsName[areaId];
+      if (districtName) {
+        setTitle(districtName);
+      }
+    }
+  }, [areaId, setTitle]);
   const [selectActive, setSelectActive] = useState(0);
   const handleSelectActive = (index: number) => {
     setSelectActive(index);

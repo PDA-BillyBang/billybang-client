@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
-import bankTest from '../../assets/image/test/bank-test.png';
 import check from '../../assets/image/icons/check.svg';
 import LoanSmallButton from './LoanSmallButton';
 import LargeButton from '../../components/common/button/LargeButton';
@@ -25,6 +24,7 @@ export interface loanDetailI {
   providerId: number;
   providerImgUrl: string;
   providerName: string;
+  originUrl: string;
 }
 
 const LoanDetail = () => {
@@ -67,7 +67,8 @@ const LoanDetail = () => {
 
   const handleToBankUrl = () => {
     window.open(
-      'https://www.kebhana.com/cont/mall/mall08/mall0802/mall080202/1501583_115196.jsp?_menuNo=98786'
+      loanDetailResult?.originUrl
+      // 'https://www.kebhana.com/cont/mall/mall08/mall0802/mall080202/1501583_115196.jsp?_menuNo=98786'
     );
   };
 
