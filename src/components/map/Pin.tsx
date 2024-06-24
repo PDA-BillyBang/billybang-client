@@ -18,7 +18,7 @@ export default function Pin({ propertyId, area, price, count, handleClick, isSel
       <div
         className={`${isSelected ? 'bg-blue-1 w-16 h-7 rounded-tl-2xl rounded-tr-2xl text-md' : 'bg-blue-2 w-14 h-6 rounded-tl-xl rounded-tr-xl text-sm'} flex items-center justify-center text-white-1 font-semibold relative shadow-lg`}
       >
-        {area}평
+        {Math.floor(area/3.3)}평
         {count >= 2 && (
           <div
             className={`${isSelected ? 'w-5 h-5 -top-2 -right-3 text-s' : 'w-4 h-4 -top-1 -right-2 text-xs'} absolute flex items-center justify-center bg-grey-3 rounded-full text-black-1 font-semibold z-20 shadow-lg`}

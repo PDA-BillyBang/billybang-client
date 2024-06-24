@@ -1,13 +1,14 @@
 // src/components/common/MainHeader.tsx
-import React from 'react';
-import { Avatar, Navbar } from 'flowbite-react';
+import React, { useState } from 'react';
+import { Avatar } from 'flowbite-react';
 import search from 'images/search.svg';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { isvalidateToken } from '@/lib/apis/user';
 
 export default function MainHeader() {
   const navigate = useNavigate();
-
+  const [address, setAddress] = useState<string>('');
+  console.log(address)
   const handleClickSearchField = () => navigate('/search');
   const handleClickToMy = async () => {
     try {
@@ -33,7 +34,7 @@ export default function MainHeader() {
         </div>
         <div className="flex items-center flex-grow ">
           <div className="text-[1.2rem] text-grey-1 flex flex-col flex-grow">
-            서울시 성동구
+            {address}
           </div>
         </div>
         <div className="flex items-center md:order-2">
@@ -52,7 +53,7 @@ export default function MainHeader() {
           />
         </div>
       </div>
-      <Outlet />
+      <Outlet context={{ setAddress }} />
     </div>
   );
 }

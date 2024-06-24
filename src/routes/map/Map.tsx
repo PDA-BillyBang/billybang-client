@@ -35,7 +35,6 @@ export default function MapComponent() {
   );
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
-
   const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
     undefined
   );
@@ -75,7 +74,10 @@ export default function MapComponent() {
       setGu,
       setGuCode,
       lat,
-      lon
+      lon,
+      setGu,
+      setGuCode,
+      setAddress
     );
     return cleanup;
   }, []);
