@@ -3,6 +3,8 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import LargeButton from '../../components/common/button/LargeButton';
 import Swal from 'sweetalert2';
 import { updatePassword } from '@/lib/apis/user';
+import { ErrorResponseI } from '@/utils/errorTypes';
+import { AxiosError } from 'axios';
 
 type Props = {};
 
@@ -58,14 +60,29 @@ export default function MypageEditPW({}: Props) {
       });
 
       navigate('../');
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '비밀번호 변경 중 오류가 발생했습니다.',
-        confirmButtonColor: '#004CC7',
-        confirmButtonText: '확인',
-      });
+    } catch (error: unknown) {
+      const errorResponse = error as AxiosError<ErrorResponseI>;
+      if (errorResponse.response && errorResponse.response.status === 400) {
+        Swal.fire({
+          icon: 'error',
+          title: '오류',
+          text: '비밀번호 변경 중 오류가 발생했습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+      } else if (
+        errorResponse.response &&
+        errorResponse.response.status === 401
+      ) {
+        Swal.fire({
+          icon: 'error',
+          title: '로그인 만료',
+          text: '로그인이 만료되었습니다. 다시 로그인 해주시길 바랍니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+        navigate('/user/login');
+      }
     }
   };
 

@@ -30,16 +30,27 @@ export default function MypageEditName({}: Props) {
       navigate('../');
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
-      if (errorResponse.response) {
-        console.error(errorResponse.response.data.response);
+      if (errorResponse.response && errorResponse.response.status === 400) {
+        Swal.fire({
+          icon: 'error',
+          title: '오류',
+          text: '닉네임 변경 중 오류가 발생했습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+      } else if (
+        errorResponse.response &&
+        errorResponse.response.status === 401
+      ) {
+        Swal.fire({
+          icon: 'error',
+          title: '로그인 만료',
+          text: '로그인이 만료되었습니다. 다시 로그인 해주시길 바랍니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+        navigate('/user/login');
       }
-      Swal.fire({
-        icon: 'error',
-        title: '오류',
-        text: '닉네임 변경 중 오류가 발생했습니다.',
-        confirmButtonColor: '#004CC7',
-        confirmButtonText: '확인',
-      });
     }
   };
 
