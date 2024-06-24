@@ -50,7 +50,6 @@ const Loan = () => {
   const [maxMoney, setMaxMoney] = useState(1000);
   const [minYear, setMinYear] = useState(0);
   const [maxYear, setMaxYear] = useState(50);
-  // const navigate = useNavigate();
   const { propertyId } = useParams<{ propertyId: string }>();
 
   const handleGetLoansByPropertyId = async (
@@ -91,14 +90,20 @@ const Loan = () => {
     console.log('적용 year', minYear, maxYear);
     handleGetLoansByPropertyId(minYear, maxYear, minMoney, maxMoney);
   };
+  const handleGetLoanInit = () => {
+    setMaxMoney(1000);
+    handleGetLoansByPropertyId(0, 600, 0, 1000);
+  };
 
   const handleMoneyFilter = (min: number, max: number) => {
     setMinMoney(min);
     setMaxMoney(max);
   };
 
-  // const handleClickLoanId = (loanId: number) =>
-  //   navigate('/loan/detail/' + loanId);
+  const handleTermFilter = (min: number, max: number) => {
+    setMinYear(min);
+    setMaxYear(max);
+  };
 
   if (loading) {
     return (
@@ -138,7 +143,15 @@ const Loan = () => {
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
                 <div className="text-sm">대출 기간</div>
-                <MultiRangeSliderYear min={0} max={50} />
+                <MultiRangeSliderYear
+                  min={0}
+                  max={50}
+                  onChange={({ min, max }) => {
+                    handleTermFilter(min, max);
+                  }}
+                  minValue={minYear}
+                  maxValue={maxYear}
+                />
               </div>
               <div className="py-[1rem]" />
               <hr />
@@ -156,7 +169,12 @@ const Loan = () => {
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">
-              <LargeButton isActive={4} customWidth="w-[40%]" text="초기화" />
+              <LargeButton
+                isActive={4}
+                customWidth="w-[40%]"
+                text="초기화"
+                handleClick={handleGetLoanInit}
+              />
               <LargeButton
                 isActive={0}
                 customWidth="w-[55%]"
