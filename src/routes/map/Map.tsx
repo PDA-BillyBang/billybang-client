@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import {
   PropertyGroup,
@@ -55,10 +55,13 @@ export default function MapComponent() {
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
   const viewportSize = GetViewportSize(); // viewport 변경 감지
 
-  const location = useLocation();
-  const { lat, lon } = location.state || { lat: null, lon: null };
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const { lat, lon } = location.state || { lat: 37.5449, lon: 127.0566 };
+
+  const { setAddress } = useOutletContext<{
+    setAddress: (title: string) => void;
+  }>();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -73,11 +76,9 @@ export default function MapComponent() {
       propertyOption,
       setGu,
       setGuCode,
+      setAddress,
       lat,
-      lon,
-      setGu,
-      setGuCode,
-      setAddress
+      lon
     );
     return cleanup;
   }, []);
@@ -178,7 +179,7 @@ export default function MapComponent() {
             id="currentLocationImg"
             src={Aim}
             alt="현재 위치로 이동"
-            className="w-7 h-7 cursor-pointer"
+            className="cursor-pointer w-7 h-7"
           />
         </div>
 
