@@ -19,3 +19,7 @@ export async function likeLoan(loanId: number) {
 export async function deleteLikeLoan(loanId: number) {
   return await loanInstance.delete(`/stars?loanId=${loanId}`);
 }
+
+export async function getLikeLoans() {
+  return await loanInstance.get('/stars');
+}

@@ -1,4 +1,3 @@
-// src/routes/user/LoginMain.tsx
 import React, { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
@@ -6,6 +5,7 @@ import LargeButton from '@components/common/button/LargeButton';
 import { isEmailRegistered, kakaoLogin } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import Swal from 'sweetalert2';
 import { ErrorResponseI } from '@/utils/errorTypes';
 
 export default function Login() {
@@ -33,6 +33,15 @@ export default function Login() {
   };
 
   const isExistedUser = async () => {
+    if (!email) {
+      Swal.fire({
+        icon: 'warning',
+        title: '이메일을 입력해주세요',
+        confirmButtonColor: '#004CC7',
+        confirmButtonText: '확인',
+      });
+      return;
+    }
     try {
       const response = await isEmailRegistered(email);
       console.log(response.data.response);

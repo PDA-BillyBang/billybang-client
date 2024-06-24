@@ -10,6 +10,7 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
+
 import { removeMarkers } from "./methods/renderPlaces";
 import OptionButton from "@components/map/OptionButton";
 import OptionContent from "@components/map/OptionContent";
@@ -18,6 +19,7 @@ import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
+
 
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);  // 매물 묶음 데이터
@@ -36,6 +38,7 @@ export default function MapComponent() {
   const markers = useRef<kakao.maps.Marker[]>([]);  // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null);  // 편의시설 상세정보 UI
   const viewportSize = GetViewportSize();  // viewport 변경 감지
+
   const navigate = useNavigate();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
@@ -87,6 +90,7 @@ export default function MapComponent() {
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map]);
 
+
   // 편의시설 카테고리 변경시 검색
   useEffect(() => {
     if (!ps || !map || !selectedCategory) return;
@@ -129,12 +133,15 @@ export default function MapComponent() {
   const handleCloseDrawer = useCallback(() => {
     setIsDrawerOpen(0);
     setSelectedPropertyId(null);
-  }, [])
+  }, []);
 
   // 페이지 변경 버튼
-  const onButtonClick = useCallback((link: string) => {
-    navigate(link);
-  }, [navigate]);
+  const onButtonClick = useCallback(
+    (link: string) => {
+      navigate(link);
+    },
+    [navigate]
+  );
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   console.log(properties)
@@ -149,6 +156,7 @@ export default function MapComponent() {
             className="w-7 h-7 cursor-pointer"
           />
         </div>
+
         <BottomDrawer isOpen={isDrawerOpen!==0} handleClose={handleCloseDrawer} isBackDropped={false} position={drawerPosition} >
           {isDrawerOpen===2 && <MapPropertyLoan properties={properties} />}
           {isDrawerOpen===1 && <OptionContent 

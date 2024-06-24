@@ -10,6 +10,7 @@ import LargeButton from '@components/common/button/LargeButton';
 import { login } from '@/lib/apis/user';
 import { AxiosError } from 'axios';
 import { ErrorResponseI } from '@/utils/errorTypes';
+import Swal from 'sweetalert2';
 
 export default function LoginPwInput() {
   const [password, setPassword] = useState<string>('');
@@ -32,7 +33,13 @@ export default function LoginPwInput() {
 
   const handleLoginButtonClicked = async () => {
     if (!email) {
-      setError('이메일이 필요합니다.');
+      Swal.fire({
+        icon: 'error',
+        title: '오류',
+        text: '이메일이 필요합니다.',
+        confirmButtonColor: '#004CC7',
+        confirmButtonText: '확인',
+      });
       return false;
     }
     try {
@@ -42,13 +49,26 @@ export default function LoginPwInput() {
       const errorResponse = error as AxiosError<ErrorResponseI>;
 
       if (errorResponse.response && errorResponse.response.status === 400) {
-        setError('아이디나 비밀번호가 일치하지 않습니다.');
+        Swal.fire({
+          icon: 'error',
+          title: '로그인 실패',
+          text: '일치하는 유저 정보가 없습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
       } else {
-        setError('로그인 중 오류가 발생했습니다.');
+        Swal.fire({
+          icon: 'error',
+          title: '오류',
+          text: '로그인 중 오류가 발생했습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
         console.error('로그인 에러:', error);
       }
     }
   };
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <div className="w-customWidthPercent my-[7rem]">
