@@ -33,7 +33,7 @@ export default function MypageProperties() {
         {likeProperties.length > 0 &&
           likeProperties.map((property: PropertyI, index) => {
             return (
-              <div key={property.id} className="pb-[0.5rem]">
+              <div key={property.id} className="mb-[0.7rem]">
                 <FavoriteDetailRoomCard property={property} />
               </div>
             );

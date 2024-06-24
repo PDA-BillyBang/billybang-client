@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import home from '@/assets/image/my/home.svg';
 import LikeButton from '../common/button/LikeButton';
 import { PropertyI } from '@/routes/mypage/Mypage';
+import { useNavigate } from 'react-router-dom';
 type Props = { property: PropertyI };
 
 export default function FavoriteDetailRoomCard({ property }: Props) {
   const [likeActive, setLikeActive] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const handleLikeClick = () => {
     console.log('like');
@@ -31,7 +33,10 @@ export default function FavoriteDetailRoomCard({ property }: Props) {
   };
 
   return (
-    <div className="w-[100%] hover:bg-grey-5 bg-grey-6 h-[150px] flex flex-row rounded-[10px]">
+    <div
+      onClick={() => navigate('/property/' + property.id)}
+      className="w-[100%] hover:bg-grey-5 bg-grey-6 h-[150px] cursor-pointer flex flex-row rounded-[10px]"
+    >
       <div className="w-[40%] pl-[0.3rem] flex justify-center items-center">
         {property.representativeImgUrl == null ? (
           <div className="flex items-center justify-center w-full h-full rounded-lg bg-grey-5">
