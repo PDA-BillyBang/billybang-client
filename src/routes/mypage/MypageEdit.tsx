@@ -49,9 +49,10 @@ export default function MypageEdit() {
 
   const handleClickedUserInfoButton = async () => {
     const resp = await getUserInfo();
-    console.log(resp);
-    if (resp.data.response.userInfo) navigate('/user/info/1');
-    else navigate('/user/info/2');
+    console.log(resp.data.response);
+    if (resp.data.response.userInfo)
+      navigate('/user/info/1'); //유저정보가 있으면 1로
+    else navigate('/user/info/2'); // 없으면 2로
   };
 
   const handleClickedUserLogoutButton = async () => {
