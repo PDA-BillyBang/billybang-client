@@ -146,7 +146,9 @@ export default function Mypage() {
         </div>
       )}
       <div className="pb-[1rem]" />
-      <PlusButton handleClick={handleToMyProperties} />
+      {likeProperties.length > 0 && (
+        <PlusButton handleClick={handleToMyProperties} />
+      )}
       <div className="py-[2rem]" />
       <div className="font-bold flex items-center flex-row text-[1.2rem] pb-[0.4rem]">
         <img
@@ -164,7 +166,7 @@ export default function Mypage() {
         </div>
       )}
       <div className="pb-[1rem]" />
-      <PlusButton handleClick={handleToMyLoan} />
+      {likeLoans.length > 0 && <PlusButton handleClick={handleToMyLoan} />}
       <div className="py-[1rem]" />
     </div>
   );

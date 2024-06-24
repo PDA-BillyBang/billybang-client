@@ -3,8 +3,6 @@ import FavoriteRoomCard from './FavoriteRoomCard';
 import { PropertyI } from '@/routes/mypage/Mypage';
 type Props = { likeProperties: PropertyI[] };
 
-const data = [1, 2, 3, 4, 5];
-
 export default function FavoriteRooms({ likeProperties }: Props) {
   return (
     <div className="w-[100%]">
