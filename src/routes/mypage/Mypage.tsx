@@ -12,6 +12,7 @@ import { ErrorResponseI } from '@/utils/errorTypes';
 import { getLikeLoans } from '@/lib/apis/loan';
 import { loanI } from '../loan/Loan';
 import EmptyFavorite from '@components/mypage/EmptyFavorite';
+import { getLikeProperties } from '@/lib/apis/property';
 
 interface UserInfo {
   birthDate: string;
@@ -26,9 +27,36 @@ export interface LikeLoansI {
   loans: loanI[];
 }
 
+export interface PropertyI {
+  area1: number;
+  area2: number;
+  areaName: string | null;
+  articleConfirmYmd: string;
+  articleFeatureDesc: string;
+  articleName: string;
+  articleUrl: string;
+  buildingName: string;
+  cpName: string;
+  direction: string;
+  floorInfo: string;
+  id: number;
+  jibeonAddress: string | null;
+  latitude: number;
+  longitude: number;
+  price: number;
+  realEstateType: string;
+  realtorName: string;
+  representativeImgUrl: string;
+  roadAddress: string | null;
+  sameAddrCnt: number;
+  tags: string;
+  tradeType: string;
+}
+
 export default function Mypage() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [likeLoans, setLikeLoans] = useState<LikeLoansI[]>([]);
+  const [likeProperties, setLikeProperties] = useState<PropertyI[]>([]);
 
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
@@ -44,8 +72,19 @@ export default function Mypage() {
     }
   };
 
+  const handleGetLikeProperties = async () => {
+    try {
+      const result = await getLikeProperties();
+      console.log('LIKE PRO', result.data.response);
+      setLikeProperties(result.data.response);
+    } catch (error) {
+      console.log('[ERROR]', error);
+    }
+  };
+
   useEffect(() => {
     handleGetLikeLoans();
+    handleGetLikeProperties();
   }, []);
 
   useEffect(() => {
@@ -90,7 +129,13 @@ export default function Mypage() {
         />
         찜한 방
       </div>
-      <FavoriteRooms />
+      {likeProperties.length > 0 ? (
+        <FavoriteRooms likeProperties={likeProperties} />
+      ) : (
+        <div className="w-[100%] ">
+          <EmptyFavorite />
+        </div>
+      )}
       <div className="pb-[1rem]" />
       <PlusButton handleClick={handleToMyProperties} />
       <div className="py-[2rem]" />
