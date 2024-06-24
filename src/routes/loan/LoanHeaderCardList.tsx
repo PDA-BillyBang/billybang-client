@@ -1,4 +1,3 @@
-import React from 'react';
 import { loanCategoriesI } from './Loan';
 import LoanHeader from '@components/loan/LoanHeader';
 import LoanCard from '@components/loan/LoanCard';

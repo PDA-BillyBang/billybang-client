@@ -1,7 +1,5 @@
-import React from 'react';
 import {
   BarChart,
-  Line,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -13,7 +11,6 @@ import {
 import size from '../../../assets/image/company/size.svg';
 import stability from '../../../assets/image/company/stability.svg';
 import growingTrend from '../../../assets/image/company/growingTrend.svg';
-import money from '../../../assets/image/company/money.svg';
 import { financialIndicatorsI } from '../LoanCompany';
 
 type Props = { financialIndicators: financialIndicatorsI[] };

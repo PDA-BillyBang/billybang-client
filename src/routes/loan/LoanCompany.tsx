@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import upArrow from '../../assets/image/icons/upArrow.svg';
 import downArrow from '../../assets/image/icons/downArrow.svg';

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import LoanFiltering from '../../components/loan/LoanFiltering';
 import BottomDrawer from '../../components/common/button/BottomDrawer';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import NavigateButton from '../../components/common/button/NavigateButton';
 import MultiRangeSlider from '@components/common/slider/MultiRangeSlider';
 import MultiRangeSliderYear from '@components/common/slider/MultiRangeSliderYear';
@@ -46,7 +46,7 @@ const Loan = () => {
   const [navigationText, setNavigationText] = useState<string>(
     '나에게 맞는 대출 상품이 궁금하다면 정보 입력하기'
   );
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { propertyId } = useParams<{ propertyId: string }>();
 
   const handleGetLoansByPropertyId = async () => {
@@ -72,8 +72,8 @@ const Loan = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
 
-  const handleClickLoanId = (loanId: number) =>
-    navigate('/loan/detail/' + loanId);
+  // const handleClickLoanId = (loanId: number) =>
+  //   navigate('/loan/detail/' + loanId);
 
   if (loading) {
     return (

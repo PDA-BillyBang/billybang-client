@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ChartSkeleton = () => {
   return (
     <div className="w-full bg-grey-6 rounded-[5px] my-[0.4rem] h-[250px] px-[0.8rem] items-center justify-between flex animate-pulse">

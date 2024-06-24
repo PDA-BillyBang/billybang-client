@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import FavoriteDetailRoomCard from '../../components/mypage/FavoriteDetailRoomCard';
 import { getLikeProperties } from '@/lib/apis/property';
@@ -31,7 +31,7 @@ export default function MypageProperties() {
     <div className="pt-[80px] flex flex-col items-center">
       <div className=" w-customWidthPercent">
         {likeProperties.length > 0 &&
-          likeProperties.map((property: PropertyI, index) => {
+          likeProperties.map((property: PropertyI) => {
             return (
               <div key={property.id} className="mb-[0.7rem]">
                 <FavoriteDetailRoomCard property={property} />

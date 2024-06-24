@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DistrictPopulationDensity from './charts/DistrictPopulationDensity';
 import DistrictIncome from './charts/DistrictIncome';
 import AgeGroupPopulation from './charts/AgeGroupPopulation';

@@ -1,15 +1,14 @@
-import React from "react";
-import { RouteObject } from "react-router-dom";
-import SubHeader from "../components/common/header/SubHeader";
-import Statistics from "../routes/statistics/Statistics";
+import { RouteObject } from 'react-router-dom';
+import SubHeader from '../components/common/header/SubHeader';
+import Statistics from '../routes/statistics/Statistics';
 
 export const statisticsRoutes: RouteObject[] = [
   {
-    path: "statistics",
+    path: 'statistics',
     element: <SubHeader />,
     children: [
       {
-        path: ":areaId",
+        path: ':areaId',
         element: <Statistics />,
       },
     ],

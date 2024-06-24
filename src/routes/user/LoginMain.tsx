@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
@@ -27,10 +27,10 @@ export default function Login() {
     }
   };
 
-  const handleKakaoLogin2 = () => {
-    window.location.href =
-      'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
-  };
+  // const handleKakaoLogin2 = () => {
+  //   window.location.href =
+  //     'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
+  // };
 
   const isExistedUser = async () => {
     if (!email) {

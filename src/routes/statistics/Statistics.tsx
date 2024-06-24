@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import SelectHeader from '../../components/common/header/SelectHeader';
 import { useState } from 'react';

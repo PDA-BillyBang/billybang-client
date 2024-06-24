@@ -1,9 +1,8 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route, RouteObject } from "react-router-dom";
-import { mainRoutes } from "./routers/MainRouter";
+import './App.css';
+import { BrowserRouter, Routes, Route, RouteObject } from 'react-router-dom';
+import { mainRoutes } from './routers/MainRouter';
 
-function renderRoutes(routesObj: RouteObject[], parentPath = "") {
+function renderRoutes(routesObj: RouteObject[], parentPath = '') {
   return routesObj.map((route) => {
     const fullPath = `${parentPath}${route.path}`;
     return (

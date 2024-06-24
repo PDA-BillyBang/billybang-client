@@ -1,11 +1,11 @@
 import { userInstance } from './api';
 
-interface User {
-  password: string;
-  birthDate: string;
-  nickname: string;
-  userinfo: UserInfo[];
-}
+// interface User {
+//   password: string;
+//   birthDate: string;
+//   nickname: string;
+//   userinfo: UserInfo[];
+// }
 
 interface UserInfo {
   occupation: string | undefined;
