@@ -97,7 +97,7 @@ export default function MapComponent() {
     }
   }, [selectedCategory, map, ps]);
 
-  // propertyOption 변경시 매물 정보 다시 가져오기
+  // 검색옵션 변경시 매물 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
     const handleFetchPropertyGroups = () => {

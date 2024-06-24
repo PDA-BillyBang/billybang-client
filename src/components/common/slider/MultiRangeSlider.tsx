@@ -112,8 +112,13 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
             value={minVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMinVal(value);
-              minValRef.current = value;
+              if (value <= maxVal) {
+                setMinVal(value);
+                minValRef.current = value;
+              } else {
+                setMinVal(maxVal - 10);
+                minValRef.current = maxVal - 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbLeft} `}
             style={{ zIndex: minVal > max - 10 ? 5 : 3 }}
@@ -125,8 +130,13 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
             value={maxVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMaxVal(value);
-              maxValRef.current = value;
+              if (value >= minVal) {
+                setMaxVal(value);
+                maxValRef.current = value;
+              } else {
+                setMaxVal(minVal + 10); // Ensure maxVal stays above minVal
+                maxValRef.current = minVal + 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbRight}`}
           />
