@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import { PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
@@ -19,7 +19,6 @@ import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
-
 
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]);  // 매물 묶음 데이터
@@ -41,6 +40,10 @@ export default function MapComponent() {
 
   const navigate = useNavigate();
 
+  const { setAddress } = useOutletContext<{
+    setAddress: (title: string) => void;
+  }>();
+
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
     const cleanup = initializeMap(
@@ -53,7 +56,8 @@ export default function MapComponent() {
       customOverlayRef,
       propertyOption,
       setGu,
-      setGuCode
+      setGuCode,
+      setAddress
     );
     return cleanup;
   }, []);

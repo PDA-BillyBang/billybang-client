@@ -12,6 +12,7 @@ export const initializeMap = (
   propertyOption : PropertyOption,
   setGu : React.Dispatch<React.SetStateAction<string>>,
   setGuCode : React.Dispatch<React.SetStateAction<string>>,
+  setAddress : (title: string) => void,
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -56,9 +57,14 @@ export const initializeMap = (
       geocoder.coord2RegionCode(center.getLng(), center.getLat(), (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           const gu = result[0].region_2depth_name;
+          const dong = result[0].region_3depth_name;
           const guCode = result[0].code.slice(0, 5);
           setGu(gu);
-          setGuCode(guCode)
+          console.log(gu, dong, guCode);
+          if (setAddress){
+            setAddress(gu+" "+dong);
+          }
+          setGuCode(guCode);
         } else {
           console.error('Geocoder failed due to: ' + status);
         }
