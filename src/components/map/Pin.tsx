@@ -17,7 +17,7 @@ export default function Pin({
 }: Props) {
   return (
     <div
-      className="absolute flex flex-col items-start justify-end bg-transparent cursor-pointer select-none"
+      className="flex flex-col items-start justify-end cursor-pointer bg-transparent absolute select-none bottom-2"
       onClick={() => handleClick(propertyId)}
     >
       <div

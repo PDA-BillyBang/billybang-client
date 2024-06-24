@@ -109,7 +109,7 @@ const Loan = () => {
           }
         )}
         <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
-          <div className="w-[100%] h-[50vh] flex flex-col justify-between">
+          <div className="w-[100%] h-[43vh] flex flex-col justify-between">
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
                 <div className="text-sm">대출 기간</div>
