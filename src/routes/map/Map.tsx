@@ -47,16 +47,20 @@ export default function MapComponent() {
   const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(
     initialPropertyOption
   );
+  const [gu, setGu] = useState<string>('');
+  const [guCode, setGuCode] = useState<string>('');
   const overlayRef = useRef<{ [key: number]: OverlayData }>({}); // 매물 그룹들의 컴포넌트
   const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
   const viewportSize = GetViewportSize(); // viewport 변경 감지
 
-  const location = useLocation();
-  const { lat, lon } = location.state || { lat: null, lon: null };
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const { lat, lon } = location.state || {
+    lat: 37.5449,
+    lon: 127.0566,
+  };
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -69,6 +73,8 @@ export default function MapComponent() {
       setIsDrawerOpen,
       customOverlayRef,
       propertyOption,
+      setGu,
+      setGuCode,
       lat,
       lon
     );
@@ -123,7 +129,7 @@ export default function MapComponent() {
     };
   }, [selectedCategory, map, ps]);
 
-  // propertyOption 변경시 매물 정보 다시 가져오기
+  // 검색옵션 변경시 매물 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
     const handleFetchPropertyGroups = () => {
@@ -209,11 +215,11 @@ export default function MapComponent() {
         </div>
         <div
           className="absolute z-10 bottom-4 right-4"
-          onClick={() => onButtonClick('/statistics/1')}
+          onClick={() => onButtonClick(`/statistics/${guCode}`)}
         >
           <SmallButton
             icon={mapStatistic}
-            text={'동대문구'}
+            text={gu}
             isActive={false}
             customWidth="min-w-20"
           ></SmallButton>
