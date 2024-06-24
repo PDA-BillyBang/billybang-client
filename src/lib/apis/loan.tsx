@@ -30,7 +30,10 @@ export async function getBestLoans(data: {
   area2: number;
   price: number;
 }) {
-  return await loanInstance.post('/best', {
+  console.log(data);
+  const s = await loanInstance.post('/best', {
     properties: [data],
   });
+  console.log(s);
+  return s;
 }

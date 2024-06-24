@@ -3,9 +3,7 @@ import { Outlet } from 'react-router-dom';
 import setting from '../../../assets/image/icons/setting.svg';
 import { useNavigate } from 'react-router-dom';
 
-type Props = {};
-
-export default function MyHeader({}: Props) {
+export default function MyHeader() {
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
   console.log(title);
@@ -22,7 +20,7 @@ export default function MyHeader({}: Props) {
           onClick={() => navigate('/my/edit')}
           src={setting}
           alt="setting"
-          className="w-[24px] h-[24px] mx-3 cursor-pointer"
+          className="w-[30px] h-[30px] mx-3 cursor-pointer"
         />
       </div>
       <div className="my-[50px]" />

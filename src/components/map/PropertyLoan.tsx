@@ -5,6 +5,8 @@ import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
 import { getBestLoans } from '@/lib/apis/loan';
+import MySkeleton from '@/routes/mypage/MySkeleton';
+import LoanSkeleton from '@/routes/loan/LoanSkeleton';
 
 type Props = {
   bottomButton?: boolean;
@@ -28,6 +30,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
   );
 
   const [bestLoan, setBestLoan] = useState<BestLoan>();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const handleClickToLoans = async () => {
     navigate(`/loan/recommend/${property.propertyId}`);
@@ -42,9 +45,13 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
           area2: property.area2,
           price: property.price,
         });
+
         setBestLoan(result.data.response[0].loan);
+        console.log('Best loan:', result.data.response[0]);
       } catch (error) {
         console.error('Error fetching best loan:', error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -76,6 +83,14 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
   useEffect(() => {
     console.log('[property]', property);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="pb-[10rem] w-full flex items-center justify-center flex-col">
+        <LoanSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -124,7 +139,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
         <div className="bg-grey-5 flex flex-col py-[0.4rem] px-[0.8rem] h-[7.5rem] rounded-[10px] shadow-md">
           <div className="flex flex-row">
             <img
-              src={bestLoan?.providerImgUrl}
+              src={shin}
               className="w-[20px] h-[20px] mr-[0.1rem] mt-[0.2rem]"
             />
             <div className="ml-[0.4rem] flex flex-col w-[100%]">
