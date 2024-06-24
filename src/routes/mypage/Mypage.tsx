@@ -13,6 +13,7 @@ import { getLikeLoans } from '@/lib/apis/loan';
 import { loanI } from '../loan/Loan';
 import EmptyFavorite from '@components/mypage/EmptyFavorite';
 import { getLikeProperties } from '@/lib/apis/property';
+import MySkeleton from './MySkeleton';
 
 interface UserInfo {
   birthDate: string;
@@ -57,6 +58,7 @@ export default function Mypage() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [likeLoans, setLikeLoans] = useState<LikeLoansI[]>([]);
   const [likeProperties, setLikeProperties] = useState<PropertyI[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const handleToMyLoan = () => navigate('/my/loan');
@@ -83,27 +85,34 @@ export default function Mypage() {
   };
 
   useEffect(() => {
-    handleGetLikeLoans();
-    handleGetLikeProperties();
-  }, []);
-
-  useEffect(() => {
-    const validateAndFetchUserInfo = async () => {
+    const loadData = async () => {
       try {
         await isvalidateToken();
         const userInfo = await getUserInfo();
         setUser(userInfo.data.response);
+
+        await Promise.all([handleGetLikeLoans(), handleGetLikeProperties()]);
       } catch (error: unknown) {
         const errorResponse = error as AxiosError<ErrorResponseI>;
         if (errorResponse.response) {
           console.log(errorResponse.response.data.response);
         }
         navigate('/user/login');
+      } finally {
+        setLoading(false);
       }
     };
 
-    validateAndFetchUserInfo();
+    loadData();
   }, [navigate]);
+
+  if (loading) {
+    return (
+      <div className="pb-[10rem] w-full flex items-center justify-center flex-col">
+        <MySkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="w-customWidthPercent">

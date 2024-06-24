@@ -1,10 +1,10 @@
-import React from 'react';
-import roomTest from '../../assets/image/test/room-test.svg';
 import { PropertyI } from '@/routes/mypage/Mypage';
 import home from '@/assets/image/my/home.svg';
+import { useNavigate } from 'react-router-dom';
 type Props = { property: PropertyI };
 
 export default function FavoriteRoomCard({ property }: Props) {
+  const navigate = useNavigate();
   const priceFormatter = (price: number): string => {
     const 억 = Math.floor(price / 100);
     const 천만 = Math.floor((price % 100) / 10);
@@ -23,7 +23,10 @@ export default function FavoriteRoomCard({ property }: Props) {
     return `${억}억 ${천만},${백만}00만`;
   };
   return (
-    <div className="w-[150px] h-[170px] cursor-pointer flex flex-col hover:bg-grey-6 ">
+    <div
+      onClick={() => navigate('/property/' + property.id)}
+      className="w-[150px] h-[170px] cursor-pointer flex flex-col hover:bg-grey-6 "
+    >
       <div className="w-[150px] h-[100px]">
         {property.representativeImgUrl == null ? (
           <div className="flex items-center justify-center w-full h-full rounded-lg bg-grey-5">
