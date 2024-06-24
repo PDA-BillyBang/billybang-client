@@ -3,10 +3,10 @@ import { propertyInstance } from './api';
 interface GetPropertiesParams {
   realEstateType: string;
   tradeType: string;
-  dealPriceMin: number,
-  dealPriceMax: number,
-  leasePriceMin: number,
-  leasePriceMax: number,
+  dealPriceMin: number;
+  dealPriceMax: number;
+  leasePriceMin: number;
+  leasePriceMax: number;
   leftLon: number;
   rightLon: number;
   topLat: number;
@@ -17,10 +17,10 @@ interface GetPropertiesParams {
 interface GetPropertyDetailsParams {
   realEstateType: string;
   tradeType: string;
-  dealPriceMin: number,
-  dealPriceMax: number,
-  leasePriceMin: number,
-  leasePriceMax: number,
+  dealPriceMin: number;
+  dealPriceMax: number;
+  leasePriceMin: number;
+  leasePriceMax: number;
   latitude: number;
   longitude: number;
   size: number;
@@ -87,20 +87,11 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
 }
 
 export async function likeProperty(propertyId: number) {
-  return await propertyInstance.post('/stars', { propertyId: propertyId });
+  return await propertyInstance.post('/stars/' + propertyId);
 }
 
 export async function deleteProperty(propertyId: number) {
-  return await propertyInstance.request({
-    method: 'DELETE',
-    url: '/stars',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: {
-      propertyId: propertyId,
-    },
-  });
+  return await propertyInstance.delete('/stars/' + propertyId);
 }
 
 export async function getLikeProperties() {
