@@ -1,7 +1,15 @@
 import { loanInstance, baseInstance } from './api';
 
-export async function getLoansByPropertyId(propertyId: number) {
-  return await baseInstance.get(`/loans?propertyId=${propertyId}`);
+export async function getLoansByPropertyId(
+  propertyId: number,
+  minTerm: number,
+  maxTerm: number,
+  minPrice: number,
+  maxPrice: number
+) {
+  return await baseInstance.get(
+    `/loans?propertyId=${propertyId}&minTerm=${minTerm}&maxTerm=${maxTerm}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+  );
 }
 
 export async function getLoanProviderById(providerId: number) {

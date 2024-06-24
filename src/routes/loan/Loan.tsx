@@ -51,7 +51,13 @@ const Loan = () => {
 
   const handleGetLoansByPropertyId = async () => {
     try {
-      const result = await getLoansByPropertyId(Number(propertyId));
+      const result = await getLoansByPropertyId(
+        Number(propertyId),
+        0,
+        600,
+        0,
+        1000
+      );
       console.log(propertyId, '-', result.data.response);
       setLoanResult(result.data.response);
       if (result.data.response.userStatus === 'UNAUTHORIZED') {
