@@ -91,13 +91,6 @@ export const initializeMap = (
     const guPolygons: kakao.maps.Polygon[] = [];
     const dongPolygons: kakao.maps.Polygon[] = [];
 
-    // const overlayContent = document.createElement('div');
-    // const overlay = new window.kakao.maps.CustomOverlay({
-    //   position: new window.kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x)),
-    //   content: overlayContent,
-    //   clickable: true,
-    // });
-
     // 구 다각형 생성
     const createGuPolygons = (geojson: any) => {
       geojson.features.forEach((feature: any) => {
@@ -111,16 +104,35 @@ export const initializeMap = (
           fillColor: '#A2FF99',
           fillOpacity: 0.7
         });
+        
         // hover 시 다각형 스타일 변경
         kakao.maps.event.addListener(polygon, 'mouseover', function() {
           polygon.setOptions({ fillColor: '#66ccff' });
+
+          // InfoWindow 설정
+          const position = (feature.geometry.coordinates[0][0][1], feature.geometry.coordinates[0][0][0]); // 다각형의 중심 좌표를 InfoWindow 위치로 사용
+          const guName = feature.properties.SIG_KOR_NM; // 구 이름 가져오기
+
+          const infoWindow = new kakao.maps.InfoWindow({
+            content: guName,
+            map: mapInstance,
+            position: position,
+          });
+
+          // InfoWindow 열기
+          infoWindow.open(mapInstance);
+
+          // mouseout 이벤트 리스너
+          kakao.maps.event.addListener(polygon, 'mouseout', function() {
+            infoWindow.close(); // InfoWindow 닫기
+            polygon.setOptions({ fillColor: '#A2FF99' }); // 다각형 색상 원래대로 복원
+          });
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function() {
-          polygon.setOptions({ fillColor: '#A2FF99' });
-        });
+
         guPolygons.push(polygon);
       });
     };
+
 
     // 동 다각형 생성
     const createDongPolygons = (geojson: any) => {
