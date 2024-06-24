@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 
 type Props = {
   type?: string;
@@ -56,7 +56,7 @@ export default function FloatingInputForm1({
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex flex-col w-full">
       <div
         className={`text-${isFocused ? 'red' : 'grey'}-2 text-[1.5rem] font-bold`}
       >
@@ -77,7 +77,7 @@ export default function FloatingInputForm1({
           className="w-full h-[3rem] border-b border-grey-2 placeholder-grey-2 focus:outline-none focus:border-[black]"
         />
         {unit && (
-          <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-grey-2 pointer-events-none">
+          <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-grey-2">
             {unit}
           </span>
         )}

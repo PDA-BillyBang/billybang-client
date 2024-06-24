@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouteObject } from 'react-router-dom';
 import LoginMain from '../routes/user/LoginMain';
 import LoginPwInput from '../routes/user/LoginPwInput';

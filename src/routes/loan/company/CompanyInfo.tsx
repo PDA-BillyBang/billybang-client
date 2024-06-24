@@ -1,4 +1,3 @@
-import React from 'react';
 import CompanyInfoTable from './CompanyInfoTable';
 import { financialStatementsI } from '../LoanCompany';
 

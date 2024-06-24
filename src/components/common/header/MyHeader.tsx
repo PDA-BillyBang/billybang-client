@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import setting from '../../../assets/image/icons/setting.svg';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ type Props = {};
 export default function MyHeader({}: Props) {
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
+  console.log(title);
   return (
     <div className="w-[100%] flex flex-col items-center">
       <div className="flex h-16 fixed top-0 flex-row justify-between bg-white-1 w-[100%] items-center">

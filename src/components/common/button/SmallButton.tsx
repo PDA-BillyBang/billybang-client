@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = {
   icon?: string;
   text: string;
@@ -20,12 +18,12 @@ export default function SmallButton({
   switch (isActive) {
     case true:
       buttonStyles = `text-center px-2 leading-[30px] text-blue-1 bg-blue-4 border-[0.5px] border-blue-1 ${
-        customWidth ? customWidth : "w-[46px]"
+        customWidth ? customWidth : 'w-[46px]'
       } h-[30px] rounded-[20px] text-[12px]`;
       break;
     case false:
       buttonStyles = `flex items-center justify-center px-2 gap-1 text-center leading-[30px] text-grey-1 bg-grey-6 border-[0.5px] border-grey-1 ${
-        customWidth ? customWidth : "min-w-[46px]"
+        customWidth ? customWidth : 'min-w-[46px]'
       } h-[30px] rounded-[20px] text-[12px]`;
       break;
     default:
@@ -39,7 +37,7 @@ export default function SmallButton({
     <div onClick={onClick}>
       <button className={buttonStyles}>
         {icon && (
-          <img src={icon} className="h-4 w-4 cursor-pointer" alt="edit" />
+          <img src={icon} className="w-4 h-4 cursor-pointer" alt="edit" />
         )}
         {text}
       </button>

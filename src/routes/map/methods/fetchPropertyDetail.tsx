@@ -12,24 +12,25 @@ export const fetchPropertyDetail = async (
   );
   const tradeType = getTradeTypeString(propertyOption.SelectedTradeCategory);
 
-  const params = {
-    realEstateType: realEstateType,
-    tradeType: tradeType,
-    priceMin: 0,
-    priceMax: 3000,
-    latitude: group.latitude,
-    longitude: group.longitude,
-    size: group.cnt,
-  };
-  try {
-    const response = await getPropertyDetails(params);
-    if (response.data.success) {
-      setProperties(response.data.response.content);
-      console.log('[Map]', response.data.response.content);
-    } else {
-      console.error('Failed to fetch detailed properties');
+    const params = {
+      realEstateType : realEstateType,
+      tradeType: tradeType,
+      dealPriceMin: propertyOption.dealPriceMin,
+      dealPriceMax: propertyOption.dealPriceMax,
+      leasePriceMin: propertyOption.leasePriceMin,
+      leasePriceMax: propertyOption.leasePriceMax,
+      latitude : group.latitude,
+      longitude : group.longitude,
+      size : group.cnt
+    };
+    try {
+      const response = await getPropertyDetails(params);
+      if (response.data.success) {
+        setProperties(response.data.response.content);
+      } else {
+        console.error('Failed to fetch detailed properties');
+      }
+    } catch (error) {
+      console.error('Error fetching detailed properties', error);
     }
-  } catch (error) {
-    console.error('Error fetching detailed properties', error);
-  }
-};
+}

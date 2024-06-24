@@ -1,0 +1,4672 @@
+[
+  {
+    "code": "1111010100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "청운동",
+    "sub_district": "",
+    "latitude": "37.587111",
+    "longitude": "126.969069",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "신교동",
+    "sub_district": "",
+    "latitude": "37.583911",
+    "longitude": "126.968354",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "궁정동",
+    "sub_district": "",
+    "latitude": "37.584381",
+    "longitude": "126.971489",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "효자동",
+    "sub_district": "",
+    "latitude": "37.582416",
+    "longitude": "126.97167",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "창성동",
+    "sub_district": "",
+    "latitude": "37.580363",
+    "longitude": "126.972065",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "통의동",
+    "sub_district": "",
+    "latitude": "37.578307",
+    "longitude": "126.972872",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "적선동",
+    "sub_district": "",
+    "latitude": "37.576122",
+    "longitude": "126.973453",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "통인동",
+    "sub_district": "",
+    "latitude": "37.580141",
+    "longitude": "126.970127",
+    "code_type": "B"
+  },
+  {
+    "code": "1111010900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "누상동",
+    "sub_district": "",
+    "latitude": "37.580478",
+    "longitude": "126.965838",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "누하동",
+    "sub_district": "",
+    "latitude": "37.579423",
+    "longitude": "126.968521",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "옥인동",
+    "sub_district": "",
+    "latitude": "37.582175",
+    "longitude": "126.967275",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "체부동",
+    "sub_district": "",
+    "latitude": "37.577645",
+    "longitude": "126.970877",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "필운동",
+    "sub_district": "",
+    "latitude": "37.577076",
+    "longitude": "126.968848",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "내자동",
+    "sub_district": "",
+    "latitude": "37.575641",
+    "longitude": "126.971177",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "사직동",
+    "sub_district": "",
+    "latitude": "37.573711",
+    "longitude": "126.966295",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "도렴동",
+    "sub_district": "",
+    "latitude": "37.572445",
+    "longitude": "126.975158",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "당주동",
+    "sub_district": "",
+    "latitude": "37.571429",
+    "longitude": "126.97457",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "내수동",
+    "sub_district": "",
+    "latitude": "37.573113",
+    "longitude": "126.971819",
+    "code_type": "B"
+  },
+  {
+    "code": "1111011900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "세종로",
+    "sub_district": "",
+    "latitude": "37.572655",
+    "longitude": "126.976742",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "신문로1가",
+    "sub_district": "",
+    "latitude": "37.570366",
+    "longitude": "126.973968",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "신문로2가",
+    "sub_district": "",
+    "latitude": "37.571299",
+    "longitude": "126.968815",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "청진동",
+    "sub_district": "",
+    "latitude": "37.571886",
+    "longitude": "126.980676",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "서린동",
+    "sub_district": "",
+    "latitude": "37.569668",
+    "longitude": "126.979809",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "수송동",
+    "sub_district": "",
+    "latitude": "37.573994",
+    "longitude": "126.981139",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "중학동",
+    "sub_district": "",
+    "latitude": "37.575301",
+    "longitude": "126.979265",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로1가",
+    "sub_district": "",
+    "latitude": "37.570479",
+    "longitude": "126.980434",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "공평동",
+    "sub_district": "",
+    "latitude": "37.571692",
+    "longitude": "126.982996",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "관훈동",
+    "sub_district": "",
+    "latitude": "37.574336",
+    "longitude": "126.984857",
+    "code_type": "B"
+  },
+  {
+    "code": "1111012900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "견지동",
+    "sub_district": "",
+    "latitude": "37.573529",
+    "longitude": "126.983065",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "와룡동",
+    "sub_district": "",
+    "latitude": "37.57695",
+    "longitude": "126.991141",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "권농동",
+    "sub_district": "",
+    "latitude": "37.575619",
+    "longitude": "126.991498",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "운니동",
+    "sub_district": "",
+    "latitude": "37.576159",
+    "longitude": "126.989206",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "익선동",
+    "sub_district": "",
+    "latitude": "37.574082",
+    "longitude": "126.989819",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "경운동",
+    "sub_district": "",
+    "latitude": "37.574538",
+    "longitude": "126.986664",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "관철동",
+    "sub_district": "",
+    "latitude": "37.569182",
+    "longitude": "126.986053",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "인사동",
+    "sub_district": "",
+    "latitude": "37.571837",
+    "longitude": "126.986206",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "낙원동",
+    "sub_district": "",
+    "latitude": "37.572558",
+    "longitude": "126.988732",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로2가",
+    "sub_district": "",
+    "latitude": "37.570195",
+    "longitude": "126.986454",
+    "code_type": "B"
+  },
+  {
+    "code": "1111013900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "팔판동",
+    "sub_district": "",
+    "latitude": "37.582882",
+    "longitude": "126.980836",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "삼청동",
+    "sub_district": "",
+    "latitude": "37.585404",
+    "longitude": "126.982123",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "안국동",
+    "sub_district": "",
+    "latitude": "37.577515",
+    "longitude": "126.983939",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "소격동",
+    "sub_district": "",
+    "latitude": "37.580122",
+    "longitude": "126.981424",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "화동",
+    "sub_district": "",
+    "latitude": "37.580693",
+    "longitude": "126.982268",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "사간동",
+    "sub_district": "",
+    "latitude": "37.577668",
+    "longitude": "126.980593",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "송현동",
+    "sub_district": "",
+    "latitude": "37.577322",
+    "longitude": "126.982187",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "가회동",
+    "sub_district": "",
+    "latitude": "37.582235",
+    "longitude": "126.984666",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "재동",
+    "sub_district": "",
+    "latitude": "37.578363",
+    "longitude": "126.985575",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "계동",
+    "sub_district": "",
+    "latitude": "37.581321",
+    "longitude": "126.987016",
+    "code_type": "B"
+  },
+  {
+    "code": "1111014900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "원서동",
+    "sub_district": "",
+    "latitude": "37.581687",
+    "longitude": "126.988696",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "훈정동",
+    "sub_district": "",
+    "latitude": "37.57098",
+    "longitude": "126.995131",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "묘동",
+    "sub_district": "",
+    "latitude": "37.572598",
+    "longitude": "126.991715",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "봉익동",
+    "sub_district": "",
+    "latitude": "37.572398",
+    "longitude": "126.992873",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "돈의동",
+    "sub_district": "",
+    "latitude": "37.572085",
+    "longitude": "126.990736",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "장사동",
+    "sub_district": "",
+    "latitude": "37.569411",
+    "longitude": "126.99383",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "관수동",
+    "sub_district": "",
+    "latitude": "37.5692",
+    "longitude": "126.990527",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로3가",
+    "sub_district": "",
+    "latitude": "37.570337",
+    "longitude": "126.992072",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "인의동",
+    "sub_district": "",
+    "latitude": "37.573102",
+    "longitude": "126.997921",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "예지동",
+    "sub_district": "",
+    "latitude": "37.569643",
+    "longitude": "126.997971",
+    "code_type": "B"
+  },
+  {
+    "code": "1111015900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "원남동",
+    "sub_district": "",
+    "latitude": "37.575326",
+    "longitude": "126.997429",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "연지동",
+    "sub_district": "",
+    "latitude": "37.57359",
+    "longitude": "126.999447",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로4가",
+    "sub_district": "",
+    "latitude": "37.570618",
+    "longitude": "126.998135",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "효제동",
+    "sub_district": "",
+    "latitude": "37.572859",
+    "longitude": "127.003417",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로5가",
+    "sub_district": "",
+    "latitude": "37.57054",
+    "longitude": "127.003794",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "종로6가",
+    "sub_district": "",
+    "latitude": "37.572572",
+    "longitude": "127.006996",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "이화동",
+    "sub_district": "",
+    "latitude": "37.577066",
+    "longitude": "127.006358",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "연건동",
+    "sub_district": "",
+    "latitude": "37.5775",
+    "longitude": "127.000903",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "충신동",
+    "sub_district": "",
+    "latitude": "37.575189",
+    "longitude": "127.006471",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "동숭동",
+    "sub_district": "",
+    "latitude": "37.581654",
+    "longitude": "127.005083",
+    "code_type": "B"
+  },
+  {
+    "code": "1111016900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "혜화동",
+    "sub_district": "",
+    "latitude": "37.587955",
+    "longitude": "127.001157",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "명륜1가",
+    "sub_district": "",
+    "latitude": "37.588347",
+    "longitude": "126.997733",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "명륜2가",
+    "sub_district": "",
+    "latitude": "37.584521",
+    "longitude": "126.998638",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "명륜4가",
+    "sub_district": "",
+    "latitude": "37.582225",
+    "longitude": "127.000008",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "명륜3가",
+    "sub_district": "",
+    "latitude": "37.588359",
+    "longitude": "126.994739",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "창신동",
+    "sub_district": "",
+    "latitude": "37.574729",
+    "longitude": "127.012062",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "숭인동",
+    "sub_district": "",
+    "latitude": "37.575979",
+    "longitude": "127.018802",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "교남동",
+    "sub_district": "",
+    "latitude": "37.567917",
+    "longitude": "126.965108",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "평동",
+    "sub_district": "",
+    "latitude": "37.567121",
+    "longitude": "126.967018",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017800",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "송월동",
+    "sub_district": "",
+    "latitude": "37.569779",
+    "longitude": "126.96576",
+    "code_type": "B"
+  },
+  {
+    "code": "1111017900",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "홍파동",
+    "sub_district": "",
+    "latitude": "37.571862",
+    "longitude": "126.965154",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018000",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "교북동",
+    "sub_district": "",
+    "latitude": "37.572612",
+    "longitude": "126.960436",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018100",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "행촌동",
+    "sub_district": "",
+    "latitude": "37.574294",
+    "longitude": "126.962469",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018200",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "구기동",
+    "sub_district": "",
+    "latitude": "37.609211",
+    "longitude": "126.957246",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018300",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "평창동",
+    "sub_district": "",
+    "latitude": "37.61042",
+    "longitude": "126.969837",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018400",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "부암동",
+    "sub_district": "",
+    "latitude": "37.594148",
+    "longitude": "126.964248",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018500",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "홍지동",
+    "sub_district": "",
+    "latitude": "37.60031",
+    "longitude": "126.957773",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018600",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "신영동",
+    "sub_district": "",
+    "latitude": "37.602696",
+    "longitude": "126.961378",
+    "code_type": "B"
+  },
+  {
+    "code": "1111018700",
+    "attempt": "서울특별시",
+    "city": "종로구",
+    "district": "무악동",
+    "sub_district": "",
+    "latitude": "37.575906",
+    "longitude": "126.959334",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "무교동",
+    "sub_district": "",
+    "latitude": "37.567732",
+    "longitude": "126.979171",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "다동",
+    "sub_district": "",
+    "latitude": "37.567577",
+    "longitude": "126.981026",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "태평로1가",
+    "sub_district": "",
+    "latitude": "37.568174",
+    "longitude": "126.976805",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로1가",
+    "sub_district": "",
+    "latitude": "37.566295",
+    "longitude": "126.980137",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로2가",
+    "sub_district": "",
+    "latitude": "37.565757",
+    "longitude": "126.985892",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남대문로1가",
+    "sub_district": "",
+    "latitude": "37.567451",
+    "longitude": "126.982976",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "삼각동",
+    "sub_district": "",
+    "latitude": "37.567588",
+    "longitude": "126.983748",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "수하동",
+    "sub_district": "",
+    "latitude": "37.567242",
+    "longitude": "126.984082",
+    "code_type": "B"
+  },
+  {
+    "code": "1114010900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "장교동",
+    "sub_district": "",
+    "latitude": "37.567116",
+    "longitude": "126.987193",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "수표동",
+    "sub_district": "",
+    "latitude": "37.567358",
+    "longitude": "126.989674",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "소공동",
+    "sub_district": "",
+    "latitude": "37.563731",
+    "longitude": "126.980135",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남창동",
+    "sub_district": "",
+    "latitude": "37.55845",
+    "longitude": "126.977464",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "북창동",
+    "sub_district": "",
+    "latitude": "37.5625",
+    "longitude": "126.978056",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "태평로2가",
+    "sub_district": "",
+    "latitude": "37.563334",
+    "longitude": "126.976861",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남대문로2가",
+    "sub_district": "",
+    "latitude": "37.563785",
+    "longitude": "126.981752",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남대문로3가",
+    "sub_district": "",
+    "latitude": "37.561033",
+    "longitude": "126.978259",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남대문로4가",
+    "sub_district": "",
+    "latitude": "37.560635",
+    "longitude": "126.976863",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남대문로5가",
+    "sub_district": "",
+    "latitude": "37.557154",
+    "longitude": "126.974366",
+    "code_type": "B"
+  },
+  {
+    "code": "1114011900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "봉래동1가",
+    "sub_district": "",
+    "latitude": "37.558687",
+    "longitude": "126.972589",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "봉래동2가",
+    "sub_district": "",
+    "latitude": "37.557841",
+    "longitude": "126.97062",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "회현동1가",
+    "sub_district": "",
+    "latitude": "37.557439",
+    "longitude": "126.980748",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "회현동2가",
+    "sub_district": "",
+    "latitude": "37.558033",
+    "longitude": "126.983443",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "회현동3가",
+    "sub_district": "",
+    "latitude": "37.56006",
+    "longitude": "126.984082",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충무로1가",
+    "sub_district": "",
+    "latitude": "37.561279",
+    "longitude": "126.98343",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충무로2가",
+    "sub_district": "",
+    "latitude": "37.561903",
+    "longitude": "126.987942",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "명동1가",
+    "sub_district": "",
+    "latitude": "37.564135",
+    "longitude": "126.984148",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "명동2가",
+    "sub_district": "",
+    "latitude": "37.56288",
+    "longitude": "126.984505",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남산동1가",
+    "sub_district": "",
+    "latitude": "37.55926",
+    "longitude": "126.984605",
+    "code_type": "B"
+  },
+  {
+    "code": "1114012900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남산동2가",
+    "sub_district": "",
+    "latitude": "37.558534",
+    "longitude": "126.985813",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남산동3가",
+    "sub_district": "",
+    "latitude": "37.560392",
+    "longitude": "126.987105",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "저동1가",
+    "sub_district": "",
+    "latitude": "37.564362",
+    "longitude": "126.987314",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충무로4가",
+    "sub_district": "",
+    "latitude": "37.562463",
+    "longitude": "126.995255",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충무로5가",
+    "sub_district": "",
+    "latitude": "37.562923",
+    "longitude": "126.999921",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "인현동2가",
+    "sub_district": "",
+    "latitude": "37.56378",
+    "longitude": "126.995779",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "예관동",
+    "sub_district": "",
+    "latitude": "37.564357",
+    "longitude": "126.99822",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "묵정동",
+    "sub_district": "",
+    "latitude": "37.561401",
+    "longitude": "127.000871",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "필동1가",
+    "sub_district": "",
+    "latitude": "37.560992",
+    "longitude": "126.992264",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "필동2가",
+    "sub_district": "",
+    "latitude": "37.55896",
+    "longitude": "126.995427",
+    "code_type": "B"
+  },
+  {
+    "code": "1114013900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "필동3가",
+    "sub_district": "",
+    "latitude": "37.559069",
+    "longitude": "126.997152",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "남학동",
+    "sub_district": "",
+    "latitude": "37.56041",
+    "longitude": "126.99086",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "주자동",
+    "sub_district": "",
+    "latitude": "37.560755",
+    "longitude": "126.98985",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "예장동",
+    "sub_district": "",
+    "latitude": "37.557397",
+    "longitude": "126.990492",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "장충동1가",
+    "sub_district": "",
+    "latitude": "37.561397",
+    "longitude": "127.007583",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "장충동2가",
+    "sub_district": "",
+    "latitude": "37.55991",
+    "longitude": "127.00256",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "광희동1가",
+    "sub_district": "",
+    "latitude": "37.565194",
+    "longitude": "127.005069",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "광희동2가",
+    "sub_district": "",
+    "latitude": "37.563799",
+    "longitude": "127.008655",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "쌍림동",
+    "sub_district": "",
+    "latitude": "37.563176",
+    "longitude": "127.004625",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로6가",
+    "sub_district": "",
+    "latitude": "37.566868",
+    "longitude": "127.00631",
+    "code_type": "B"
+  },
+  {
+    "code": "1114014900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로7가",
+    "sub_district": "",
+    "latitude": "37.565117",
+    "longitude": "127.009288",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로4가",
+    "sub_district": "",
+    "latitude": "37.566587",
+    "longitude": "126.998139",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로5가",
+    "sub_district": "",
+    "latitude": "37.566455",
+    "longitude": "127.001862",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "주교동",
+    "sub_district": "",
+    "latitude": "37.568136",
+    "longitude": "126.999252",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "방산동",
+    "sub_district": "",
+    "latitude": "37.568469",
+    "longitude": "127.001903",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "오장동",
+    "sub_district": "",
+    "latitude": "37.564685",
+    "longitude": "127.0007",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "을지로3가",
+    "sub_district": "",
+    "latitude": "37.566292",
+    "longitude": "126.992337",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "입정동",
+    "sub_district": "",
+    "latitude": "37.567709",
+    "longitude": "126.993042",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "산림동",
+    "sub_district": "",
+    "latitude": "37.567564",
+    "longitude": "126.996085",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충무로3가",
+    "sub_district": "",
+    "latitude": "37.562676",
+    "longitude": "126.991874",
+    "code_type": "B"
+  },
+  {
+    "code": "1114015900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "초동",
+    "sub_district": "",
+    "latitude": "37.564226",
+    "longitude": "126.992375",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "인현동1가",
+    "sub_district": "",
+    "latitude": "37.564472",
+    "longitude": "126.994232",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "저동2가",
+    "sub_district": "",
+    "latitude": "37.564385",
+    "longitude": "126.990257",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "신당동",
+    "sub_district": "",
+    "latitude": "37.559441",
+    "longitude": "127.013427",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "흥인동",
+    "sub_district": "",
+    "latitude": "37.566792",
+    "longitude": "127.016839",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "무학동",
+    "sub_district": "",
+    "latitude": "37.564149",
+    "longitude": "127.015091",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016500",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "황학동",
+    "sub_district": "",
+    "latitude": "37.56794",
+    "longitude": "127.020367",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016600",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "서소문동",
+    "sub_district": "",
+    "latitude": "37.563075",
+    "longitude": "126.974142",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016700",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "정동",
+    "sub_district": "",
+    "latitude": "37.566905",
+    "longitude": "126.972078",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016800",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "순화동",
+    "sub_district": "",
+    "latitude": "37.562471",
+    "longitude": "126.970566",
+    "code_type": "B"
+  },
+  {
+    "code": "1114016900",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "의주로1가",
+    "sub_district": "",
+    "latitude": "37.564783",
+    "longitude": "126.968176",
+    "code_type": "B"
+  },
+  {
+    "code": "1114017000",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "충정로1가",
+    "sub_district": "",
+    "latitude": "37.567411",
+    "longitude": "126.968642",
+    "code_type": "B"
+  },
+  {
+    "code": "1114017100",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "중림동",
+    "sub_district": "",
+    "latitude": "37.558715",
+    "longitude": "126.96584",
+    "code_type": "B"
+  },
+  {
+    "code": "1114017200",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "의주로2가",
+    "sub_district": "",
+    "latitude": "37.559382",
+    "longitude": "126.969985",
+    "code_type": "B"
+  },
+  {
+    "code": "1114017300",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "만리동1가",
+    "sub_district": "",
+    "latitude": "37.556408",
+    "longitude": "126.967319",
+    "code_type": "B"
+  },
+  {
+    "code": "1114017400",
+    "attempt": "서울특별시",
+    "city": "중구",
+    "district": "만리동2가",
+    "sub_district": "",
+    "latitude": "37.553986",
+    "longitude": "126.96415",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010100",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "후암동",
+    "sub_district": "",
+    "latitude": "37.549171",
+    "longitude": "126.978938",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010200",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동2가",
+    "sub_district": "",
+    "latitude": "37.544184",
+    "longitude": "126.98511",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010300",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동4가",
+    "sub_district": "",
+    "latitude": "37.534964",
+    "longitude": "126.986876",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010400",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "갈월동",
+    "sub_district": "",
+    "latitude": "37.546267",
+    "longitude": "126.972941",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010500",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "남영동",
+    "sub_district": "",
+    "latitude": "37.542934",
+    "longitude": "126.97341",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010600",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동1가",
+    "sub_district": "",
+    "latitude": "37.534968",
+    "longitude": "126.977282",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010700",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "동자동",
+    "sub_district": "",
+    "latitude": "37.551535",
+    "longitude": "126.974137",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010800",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "서계동",
+    "sub_district": "",
+    "latitude": "37.552113",
+    "longitude": "126.966089",
+    "code_type": "B"
+  },
+  {
+    "code": "1117010900",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "청파동1가",
+    "sub_district": "",
+    "latitude": "37.54887",
+    "longitude": "126.967046",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011000",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "청파동2가",
+    "sub_district": "",
+    "latitude": "37.546067",
+    "longitude": "126.967745",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011100",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "청파동3가",
+    "sub_district": "",
+    "latitude": "37.543407",
+    "longitude": "126.968276",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011200",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "원효로1가",
+    "sub_district": "",
+    "latitude": "37.539977",
+    "longitude": "126.966998",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011300",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "원효로2가",
+    "sub_district": "",
+    "latitude": "37.536307",
+    "longitude": "126.963165",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011400",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "신창동",
+    "sub_district": "",
+    "latitude": "37.53573",
+    "longitude": "126.955199",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011500",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "산천동",
+    "sub_district": "",
+    "latitude": "37.535428",
+    "longitude": "126.952396",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011600",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "청암동",
+    "sub_district": "",
+    "latitude": "37.53504",
+    "longitude": "126.9465",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011700",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "원효로3가",
+    "sub_district": "",
+    "latitude": "37.53414",
+    "longitude": "126.956862",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011800",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "원효로4가",
+    "sub_district": "",
+    "latitude": "37.533504",
+    "longitude": "126.952763",
+    "code_type": "B"
+  },
+  {
+    "code": "1117011900",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "효창동",
+    "sub_district": "",
+    "latitude": "37.543291",
+    "longitude": "126.961214",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012000",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "도원동",
+    "sub_district": "",
+    "latitude": "37.539188",
+    "longitude": "126.95794",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012100",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용문동",
+    "sub_district": "",
+    "latitude": "37.537571",
+    "longitude": "126.959936",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012200",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "문배동",
+    "sub_district": "",
+    "latitude": "37.536423",
+    "longitude": "126.969346",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012300",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "신계동",
+    "sub_district": "",
+    "latitude": "37.534581",
+    "longitude": "126.964922",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012400",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "한강로1가",
+    "sub_district": "",
+    "latitude": "37.534384",
+    "longitude": "126.973765",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012500",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "한강로2가",
+    "sub_district": "",
+    "latitude": "37.531715",
+    "longitude": "126.970242",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012600",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동3가",
+    "sub_district": "",
+    "latitude": "37.533189",
+    "longitude": "126.974319",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012700",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동5가",
+    "sub_district": "",
+    "latitude": "37.527123",
+    "longitude": "126.97083",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012800",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "한강로3가",
+    "sub_district": "",
+    "latitude": "37.524659",
+    "longitude": "126.963299",
+    "code_type": "B"
+  },
+  {
+    "code": "1117012900",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "이촌동",
+    "sub_district": "",
+    "latitude": "37.524133",
+    "longitude": "126.961987",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013000",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "이태원동",
+    "sub_district": "",
+    "latitude": "37.5367",
+    "longitude": "126.992151",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013100",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "한남동",
+    "sub_district": "",
+    "latitude": "37.533889",
+    "longitude": "127.003955",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013200",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "동빙고동",
+    "sub_district": "",
+    "latitude": "37.523599",
+    "longitude": "126.995949",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013300",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "서빙고동",
+    "sub_district": "",
+    "latitude": "37.521042",
+    "longitude": "126.993023",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013400",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "주성동",
+    "sub_district": "",
+    "latitude": "37.522591",
+    "longitude": "126.998382",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013500",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "용산동6가",
+    "sub_district": "",
+    "latitude": "37.51915",
+    "longitude": "126.983164",
+    "code_type": "B"
+  },
+  {
+    "code": "1117013600",
+    "attempt": "서울특별시",
+    "city": "용산구",
+    "district": "보광동",
+    "sub_district": "",
+    "latitude": "37.528858",
+    "longitude": "126.999766",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010100",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "상왕십리동",
+    "sub_district": "",
+    "latitude": "37.569332",
+    "longitude": "127.025349",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010200",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "하왕십리동",
+    "sub_district": "",
+    "latitude": "37.562462",
+    "longitude": "127.029586",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010300",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "홍익동",
+    "sub_district": "",
+    "latitude": "37.566144",
+    "longitude": "127.032921",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010400",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "도선동",
+    "sub_district": "",
+    "latitude": "37.563897",
+    "longitude": "127.033258",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010500",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "마장동",
+    "sub_district": "",
+    "latitude": "37.567305",
+    "longitude": "127.039084",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010600",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "사근동",
+    "sub_district": "",
+    "latitude": "37.561371",
+    "longitude": "127.046789",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010700",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "행당동",
+    "sub_district": "",
+    "latitude": "37.559076",
+    "longitude": "127.035869",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010800",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "응봉동",
+    "sub_district": "",
+    "latitude": "37.551169",
+    "longitude": "127.031462",
+    "code_type": "B"
+  },
+  {
+    "code": "1120010900",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "금호동1가",
+    "sub_district": "",
+    "latitude": "37.554697",
+    "longitude": "127.023412",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011000",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "금호동2가",
+    "sub_district": "",
+    "latitude": "37.552482",
+    "longitude": "127.020133",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011100",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "금호동3가",
+    "sub_district": "",
+    "latitude": "37.549504",
+    "longitude": "127.021812",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011200",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "금호동4가",
+    "sub_district": "",
+    "latitude": "37.547468",
+    "longitude": "127.02006",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011300",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "옥수동",
+    "sub_district": "",
+    "latitude": "37.542764",
+    "longitude": "127.014662",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011400",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "성수동1가",
+    "sub_district": "",
+    "latitude": "37.544661",
+    "longitude": "127.046772",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011500",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "성수동2가",
+    "sub_district": "",
+    "latitude": "37.541123",
+    "longitude": "127.056125",
+    "code_type": "B"
+  },
+  {
+    "code": "1120011800",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "송정동",
+    "sub_district": "",
+    "latitude": "37.552124",
+    "longitude": "127.067652",
+    "code_type": "B"
+  },
+  {
+    "code": "1120012200",
+    "attempt": "서울특별시",
+    "city": "성동구",
+    "district": "용답동",
+    "sub_district": "",
+    "latitude": "37.564354",
+    "longitude": "127.052795",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510100",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "중곡동",
+    "sub_district": "",
+    "latitude": "37.561882",
+    "longitude": "127.084745",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510200",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "능동",
+    "sub_district": "",
+    "latitude": "37.553729",
+    "longitude": "127.082381",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510300",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "구의동",
+    "sub_district": "",
+    "latitude": "37.544655",
+    "longitude": "127.089493",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510400",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "광장동",
+    "sub_district": "",
+    "latitude": "37.546992",
+    "longitude": "127.103926",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510500",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "자양동",
+    "sub_district": "",
+    "latitude": "37.534692",
+    "longitude": "127.074327",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510700",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "화양동",
+    "sub_district": "",
+    "latitude": "37.544427",
+    "longitude": "127.070047",
+    "code_type": "B"
+  },
+  {
+    "code": "1121510900",
+    "attempt": "서울특별시",
+    "city": "광진구",
+    "district": "군자동",
+    "sub_district": "",
+    "latitude": "37.553878",
+    "longitude": "127.073516",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010100",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "신설동",
+    "sub_district": "",
+    "latitude": "37.575204",
+    "longitude": "127.026023",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010200",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "용두동",
+    "sub_district": "",
+    "latitude": "37.576328",
+    "longitude": "127.034621",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010300",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "제기동",
+    "sub_district": "",
+    "latitude": "37.584134",
+    "longitude": "127.03796",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010400",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "전농동",
+    "sub_district": "",
+    "latitude": "37.579797",
+    "longitude": "127.053848",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010500",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "답십리동",
+    "sub_district": "",
+    "latitude": "37.569883",
+    "longitude": "127.056757",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010600",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "장안동",
+    "sub_district": "",
+    "latitude": "37.570749",
+    "longitude": "127.068233",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010700",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "청량리동",
+    "sub_district": "",
+    "latitude": "37.586643",
+    "longitude": "127.044621",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010800",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "회기동",
+    "sub_district": "",
+    "latitude": "37.591447",
+    "longitude": "127.051971",
+    "code_type": "B"
+  },
+  {
+    "code": "1123010900",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "휘경동",
+    "sub_district": "",
+    "latitude": "37.589592",
+    "longitude": "127.061228",
+    "code_type": "B"
+  },
+  {
+    "code": "1123011000",
+    "attempt": "서울특별시",
+    "city": "동대문구",
+    "district": "이문동",
+    "sub_district": "",
+    "latitude": "37.598851",
+    "longitude": "127.062465",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010100",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "면목동",
+    "sub_district": "",
+    "latitude": "37.58442",
+    "longitude": "127.086487",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010200",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "상봉동",
+    "sub_district": "",
+    "latitude": "37.596267",
+    "longitude": "127.085704",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010300",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "중화동",
+    "sub_district": "",
+    "latitude": "37.59975",
+    "longitude": "127.077718",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010400",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "묵동",
+    "sub_district": "",
+    "latitude": "37.611266",
+    "longitude": "127.077829",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010500",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "망우동",
+    "sub_district": "",
+    "latitude": "37.596678",
+    "longitude": "127.100419",
+    "code_type": "B"
+  },
+  {
+    "code": "1126010600",
+    "attempt": "서울특별시",
+    "city": "중랑구",
+    "district": "신내동",
+    "sub_district": "",
+    "latitude": "37.607237",
+    "longitude": "127.098924",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010100",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "성북동",
+    "sub_district": "",
+    "latitude": "37.594567",
+    "longitude": "126.997514",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010200",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "성북동1가",
+    "sub_district": "",
+    "latitude": "37.589374",
+    "longitude": "127.003652",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010300",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "돈암동",
+    "sub_district": "",
+    "latitude": "37.598415",
+    "longitude": "127.020288",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010400",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동1가",
+    "sub_district": "",
+    "latitude": "37.589858",
+    "longitude": "127.00746",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010500",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동2가",
+    "sub_district": "",
+    "latitude": "37.588696",
+    "longitude": "127.008412",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010600",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동3가",
+    "sub_district": "",
+    "latitude": "37.590052",
+    "longitude": "127.010816",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010700",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동4가",
+    "sub_district": "",
+    "latitude": "37.591541",
+    "longitude": "127.010756",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010800",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동5가",
+    "sub_district": "",
+    "latitude": "37.591666",
+    "longitude": "127.01559",
+    "code_type": "B"
+  },
+  {
+    "code": "1129010900",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동6가",
+    "sub_district": "",
+    "latitude": "37.59377",
+    "longitude": "127.014858",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011000",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동소문동7가",
+    "sub_district": "",
+    "latitude": "37.596303",
+    "longitude": "127.014721",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011100",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "삼선동1가",
+    "sub_district": "",
+    "latitude": "37.585059",
+    "longitude": "127.007942",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011200",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "삼선동2가",
+    "sub_district": "",
+    "latitude": "37.585259",
+    "longitude": "127.010538",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011300",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "삼선동3가",
+    "sub_district": "",
+    "latitude": "37.586298",
+    "longitude": "127.012802",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011400",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "삼선동4가",
+    "sub_district": "",
+    "latitude": "37.589818",
+    "longitude": "127.013135",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011500",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "삼선동5가",
+    "sub_district": "",
+    "latitude": "37.58825",
+    "longitude": "127.015789",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011600",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동선동1가",
+    "sub_district": "",
+    "latitude": "37.592065",
+    "longitude": "127.01826",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011700",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동선동2가",
+    "sub_district": "",
+    "latitude": "37.590091",
+    "longitude": "127.020053",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011800",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동선동3가",
+    "sub_district": "",
+    "latitude": "37.594108",
+    "longitude": "127.020597",
+    "code_type": "B"
+  },
+  {
+    "code": "1129011900",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동선동4가",
+    "sub_district": "",
+    "latitude": "37.595087",
+    "longitude": "127.018541",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012000",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "동선동5가",
+    "sub_district": "",
+    "latitude": "37.596185",
+    "longitude": "127.016726",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012100",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "안암동1가",
+    "sub_district": "",
+    "latitude": "37.588393",
+    "longitude": "127.021456",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012200",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "안암동2가",
+    "sub_district": "",
+    "latitude": "37.586638",
+    "longitude": "127.022973",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012300",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "안암동3가",
+    "sub_district": "",
+    "latitude": "37.583915",
+    "longitude": "127.02328",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012400",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "안암동4가",
+    "sub_district": "",
+    "latitude": "37.580811",
+    "longitude": "127.024633",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012500",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "안암동5가",
+    "sub_district": "",
+    "latitude": "37.586083",
+    "longitude": "127.029493",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012600",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동4가",
+    "sub_district": "",
+    "latitude": "37.582645",
+    "longitude": "127.021437",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012700",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동5가",
+    "sub_district": "",
+    "latitude": "37.582359",
+    "longitude": "127.019936",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012800",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동6가",
+    "sub_district": "",
+    "latitude": "37.580444",
+    "longitude": "127.019694",
+    "code_type": "B"
+  },
+  {
+    "code": "1129012900",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동7가",
+    "sub_district": "",
+    "latitude": "37.580033",
+    "longitude": "127.02182",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013000",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동1가",
+    "sub_district": "",
+    "latitude": "37.586226",
+    "longitude": "127.019779",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013100",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동2가",
+    "sub_district": "",
+    "latitude": "37.585602",
+    "longitude": "127.018306",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013200",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "보문동3가",
+    "sub_district": "",
+    "latitude": "37.584277",
+    "longitude": "127.017551",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013300",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "정릉동",
+    "sub_district": "",
+    "latitude": "37.608442",
+    "longitude": "127.008288",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013400",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "길음동",
+    "sub_district": "",
+    "latitude": "37.607316",
+    "longitude": "127.02476",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013500",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "종암동",
+    "sub_district": "",
+    "latitude": "37.597405",
+    "longitude": "127.035032",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013600",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "하월곡동",
+    "sub_district": "",
+    "latitude": "37.605662",
+    "longitude": "127.035753",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013700",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "상월곡동",
+    "sub_district": "",
+    "latitude": "37.606723",
+    "longitude": "127.048393",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013800",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "장위동",
+    "sub_district": "",
+    "latitude": "37.614232",
+    "longitude": "127.050118",
+    "code_type": "B"
+  },
+  {
+    "code": "1129013900",
+    "attempt": "서울특별시",
+    "city": "성북구",
+    "district": "석관동",
+    "sub_district": "",
+    "latitude": "37.608823",
+    "longitude": "127.060712",
+    "code_type": "B"
+  },
+  {
+    "code": "1130510100",
+    "attempt": "서울특별시",
+    "city": "강북구",
+    "district": "미아동",
+    "sub_district": "",
+    "latitude": "37.621298",
+    "longitude": "127.024902",
+    "code_type": "B"
+  },
+  {
+    "code": "1130510200",
+    "attempt": "서울특별시",
+    "city": "강북구",
+    "district": "번동",
+    "sub_district": "",
+    "latitude": "37.635123",
+    "longitude": "127.032072",
+    "code_type": "B"
+  },
+  {
+    "code": "1130510300",
+    "attempt": "서울특별시",
+    "city": "강북구",
+    "district": "수유동",
+    "sub_district": "",
+    "latitude": "37.639388",
+    "longitude": "127.017183",
+    "code_type": "B"
+  },
+  {
+    "code": "1130510400",
+    "attempt": "서울특별시",
+    "city": "강북구",
+    "district": "우이동",
+    "sub_district": "",
+    "latitude": "37.658785",
+    "longitude": "127.01119",
+    "code_type": "B"
+  },
+  {
+    "code": "1132010500",
+    "attempt": "서울특별시",
+    "city": "도봉구",
+    "district": "쌍문동",
+    "sub_district": "",
+    "latitude": "37.652731",
+    "longitude": "127.02871",
+    "code_type": "B"
+  },
+  {
+    "code": "1132010600",
+    "attempt": "서울특별시",
+    "city": "도봉구",
+    "district": "방학동",
+    "sub_district": "",
+    "latitude": "37.666224",
+    "longitude": "127.03665",
+    "code_type": "B"
+  },
+  {
+    "code": "1132010700",
+    "attempt": "서울특별시",
+    "city": "도봉구",
+    "district": "창동",
+    "sub_district": "",
+    "latitude": "37.64344",
+    "longitude": "127.039413",
+    "code_type": "B"
+  },
+  {
+    "code": "1132010800",
+    "attempt": "서울특별시",
+    "city": "도봉구",
+    "district": "도봉동",
+    "sub_district": "",
+    "latitude": "37.678103",
+    "longitude": "127.043249",
+    "code_type": "B"
+  },
+  {
+    "code": "1135010200",
+    "attempt": "서울특별시",
+    "city": "노원구",
+    "district": "월계동",
+    "sub_district": "",
+    "latitude": "37.622192",
+    "longitude": "127.05865",
+    "code_type": "B"
+  },
+  {
+    "code": "1135010300",
+    "attempt": "서울특별시",
+    "city": "노원구",
+    "district": "공릉동",
+    "sub_district": "",
+    "latitude": "37.623601",
+    "longitude": "127.077388",
+    "code_type": "B"
+  },
+  {
+    "code": "1135010400",
+    "attempt": "서울특별시",
+    "city": "노원구",
+    "district": "하계동",
+    "sub_district": "",
+    "latitude": "37.63689",
+    "longitude": "127.073145",
+    "code_type": "B"
+  },
+  {
+    "code": "1135010500",
+    "attempt": "서울특별시",
+    "city": "노원구",
+    "district": "상계동",
+    "sub_district": "",
+    "latitude": "37.6671",
+    "longitude": "127.072189",
+    "code_type": "B"
+  },
+  {
+    "code": "1135010600",
+    "attempt": "서울특별시",
+    "city": "노원구",
+    "district": "중계동",
+    "sub_district": "",
+    "latitude": "37.646989",
+    "longitude": "127.082411",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010100",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "수색동",
+    "sub_district": "",
+    "latitude": "37.585121",
+    "longitude": "126.89426",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010200",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "녹번동",
+    "sub_district": "",
+    "latitude": "37.605253",
+    "longitude": "126.929107",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010300",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "불광동",
+    "sub_district": "",
+    "latitude": "37.620465",
+    "longitude": "126.927435",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010400",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "갈현동",
+    "sub_district": "",
+    "latitude": "37.621223",
+    "longitude": "126.914993",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010500",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "구산동",
+    "sub_district": "",
+    "latitude": "37.61139",
+    "longitude": "126.910297",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010600",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "대조동",
+    "sub_district": "",
+    "latitude": "37.612276",
+    "longitude": "126.92285",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010700",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "응암동",
+    "sub_district": "",
+    "latitude": "37.592677",
+    "longitude": "126.920257",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010800",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "역촌동",
+    "sub_district": "",
+    "latitude": "37.60477",
+    "longitude": "126.915663",
+    "code_type": "B"
+  },
+  {
+    "code": "1138010900",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "신사동",
+    "sub_district": "",
+    "latitude": "37.595711",
+    "longitude": "126.909195",
+    "code_type": "B"
+  },
+  {
+    "code": "1138011000",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "증산동",
+    "sub_district": "",
+    "latitude": "37.584724",
+    "longitude": "126.907223",
+    "code_type": "B"
+  },
+  {
+    "code": "1138011400",
+    "attempt": "서울특별시",
+    "city": "은평구",
+    "district": "진관동",
+    "sub_district": "",
+    "latitude": "37.644355",
+    "longitude": "126.936524",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010100",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "충정로2가",
+    "sub_district": "",
+    "latitude": "37.565192",
+    "longitude": "126.964529",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010200",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "충정로3가",
+    "sub_district": "",
+    "latitude": "37.562611",
+    "longitude": "126.961351",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010300",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "합동",
+    "sub_district": "",
+    "latitude": "37.561567",
+    "longitude": "126.966566",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010400",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "미근동",
+    "sub_district": "",
+    "latitude": "37.563162",
+    "longitude": "126.967026",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010500",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "냉천동",
+    "sub_district": "",
+    "latitude": "37.567257",
+    "longitude": "126.96389",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010600",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "천연동",
+    "sub_district": "",
+    "latitude": "37.568285",
+    "longitude": "126.960571",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010700",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "옥천동",
+    "sub_district": "",
+    "latitude": "37.569686",
+    "longitude": "126.96089",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010800",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "영천동",
+    "sub_district": "",
+    "latitude": "37.570759",
+    "longitude": "126.96046",
+    "code_type": "B"
+  },
+  {
+    "code": "1141010900",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "현저동",
+    "sub_district": "",
+    "latitude": "37.576486",
+    "longitude": "126.95422",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011000",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "북아현동",
+    "sub_district": "",
+    "latitude": "37.561666",
+    "longitude": "126.95617",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011100",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "홍제동",
+    "sub_district": "",
+    "latitude": "37.588734",
+    "longitude": "126.946107",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011200",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "대현동",
+    "sub_district": "",
+    "latitude": "37.558086",
+    "longitude": "126.944504",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011300",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "대신동",
+    "sub_district": "",
+    "latitude": "37.566438",
+    "longitude": "126.945199",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011400",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "신촌동",
+    "sub_district": "",
+    "latitude": "37.568134",
+    "longitude": "126.946792",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011500",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "봉원동",
+    "sub_district": "",
+    "latitude": "37.569952",
+    "longitude": "126.947063",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011600",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "창천동",
+    "sub_district": "",
+    "latitude": "37.558584",
+    "longitude": "126.934113",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011700",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "연희동",
+    "sub_district": "",
+    "latitude": "37.570389",
+    "longitude": "126.929628",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011800",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "홍은동",
+    "sub_district": "",
+    "latitude": "37.59156",
+    "longitude": "126.938775",
+    "code_type": "B"
+  },
+  {
+    "code": "1141011900",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "북가좌동",
+    "sub_district": "",
+    "latitude": "37.580344",
+    "longitude": "126.912261",
+    "code_type": "B"
+  },
+  {
+    "code": "1141012000",
+    "attempt": "서울특별시",
+    "city": "서대문구",
+    "district": "남가좌동",
+    "sub_district": "",
+    "latitude": "37.577538",
+    "longitude": "126.922311",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010100",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "아현동",
+    "sub_district": "",
+    "latitude": "37.555483",
+    "longitude": "126.955998",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010200",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "공덕동",
+    "sub_district": "",
+    "latitude": "37.548828",
+    "longitude": "126.959006",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010300",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "신공덕동",
+    "sub_district": "",
+    "latitude": "37.544374",
+    "longitude": "126.956854",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010400",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "도화동",
+    "sub_district": "",
+    "latitude": "37.539966",
+    "longitude": "126.95",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010500",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "용강동",
+    "sub_district": "",
+    "latitude": "37.541967",
+    "longitude": "126.940414",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010600",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "토정동",
+    "sub_district": "",
+    "latitude": "37.54035",
+    "longitude": "126.940474",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010700",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "마포동",
+    "sub_district": "",
+    "latitude": "37.537003",
+    "longitude": "126.945323",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010800",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "대흥동",
+    "sub_district": "",
+    "latitude": "37.551055",
+    "longitude": "126.943731",
+    "code_type": "B"
+  },
+  {
+    "code": "1144010900",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "염리동",
+    "sub_district": "",
+    "latitude": "37.551546",
+    "longitude": "126.947279",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011000",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "노고산동",
+    "sub_district": "",
+    "latitude": "37.554402",
+    "longitude": "126.938556",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011100",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "신수동",
+    "sub_district": "",
+    "latitude": "37.547351",
+    "longitude": "126.937074",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011200",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "현석동",
+    "sub_district": "",
+    "latitude": "37.54384",
+    "longitude": "126.933903",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011300",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "구수동",
+    "sub_district": "",
+    "latitude": "37.545679",
+    "longitude": "126.932695",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011400",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "창전동",
+    "sub_district": "",
+    "latitude": "37.550966",
+    "longitude": "126.929835",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011500",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "상수동",
+    "sub_district": "",
+    "latitude": "37.547431",
+    "longitude": "126.922946",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011600",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "하중동",
+    "sub_district": "",
+    "latitude": "37.54575",
+    "longitude": "126.928674",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011700",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "신정동",
+    "sub_district": "",
+    "latitude": "37.54421",
+    "longitude": "126.930866",
+    "code_type": "B"
+  },
+  {
+    "code": "1144011800",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "당인동",
+    "sub_district": "",
+    "latitude": "37.54625",
+    "longitude": "126.920245",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012000",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "서교동",
+    "sub_district": "",
+    "latitude": "37.55391",
+    "longitude": "126.918985",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012100",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "동교동",
+    "sub_district": "",
+    "latitude": "37.55765",
+    "longitude": "126.925663",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012200",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "합정동",
+    "sub_district": "",
+    "latitude": "37.549046",
+    "longitude": "126.911558",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012300",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "망원동",
+    "sub_district": "",
+    "latitude": "37.55662",
+    "longitude": "126.903976",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012400",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "연남동",
+    "sub_district": "",
+    "latitude": "37.562962",
+    "longitude": "126.921783",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012500",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "성산동",
+    "sub_district": "",
+    "latitude": "37.563317",
+    "longitude": "126.91087",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012600",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "중동",
+    "sub_district": "",
+    "latitude": "37.5704",
+    "longitude": "126.907656",
+    "code_type": "B"
+  },
+  {
+    "code": "1144012700",
+    "attempt": "서울특별시",
+    "city": "마포구",
+    "district": "상암동",
+    "sub_district": "",
+    "latitude": "37.577131",
+    "longitude": "126.893488",
+    "code_type": "B"
+  },
+  {
+    "code": "1147010100",
+    "attempt": "서울특별시",
+    "city": "양천구",
+    "district": "신정동",
+    "sub_district": "",
+    "latitude": "37.521636",
+    "longitude": "126.857957",
+    "code_type": "B"
+  },
+  {
+    "code": "1147010200",
+    "attempt": "서울특별시",
+    "city": "양천구",
+    "district": "목동",
+    "sub_district": "",
+    "latitude": "37.539776",
+    "longitude": "126.869079",
+    "code_type": "B"
+  },
+  {
+    "code": "1147010300",
+    "attempt": "서울특별시",
+    "city": "양천구",
+    "district": "신월동",
+    "sub_district": "",
+    "latitude": "37.529444",
+    "longitude": "126.834248",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010100",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "염창동",
+    "sub_district": "",
+    "latitude": "37.551366",
+    "longitude": "126.8713",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010200",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "등촌동",
+    "sub_district": "",
+    "latitude": "37.551325",
+    "longitude": "126.858411",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010300",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "화곡동",
+    "sub_district": "",
+    "latitude": "37.538358",
+    "longitude": "126.847336",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010400",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "가양동",
+    "sub_district": "",
+    "latitude": "37.568238",
+    "longitude": "126.845059",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010500",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "마곡동",
+    "sub_district": "",
+    "latitude": "37.566092",
+    "longitude": "126.830395",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010600",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "내발산동",
+    "sub_district": "",
+    "latitude": "37.552616",
+    "longitude": "126.83573",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010700",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "외발산동",
+    "sub_district": "",
+    "latitude": "37.546721",
+    "longitude": "126.821871",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010800",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "공항동",
+    "sub_district": "",
+    "latitude": "37.558805",
+    "longitude": "126.813297",
+    "code_type": "B"
+  },
+  {
+    "code": "1150010900",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "방화동",
+    "sub_district": "",
+    "latitude": "37.569138",
+    "longitude": "126.812192",
+    "code_type": "B"
+  },
+  {
+    "code": "1150011000",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "개화동",
+    "sub_district": "",
+    "latitude": "37.582069",
+    "longitude": "126.801198",
+    "code_type": "B"
+  },
+  {
+    "code": "1150011100",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "과해동",
+    "sub_district": "",
+    "latitude": "37.560661",
+    "longitude": "126.794953",
+    "code_type": "B"
+  },
+  {
+    "code": "1150011200",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "오곡동",
+    "sub_district": "",
+    "latitude": "37.554615",
+    "longitude": "126.775768",
+    "code_type": "B"
+  },
+  {
+    "code": "1150011300",
+    "attempt": "서울특별시",
+    "city": "강서구",
+    "district": "오쇠동",
+    "sub_district": "",
+    "latitude": "37.541148",
+    "longitude": "126.796575",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010100",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "신도림동",
+    "sub_district": "",
+    "latitude": "37.509454",
+    "longitude": "126.880425",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010200",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "구로동",
+    "sub_district": "",
+    "latitude": "37.4929",
+    "longitude": "126.886427",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010300",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "가리봉동",
+    "sub_district": "",
+    "latitude": "37.482944",
+    "longitude": "126.888062",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010600",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "고척동",
+    "sub_district": "",
+    "latitude": "37.50356",
+    "longitude": "126.855829",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010700",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "개봉동",
+    "sub_district": "",
+    "latitude": "37.49497",
+    "longitude": "126.851409",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010800",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "오류동",
+    "sub_district": "",
+    "latitude": "37.494129",
+    "longitude": "126.840746",
+    "code_type": "B"
+  },
+  {
+    "code": "1153010900",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "궁동",
+    "sub_district": "",
+    "latitude": "37.49687",
+    "longitude": "126.831303",
+    "code_type": "B"
+  },
+  {
+    "code": "1153011000",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "온수동",
+    "sub_district": "",
+    "latitude": "37.493507",
+    "longitude": "126.820255",
+    "code_type": "B"
+  },
+  {
+    "code": "1153011100",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "천왕동",
+    "sub_district": "",
+    "latitude": "37.482016",
+    "longitude": "126.841789",
+    "code_type": "B"
+  },
+  {
+    "code": "1153011200",
+    "attempt": "서울특별시",
+    "city": "구로구",
+    "district": "항동",
+    "sub_district": "",
+    "latitude": "37.484059",
+    "longitude": "126.82298",
+    "code_type": "B"
+  },
+  {
+    "code": "1154510100",
+    "attempt": "서울특별시",
+    "city": "금천구",
+    "district": "가산동",
+    "sub_district": "",
+    "latitude": "37.477598",
+    "longitude": "126.888291",
+    "code_type": "B"
+  },
+  {
+    "code": "1154510200",
+    "attempt": "서울특별시",
+    "city": "금천구",
+    "district": "독산동",
+    "sub_district": "",
+    "latitude": "37.469371",
+    "longitude": "126.901246",
+    "code_type": "B"
+  },
+  {
+    "code": "1154510300",
+    "attempt": "서울특별시",
+    "city": "금천구",
+    "district": "시흥동",
+    "sub_district": "",
+    "latitude": "37.453325",
+    "longitude": "126.906222",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010100",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동",
+    "sub_district": "",
+    "latitude": "37.513448",
+    "longitude": "126.907724",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010200",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동1가",
+    "sub_district": "",
+    "latitude": "37.51771",
+    "longitude": "126.913057",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010300",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동2가",
+    "sub_district": "",
+    "latitude": "37.520839",
+    "longitude": "126.910094",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010400",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동3가",
+    "sub_district": "",
+    "latitude": "37.518155",
+    "longitude": "126.907998",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010500",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동4가",
+    "sub_district": "",
+    "latitude": "37.517981",
+    "longitude": "126.903506",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010600",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동5가",
+    "sub_district": "",
+    "latitude": "37.521133",
+    "longitude": "126.907084",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010700",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동6가",
+    "sub_district": "",
+    "latitude": "37.521556",
+    "longitude": "126.90309",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010800",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동7가",
+    "sub_district": "",
+    "latitude": "37.524619",
+    "longitude": "126.90667",
+    "code_type": "B"
+  },
+  {
+    "code": "1156010900",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "영등포동8가",
+    "sub_district": "",
+    "latitude": "37.527015",
+    "longitude": "126.905253",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011000",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "여의도동",
+    "sub_district": "",
+    "latitude": "37.524371",
+    "longitude": "126.925958",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011100",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동1가",
+    "sub_district": "",
+    "latitude": "37.522336",
+    "longitude": "126.898748",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011200",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동2가",
+    "sub_district": "",
+    "latitude": "37.522967",
+    "longitude": "126.892688",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011300",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동3가",
+    "sub_district": "",
+    "latitude": "37.525551",
+    "longitude": "126.896668",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011400",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동4가",
+    "sub_district": "",
+    "latitude": "37.528887",
+    "longitude": "126.898848",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011500",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동5가",
+    "sub_district": "",
+    "latitude": "37.532856",
+    "longitude": "126.899187",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011600",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동6가",
+    "sub_district": "",
+    "latitude": "37.534373",
+    "longitude": "126.903445",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011700",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "당산동",
+    "sub_district": "",
+    "latitude": "37.528625",
+    "longitude": "126.907439",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011800",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "도림동",
+    "sub_district": "",
+    "latitude": "37.509277",
+    "longitude": "126.902494",
+    "code_type": "B"
+  },
+  {
+    "code": "1156011900",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동1가",
+    "sub_district": "",
+    "latitude": "37.512364",
+    "longitude": "126.897201",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012000",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동2가",
+    "sub_district": "",
+    "latitude": "37.51329",
+    "longitude": "126.893779",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012100",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동3가",
+    "sub_district": "",
+    "latitude": "37.516929",
+    "longitude": "126.897249",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012200",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동4가",
+    "sub_district": "",
+    "latitude": "37.515082",
+    "longitude": "126.890475",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012300",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동5가",
+    "sub_district": "",
+    "latitude": "37.515863",
+    "longitude": "126.885676",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012400",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "문래동6가",
+    "sub_district": "",
+    "latitude": "37.519342",
+    "longitude": "126.886528",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012500",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동1가",
+    "sub_district": "",
+    "latitude": "37.523571",
+    "longitude": "126.888814",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012600",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동2가",
+    "sub_district": "",
+    "latitude": "37.52427",
+    "longitude": "126.884578",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012700",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동3가",
+    "sub_district": "",
+    "latitude": "37.528148",
+    "longitude": "126.889731",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012800",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동4가",
+    "sub_district": "",
+    "latitude": "37.537079",
+    "longitude": "126.89626",
+    "code_type": "B"
+  },
+  {
+    "code": "1156012900",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동5가",
+    "sub_district": "",
+    "latitude": "37.538964",
+    "longitude": "126.893422",
+    "code_type": "B"
+  },
+  {
+    "code": "1156013000",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동6가",
+    "sub_district": "",
+    "latitude": "37.542645",
+    "longitude": "126.890065",
+    "code_type": "B"
+  },
+  {
+    "code": "1156013100",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양화동",
+    "sub_district": "",
+    "latitude": "37.545629",
+    "longitude": "126.891554",
+    "code_type": "B"
+  },
+  {
+    "code": "1156013200",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "신길동",
+    "sub_district": "",
+    "latitude": "37.507088",
+    "longitude": "126.913103",
+    "code_type": "B"
+  },
+  {
+    "code": "1156013300",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "대림동",
+    "sub_district": "",
+    "latitude": "37.494306",
+    "longitude": "126.900642",
+    "code_type": "B"
+  },
+  {
+    "code": "1156013400",
+    "attempt": "서울특별시",
+    "city": "영등포구",
+    "district": "양평동",
+    "sub_district": "",
+    "latitude": "37.522602",
+    "longitude": "126.881344",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010100",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "노량진동",
+    "sub_district": "",
+    "latitude": "37.510162",
+    "longitude": "126.940418",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010200",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "상도동",
+    "sub_district": "",
+    "latitude": "37.499206",
+    "longitude": "126.940385",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010300",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "상도1동",
+    "sub_district": "",
+    "latitude": "37.502889",
+    "longitude": "126.950645",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010400",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "본동",
+    "sub_district": "",
+    "latitude": "37.511491",
+    "longitude": "126.954336",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010500",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "흑석동",
+    "sub_district": "",
+    "latitude": "37.505964",
+    "longitude": "126.962578",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010600",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "동작동",
+    "sub_district": "",
+    "latitude": "37.496605",
+    "longitude": "126.980985",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010700",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "사당동",
+    "sub_district": "",
+    "latitude": "37.483974",
+    "longitude": "126.974999",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010800",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "대방동",
+    "sub_district": "",
+    "latitude": "37.504791",
+    "longitude": "126.927862",
+    "code_type": "B"
+  },
+  {
+    "code": "1159010900",
+    "attempt": "서울특별시",
+    "city": "동작구",
+    "district": "신대방동",
+    "sub_district": "",
+    "latitude": "37.492678",
+    "longitude": "126.917721",
+    "code_type": "B"
+  },
+  {
+    "code": "1162010100",
+    "attempt": "서울특별시",
+    "city": "관악구",
+    "district": "봉천동",
+    "sub_district": "",
+    "latitude": "37.482717",
+    "longitude": "126.949951",
+    "code_type": "B"
+  },
+  {
+    "code": "1162010200",
+    "attempt": "서울특별시",
+    "city": "관악구",
+    "district": "신림동",
+    "sub_district": "",
+    "latitude": "37.476412",
+    "longitude": "126.925691",
+    "code_type": "B"
+  },
+  {
+    "code": "1162010300",
+    "attempt": "서울특별시",
+    "city": "관악구",
+    "district": "남현동",
+    "sub_district": "",
+    "latitude": "37.474116",
+    "longitude": "126.976721",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010100",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "방배동",
+    "sub_district": "",
+    "latitude": "37.484677",
+    "longitude": "126.989955",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010200",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "양재동",
+    "sub_district": "",
+    "latitude": "37.474839",
+    "longitude": "127.041717",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010300",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "우면동",
+    "sub_district": "",
+    "latitude": "37.466629",
+    "longitude": "127.021892",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010400",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "원지동",
+    "sub_district": "",
+    "latitude": "37.446848",
+    "longitude": "127.053774",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010600",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "잠원동",
+    "sub_district": "",
+    "latitude": "37.513667",
+    "longitude": "127.016166",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010700",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "반포동",
+    "sub_district": "",
+    "latitude": "37.502816",
+    "longitude": "127.010493",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010800",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "서초동",
+    "sub_district": "",
+    "latitude": "37.488514",
+    "longitude": "127.016222",
+    "code_type": "B"
+  },
+  {
+    "code": "1165010900",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "내곡동",
+    "sub_district": "",
+    "latitude": "37.456881",
+    "longitude": "127.074171",
+    "code_type": "B"
+  },
+  {
+    "code": "1165011000",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "염곡동",
+    "sub_district": "",
+    "latitude": "37.462035",
+    "longitude": "127.052837",
+    "code_type": "B"
+  },
+  {
+    "code": "1165011100",
+    "attempt": "서울특별시",
+    "city": "서초구",
+    "district": "신원동",
+    "sub_district": "",
+    "latitude": "37.447112",
+    "longitude": "127.058841",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010100",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "역삼동",
+    "sub_district": "",
+    "latitude": "37.500335",
+    "longitude": "127.037596",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010300",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "개포동",
+    "sub_district": "",
+    "latitude": "37.47826",
+    "longitude": "127.052024",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010400",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "청담동",
+    "sub_district": "",
+    "latitude": "37.523404",
+    "longitude": "127.046858",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010500",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "삼성동",
+    "sub_district": "",
+    "latitude": "37.512792",
+    "longitude": "127.053085",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010600",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "대치동",
+    "sub_district": "",
+    "latitude": "37.501711",
+    "longitude": "127.057851",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010700",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "신사동",
+    "sub_district": "",
+    "latitude": "37.522893",
+    "longitude": "127.028589",
+    "code_type": "B"
+  },
+  {
+    "code": "1168010800",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "논현동",
+    "sub_district": "",
+    "latitude": "37.513093",
+    "longitude": "127.031353",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011000",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "압구정동",
+    "sub_district": "",
+    "latitude": "37.528752",
+    "longitude": "127.031766",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011100",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "세곡동",
+    "sub_district": "",
+    "latitude": "37.466494",
+    "longitude": "127.103021",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011200",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "자곡동",
+    "sub_district": "",
+    "latitude": "37.476796",
+    "longitude": "127.100387",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011300",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "율현동",
+    "sub_district": "",
+    "latitude": "37.47145",
+    "longitude": "127.107251",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011400",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "일원동",
+    "sub_district": "",
+    "latitude": "37.491326",
+    "longitude": "127.083799",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011500",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "수서동",
+    "sub_district": "",
+    "latitude": "37.485767",
+    "longitude": "127.098137",
+    "code_type": "B"
+  },
+  {
+    "code": "1168011800",
+    "attempt": "서울특별시",
+    "city": "강남구",
+    "district": "도곡동",
+    "sub_district": "",
+    "latitude": "37.486509",
+    "longitude": "127.040738",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010100",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "잠실동",
+    "sub_district": "",
+    "latitude": "37.506967",
+    "longitude": "127.083673",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010200",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "신천동",
+    "sub_district": "",
+    "latitude": "37.517302",
+    "longitude": "127.104967",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010300",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "풍납동",
+    "sub_district": "",
+    "latitude": "37.534673",
+    "longitude": "127.117643",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010400",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "송파동",
+    "sub_district": "",
+    "latitude": "37.506058",
+    "longitude": "127.111216",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010500",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "석촌동",
+    "sub_district": "",
+    "latitude": "37.502699",
+    "longitude": "127.102321",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010600",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "삼전동",
+    "sub_district": "",
+    "latitude": "37.502724",
+    "longitude": "127.092352",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010700",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "가락동",
+    "sub_district": "",
+    "latitude": "37.496486",
+    "longitude": "127.126006",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010800",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "문정동",
+    "sub_district": "",
+    "latitude": "37.486581",
+    "longitude": "127.127495",
+    "code_type": "B"
+  },
+  {
+    "code": "1171010900",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "장지동",
+    "sub_district": "",
+    "latitude": "37.478077",
+    "longitude": "127.133269",
+    "code_type": "B"
+  },
+  {
+    "code": "1171011100",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "방이동",
+    "sub_district": "",
+    "latitude": "37.512017",
+    "longitude": "127.116902",
+    "code_type": "B"
+  },
+  {
+    "code": "1171011200",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "오금동",
+    "sub_district": "",
+    "latitude": "37.503984",
+    "longitude": "127.135124",
+    "code_type": "B"
+  },
+  {
+    "code": "1171011300",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "거여동",
+    "sub_district": "",
+    "latitude": "37.494161",
+    "longitude": "127.145196",
+    "code_type": "B"
+  },
+  {
+    "code": "1171011400",
+    "attempt": "서울특별시",
+    "city": "송파구",
+    "district": "마천동",
+    "sub_district": "",
+    "latitude": "37.497117",
+    "longitude": "127.152393",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010100",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "명일동",
+    "sub_district": "",
+    "latitude": "37.549276",
+    "longitude": "127.147555",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010200",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "고덕동",
+    "sub_district": "",
+    "latitude": "37.561068",
+    "longitude": "127.160582",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010300",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "상일동",
+    "sub_district": "",
+    "latitude": "37.54822",
+    "longitude": "127.17063",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010500",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "길동",
+    "sub_district": "",
+    "latitude": "37.539123",
+    "longitude": "127.143163",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010600",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "둔촌동",
+    "sub_district": "",
+    "latitude": "37.531157",
+    "longitude": "127.142891",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010700",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "암사동",
+    "sub_district": "",
+    "latitude": "37.552497",
+    "longitude": "127.13301",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010800",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "성내동",
+    "sub_district": "",
+    "latitude": "37.531338",
+    "longitude": "127.129174",
+    "code_type": "B"
+  },
+  {
+    "code": "1174010900",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "천호동",
+    "sub_district": "",
+    "latitude": "37.543676",
+    "longitude": "127.131748",
+    "code_type": "B"
+  },
+  {
+    "code": "1174011000",
+    "attempt": "서울특별시",
+    "city": "강동구",
+    "district": "강일동",
+    "sub_district": "",
+    "latitude": "37.569204",
+    "longitude": "127.17162",
+    "code_type": "B"
+  }
+]

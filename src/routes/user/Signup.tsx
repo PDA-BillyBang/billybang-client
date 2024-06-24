@@ -1,12 +1,13 @@
 import FloatingInputForm1 from '@components/common/form/FloatingInputForm1';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import {
   Params,
   useNavigate,
   useOutletContext,
   useParams,
 } from 'react-router-dom';
-import { Datepicker } from 'flowbite-react';
+import { Dropdown } from 'flowbite-react';
 import LargeButton from '@components/common/button/LargeButton';
 import { signUp } from '@/lib/apis/user';
 import { AxiosError } from 'axios';
@@ -17,11 +18,17 @@ export default function SignUp() {
   const [password, setPassword] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [checkPassword, setCheckPassword] = useState<string>('');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isActive, setIsActive] = useState<number>(3); // 기본값은 3으로 설정
-  const [birthDate, setBirthDate] = useState<Date>();
+  const [birthDate, setBirthDate] = useState<Date>(new Date());
   const [error, setError] = useState<string | null>(null);
+
+  const years = Array.from({ length: 2024 - 1900 + 1 }, (_, i) => 1900 + i);
+  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
 
   const navigate = useNavigate();
 
@@ -33,6 +40,12 @@ export default function SignUp() {
     setTitle('회원가입');
   }, [setTitle]);
 
+  useEffect(() => {
+    const newDate = new Date(selectedYear, selectedMonth - 1, selectedDay);
+    setBirthDate(newDate);
+    console.log(birthDate);
+  }, [selectedYear, selectedMonth, selectedDay]);
+
   const handleClickedRegisterUserButton = async () => {
     if (email === undefined) {
       navigate(-1);
@@ -41,6 +54,14 @@ export default function SignUp() {
     try {
       if (email !== undefined && birthDate !== undefined) {
         await signUp({ email, password, birthDate, nickname });
+
+        Swal.fire({
+          title: '회원가입 성공',
+          text: '회원가입이 완료 되었습니다.',
+          confirmButtonColor: '#004CC7',
+          confirmButtonText: '확인',
+        });
+
         navigate('/');
         console.log(1);
       }
@@ -48,7 +69,7 @@ export default function SignUp() {
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
       if (errorResponse.response && errorResponse.response.status === 400) {
-        setError('아이디가 중복 됩니다.');
+        setError('모든 정보를 기입해주세요.');
         console.log(3);
       } else {
         setError('회원가입 중 오류가 발생했습니다.');
@@ -63,7 +84,7 @@ export default function SignUp() {
   // 모든 입력 값이 유효한지 확인하는 함수
   const checkValidity = () => {
     const isPasswordValid = password.length >= 8;
-    const isNicknameValid = nickname.length >= 4;
+    const isNicknameValid = nickname.length >= 2;
     const isCheckPasswordValid =
       checkPassword.length >= 8 && checkPassword === password;
     const isDateValid = birthDate !== null; // 생년월일이 선택되었는지 확인
@@ -76,7 +97,7 @@ export default function SignUp() {
     ) {
       setIsActive(0); // 모든 조건이 충족되면 isActive를 0으로 설정
     } else {
-      setIsActive(3); // 조건이 충족되지 않으면 isActive를 3으로 설정
+      setIsActive(1); // 조건이 충족되지 않으면 isActive를 3으로 설정
     }
   };
 
@@ -103,10 +124,10 @@ export default function SignUp() {
     }
   };
 
-  const handleDateChange = (date: Date) => {
-    console.log(birthDate);
-    setBirthDate(date);
-  };
+  // const handleDateChange = (date: Date) => {
+  //   console.log(birthDate);
+  //   setBirthDate(date);
+  // };
 
   return (
     <div className="flex flex-col items-center min-h-screen">
@@ -136,35 +157,77 @@ export default function SignUp() {
         <FloatingInputForm1
           type="text"
           title="닉네임"
-          text="4자리 이상 입력해주세요"
+          text="2자리 이상 입력해주세요"
           value={nickname}
           onChange={handleCheckNicnameChange}
-          validate={(value) => typeof value === 'string' && value.length >= 4}
-          errorMessage="닉네임은 4자리 이상이어야 합니다."
+          validate={(value) => typeof value === 'string' && value.length >= 2}
+          errorMessage="닉네임은 2자리 이상이어야 합니다."
         />
       </div>
 
-      <div className="w-customWidthPercent text-grey-2 hover:text-[black] ">
+      <div className="w-customWidthPercent text-grey-2 hover:text-[black] relative bg-[white]">
         <div className={`text-[1.5rem] font-bold mb-2`}>생년월일</div>
+        <div className="flex items-center">
+          <Dropdown
+            label={selectedYear}
+            placement="bottom"
+            className="bg-[white]"
+          >
+            <div className="overflow-y-auto max-h-[50vh]">
+              {years.map((year) => (
+                <Dropdown.Item key={year} onClick={() => setSelectedYear(year)}>
+                  {year}
+                </Dropdown.Item>
+              ))}
+            </div>
+          </Dropdown>
+          <div className="ml-1 mr-3">년</div>
 
-        <Datepicker
-          onClick={() => {
-            setIsFocused(true);
-          }}
-          onBlur={() => setIsFocused(false)}
-          language="ko"
-          className="hover:text-[black] text-grey-2 z-20"
-          onSelectedDateChanged={handleDateChange}
-        />
+          <Dropdown
+            label={selectedMonth}
+            placement="bottom"
+            className="bg-[white]"
+          >
+            <div className="overflow-y-auto max-h-[50vh]">
+              {months.map((month) => (
+                <Dropdown.Item
+                  key={month}
+                  onClick={() => setSelectedMonth(month)}
+                >
+                  {month}
+                </Dropdown.Item>
+              ))}
+            </div>
+          </Dropdown>
+          <div className="ml-1 mr-3">월</div>
+
+          <Dropdown
+            label={selectedDay}
+            placement="bottom"
+            className="bg-[white]"
+          >
+            <div className="overflow-y-auto max-h-[50vh]">
+              {days.map((day) => (
+                <Dropdown.Item key={day} onClick={() => setSelectedDay(day)}>
+                  {day}
+                </Dropdown.Item>
+              ))}
+            </div>
+          </Dropdown>
+          <div className="ml-1 mr-3">일</div>
+        </div>
       </div>
 
-      {error !== null ? <div className="text-blue-1">{error}</div> : <></>}
       <div className="flex flex-col items-center mt-auto mb-4 w-customWidthPercent">
+        {error !== null ? <div className="text-blue-1">{error}</div> : <></>}
+
         <LargeButton
           text="계속하기"
           customWidth="w-full"
           isActive={isActive}
-          handleClick={handleClickedRegisterUserButton}
+          handleClick={
+            isActive === 0 ? handleClickedRegisterUserButton : undefined
+          }
         ></LargeButton>
       </div>
     </div>

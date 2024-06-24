@@ -3,8 +3,10 @@ import { propertyInstance } from './api';
 interface GetPropertiesParams {
   realEstateType: string;
   tradeType: string;
-  priceMin: number;
-  priceMax: number;
+  dealPriceMin: number;
+  dealPriceMax: number;
+  leasePriceMin: number;
+  leasePriceMax: number;
   leftLon: number;
   rightLon: number;
   topLat: number;
@@ -15,8 +17,10 @@ interface GetPropertiesParams {
 interface GetPropertyDetailsParams {
   realEstateType: string;
   tradeType: string;
-  priceMin: number;
-  priceMax: number;
+  dealPriceMin: number;
+  dealPriceMax: number;
+  leasePriceMin: number;
+  leasePriceMax: number;
   latitude: number;
   longitude: number;
   size: number;
@@ -26,8 +30,10 @@ export async function getPropertyGroups(params: GetPropertiesParams) {
   const {
     realEstateType,
     tradeType,
-    priceMin,
-    priceMax,
+    dealPriceMin,
+    dealPriceMax,
+    leasePriceMin,
+    leasePriceMax,
     leftLon,
     rightLon,
     topLat,
@@ -39,8 +45,10 @@ export async function getPropertyGroups(params: GetPropertiesParams) {
     params: {
       realEstateType,
       tradeType,
-      priceMin,
-      priceMax,
+      dealPriceMin,
+      dealPriceMax,
+      leasePriceMin,
+      leasePriceMax,
       leftLon,
       rightLon,
       topLat,
@@ -54,8 +62,10 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
   const {
     realEstateType,
     tradeType,
-    priceMin,
-    priceMax,
+    dealPriceMin,
+    dealPriceMax,
+    leasePriceMin,
+    leasePriceMax,
     latitude,
     longitude,
     size,
@@ -65,8 +75,10 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
     params: {
       realEstateType,
       tradeType,
-      priceMin,
-      priceMax,
+      dealPriceMin,
+      dealPriceMax,
+      leasePriceMin,
+      leasePriceMax,
       latitude,
       longitude,
       size,
@@ -75,20 +87,11 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
 }
 
 export async function likeProperty(propertyId: number) {
-  return await propertyInstance.post('/stars', { propertyId: propertyId });
+  return await propertyInstance.post('/stars/' + propertyId);
 }
 
 export async function deleteProperty(propertyId: number) {
-  return await propertyInstance.request({
-    method: 'DELETE',
-    url: '/stars',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: {
-      propertyId: propertyId,
-    },
-  });
+  return await propertyInstance.delete('/stars/' + propertyId);
 }
 
 export async function getLikeProperties() {
