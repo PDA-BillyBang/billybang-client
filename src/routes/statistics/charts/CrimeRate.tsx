@@ -24,8 +24,16 @@ export interface crimeCountI {
 export default function CrimeRate({ crimeCountList, areaId }: Props) {
   const targetDistrict = districtsName[Number(areaId)];
 
-  const sortedCrimeCountList = [...crimeCountList].sort(
-    (a, b) => a.count - b.count
+  const transformCrimeData = (data: crimeCountI[]) => {
+    return data.map((item) => ({
+      districtName: item.districtName,
+      건수: item.count,
+    }));
+  };
+
+  // Sorting the crime count list by count in ascending order
+  const sortedCrimeCountList = transformCrimeData(
+    [...crimeCountList].sort((a, b) => a.count - b.count)
   );
 
   return (
@@ -42,7 +50,7 @@ export default function CrimeRate({ crimeCountList, areaId }: Props) {
             <YAxis width={35} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="count">
+            <Bar dataKey="건수">
               {sortedCrimeCountList.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
@@ -59,4 +67,9 @@ export default function CrimeRate({ crimeCountList, areaId }: Props) {
       </div>
     </div>
   );
+}
+
+export interface crimeCountI {
+  districtName: string;
+  count: number;
 }
