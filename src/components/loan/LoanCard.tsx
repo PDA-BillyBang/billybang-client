@@ -76,7 +76,7 @@ export default function LoanCard({
             className="w-[2.0rem] h-[2.0rem]"
           />
           <div className="px-[0.2rem]" />
-          <div className="w-[85%] font-bold text-[1.3rem]">{providerName}</div>
+          <div className="w-[85%] font-bold text-[1.3rem] ">{providerName}</div>
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
@@ -17,7 +16,6 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-
 import { removeMarkers } from './methods/renderPlaces';
 import OptionButton from '@components/map/OptionButton';
 import OptionContent from '@components/map/OptionContent';
@@ -30,13 +28,23 @@ import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
   const [properties, setProperties] = useState<Property[]>([]); // 매물 상세 데이터들
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
+    null
+  );
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
-  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(''); // 편의시설 카테고리
-  const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption);
-  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption);
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
+    undefined
+  );
+  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(
+    ''
+  ); // 편의시설 카테고리
+  const [propertyOption, setPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
+  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
   const [gu, setGu] = useState<string>('');
   const [guCode, setGuCode] = useState<string>('');
   const overlayRef = useRef<{ [key: number]: OverlayData }>({}); // 매물 그룹들의 컴포넌트
@@ -46,8 +54,17 @@ export default function MapComponent() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || { lat: 37.563915912, lon: 126.99772498493 };
-  const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
+  const { lat, lon } = location.state || {
+    lat: 37.563915912,
+    lon: 126.99772498493,
+  };
+  const { setAddress } = useOutletContext<{
+    setAddress: (title: string) => void;
+  }>();
+
+  const [page, setPage] = useState<number>(0);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const loader = useRef<HTMLDivElement | null>(null);
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -88,11 +105,14 @@ export default function MapComponent() {
         (group) => group.representativeId === selectedPropertyId
       );
       if (selectedGroup) {
-        fetchPropertyDetail(selectedGroup, setProperties, propertyOption);
+        setPage(0); // 페이지 초기화
+        setProperties([]); // 기존 데이터 초기화
+        fetchProperties(selectedGroup, propertyOption, page); // 첫 페이지 데이터 가져오기
       }
     } else {
       setProperties([]);
     }
+
     updateSelectedProperty(
       selectedPropertyId,
       previousSelectedPropertyIdRef,
@@ -102,6 +122,53 @@ export default function MapComponent() {
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map]);
+
+  // 스크롤 이벤트 핸들러
+  const handleScroll = useCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+      const bottom = scrollHeight - scrollTop === clientHeight;
+      if (bottom && hasMore) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    },
+    [hasMore]
+  );
+
+  // 데이터 가져오는 함수
+  const fetchProperties = async (
+    group: PropertyGroup,
+    propertyOption: PropertyOption,
+    currentPage: number
+  ) => {
+    try {
+      const newProperties = await fetchPropertyDetail(
+        group,
+        propertyOption,
+        currentPage
+      );
+
+      if (newProperties.length === 0) {
+        setHasMore(false); // 더 이상 데이터가 없으면 hasMore를 false로 설정
+      }
+
+      setProperties((prevProperties) => [...prevProperties, ...newProperties]);
+    } catch (error) {
+      console.error('Error fetching detailed properties', error);
+    }
+  };
+
+  // 새로운 페이지 데이터 가져오기
+  useEffect(() => {
+    if (selectedPropertyId !== null && page > 0) {
+      const selectedGroup = propertyGroups.find(
+        (group) => group.representativeId === selectedPropertyId
+      );
+      if (selectedGroup) {
+        fetchProperties(selectedGroup, propertyOption, page); // currentPage로 변경
+      }
+    }
+  }, [page]);
 
   // 편의시설 카테고리 변경시 검색
   useEffect(() => {
@@ -157,6 +224,7 @@ export default function MapComponent() {
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   console.log(properties);
+
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
@@ -175,7 +243,15 @@ export default function MapComponent() {
           isBackDropped={false}
           position={drawerPosition}
         >
-          {isDrawerOpen === 2 && <MapPropertyLoan properties={properties} />}
+          {isDrawerOpen === 2 && (
+            <div
+              onScroll={handleScroll}
+              style={{ overflowY: 'auto', height: '100%' }}
+            >
+              <MapPropertyLoan properties={properties} />
+              {hasMore && <div ref={loader}>Loading more properties...</div>}
+            </div>
+          )}
           {isDrawerOpen === 1 && (
             <OptionContent
               propertyOption={propertyOption}

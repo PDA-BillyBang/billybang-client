@@ -24,6 +24,7 @@ interface GetPropertyDetailsParams {
   latitude: number;
   longitude: number;
   size: number;
+  page: number;
 }
 
 export async function getPropertyGroups(params: GetPropertiesParams) {
@@ -69,6 +70,7 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
     latitude,
     longitude,
     size,
+    page,
   } = params;
 
   return propertyInstance.get('/details', {
@@ -82,6 +84,7 @@ export async function getPropertyDetails(params: GetPropertyDetailsParams) {
       latitude,
       longitude,
       size,
+      page,
     },
   });
 }

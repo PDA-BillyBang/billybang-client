@@ -45,6 +45,7 @@ module.exports = {
       'CWDangamAsac-Bold': ['CWDangamAsac-Bold'],
       NanumSquareRound: ['NanumSquareRound'],
       GyeonggiTitleM: ['GyeonggiTitleM'],
+      'Pretendard-Bold': ['Pretendard-Bold'],
     },
     extend: {
       spacing: {

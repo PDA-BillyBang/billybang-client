@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
-import { deleteLikeLoan, getBestLoans } from '@/lib/apis/loan';
-import MySkeleton from '@/routes/mypage/MySkeleton';
+import { getBestLoans } from '@/lib/apis/loan';
 import LoanSkeleton from '@/routes/loan/LoanSkeleton';
-import { getLikeProperties } from '@/lib/apis/property';
 
 type Props = {
   bottomButton?: boolean;
@@ -142,7 +139,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
         <div className="bg-grey-5 flex flex-col py-[0.4rem] px-[0.8rem] h-[7.5rem] rounded-[10px] shadow-md">
           <div className="flex flex-row">
             <img
-              src={shin}
+              src={bestLoan?.providerImgUrl}
               className="w-[20px] h-[20px] mr-[0.1rem] mt-[0.2rem]"
             />
             <div className="ml-[0.4rem] flex flex-col w-[100%]">

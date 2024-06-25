@@ -31,7 +31,7 @@ export const initializeMap = (
     // 지도 생성
     const mapInstance = new kakao.maps.Map(container, options);
     setMap(mapInstance);
-
+    console.log(mapInstance);
     // 편의시설 검색 객체 생성
     const psInstance = new kakao.maps.services.Places(mapInstance);
     setPs(psInstance);
@@ -101,21 +101,23 @@ export const initializeMap = (
     // 구 다각형 생성
     const createGuPolygons = (geojson: any) => {
       geojson.features.forEach((feature: any) => {
-        console.log(feature.properties.SIG_KOR_NM)
-        const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
+        console.log(feature.properties.SIG_KOR_NM);
+        const coordinates = feature.geometry.coordinates[0].map(
+          (coord: any) => new kakao.maps.LatLng(coord[1], coord[0])
+        );
         const polygon = new kakao.maps.Polygon({
           path: coordinates,
           strokeWeight: 2,
           strokeColor: '#39DE2A',
           strokeOpacity: 0.8,
           fillColor: '#A2FF99',
-          fillOpacity: 0.7
+          fillOpacity: 0.7,
         });
         // hover 시 다각형 스타일 변경
-        kakao.maps.event.addListener(polygon, 'mouseover', function() {
+        kakao.maps.event.addListener(polygon, 'mouseover', function () {
           polygon.setOptions({ fillColor: '#66ccff' });
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function() {
+        kakao.maps.event.addListener(polygon, 'mouseout', function () {
           polygon.setOptions({ fillColor: '#A2FF99' });
         });
         guPolygons.push(polygon);
@@ -125,20 +127,22 @@ export const initializeMap = (
     // 동 다각형 생성
     const createDongPolygons = (geojson: any) => {
       geojson.features.forEach((feature: any) => {
-        const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
+        const coordinates = feature.geometry.coordinates[0].map(
+          (coord: any) => new kakao.maps.LatLng(coord[1], coord[0])
+        );
         const polygon = new kakao.maps.Polygon({
           path: coordinates,
           strokeWeight: 2,
           strokeColor: '#39DE2A',
           strokeOpacity: 0.8,
           fillColor: '#A2FF99',
-          fillOpacity: 0.7
+          fillOpacity: 0.7,
         });
         // hover 시 다각형 스타일 변경
-        kakao.maps.event.addListener(polygon, 'mouseover', function() {
+        kakao.maps.event.addListener(polygon, 'mouseover', function () {
           polygon.setOptions({ fillColor: '#66ccff' });
         });
-        kakao.maps.event.addListener(polygon, 'mouseout', function() {
+        kakao.maps.event.addListener(polygon, 'mouseout', function () {
           polygon.setOptions({ fillColor: '#A2FF99' });
         });
         dongPolygons.push(polygon);
@@ -147,28 +151,28 @@ export const initializeMap = (
 
     // 구 표시
     const showGuPolygons = () => {
-      guPolygons.forEach(polygon => {
+      guPolygons.forEach((polygon) => {
         polygon.setMap(mapInstance);
       });
     };
 
     // 구 숨기기
     const hideGuPolygons = () => {
-      guPolygons.forEach(polygon => {
+      guPolygons.forEach((polygon) => {
         polygon.setMap(null);
       });
     };
 
     // 동 표시
     const showDongPolygons = () => {
-      dongPolygons.forEach(polygon => {
+      dongPolygons.forEach((polygon) => {
         polygon.setMap(mapInstance);
       });
     };
 
     // 동 숨기기
     const hideDongPolygons = () => {
-      dongPolygons.forEach(polygon => {
+      dongPolygons.forEach((polygon) => {
         polygon.setMap(null);
       });
     };
@@ -201,9 +205,17 @@ export const initializeMap = (
     kakao.maps.event.addListener(mapInstance, 'zoom_changed', onZoomChanged);
 
     return () => {
-      kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo);
+      kakao.maps.event.removeListener(
+        mapInstance,
+        'click',
+        removeCovenientInfo
+      );
       kakao.maps.event.removeListener(mapInstance, 'idle', getGu);
-      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', onZoomChanged);
+      kakao.maps.event.removeListener(
+        mapInstance,
+        'zoom_changed',
+        onZoomChanged
+      );
     };
   });
 };
