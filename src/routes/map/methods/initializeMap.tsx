@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { fetchPropertyGroups } from './fetchPropertyGroups';
 import { moveToCurrentLocation } from './moveToCurrentLocation';
 import guData from '@/assets/json/gu2.json';
+
 import { districtInfoLocation, initialDistrictLocation } from '@/utils/districtsLocation';
 import {
   renderPolygons,
@@ -126,7 +127,12 @@ export const initializeMap = (
     };
 
     // 다각형을 저장할 배열
-    const guPolygons = renderPolygons(guData, mapInstance, infoWindow, handlePolygonHover);
+    const guPolygons = renderPolygons(
+      guData,
+      mapInstance,
+      infoWindow,
+      handlePolygonHover
+    );
 
     // 구 표시
     const showGuPolygons = () => {
@@ -137,7 +143,7 @@ export const initializeMap = (
     const hideGuPolygons = () => {
       hidePolygons(guPolygons);
     };
-    
+
     // 줌 레벨 변경 이벤트 핸들러
     const onZoomChanged = () => {
       if (infoWindowRef.current) {
@@ -164,10 +170,17 @@ export const initializeMap = (
     kakao.maps.event.addListener(mapInstance, 'zoom_changed', onZoomChanged);
 
     return () => {
-      kakao.maps.event.removeListener(mapInstance, 'click', removeCovenientInfo);
+      kakao.maps.event.removeListener(
+        mapInstance,
+        'click',
+        removeCovenientInfo
+      );
       kakao.maps.event.removeListener(mapInstance, 'idle', getGu);
-      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', onZoomChanged);
+      kakao.maps.event.removeListener(
+        mapInstance,
+        'zoom_changed',
+        onZoomChanged
+      );
     };
   });
 };
-

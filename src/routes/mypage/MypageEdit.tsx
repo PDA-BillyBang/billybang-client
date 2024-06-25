@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import profileTest from '../../assets/image/test/profile-test.svg';
 import editGrey from '../../assets/image/icons/editGrey.svg';
 import rightArrowGrey from '../../assets/image/icons/rightArrowGrey.svg';
+import userImg from 'images/user2.svg';
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo, isvalidateToken, logout } from '@/lib/apis/user';
 import { ErrorResponseI } from '@/utils/errorTypes';
@@ -72,11 +72,7 @@ export default function MypageEdit() {
     <div className="pt-[80px] w-[100%] flex flex-col items-center">
       <div className=" w-customWidthPercent">
         <div className="flex flex-col items-center">
-          <img
-            src={profileTest}
-            alt="profile"
-            className="w-[100px] h-[100px]"
-          />
+          <img src={userImg} alt="profile" className="w-[100px] h-[100px]" />
 
           <div className="font-bold text-[1rem] pt-[0.3rem]">
             {user?.nickname}

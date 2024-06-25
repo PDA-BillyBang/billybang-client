@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import profileTest from '../../assets/image/test/profile-test.svg';
+// import profileTest from '../../assets/image/test/profile-test.svg';
+import userImg from 'images/user2.svg';
 import FavoriteRooms from '../../components/mypage/FavoriteRooms';
 import PlusButton from '../../components/common/button/PlusButton';
 import FavoriteLoans from '../../components/mypage/FavoriteLoans';
@@ -119,7 +120,7 @@ export default function Mypage() {
       <div className="flex flex-row items-center">
         <div className="w-[20%] mr-3">
           <img
-            src={profileTest}
+            src={userImg}
             alt="profile-test"
             className="h-[4.5rem] w-[4.5rem]"
           />
