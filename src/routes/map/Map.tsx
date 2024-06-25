@@ -165,7 +165,7 @@ export default function Map() {
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   return (
-    <div className="pt-16 h-[100vh]">
+    <div className="pt-16 h-[100vh] flex">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
         <div className="absolute z-10 p-1 rounded-full top-3.5 left-3.5 bg-white-2 select-none">
           <img
@@ -219,6 +219,14 @@ export default function Map() {
             customWidth="min-w-20"
           ></SmallButton>
         </div>
+      </div>
+      <div id="roadview" className="absolute right-0 top-0 w-1/2 h-full hidden"></div>
+      <div id="roadviewControl" className="absolute z-10 top-20 left-36">
+        <SmallButton
+          text="로드뷰"
+          isActive={false}
+          customWidth="min-w-14"
+        ></SmallButton>
       </div>
     </div>
   );
