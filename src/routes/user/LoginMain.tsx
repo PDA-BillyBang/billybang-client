@@ -2,35 +2,14 @@ import { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
-import { isEmailRegistered, kakaoLogin } from '@/lib/apis/user';
+import { isEmailRegistered } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { ErrorResponseI } from '@/utils/errorTypes';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
-
-  const handleKakaoLogin = async () => {
-    try {
-      await kakaoLogin();
-      // navigate('/');
-    } catch (error: unknown) {
-      const errorResponse = error as AxiosError<ErrorResponseI>;
-      if (errorResponse.response) {
-        console.error(errorResponse.response.data.response);
-      }
-      navigate('/user/login');
-    } finally {
-      navigate('/');
-    }
-  };
-
-  // const handleKakaoLogin2 = () => {
-  //   window.location.href =
-  //     'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
-  // };
 
   const isExistedUser = async () => {
     if (!email) {
