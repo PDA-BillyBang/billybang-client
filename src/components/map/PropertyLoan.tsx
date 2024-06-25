@@ -157,7 +157,9 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="flex flex-row justify-between">
                 <div className="text-[0.8rem]">
                   {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}
-                  , LTV {bestLoan?.ltv}%이내
+                  {bestLoan?.ltv !== undefined
+                    ? `, LTV ${bestLoan?.ltv}% 이내`
+                    : ''}
                 </div>
                 <div className="text-[0.8rem] font-bold">
                   {bestLoan?.minInterestRate}~{bestLoan?.maxInterestRate}%
