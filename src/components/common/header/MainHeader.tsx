@@ -14,6 +14,7 @@ export default function MainHeader() {
   const handleClickToMy = async () => {
     try {
       const resp = await isvalidateToken();
+      console.log(resp.data.response);
       if (resp.data.response.isValid === true) navigate('/my');
       else navigate('/user/login');
     } catch (error) {

@@ -95,30 +95,27 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
       className={`w-[100%] flex flex-col ${bottomButton ? 'h-[50vh]' : 'h-[310px]'}  justify-between`}
     >
       <div className="flex flex-col">
-        <div className="font-bold text-[1.2rem] justify-between flex flex-row">
-          <div
-            className="cursor-pointer"
-            onClick={() => navigate(`/property/${property.propertyId}`)}
-          >
-            {property.articleName}
+        <div
+          className="cursor-pointer"
+          onClick={() => navigate(`/property/${property.propertyId}`)}
+        >
+          <div className="font-bold text-[1.2rem] justify-between flex flex-row">
+            <div className="cursor-pointer">{property.articleName}</div>
+            <LikeButton
+              isActive={likeButtonActive}
+              handleClick={handleLikeClick}
+              isLoan={false}
+              propertyId={property.propertyId}
+            />
           </div>
-          <LikeButton
-            isActive={likeButtonActive}
-            handleClick={handleLikeClick}
-            isLoan={false}
-            propertyId={property.propertyId}
-          />
-        </div>
 
-        <div className="text-[0.8rem]">
-          {property.roadAddress}
-          {/* {property.jibeonAddress} */}
-        </div>
+          <div className="text-[0.8rem]">{property.roadAddress}</div>
 
-        <div className="text-[0.8rem]">
-          {getRealEstateTypeString(property.realEstateType)} |{' '}
-          {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용{' '}
-          {property.area2}㎡
+          <div className="text-[0.8rem]">
+            {getRealEstateTypeString(property.realEstateType)} |{' '}
+            {property.floorInfo}층 | 공급 {property.area1}㎡ / 전용{' '}
+            {property.area2}㎡
+          </div>
         </div>
         <div className="py-[0.2rem]" />
         <div className="bg-grey-5 h-[5rem] flex flex-row rounded-[10px] items-center shadow-md">
@@ -157,19 +154,19 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="flex flex-row justify-between">
                 <div className="text-[0.8rem]">
                   {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}
-                  {bestLoan?.ltv !== undefined
-                    ? `, LTV ${bestLoan?.ltv}% 이내`
-                    : ''}
+                  {bestLoan?.ltv && `, LTV ${bestLoan?.ltv}% 이내`}
                 </div>
                 <div className="text-[0.8rem] font-bold">
-                  {bestLoan?.minInterestRate}~{bestLoan?.maxInterestRate}%
+                  {bestLoan?.minInterestRate &&
+                    bestLoan?.maxInterestRate &&
+                    `${bestLoan?.minInterestRate}~${bestLoan?.maxInterestRate}`}
                 </div>
               </div>
             </div>
           </div>
           <div className="pt-[0.5rem]" />
           <NavigateButton
-            text={`${property.buildingName}의 추천 대출 상품 더 보기`}
+            text={`${property.articleName}의 추천 대출 상품 더 보기`}
             customWidth="w-[100%]"
             handleClick={handleClickToLoans}
           />
