@@ -2,7 +2,14 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import {  PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
+import {
+  PropertyGroup,
+  Property,
+  OverlayData,
+  initialPropertyOption,
+  PropertyOption,
+  CategoryCode,
+} from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
@@ -10,7 +17,6 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
-
 import { removeMarkers } from './methods/renderPlaces';
 import OptionButton from '@components/map/OptionButton';
 import OptionContent from '@components/map/OptionContent';
@@ -51,8 +57,10 @@ export default function Map() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon, level } = location.state || { lat: 37.563915912, lon: 126.99772498493, level: 9 };
+
+  const { lat, lon, level } = location.state || { lat: 37.563915912, lon: 126.99772498493, level: 8 };
   const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
+
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -129,7 +137,7 @@ export default function Map() {
     if (!map) return;
     const handleFetchPropertyGroups = debounce(() => {
       fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    }, 500, { maxWait: 500, trailing: true });
+    }, 2000, { maxWait: 4000, trailing: true, leading: true });
 
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);

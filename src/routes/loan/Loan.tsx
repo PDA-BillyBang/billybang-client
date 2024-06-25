@@ -76,6 +76,12 @@ const Loan = () => {
       if (result.data.response.userStatus === 'UNAUTHORIZED') {
         setNavigationText('나에게 맞는 대출 상품이 궁금하다면 로그인하기');
         setNavigationRoute('/user/login');
+      } else if (result.data.response.userStatus === 'NO_INFO') {
+        setNavigationText('나에게 맞는 대출 상품이 궁금하다면 정보 입력하기');
+        setNavigationRoute('/user/info/2');
+      } else if (result.data.response.userStatus === 'NORMAL') {
+        setNavigationText('개인 정보 수정하러 가기');
+        setNavigationRoute('/user/info/1');
       }
       setTitle(result.data.response.buildingName);
     } catch (error) {

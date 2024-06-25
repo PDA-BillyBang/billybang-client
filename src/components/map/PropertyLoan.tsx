@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-// import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
 import { getBestLoans } from '@/lib/apis/loan';
-// import MySkeleton from '@/routes/mypage/MySkeleton';
 import LoanSkeleton from '@/routes/loan/LoanSkeleton';
-// import { getLikeProperties } from '@/lib/apis/property';
 
 type Props = {
   bottomButton?: boolean;
@@ -99,7 +96,12 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
     >
       <div className="flex flex-col">
         <div className="font-bold text-[1.2rem] justify-between flex flex-row">
-          <div>{property.articleName}</div>
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate(`/property/${property.propertyId}`)}
+          >
+            {property.articleName}
+          </div>
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}
@@ -149,11 +151,15 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="font-bold text-[1rem]">
                 {bestLoan?.providerName}
               </div>
-              <div className="text-[1rem]">{bestLoan?.productName}</div>
+              <div className="text-[1rem] w-[15rem] overflow-hidden whitespace-nowrap text-ellipsis">
+                {bestLoan?.productName}
+              </div>
               <div className="flex flex-row justify-between">
                 <div className="text-[0.8rem]">
                   {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}
-                  , LTV {bestLoan?.ltv}%이내
+                  {bestLoan?.ltv !== undefined
+                    ? `, LTV ${bestLoan?.ltv}% 이내`
+                    : ''}
                 </div>
                 <div className="text-[0.8rem] font-bold">
                   {bestLoan?.minInterestRate}~{bestLoan?.maxInterestRate}%

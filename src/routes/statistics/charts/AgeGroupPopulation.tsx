@@ -15,6 +15,12 @@ export interface populationCountI {
   count: number;
 }
 
+export interface popI {
+  name: string;
+  value: number;
+  fill: string;
+}
+
 // Define a color map for age groups
 const colorMap: { [key: string]: string } = {
   '0s': '#004CC7',
@@ -34,6 +40,46 @@ export default function AgeGroupPopulation({ populationCount }: Props) {
     fill: colorMap[item.age] || '#003488', // Default color if not in colorMap
   }));
 
+  console.log(populationCount);
+  console.log(data);
+  function transformAgeData(data: popI[]) {
+    return data.map((item) => {
+      let newName;
+      switch (item.name) {
+        case '0s':
+          newName = '0~9세';
+          break;
+        case '10s':
+          newName = '10대 ';
+          break;
+        case '20s':
+          newName = '20대 ';
+          break;
+        case '30s':
+          newName = '30대 ';
+          break;
+        case '40s':
+          newName = '40대 ';
+          break;
+        case '50s':
+          newName = '50대 ';
+          break;
+        case '60s':
+          newName = '60대';
+          break;
+        case '70over':
+          newName = '70대 이상';
+          break;
+        default:
+          newName = item.name;
+      }
+      return {
+        name: newName,
+        value: item.value,
+        fill: item.fill,
+      };
+    });
+  }
   return (
     <div>
       <ResponsiveContainer
@@ -43,7 +89,11 @@ export default function AgeGroupPopulation({ populationCount }: Props) {
       >
         <FunnelChart width={730} height={250}>
           <Tooltip />
-          <Funnel dataKey="value" data={data.reverse()} isAnimationActive>
+          <Funnel
+            dataKey="value"
+            data={transformAgeData(data.reverse())}
+            isAnimationActive
+          >
             <LabelList
               position="right"
               fill="#000"

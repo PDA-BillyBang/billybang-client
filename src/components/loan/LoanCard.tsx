@@ -68,7 +68,7 @@ export default function LoanCard({
       onClick={() => loanId && handleClick && handleClick(loanId)}
       className="h-[180px] w-[100%] cursor-pointer bg-grey-6 rounded-[5px] hover:bg-grey-5"
     >
-      <div className="px-[1rem] py-[0.5rem] flex flex-col">
+      <div className="px-[1rem] py-[0.7rem] flex flex-col">
         <div className="flex flex-row items-center justify-between w-[100%]">
           <img
             src={providerImgUrl}
@@ -85,7 +85,7 @@ export default function LoanCard({
           />
         </div>
         <div className="py-[0.2rem]" />
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between h-[120px]">
           <div className="text-black-1 text-[1.1rem]">{productName}</div>
           <div className="py-[0.15rem]" />
           <div className="text-grey-1 text-[1.0rem]">
@@ -94,7 +94,7 @@ export default function LoanCard({
           <div className="py-[0.15rem]" />
           <div className="flex flex-row justify-between text-[0.9rem]">
             <div className="text-grey-1">
-              {formattedLoanLimit} {ltv && ` | LTV ${ltv}%이내`}
+              최대 {formattedLoanLimit} {ltv && ` | LTV ${ltv}%이내`}
             </div>
             <div className="font-bold text-blue-1">
               {minInterestRate}~{maxInterestRate}%

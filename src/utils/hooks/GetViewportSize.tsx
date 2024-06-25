@@ -6,14 +6,13 @@ export default function GetViewportSize() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-
   useEffect(() => {
     const handleResize = debounce(() => {
       setViewportSize({
         width: window.innerWidth,
         height: window.innerHeight,
       });
-    }, 1000); // 1000ms 디바운스 설정
+    }, 1000, {trailing: true, leading: false}); // 1000ms 디바운스 설정
 
     window.addEventListener('resize', handleResize);
 
