@@ -25,6 +25,7 @@ export interface loanDetailI {
   providerImgUrl: string;
   providerName: string;
   originUrl: string;
+  userLoanLimit: number;
 }
 
 const LoanDetail = () => {
@@ -132,13 +133,21 @@ const LoanDetail = () => {
         <div className="text-grey-1 pt-[1.6rem]">
           {loanDetailResult.productDesc}
         </div>
+        {loanDetailResult.userLoanLimit !== null && (
+          <div className="pt-[0.4rem]">
+            내 대출 가능 한도 :{' '}
+            {formatLoanLimit(loanDetailResult.userLoanLimit)}
+          </div>
+        )}
         <div className="flex flex-row mt-[1.5rem] bg-grey-6 rounded-[10px]">
           <div className="flex flex-col w-[30%] items-center text-grey-1">
             <div className="pt-[1rem]">분류</div>
             <div className="pt-[1rem]">한도</div>
             <div className="pt-[1rem]">LTV</div>
             <div className="pt-[1rem]">기간</div>
-            {/* <div className="py-[1rem]">우대조건</div> */}
+            {loanDetailResult.preferentialItems.length !== 0 && (
+              <div className="py-[1rem]">우대조건</div>
+            )}
           </div>
           <div className="flex flex-col w-[70%]">
             <div className="pt-[1rem]">{loanDetailResult.loanType}</div>
@@ -152,7 +161,7 @@ const LoanDetail = () => {
                 <div>{loanDetailResult.ltv}%</div>
               )}
             </div>
-            <div className="py-[1rem]">
+            <div className="pt-[1rem]">
               {loanDetailResult.minTerm === null ? (
                 <div>{Math.floor(loanDetailResult.maxTerm / 12)}년</div>
               ) : (
@@ -162,7 +171,9 @@ const LoanDetail = () => {
                 </div>
               )}
             </div>
-            {/* <div className="py-[1rem]">신혼, 부부합산소득, 자녀여부</div> */}
+            <div className="py-[1rem]">
+              {loanDetailResult.preferentialItems}
+            </div>
           </div>
         </div>
       </div>
