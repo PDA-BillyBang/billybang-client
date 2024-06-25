@@ -5,9 +5,8 @@ import Swal from 'sweetalert2';
 import { updateNickname } from '@/lib/apis/user';
 import { AxiosError } from 'axios';
 import { ErrorResponseI } from '@/utils/errorTypes';
-type Props = {};
 
-export default function MypageEditName({}: Props) {
+export default function MypageEditName() {
   const navigate = useNavigate();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;

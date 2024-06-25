@@ -97,3 +97,7 @@ export async function deleteProperty(propertyId: number) {
 export async function getLikeProperties() {
   return await propertyInstance.get('/stars');
 }
+
+export async function getPropertyDetailInfo(propertyId: number) {
+  return await propertyInstance.get(`/${propertyId}`);
+}

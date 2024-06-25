@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PropertyGroup, PropertyOption } from "@/utils/types";
 import { getPropertyGroups } from '@/lib/apis/property';
-import { getRealEstateTypeString, getTradeTypeString } from "./fetchMethods";
-
+import { getRealEstateTypeString, getTradeTypeString } from './fetchMethods';
 
 export const fetchPropertyGroups = async (
   map: kakao.maps.Map | null,
   setPropertyGroups: (properties: PropertyGroup[]) => void,
-  propertyOption: PropertyOption,
+  propertyOption: PropertyOption
 ) => {
   if (!map) return;
 
@@ -15,7 +14,9 @@ export const fetchPropertyGroups = async (
   const swLatLng = bounds.getSouthWest();
   const neLatLng = bounds.getNorthEast();
 
-  const realEstateType = getRealEstateTypeString(propertyOption.SelectedBuildingCategory);
+  const realEstateType = getRealEstateTypeString(
+    propertyOption.SelectedBuildingCategory
+  );
   const tradeType = getTradeTypeString(propertyOption.SelectedTradeCategory);
   const zoom = map.getLevel();
   

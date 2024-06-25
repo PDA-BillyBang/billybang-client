@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Avatar } from 'flowbite-react';
 import search from 'images/search.svg';
+import avatar from 'images/avatar.svg';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { isvalidateToken } from '@/lib/apis/user';
 
@@ -40,16 +41,15 @@ export default function MainHeader() {
         <div className="flex items-center md:order-2">
           <img
             src={search}
-            className="h-6 mr-3 cursor-pointer sm:h-9"
-            alt="Flowbite React Logo"
+            className="h-[1.9rem] w-[1.9rem] mr-3 cursor-pointer sm:h-9"
+            alt="search"
             onClick={handleClickSearchField}
           />
           <Avatar
             onClick={handleClickToMy}
-            className="mr-3 cursor-pointer"
+            className="mr-3 cursor-pointer w-[2.1rem] h-[2.1rem]"
             alt="User settings"
-            img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-            rounded
+            img={avatar}
           />
         </div>
       </div>

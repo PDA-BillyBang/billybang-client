@@ -1,7 +1,18 @@
 import { loanInstance, baseInstance } from './api';
 
-export async function getLoansByPropertyId(propertyId: number) {
-  return await baseInstance.get(`/loans?propertyId=${propertyId}`);
+export async function getLoansByPropertyId(
+  propertyId: number,
+  minTerm: number,
+  maxTerm: number,
+  minPrice: number,
+  maxPrice: number
+) {
+  console.log(
+    `/loans?propertyId=${propertyId}&minTerm=${minTerm}&maxTerm=${maxTerm}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+  );
+  return await baseInstance.get(
+    `/loans?propertyId=${propertyId}&minTerm=${minTerm}&maxTerm=${maxTerm}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+  );
 }
 
 export async function getLoanProviderById(providerId: number) {
@@ -22,4 +33,18 @@ export async function deleteLikeLoan(loanId: number) {
 
 export async function getLikeLoans() {
   return await loanInstance.get('/stars');
+}
+
+export async function getBestLoans(data: {
+  propertyId: number;
+  tradeType: string;
+  area2: number;
+  price: number;
+}) {
+  console.log(data);
+  const s = await loanInstance.post('/best', {
+    properties: [data],
+  });
+  console.log(s);
+  return s;
 }

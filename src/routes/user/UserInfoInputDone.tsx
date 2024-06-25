@@ -14,7 +14,7 @@ export default function UserInfoInputDone() {
 
       <div className="mt-auto w-customWidthPercent flex flex-col items-center mb-4">
         <LargeButton
-          text="로그인"
+          text="매물 보러가기"
           customWidth="w-full"
           isActive={3}
           image={doubleWhiteRight}

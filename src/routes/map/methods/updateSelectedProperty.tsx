@@ -1,6 +1,6 @@
-import { OverlayData, PropertyGroup } from "@/utils/types";
-import { MutableRefObject } from "react";
-import Pin from "@/components/map/Pin";
+import { OverlayData, PropertyGroup } from '@/utils/types';
+import { MutableRefObject } from 'react';
+import Pin from '@/components/map/Pin';
 
 export const updateSelectedProperty = (
   selectedPropertyId: number | null,
@@ -13,7 +13,7 @@ export const updateSelectedProperty = (
 
   const previousSelectedPropertyId = previousSelectedPropertyIdRef.current;
   let previousSelectedProperty: PropertyGroup | undefined;
-  let currentSelectedProperty: PropertyGroup| undefined;
+  let currentSelectedProperty: PropertyGroup | undefined;
 
   for (const property of properties) {
     if (property.representativeId === previousSelectedPropertyId) {
@@ -39,7 +39,7 @@ export const updateSelectedProperty = (
           setSelectedPropertyId(id);
         }}
         isSelected={false}
-      />,
+      />
     );
   }
 
@@ -55,7 +55,7 @@ export const updateSelectedProperty = (
           setSelectedPropertyId(id);
         }}
         isSelected={true}
-      />,
+      />
     );
   }
 
