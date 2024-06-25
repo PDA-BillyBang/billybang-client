@@ -4,10 +4,10 @@ import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
-import { deleteLikeLoan, getBestLoans } from '@/lib/apis/loan';
-import MySkeleton from '@/routes/mypage/MySkeleton';
+import { getBestLoans } from '@/lib/apis/loan';
+// import MySkeleton from '@/routes/mypage/MySkeleton';
 import LoanSkeleton from '@/routes/loan/LoanSkeleton';
-import { getLikeProperties } from '@/lib/apis/property';
+// import { getLikeProperties } from '@/lib/apis/property';
 
 type Props = {
   bottomButton?: boolean;
