@@ -4,8 +4,6 @@ import search from 'images/search.svg';
 import pin from 'images/pin.svg';
 import jsonData from '../../assets/json/output.json'; // JSON 파일 경로에 맞게 수정하십시오.
 
-type Props = {};
-
 interface Location {
   code: string;
   attempt: string;
@@ -17,7 +15,7 @@ interface Location {
   code_type: string;
 }
 
-export default function MapSearch({}: Props) {
+export default function MapSearch() {
   const navigate = useNavigate();
   const [query, setQuery] = useState<string>('');
   const [filteredArray, setFilteredArray] = useState<Location[]>([]);
@@ -69,6 +67,7 @@ export default function MapSearch({}: Props) {
     const state = {
       lat: Number(lat),
       lon: Number(lon),
+      level: 3,
     };
 
     navigate('/', { state });

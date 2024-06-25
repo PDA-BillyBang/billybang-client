@@ -7,6 +7,7 @@ export type PropertyGroup = {
     area : number,
     latitude : number,
     longitude : number,
+    name : string,
 }
 
 export type Property = {
@@ -35,7 +36,6 @@ export type Property = {
   direction: string;
   isStarred: boolean | null;
 };
-
   
 export type OverlayData = {
     root: Root;

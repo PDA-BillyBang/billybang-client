@@ -2,14 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import {
-  PropertyGroup,
-  Property,
-  OverlayData,
-  initialPropertyOption,
-  PropertyOption,
-  CategoryCode,
-} from '@/utils/types';
+import {  PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
@@ -46,7 +39,7 @@ export default function Map() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || { lat: 37.563915912, lon: 126.99772498493 };
+  const { lat, lon, level } = location.state || { lat: 37.563915912, lon: 126.99772498493, level: 9 };
   const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
@@ -65,6 +58,7 @@ export default function Map() {
       setAddress,
       lat,
       lon,
+      level,
       infoWindowRef
     );
     return cleanup;
@@ -118,7 +112,7 @@ export default function Map() {
     };
   }, [selectedCategory, map, ps]);
 
-  // 검색옵션 변경시 매물 정보 다시 가져오기
+  // 검색옵션 변경시 매물 또는 지역 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
     const handleFetchPropertyGroups = () => {
@@ -157,7 +151,6 @@ export default function Map() {
   );
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
-  console.log(properties);
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
