@@ -95,7 +95,7 @@ export default function LikeButton({
         <img
           src={isActive ? filledLike : emptyLike}
           alt="filledLike"
-          className="w-[1.5rem] h-[1.rem]"
+          className="w-[2.5rem] h-[1.8rem]"
         />
       </div>
       {showAlert && (
