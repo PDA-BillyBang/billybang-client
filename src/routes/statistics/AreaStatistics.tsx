@@ -55,14 +55,14 @@ export default function AreaStatistics({ areaId }: Props) {
   return (
     <div className="">
       <div className="pt-[1rem]" />
-      <div className="text-[1rem] font-bold">동별 인구 밀도</div>
+      <div className="text-[1rem] font-bold">동별 인구 밀도 (명/㎢)</div>
       {populationDensityList ? (
         <DistrictPopulationDensity populationDensity={populationDensityList} />
       ) : (
         <ChartSkeleton />
       )}
       <div className="pt-[2rem]" />
-      <div className="text-[1rem] font-bold">구별 근로소득</div>
+      <div className="text-[1rem] font-bold">구별 근로소득 (만원/년)</div>
       {individualIncomeList ? (
         <DistrictIncome
           areaId={areaId}
@@ -72,14 +72,14 @@ export default function AreaStatistics({ areaId }: Props) {
         <ChartSkeleton />
       )}
       <div className="pt-[2rem]" />
-      <div className="text-[1rem] font-bold">연령별 인구 수</div>
+      <div className="text-[1rem] font-bold">연령별 인구 수 (명)</div>
       {populationCountList ? (
         <AgeGroupPopulation populationCount={populationCountList} />
       ) : (
         <ChartSkeleton />
       )}
       <div className="pt-[2rem]" />
-      <div className="text-[1rem] font-bold">범죄율</div>
+      <div className="text-[1rem] font-bold">범죄 건수 (년)</div>
       {crimeCountList && areaId ? (
         <CrimeRate areaId={areaId} crimeCountList={crimeCountList} />
       ) : (
