@@ -91,12 +91,12 @@ export const initializeMap = (
           }
         }
       );
-    }, 500, { maxWait: 500, trailing: true, leading: false });
+    }, 1000, { maxWait: 1000, trailing: true, leading: false });
     getGu();
 
 
     // 구 hover시 구명 보기
-    const infoWindow = new kakao.maps.InfoWindow({});
+    const infoWindow = new kakao.maps.InfoWindow({disableAutoPan:true});
     infoWindowRef.current = infoWindow;
 
     // 폴리곤 hover 이벤트 등록

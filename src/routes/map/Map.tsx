@@ -128,7 +128,7 @@ export default function Map() {
     if (!map) return;
     const handleFetchPropertyGroups = debounce(() => {
       fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    }, 2000, { maxWait: 4000, trailing: true, leading: true });
+    }, 1000, { maxWait: 4000, trailing: true, leading: true });
 
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
