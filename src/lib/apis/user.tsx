@@ -1,4 +1,4 @@
-import { userInstance } from './api';
+import { baseInstance, userInstance } from './api';
 
 // interface User {
 //   password: string;
@@ -35,7 +35,7 @@ export async function signUp(data: {
 }
 
 export async function kakaoLogin() {
-  const s = await userInstance.get('/oauth2/authorization/kakao');
+  const s = await baseInstance.get('/oauth2/authorization/kakao');
   console.log(s);
   return s;
 }

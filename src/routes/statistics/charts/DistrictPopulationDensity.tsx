@@ -14,10 +14,21 @@ export interface populationDensityI {
   areaName: string;
   density: number;
 }
+export interface populationDensity2I {
+  areaName: string;
+  인구밀도: number;
+}
 
 export default function DistrictPopulationDensity({
   populationDensity,
 }: Props) {
+  console.log(populationDensity);
+  const transformPopulationDensity = (data: populationDensityI[]) => {
+    return data.map((item: populationDensityI) => ({
+      areaName: item.areaName,
+      인구밀도: item.density,
+    }));
+  };
   return (
     <div className="overflow-x-auto">
       <div style={{ minWidth: '600px' }}>
@@ -29,7 +40,7 @@ export default function DistrictPopulationDensity({
           <AreaChart
             width={730}
             height={250}
-            data={populationDensity}
+            data={transformPopulationDensity(populationDensity)}
             margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <defs>
@@ -39,12 +50,12 @@ export default function DistrictPopulationDensity({
               </linearGradient>
             </defs>
             <XAxis dataKey="areaName" />
-            <YAxis width={50} />
+            <YAxis width={60} />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="density"
+              dataKey="인구밀도"
               stroke="#004CC7"
               fillOpacity={1}
               fill="url(#colorPv)"

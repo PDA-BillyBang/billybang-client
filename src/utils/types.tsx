@@ -1,12 +1,13 @@
 import { Root } from "react-dom/client";
 
 export type PropertyGroup = {
-    representativeId : number,
-    cnt: number,
-    price : number,
-    area : number,
-    latitude : number,
-    longitude : number,
+  representativeId: number;
+  cnt: number;
+  price: number | null;
+  area: number | null; 
+  name: string;
+  latitude: number;
+  longitude: number;
 }
 
 export type Property = {
@@ -35,7 +36,6 @@ export type Property = {
   direction: string;
   isStarred: boolean | null;
 };
-
   
 export type OverlayData = {
     root: Root;
