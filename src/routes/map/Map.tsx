@@ -2,14 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
-import {
-  PropertyGroup,
-  Property,
-  OverlayData,
-  initialPropertyOption,
-  PropertyOption,
-  CategoryCode,
-} from '@/utils/types';
+import {  PropertyGroup, Property, OverlayData, initialPropertyOption, PropertyOption, CategoryCode } from '@/utils/types';
 import { initializeMap } from './methods/initializeMap';
 import { renderProperties } from './methods/renderProperties';
 import { updateSelectedProperty } from './methods/updateSelectedProperty';
@@ -26,8 +19,9 @@ import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
+import { debounce } from 'lodash';
 
-export default function MapComponent() {
+export default function Map() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
   const [properties, setProperties] = useState<Property[]>([]); // 매물 상세 데이터들
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
@@ -53,16 +47,12 @@ export default function MapComponent() {
   const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
+  const infoWindowRef = useRef<kakao.maps.InfoWindow | null>(null); // 구 정보 창
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || {
-    lat: 37.563915912,
-    lon: 126.99772498493,
-  };
-  const { setAddress } = useOutletContext<{
-    setAddress: (title: string) => void;
-  }>();
+  const { lat, lon, level } = location.state || { lat: 37.563915912, lon: 126.99772498493, level: 9 };
+  const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -79,7 +69,9 @@ export default function MapComponent() {
       setGuCode,
       setAddress,
       lat,
-      lon
+      lon,
+      level,
+      infoWindowRef
     );
     return cleanup;
   }, []);
@@ -132,16 +124,18 @@ export default function MapComponent() {
     };
   }, [selectedCategory, map, ps]);
 
-  // 검색옵션 변경시 매물 정보 다시 가져오기
+  // 검색옵션 변경시 매물 또는 지역 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
-    const handleFetchPropertyGroups = () => {
+    const handleFetchPropertyGroups = debounce(() => {
       fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    };
+    }, 500, { maxWait: 500, trailing: true });
+
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
     return () => {
       kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
+      handleFetchPropertyGroups.cancel(); // 컴포넌트 언마운트 시 디바운스 취소
     };
   }, [propertyOption, map]);
 
@@ -171,7 +165,6 @@ export default function MapComponent() {
   );
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
-  console.log(properties);
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">

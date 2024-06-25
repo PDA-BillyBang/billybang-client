@@ -4,7 +4,12 @@ import { Dispatch, SetStateAction } from 'react';
 import { fetchPropertyGroups } from './fetchPropertyGroups';
 import { moveToCurrentLocation } from './moveToCurrentLocation';
 import guData from '@/assets/json/gu2.json';
-import dongData from '@/assets/json/dong2.json';
+import { districtsLocation } from '@/utils/districtsLocation';
+import {
+  renderPolygons,
+  showPolygons,
+  hidePolygons,
+} from './renderPolygons';
 
 export const initializeMap = (
   setPropertyGroups: (properties: PropertyGroup[]) => void,
@@ -17,12 +22,14 @@ export const initializeMap = (
   setGuCode: React.Dispatch<React.SetStateAction<string>>,
   setAddress: (title: string) => void,
   lat: number,
-  lon: number
+  lon: number,
+  level: number,
+  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>
 ) => {
   const container = document.getElementById('map');
   const options = {
     center: new window.kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
-    level: 9, // 지도의 확대 레벨
+    level: level, // 지도의 확대 레벨
   };
   if (!container) {
     return;
@@ -46,7 +53,7 @@ export const initializeMap = (
       }
     };
 
-    // 매물 가져오기
+    // 지역 정보 가져오기
     fetchPropertyGroups(mapInstance, setPropertyGroups, propertyOption);
 
     // 현재 위치로 아이콘 부착
@@ -74,7 +81,6 @@ export const initializeMap = (
             const dong = result[0].region_3depth_name;
             const guCode = result[0].code.slice(0, 5);
             setGu(gu);
-            console.log(gu, dong, guCode);
             if (setAddress) {
               setAddress(gu + ' ' + dong);
             }
@@ -87,110 +93,49 @@ export const initializeMap = (
     };
     getGu();
 
+    // 구 hover시 구명 보기
+    const infoWindow = new kakao.maps.InfoWindow({});
+    infoWindowRef.current = infoWindow;
+
+    // 폴리곤 hover 이벤트 등록
+    const handlePolygonHover = (name: string) => {
+      return () => {
+        if (!infoWindowRef.current) return;
+    
+        const content = `<div class="infoWindow-content" style="padding:5px;z-index:1;">${name}</div>`;
+    
+        const position = new kakao.maps.LatLng(districtsLocation[name][1], districtsLocation[name][0]);
+        infoWindowRef.current.setContent(content);
+        infoWindowRef.current.setPosition(position);
+        infoWindowRef.current.open(mapInstance);
+      };
+    };
+
     // 다각형을 저장할 배열
-    const guPolygons: kakao.maps.Polygon[] = [];
-    const dongPolygons: kakao.maps.Polygon[] = [];
-
-    // const overlayContent = document.createElement('div');
-    // const overlay = new window.kakao.maps.CustomOverlay({
-    //   position: new window.kakao.maps.LatLng(parseFloat(place.y), parseFloat(place.x)),
-    //   content: overlayContent,
-    //   clickable: true,
-    // });
-
-    // 구 다각형 생성
-    const createGuPolygons = (geojson: any) => {
-      geojson.features.forEach((feature: any) => {
-        console.log(feature.properties.SIG_KOR_NM)
-        const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
-        const polygon = new kakao.maps.Polygon({
-          path: coordinates,
-          strokeWeight: 2,
-          strokeColor: '#39DE2A',
-          strokeOpacity: 0.8,
-          fillColor: '#A2FF99',
-          fillOpacity: 0.7
-        });
-        // hover 시 다각형 스타일 변경
-        kakao.maps.event.addListener(polygon, 'mouseover', function() {
-          polygon.setOptions({ fillColor: '#66ccff' });
-        });
-        kakao.maps.event.addListener(polygon, 'mouseout', function() {
-          polygon.setOptions({ fillColor: '#A2FF99' });
-        });
-        guPolygons.push(polygon);
-      });
-    };
-
-    // 동 다각형 생성
-    const createDongPolygons = (geojson: any) => {
-      geojson.features.forEach((feature: any) => {
-        const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
-        const polygon = new kakao.maps.Polygon({
-          path: coordinates,
-          strokeWeight: 2,
-          strokeColor: '#39DE2A',
-          strokeOpacity: 0.8,
-          fillColor: '#A2FF99',
-          fillOpacity: 0.7
-        });
-        // hover 시 다각형 스타일 변경
-        kakao.maps.event.addListener(polygon, 'mouseover', function() {
-          polygon.setOptions({ fillColor: '#66ccff' });
-        });
-        kakao.maps.event.addListener(polygon, 'mouseout', function() {
-          polygon.setOptions({ fillColor: '#A2FF99' });
-        });
-        dongPolygons.push(polygon);
-      });
-    };
+    const guPolygons = renderPolygons(guData, mapInstance, infoWindow, handlePolygonHover);
 
     // 구 표시
     const showGuPolygons = () => {
-      guPolygons.forEach(polygon => {
-        polygon.setMap(mapInstance);
-      });
+      showPolygons(guPolygons, mapInstance);
     };
 
     // 구 숨기기
     const hideGuPolygons = () => {
-      guPolygons.forEach(polygon => {
-        polygon.setMap(null);
-      });
+      hidePolygons(guPolygons);
     };
-
-    // 동 표시
-    const showDongPolygons = () => {
-      dongPolygons.forEach(polygon => {
-        polygon.setMap(mapInstance);
-      });
-    };
-
-    // 동 숨기기
-    const hideDongPolygons = () => {
-      dongPolygons.forEach(polygon => {
-        polygon.setMap(null);
-      });
-    };
-
+    
     // 줌 레벨 변경 이벤트 핸들러
     const onZoomChanged = () => {
+      if (infoWindowRef.current) {
+        infoWindowRef.current.close();
+      }
       const level = mapInstance.getLevel();
-      if (level <= 4) {
+      if (level <= 7) {
         hideGuPolygons();
-        hideDongPolygons();
-      } else if (level >= 5 && level <= 6) {
-        hideGuPolygons();
-        showDongPolygons();
-      } else if (level >= 7) {
-        hideDongPolygons();
+      } else if (level >= 8) {
         showGuPolygons();
       }
     };
-
-    // GeoJSON 데이터를 이용하여 다각형 생성
-    createGuPolygons(guData);
-    createDongPolygons(dongData);
 
     // 초기 다각형 표시
     onZoomChanged();
@@ -207,3 +152,4 @@ export const initializeMap = (
     };
   });
 };
+

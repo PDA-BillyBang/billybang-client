@@ -1,4 +1,5 @@
-import { PropertyGroup, PropertyOption } from '@/utils/types';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { PropertyGroup, PropertyOption } from "@/utils/types";
 import { getPropertyGroups } from '@/lib/apis/property';
 import { getRealEstateTypeString, getTradeTypeString } from './fetchMethods';
 
@@ -17,7 +18,8 @@ export const fetchPropertyGroups = async (
     propertyOption.SelectedBuildingCategory
   );
   const tradeType = getTradeTypeString(propertyOption.SelectedTradeCategory);
-
+  const zoom = map.getLevel();
+  
   const params = {
     realEstateType,
     tradeType,
@@ -29,27 +31,36 @@ export const fetchPropertyGroups = async (
     rightLon: neLatLng.getLng(),
     topLat: neLatLng.getLat(),
     bottomLat: swLatLng.getLat(),
-    zoom: map.getLevel(),
+    zoom: zoom,
   };
-
-  try {
-    const response = await getPropertyGroups(params);
-    if (response.data.success) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setPropertyGroups(
-        response.data.response.map((item: any) => ({
-          representativeId: item.representativeId,
-          latitude: item.latitude,
-          longitude: item.longitude,
-          area: item.area,
-          cnt: item.cnt,
-          price: item.price,
-        }))
-      );
-    } else {
-      console.error('Failed to fetch properties');
+  
+    try {
+      const response = await getPropertyGroups(params);
+      if (response.data.success) {
+        if (zoom <= 5) {
+          setPropertyGroups(response.data.response.map((item: PropertyGroup) => ({
+            representativeId: item.representativeId,
+            latitude: item.latitude,
+            longitude: item.longitude,
+            area: item.area,
+            cnt: item.cnt,
+            price: item.price,
+          })));
+        } else {
+          setPropertyGroups(response.data.response.map((item: PropertyGroup) => ({
+            representativeId: item.representativeId,
+            cnt: item.cnt,
+            price : item.price,
+            name : item.name,
+            latitude : item.latitude,
+            longitude : item.longitude,
+          })))
+        }
+      } else {
+        console.error('Failed to fetch properties');
+      }
+    } catch (error) {
+      console.error('Error fetching properties', error);
     }
-  } catch (error) {
-    console.error('Error fetching properties', error);
-  }
+
 };
