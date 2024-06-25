@@ -13,9 +13,9 @@ export const renderProperties = (
   if (!map) return;
   
   // 클릭 시 지도 중심과 줌 레벨 변경
-  const goToGu = (latitude: number, longitude: number) => {
+  const goToGu = (level: number, latitude: number, longitude: number) => {
     const center = new kakao.maps.LatLng(latitude, longitude);
-    map.setLevel(6,{animate:true, anchor: center});
+    map.setLevel(level,{animate:true, anchor: center});
     // map.setCenter(center);
   }
 
@@ -61,7 +61,7 @@ export const renderProperties = (
           name={property.name}
           latitude={property.latitude}
           longitude={property.longitude}
-          isGu={level>=8}
+          isGu={level>=7}
         />,
       );
 

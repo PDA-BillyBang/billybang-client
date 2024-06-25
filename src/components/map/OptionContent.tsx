@@ -19,7 +19,6 @@ export default function OptionContent({
   setTempPropertyOption,
   closeDrawer,
 }:OptionContentProps){
-  console.log(tempPropertyOption)
   const handleTradeTypeButtonClick = (clickedTradeType: keyof SelectedTradeCategory) => {
     setTempPropertyOption({
       ...tempPropertyOption,

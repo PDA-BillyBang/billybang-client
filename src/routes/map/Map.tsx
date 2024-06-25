@@ -18,6 +18,7 @@ import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
+import { debounce } from 'lodash';
 
 export default function Map() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
@@ -115,13 +116,15 @@ export default function Map() {
   // 검색옵션 변경시 매물 또는 지역 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
-    const handleFetchPropertyGroups = () => {
+    const handleFetchPropertyGroups = debounce(() => {
       fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    };
+    }, 500, { maxWait: 500, trailing: true });
+
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
     return () => {
       kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
+      handleFetchPropertyGroups.cancel(); // 컴포넌트 언마운트 시 디바운스 취소
     };
   }, [propertyOption, map]);
 
