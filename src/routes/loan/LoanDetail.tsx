@@ -91,13 +91,13 @@ const LoanDetail = () => {
     <div className="flex flex-col items-center mt-[50px]">
       <div className="py-[0.5rem]" />
       <div className="w-customWidthPercent">
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center justify-between ">
+          <div className="flex flex-row items-center ">
             <img
               src={loanDetailResult.providerImgUrl}
               className="w-[2.5rem] h-[2.5rem]"
             />
-            <div className="text-[1.2rem] pl-[0.25rem] font-bold">
+            <div className="text-[1.2rem] pl-[0.25rem] font-bold ">
               {loanDetailResult.providerName}
             </div>
           </div>
@@ -107,7 +107,7 @@ const LoanDetail = () => {
           />
         </div>
       </div>
-      <div className="py-[0.6rem]" />
+      <div className="pt-[0.5rem] " />
       <div className="w-customWidthPercent">
         <header className="flex flex-row items-center justify-between">
           <div className="font-bold text-[1.2rem] leading-[1.2rem] text-center">
