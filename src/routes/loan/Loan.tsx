@@ -10,6 +10,7 @@ import LargeButton from '@components/common/button/LargeButton';
 import { getLoansByPropertyId } from '@/lib/apis/loan';
 import LoanHeaderCardList from './LoanHeaderCardList';
 import LoanSkeleton from './LoanSkeleton';
+import GetViewportSize from '@/utils/hooks/GetViewportSize';
 
 export interface loanI {
   isStarred: boolean;
@@ -38,6 +39,7 @@ export interface loanByPropertyIdI {
 
 // recommend/:propertyId
 const Loan = () => {
+  const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
@@ -108,7 +110,7 @@ const Loan = () => {
     setMinYear(min);
     setMaxYear(max);
   };
-
+  const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   if (loading) {
     return (
       <div className="flex flex-col w-[100%] items-center mt-[80px]">
@@ -146,7 +148,11 @@ const Loan = () => {
             );
           }
         )}
-        <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
+        <BottomDrawer
+          isOpen={isOpen}
+          handleClose={handleClick}
+          position={drawerPosition}
+        >
           <div className="w-[100%] h-[43vh] flex flex-col justify-between">
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
