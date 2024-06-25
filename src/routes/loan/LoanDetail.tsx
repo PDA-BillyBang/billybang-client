@@ -145,9 +145,10 @@ const LoanDetail = () => {
             <div className="pt-[1rem]">한도</div>
             <div className="pt-[1rem]">LTV</div>
             <div className="pt-[1rem]">기간</div>
-            {loanDetailResult.preferentialItems.length !== 0 && (
-              <div className="py-[1rem]">우대조건</div>
-            )}
+            {loanDetailResult.preferentialItems &&
+              loanDetailResult.preferentialItems.length !== 0 && (
+                <div className="py-[1rem]">우대조건</div>
+              )}
           </div>
           <div className="flex flex-col w-[70%]">
             <div className="pt-[1rem]">{loanDetailResult.loanType}</div>
