@@ -8,12 +8,11 @@ import {
   registerAdditionalUserInfo,
   updateUserInfo,
 } from '@/lib/apis/user';
-import { Params, useNavigate, useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
 import { ErrorResponseI } from '@/utils/errorTypes';
 import { AxiosError } from 'axios';
 
 export default function UserInfoInput() {
-  const navigate = useNavigate();
   const { option } = useParams<Params>();
 
   useEffect(() => {}, [option]);

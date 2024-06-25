@@ -33,7 +33,7 @@ export default function LikeButton({
       } else {
         const result = await likeLoan(loanId);
         console.log(result);
-        setMessage('❤️ 상품을 찜했어요!');
+        setMessage('❤️ 찜했어요!');
       }
     } catch (error) {
       const axiosError = error as AxiosError;
@@ -56,7 +56,7 @@ export default function LikeButton({
       } else {
         const result = await likeProperty(propertyId);
         console.log(result);
-        setMessage('❤️ 상품을 찜했어요!');
+        setMessage('❤️ 찜했어요!');
       }
     } catch (error) {
       const axiosError = error as AxiosError;

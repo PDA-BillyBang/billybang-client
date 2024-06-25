@@ -17,6 +17,7 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
+
 import { removeMarkers } from './methods/renderPlaces';
 import OptionButton from '@components/map/OptionButton';
 import OptionContent from '@components/map/OptionContent';
@@ -29,13 +30,23 @@ import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
 export default function MapComponent() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
   const [properties, setProperties] = useState<Property[]>([]); // 매물 상세 데이터들
-  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
+    null
+  );
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState<number>(0); // 0: 닫힘 1: 옵션 2: 매물
-  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(undefined);
-  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(''); // 편의시설 카테고리
-  const [propertyOption, setPropertyOption] = useState<PropertyOption>(initialPropertyOption);
-  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(initialPropertyOption);
+  const [ps, setPs] = useState<kakao.maps.services.Places | undefined>(
+    undefined
+  );
+  const [selectedCategory, setSelectedCategory] = useState<'' | CategoryCode>(
+    ''
+  ); // 편의시설 카테고리
+  const [propertyOption, setPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
+  const [tempPropertyOption, setTempPropertyOption] = useState<PropertyOption>(
+    initialPropertyOption
+  );
   const [gu, setGu] = useState<string>('');
   const [guCode, setGuCode] = useState<string>('');
   const overlayRef = useRef<{ [key: number]: OverlayData }>({}); // 매물 그룹들의 컴포넌트
@@ -45,8 +56,13 @@ export default function MapComponent() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || { lat: 37.563915912, lon: 126.99772498493 };
-  const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
+  const { lat, lon } = location.state || {
+    lat: 37.563915912,
+    lon: 126.99772498493,
+  };
+  const { setAddress } = useOutletContext<{
+    setAddress: (title: string) => void;
+  }>();
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {

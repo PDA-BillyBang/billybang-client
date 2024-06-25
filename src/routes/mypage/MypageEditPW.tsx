@@ -6,9 +6,7 @@ import { updatePassword } from '@/lib/apis/user';
 import { ErrorResponseI } from '@/utils/errorTypes';
 import { AxiosError } from 'axios';
 
-type Props = {};
-
-export default function MypageEditPW({}: Props) {
+export default function MypageEditPW() {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setPasswordConfirm] = useState('');
