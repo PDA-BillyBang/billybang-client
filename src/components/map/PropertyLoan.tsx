@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import shin from '../../assets/image/test/shin.svg';
 import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';

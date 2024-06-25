@@ -1,13 +1,13 @@
 import { Root } from "react-dom/client";
 
 export type PropertyGroup = {
-    representativeId : number,
-    cnt: number,
-    price : number,
-    area : number,
-    latitude : number,
-    longitude : number,
-    name : string,
+  representativeId: number;
+  cnt: number;
+  price: number | null;
+  area: number | null; 
+  name: string;
+  latitude: number;
+  longitude: number;
 }
 
 export type Property = {
