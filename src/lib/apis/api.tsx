@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'http://www.billybang.me:3000'; // 로컬에서 CORS를 해결하려면 /api, 빌드용은 BASEURL + /api 로 해야한다 
+export const BASE_URL = 'http://www.billybang.me:3000';
 
 export const userInstance = axios.create({
   baseURL: '/api/users',
