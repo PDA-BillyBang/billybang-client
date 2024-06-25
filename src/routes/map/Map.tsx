@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import Aim from '@/assets/image/map/aim.png';
 import {
@@ -16,6 +17,7 @@ import BottomDrawer from '@components/common/button/BottomDrawer';
 import SmallButton from '@components/common/button/SmallButton';
 import mapStatistic from '../../assets/image/map/mapStatistic.svg';
 import DropDown from '@components/map/Dropdown';
+
 import { removeMarkers } from './methods/renderPlaces';
 import OptionButton from '@components/map/OptionButton';
 import OptionContent from '@components/map/OptionContent';
@@ -24,8 +26,9 @@ import MapPropertyLoan from '../../components/map/MapPropertyLoan';
 import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
+import { debounce } from 'lodash';
 
-export default function MapComponent() {
+export default function Map() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
   const [properties, setProperties] = useState<Property[]>([]); // 매물 상세 데이터들
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(
@@ -51,20 +54,18 @@ export default function MapComponent() {
   const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
   const customOverlayRef = useRef<kakao.maps.CustomOverlay | null>(null); // 편의시설 상세정보 UI
+  const infoWindowRef = useRef<kakao.maps.InfoWindow | null>(null); // 구 정보 창
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-  const { lat, lon } = location.state || {
+  const { lat, lon, level } = location.state || {
     lat: 37.563915912,
     lon: 126.99772498493,
+    level: 9,
   };
   const { setAddress } = useOutletContext<{
     setAddress: (title: string) => void;
   }>();
-
-  const [page, setPage] = useState<number>(0);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const loader = useRef<HTMLDivElement | null>(null);
 
   // 지도 생성시에만, 총 1회 실행되는 코드들을 initializeMap에 담았음
   useEffect(() => {
@@ -81,7 +82,9 @@ export default function MapComponent() {
       setGuCode,
       setAddress,
       lat,
-      lon
+      lon,
+      level,
+      infoWindowRef
     );
     return cleanup;
   }, []);
@@ -105,14 +108,11 @@ export default function MapComponent() {
         (group) => group.representativeId === selectedPropertyId
       );
       if (selectedGroup) {
-        setPage(0); // 페이지 초기화
-        setProperties([]); // 기존 데이터 초기화
-        fetchProperties(selectedGroup, propertyOption, page); // 첫 페이지 데이터 가져오기
+        fetchPropertyDetail(selectedGroup, setProperties, propertyOption);
       }
     } else {
       setProperties([]);
     }
-
     updateSelectedProperty(
       selectedPropertyId,
       previousSelectedPropertyIdRef,
@@ -122,53 +122,6 @@ export default function MapComponent() {
     );
     setIsDrawerOpen(selectedPropertyId !== null ? 2 : 0);
   }, [selectedPropertyId, map]);
-
-  // 스크롤 이벤트 핸들러
-  const handleScroll = useCallback(
-    (event: React.UIEvent<HTMLDivElement>) => {
-      const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
-      const bottom = scrollHeight - scrollTop === clientHeight;
-      if (bottom && hasMore) {
-        setPage((prevPage) => prevPage + 1);
-      }
-    },
-    [hasMore]
-  );
-
-  // 데이터 가져오는 함수
-  const fetchProperties = async (
-    group: PropertyGroup,
-    propertyOption: PropertyOption,
-    currentPage: number
-  ) => {
-    try {
-      const newProperties = await fetchPropertyDetail(
-        group,
-        propertyOption,
-        currentPage
-      );
-
-      if (newProperties.length === 0) {
-        setHasMore(false); // 더 이상 데이터가 없으면 hasMore를 false로 설정
-      }
-
-      setProperties((prevProperties) => [...prevProperties, ...newProperties]);
-    } catch (error) {
-      console.error('Error fetching detailed properties', error);
-    }
-  };
-
-  // 새로운 페이지 데이터 가져오기
-  useEffect(() => {
-    if (selectedPropertyId !== null && page > 0) {
-      const selectedGroup = propertyGroups.find(
-        (group) => group.representativeId === selectedPropertyId
-      );
-      if (selectedGroup) {
-        fetchProperties(selectedGroup, propertyOption, page); // currentPage로 변경
-      }
-    }
-  }, [page]);
 
   // 편의시설 카테고리 변경시 검색
   useEffect(() => {
@@ -184,16 +137,22 @@ export default function MapComponent() {
     };
   }, [selectedCategory, map, ps]);
 
-  // 검색옵션 변경시 매물 정보 다시 가져오기
+  // 검색옵션 변경시 매물 또는 지역 정보 다시 가져오기
   useEffect(() => {
     if (!map) return;
-    const handleFetchPropertyGroups = () => {
-      fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    };
+    const handleFetchPropertyGroups = debounce(
+      () => {
+        fetchPropertyGroups(map, setPropertyGroups, propertyOption);
+      },
+      500,
+      { maxWait: 500, trailing: true }
+    );
+
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
     return () => {
       kakao.maps.event.removeListener(map, 'idle', handleFetchPropertyGroups);
+      handleFetchPropertyGroups.cancel(); // 컴포넌트 언마운트 시 디바운스 취소
     };
   }, [propertyOption, map]);
 
@@ -223,8 +182,6 @@ export default function MapComponent() {
   );
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
-  console.log(properties);
-
   return (
     <div className="pt-16 h-[100vh]">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
@@ -243,15 +200,7 @@ export default function MapComponent() {
           isBackDropped={false}
           position={drawerPosition}
         >
-          {isDrawerOpen === 2 && (
-            <div
-              onScroll={handleScroll}
-              style={{ overflowY: 'auto', height: '100%' }}
-            >
-              <MapPropertyLoan properties={properties} />
-              {hasMore && <div ref={loader}>Loading more properties...</div>}
-            </div>
-          )}
+          {isDrawerOpen === 2 && <MapPropertyLoan properties={properties} />}
           {isDrawerOpen === 1 && (
             <OptionContent
               propertyOption={propertyOption}

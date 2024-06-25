@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import LoanFiltering from '../../components/loan/LoanFiltering';
 import BottomDrawer from '../../components/common/button/BottomDrawer';
 // import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import LargeButton from '@components/common/button/LargeButton';
 import { getLoansByPropertyId } from '@/lib/apis/loan';
 import LoanHeaderCardList from './LoanHeaderCardList';
 import LoanSkeleton from './LoanSkeleton';
+import GetViewportSize from '@/utils/hooks/GetViewportSize';
 
 export interface loanI {
   isStarred: boolean;
@@ -38,6 +39,8 @@ export interface loanByPropertyIdI {
 
 // recommend/:propertyId
 const Loan = () => {
+  const viewportSize = GetViewportSize(); // viewport 변경 감지
+  const navigate = useNavigate();
   const { setTitle } = useOutletContext<{
     setTitle: (title: string) => void;
   }>();
@@ -46,16 +49,33 @@ const Loan = () => {
   const [navigationText, setNavigationText] = useState<string>(
     '나에게 맞는 대출 상품이 궁금하다면 정보 입력하기'
   );
-  // const navigate = useNavigate();
+  const [navigationRoute, setNavigationRoute] =
+    useState<string>('/user/info/1');
+  const [minMoney, setMinMoney] = useState(0);
+  const [maxMoney, setMaxMoney] = useState(1000);
+  const [minYear, setMinYear] = useState(0);
+  const [maxYear, setMaxYear] = useState(50);
   const { propertyId } = useParams<{ propertyId: string }>();
 
-  const handleGetLoansByPropertyId = async () => {
+  const handleGetLoansByPropertyId = async (
+    minTerm: number,
+    maxTerm: number,
+    minPrice: number,
+    maxPrice: number
+  ) => {
     try {
-      const result = await getLoansByPropertyId(Number(propertyId));
+      const result = await getLoansByPropertyId(
+        Number(propertyId),
+        minTerm,
+        maxTerm,
+        minPrice,
+        maxPrice
+      );
       console.log(propertyId, '-', result.data.response);
       setLoanResult(result.data.response);
       if (result.data.response.userStatus === 'UNAUTHORIZED') {
         setNavigationText('나에게 맞는 대출 상품이 궁금하다면 로그인하기');
+        setNavigationRoute('/user/login');
       }
       setTitle(result.data.response.buildingName);
     } catch (error) {
@@ -66,15 +86,31 @@ const Loan = () => {
   };
 
   useEffect(() => {
-    handleGetLoansByPropertyId();
+    handleGetLoansByPropertyId(0, 600, 0, 1000);
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => setIsOpen((prev) => !prev);
+  const handleGetLoansFiltering = () => {
+    console.log('적용 money', minMoney, maxMoney);
+    console.log('적용 year', minYear, maxYear);
+    handleGetLoansByPropertyId(minYear, maxYear, minMoney, maxMoney);
+  };
+  const handleGetLoanInit = () => {
+    setMaxMoney(1000);
+    handleGetLoansByPropertyId(0, 600, 0, 1000);
+  };
 
-  // const handleClickLoanId = (loanId: number) =>
-  //   navigate('/loan/detail/' + loanId);
+  const handleMoneyFilter = (min: number, max: number) => {
+    setMinMoney(min);
+    setMaxMoney(max);
+  };
 
+  const handleTermFilter = (min: number, max: number) => {
+    setMinYear(min);
+    setMaxYear(max);
+  };
+  const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   if (loading) {
     return (
       <div className="flex flex-col w-[100%] items-center mt-[80px]">
@@ -89,7 +125,11 @@ const Loan = () => {
   return (
     <div className="flex flex-col items-center mt-[80px]">
       <div className=" w-customWidthPercent">
-        <NavigateButton text={navigationText} customWidth="w-[100%]" />
+        <NavigateButton
+          text={navigationText}
+          customWidth="w-[100%]"
+          handleClick={() => navigate(navigationRoute)}
+        />
         <div className="pb-[10px]" />
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row text-grey-1">
@@ -108,12 +148,24 @@ const Loan = () => {
             );
           }
         )}
-        <BottomDrawer isOpen={isOpen} handleClose={handleClick}>
+        <BottomDrawer
+          isOpen={isOpen}
+          handleClose={handleClick}
+          position={drawerPosition}
+        >
           <div className="w-[100%] h-[43vh] flex flex-col justify-between">
             <div className="w-[100%]">
               <div className="h-[30%] my-4">
                 <div className="text-sm">대출 기간</div>
-                <MultiRangeSliderYear min={0} max={120} />
+                <MultiRangeSliderYear
+                  min={0}
+                  max={50}
+                  onChange={({ min, max }) => {
+                    handleTermFilter(min, max);
+                  }}
+                  minValue={minYear}
+                  maxValue={maxYear}
+                />
               </div>
               <div className="py-[1rem]" />
               <hr />
@@ -121,16 +173,28 @@ const Loan = () => {
                 <div className="text-sm">최소 대출 금액</div>
                 <MultiRangeSlider
                   min={0}
-                  max={3000}
-                  onChange={() => {}}
-                  minValue={0}
-                  maxValue={3000}
+                  max={1000}
+                  onChange={({ min, max }) => {
+                    handleMoneyFilter(min, max);
+                  }}
+                  minValue={minMoney}
+                  maxValue={maxMoney}
                 />
               </div>
             </div>
             <div className="flex justify-around pb-[1rem]">
-              <LargeButton isActive={4} customWidth="w-[40%]" text="초기화" />
-              <LargeButton isActive={0} customWidth="w-[55%]" text="적용" />
+              <LargeButton
+                isActive={4}
+                customWidth="w-[40%]"
+                text="초기화"
+                handleClick={handleGetLoanInit}
+              />
+              <LargeButton
+                isActive={0}
+                customWidth="w-[55%]"
+                text="적용"
+                handleClick={handleGetLoansFiltering}
+              />
             </div>
           </div>
         </BottomDrawer>

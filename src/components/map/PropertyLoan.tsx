@@ -96,7 +96,12 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
     >
       <div className="flex flex-col">
         <div className="font-bold text-[1.2rem] justify-between flex flex-row">
-          <div>{property.articleName}</div>
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate(`/property/${property.propertyId}`)}
+          >
+            {property.articleName}
+          </div>
           <LikeButton
             isActive={likeButtonActive}
             handleClick={handleLikeClick}
@@ -146,7 +151,9 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="font-bold text-[1rem]">
                 {bestLoan?.providerName}
               </div>
-              <div className="text-[1rem]">{bestLoan?.productName}</div>
+              <div className="text-[1rem] w-[15rem] overflow-hidden whitespace-nowrap text-ellipsis">
+                {bestLoan?.productName}
+              </div>
               <div className="flex flex-row justify-between">
                 <div className="text-[0.8rem]">
                   {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}

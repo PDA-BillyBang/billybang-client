@@ -4,9 +4,9 @@ import { getRealEstateTypeString, getTradeTypeString } from './fetchMethods';
 
 export const fetchPropertyDetail = async (
   group: PropertyGroup,
-  propertyOption: PropertyOption,
-  page: number
-): Promise<Property[]> => {
+  setProperties: React.Dispatch<React.SetStateAction<Property[]>>,
+  propertyOption: PropertyOption
+) => {
   const realEstateType = getRealEstateTypeString(
     propertyOption.SelectedBuildingCategory
   );
@@ -21,20 +21,16 @@ export const fetchPropertyDetail = async (
     leasePriceMax: propertyOption.leasePriceMax,
     latitude: group.latitude,
     longitude: group.longitude,
-    size: 2,
-    page: page, // 페이지 번호 반영
+    size: group.cnt,
   };
-
   try {
     const response = await getPropertyDetails(params);
     if (response.data.success) {
-      return response.data.response.content;
+      setProperties(response.data.response.content);
     } else {
       console.error('Failed to fetch detailed properties');
-      return [];
     }
   } catch (error) {
     console.error('Error fetching detailed properties', error);
-    return [];
   }
 };

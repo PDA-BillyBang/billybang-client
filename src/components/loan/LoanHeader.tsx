@@ -12,9 +12,9 @@ export default function LoanHeader({
           <div className="px-[0.15rem]" />
           <div className="text-[0.9rem] leading-[0.9rem]">({count})</div>
         </div>
-        <button className="text-[0.8rem] leading-[0.8rem] flex items-center justify-center text-center w-[55px] h-[30px] text-grey-1 border rounded-[20px] border-grey-2 bg-grey-6">
+        {/* <button className="text-[0.8rem] leading-[0.8rem] flex items-center justify-center text-center w-[55px] h-[30px] text-grey-1 border rounded-[20px] border-grey-2 bg-grey-6">
           출시순
-        </button>
+        </button> */}
       </div>
       <div className="py-[0.1rem] border-b border-grey-2 w-[100%]" />
     </div>

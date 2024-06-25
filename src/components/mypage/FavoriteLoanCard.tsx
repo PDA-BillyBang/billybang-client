@@ -13,7 +13,7 @@ export default function FavoriteLoanCard({ loan }: Props) {
   return (
     <div
       onClick={() => navigate('/loan/detail/' + loan.loanId)}
-      className="w-[170px] h-[110px] rounded-[0.3rem] pl-[0.3rem] pt-[0.3rem] cursor-pointer flex flex-col hover:bg-grey-6 "
+      className="w-[170px] h-[140px] rounded-[0.3rem] pl-[0.3rem] pt-[0.3rem] cursor-pointer flex flex-col hover:bg-grey-6 "
     >
       <div className="text-[0.9rem] font-bold">{truncatedProductName}</div>
       <div className="flex flex-row items-center pt-[0.3rem]">
@@ -25,13 +25,13 @@ export default function FavoriteLoanCard({ loan }: Props) {
       <div className="py-[0.4rem] text-[0.8rem] font-bold text-blue-1">
         이자율 : {loan.minInterestRate}~{loan.maxInterestRate}%
       </div>
-      <div className="flex flex-row">
-        <div className="bg-grey-5 rounded-[10px] text-[0.7rem] min-w-[40px] h-[20px] px-[0.5rem] leading-[20px] items-center justify-center text-center inline-block">
+      <div className="flex flex-col">
+        <div className="bg-grey-5 rounded-[10px] text-[0.7rem] h-[20px] leading-[20px] items-center justify-center text-center ">
           {formattedLoanLimit}
         </div>
-        <div className="pr-[0.2rem]" />
+        <div className="pb-[0.3rem]" />
         {loan.ltv !== null && (
-          <div className="bg-grey-5 rounded-[10px] text-[0.7rem] w-[80px] h-[20px] leading-[20px] items-center justify-center text-center">
+          <div className="bg-grey-5 rounded-[10px] text-[0.7rem] h-[20px] leading-[20px] items-center justify-center text-center inline-block">
             LTV {loan.ltv}% 이내
           </div>
         )}

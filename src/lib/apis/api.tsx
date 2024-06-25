@@ -8,7 +8,7 @@ export const userInstance = axios.create({
 });
 
 export const myInstance = axios.create({
-  baseURL: BASE_URL + '/',
+  baseURL: '/',
 });
 
 export const loanInstance = axios.create({
