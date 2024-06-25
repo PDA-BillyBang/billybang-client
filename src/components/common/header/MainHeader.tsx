@@ -41,13 +41,13 @@ export default function MainHeader() {
         <div className="flex items-center md:order-2">
           <img
             src={search}
-            className="h-6 mr-3 cursor-pointer sm:h-9"
-            alt="Flowbite React Logo"
+            className="h-[1.9rem] w-[1.9rem] mr-3 cursor-pointer sm:h-9"
+            alt="search"
             onClick={handleClickSearchField}
           />
           <Avatar
             onClick={handleClickToMy}
-            className="mr-3 cursor-pointer w-[1.3rem] "
+            className="mr-3 cursor-pointer w-[2.1rem] h-[2.1rem]"
             alt="User settings"
             img={avatar}
           />
