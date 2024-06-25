@@ -26,7 +26,7 @@ export const initializeMap = (
   lat: number,
   lon: number,
   level: number,
-  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>
+  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>,
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -72,8 +72,8 @@ export const initializeMap = (
     );
 
     // 현재 '구' 가져오기
-    const center = mapInstance.getCenter();
     const getGu = debounce(() => {
+      const center = mapInstance.getCenter();
       geocoder.coord2RegionCode(
         center.getLng(),
         center.getLat(),
@@ -92,12 +92,12 @@ export const initializeMap = (
           }
         }
       );
-    }, 500, { maxWait: 500, trailing: true, leading: false });
+    }, 1000, { maxWait: 1000, trailing: true, leading: false });
     getGu();
 
 
     // 구 hover시 구명 보기
-    const infoWindow = new kakao.maps.InfoWindow({});
+    const infoWindow = new kakao.maps.InfoWindow({disableAutoPan:true});
     infoWindowRef.current = infoWindow;
 
     // 폴리곤 hover 이벤트 등록
@@ -143,6 +143,51 @@ export const initializeMap = (
     const hideGuPolygons = () => {
       hidePolygons(guPolygons);
     };
+    
+    const roadviewContainer = document.getElementById('roadview');
+    const roadviewControl = document.getElementById('roadviewControl');
+    
+    let roadviewVisible = false;
+    let marker: kakao.maps.Marker | null = null;
+
+    if (roadviewContainer && roadviewControl) {
+      const roadview = new kakao.maps.Roadview(roadviewContainer);
+      const roadviewClient = new kakao.maps.RoadviewClient();
+      
+      const toggleRoadview = () => {
+        if (roadviewVisible) {
+          roadviewContainer.style.width = '0';
+          container.style.width = '100%';
+          roadviewContainer.classList.add('hidden');
+          roadviewVisible = !roadviewVisible
+          if (marker) {
+            marker.setMap(null);
+            marker = null;
+          }
+        } else {
+          const position = mapInstance.getCenter();
+          roadviewClient.getNearestPanoId(position, 50, (panoId: any) => {
+            if (panoId) { // 현재위치에 로드뷰가 있을 시
+              roadviewVisible = !roadviewVisible
+              roadviewContainer.classList.remove('hidden');
+              roadview.setPanoId(panoId, position);
+              roadviewContainer.style.width = '50%';
+              container.style.width = '50%';
+              roadview.relayout();
+              marker = new kakao.maps.Marker({
+                position: position,
+                map: mapInstance,
+              });
+              const newPosition = new kakao.maps.LatLng(position.getLat(),(mapInstance.getBounds().getNorthEast().getLng() + position.getLng())/2)
+              mapInstance.setLevel(1,{animate:true, anchor: newPosition})
+              mapInstance.panTo(newPosition)
+            }
+          });
+        }
+      };
+      
+      roadviewControl.addEventListener('click', toggleRoadview);
+    }
 
     // 줌 레벨 변경 이벤트 핸들러
     const onZoomChanged = () => {
@@ -151,6 +196,17 @@ export const initializeMap = (
       }
       setPropertyGroups([]);
       const level = mapInstance.getLevel();
+
+      // 로드뷰 버튼 렌더링 여부 결정
+      if (roadviewControl) {
+        if (level <= 3) {
+          roadviewControl.classList.remove('hidden');
+        } else {
+          roadviewControl.classList.add('hidden');
+        }
+      }
+
+      // 다각형 그리기 결정
       if (level <= 6) {
         hideGuPolygons();
       } else if (level >= 7) {
@@ -158,17 +214,19 @@ export const initializeMap = (
         setPropertyGroups(initialDistrictLocation)
       }
     };
-
+    
+        
     // 초기 다각형 표시
     onZoomChanged();
-
+    
+    // 초기 지역구 핀 설정
     setPropertyGroups(initialDistrictLocation);
 
     // 이벤트 리스너 등록
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo);
     kakao.maps.event.addListener(mapInstance, 'idle', getGu);
     kakao.maps.event.addListener(mapInstance, 'zoom_changed', onZoomChanged);
-
+    
     return () => {
       kakao.maps.event.removeListener(
         mapInstance,
@@ -176,11 +234,12 @@ export const initializeMap = (
         removeCovenientInfo
       );
       kakao.maps.event.removeListener(mapInstance, 'idle', getGu);
-      kakao.maps.event.removeListener(
-        mapInstance,
-        'zoom_changed',
-        onZoomChanged
-      );
+      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', onZoomChanged);
+
+      if (marker) {
+        marker.setMap(null);
+        marker = null;
+      }
     };
   });
 };

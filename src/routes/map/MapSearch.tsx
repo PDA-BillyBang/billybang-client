@@ -74,7 +74,7 @@ export default function MapSearch() {
   };
 
   return (
-    <div className="font-NanumSquareRound">
+    <div>
       <div className="flex h-16">
         <div className="flex w-full">
           <input

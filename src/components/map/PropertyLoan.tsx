@@ -3,8 +3,8 @@ import NavigateButton from '@components/common/button/NavigateButton';
 import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
-import { getBestLoans } from '@/lib/apis/loan';
 import LoanSkeleton from '@/routes/loan/LoanSkeleton';
+import { getBestLoans } from '@/lib/apis/loan';8
 
 type Props = {
   bottomButton?: boolean;
