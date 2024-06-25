@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { districtsLocation } from '@/utils/districtsLocation';
+
 export const renderPolygons = (
     geojson: any,
     mapInstance: kakao.maps.Map,
@@ -7,7 +8,7 @@ export const renderPolygons = (
     handlePolygonHover: (name: string) => () => void
   ): kakao.maps.Polygon[] => {
     const guPolygons: kakao.maps.Polygon[] = [];
-  
+
     geojson.features.forEach((feature: any) => {
       const coordinates = feature.geometry.coordinates[0].map((coord: any) => new kakao.maps.LatLng(coord[1], coord[0]));
       const polygon = new kakao.maps.Polygon({
@@ -18,7 +19,7 @@ export const renderPolygons = (
         fillColor: '#DAE5F7',
         fillOpacity: 0.7,
       });
-  
+
       const guName = feature.properties.SIG_KOR_NM; // 구 이름 가져오기
 
       // hover 시 다각형 스타일 변경
@@ -58,15 +59,15 @@ export const renderPolygons = (
         const location = districtsLocation[guName];
         if (location) {
           const center = new kakao.maps.LatLng(location[1], location[0]);
-          mapInstance.setLevel(7,{animate:true, anchor: center});
+          mapInstance.setLevel(6,{animate:true, anchor: center});
         }
       });
 
       guPolygons.push(polygon);
     });
   
-    return guPolygons;
-  };
+  return guPolygons;
+};
 
 export const showPolygons = (polygons: kakao.maps.Polygon[], mapInstance: kakao.maps.Map) => {
   polygons.forEach(polygon => {

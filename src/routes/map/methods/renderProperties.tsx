@@ -14,9 +14,10 @@ export const renderProperties = (
   
   // 클릭 시 지도 중심과 줌 레벨 변경
   const goToGu = (level: number, latitude: number, longitude: number) => {
+    Object.values(overlayRef.current).forEach(({ overlay }) => overlay.setMap(null));
+    
     const center = new kakao.maps.LatLng(latitude, longitude);
     map.setLevel(level,{animate:true, anchor: center});
-    // map.setCenter(center);
   }
 
   // Zoom 레벨에 따라 Pin 또는 DistrictPin 표시
@@ -68,7 +69,7 @@ export const renderProperties = (
       const customOverlay = new window.kakao.maps.CustomOverlay({
         position: position,
         content: container,
-        clickable: true,
+        clickable: false,
       });
 
       customOverlay.setMap(map);
