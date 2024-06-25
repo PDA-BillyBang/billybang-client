@@ -4,8 +4,14 @@ import { Dispatch, SetStateAction } from 'react';
 import { fetchPropertyGroups } from './fetchPropertyGroups';
 import { moveToCurrentLocation } from './moveToCurrentLocation';
 import guData from '@/assets/json/gu2.json';
-import { districtsLocation } from '@/utils/districtsLocation';
-import { renderPolygons, showPolygons, hidePolygons } from './renderPolygons';
+
+import { districtInfoLocation, initialDistrictLocation } from '@/utils/districtsLocation';
+import {
+  renderPolygons,
+  showPolygons,
+  hidePolygons,
+} from './renderPolygons';
+import { debounce } from 'lodash';
 
 export const initializeMap = (
   setPropertyGroups: (properties: PropertyGroup[]) => void,
@@ -66,8 +72,8 @@ export const initializeMap = (
     );
 
     // 현재 '구' 가져오기
-    const getGu = () => {
-      const center = mapInstance.getCenter();
+    const center = mapInstance.getCenter();
+    const getGu = debounce(() => {
       geocoder.coord2RegionCode(
         center.getLng(),
         center.getLat(),
@@ -86,8 +92,9 @@ export const initializeMap = (
           }
         }
       );
-    };
+    }, 500, { maxWait: 500, trailing: true, leading: false });
     getGu();
+
 
     // 구 hover시 구명 보기
     const infoWindow = new kakao.maps.InfoWindow({});
@@ -97,13 +104,22 @@ export const initializeMap = (
     const handlePolygonHover = (name: string) => {
       return () => {
         if (!infoWindowRef.current) return;
-
-        const content = `<div class="infoWindow-content" style="padding:5px;z-index:1;">${name}</div>`;
-
-        const position = new kakao.maps.LatLng(
-          districtsLocation[name][1],
-          districtsLocation[name][0]
-        );
+    
+        const content = `
+          <div class="infoWindow-content" style="padding:5px;">
+            ${name}
+          </div>
+          <style>
+            .infoWindow-content {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 150px;
+            }
+          </style>
+        `;
+        
+        const position = new kakao.maps.LatLng(districtInfoLocation[name].lat, districtInfoLocation[name].lng);
         infoWindowRef.current.setContent(content);
         infoWindowRef.current.setPosition(position);
         infoWindowRef.current.open(mapInstance);
@@ -133,16 +149,20 @@ export const initializeMap = (
       if (infoWindowRef.current) {
         infoWindowRef.current.close();
       }
+      setPropertyGroups([]);
       const level = mapInstance.getLevel();
-      if (level <= 7) {
+      if (level <= 6) {
         hideGuPolygons();
-      } else if (level >= 8) {
+      } else if (level >= 7) {
         showGuPolygons();
+        setPropertyGroups(initialDistrictLocation)
       }
     };
 
     // 초기 다각형 표시
     onZoomChanged();
+
+    setPropertyGroups(initialDistrictLocation);
 
     // 이벤트 리스너 등록
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo);
