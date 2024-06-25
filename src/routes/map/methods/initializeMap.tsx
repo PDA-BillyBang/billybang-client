@@ -71,8 +71,8 @@ export const initializeMap = (
     );
 
     // 현재 '구' 가져오기
-    const center = mapInstance.getCenter();
     const getGu = debounce(() => {
+      const center = mapInstance.getCenter();
       geocoder.coord2RegionCode(
         center.getLng(),
         center.getLat(),
