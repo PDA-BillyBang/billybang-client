@@ -67,6 +67,7 @@ export default function MapSearch() {
     const state = {
       lat: Number(lat),
       lon: Number(lon),
+      level: 3,
     };
 
     navigate('/', { state });
