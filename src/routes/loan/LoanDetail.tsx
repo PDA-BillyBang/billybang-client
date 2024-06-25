@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
-import check from '../../assets/image/icons/check.svg';
 import LoanSmallButton from './LoanSmallButton';
 import LargeButton from '../../components/common/button/LargeButton';
 import LikeButton from '../../components/common/button/LikeButton';
 import { getLoanDetailByLoanId } from '@/lib/apis/loan';
 import LoanDetailSkeleton from './LoanDetailSkeleton';
+import { formatLoanLimit } from '@components/loan/LoanCard';
 
 export interface loanDetailI {
   guaranteeAgencyName: string | null;
@@ -120,15 +120,13 @@ const LoanDetail = () => {
           />
         </header>
         <div className="flex flex-row items-center">
-          <div className="w-[1.3rem] h-[1.3rem] bg-blue-1 rounded-full flex items-center justify-center">
-            <img src={check} className="w-[1rem] h-[1rem]" />
-          </div>
-          <div className="pb-[2rem]" />
-          <div className="pl-[0.4rem] leading-[0.8rem] text-[1rem]">
-            HF 보증
-          </div>
+          {loanDetailResult.guaranteeAgencyName !== null && (
+            <div className="inline-block text-[0.8rem] mt-[0.4rem] font-bold leading-[1.7rem] px-[1.2rem] h-[1.7rem] text-center bg-blue-1 text-white-1 rounded-lg">
+              {loanDetailResult.guaranteeAgencyName} 보증
+            </div>
+          )}
         </div>
-        <div className="text-red-1 pt-[0.7rem] font-bold">
+        <div className="text-blue-1 pt-[0.7rem] font-bold">
           {loanDetailResult.minInterestRate}~{loanDetailResult.maxInterestRate}%
         </div>
         <div className="text-grey-1 pt-[1.6rem]">
@@ -140,13 +138,21 @@ const LoanDetail = () => {
             <div className="pt-[1rem]">한도</div>
             <div className="pt-[1rem]">LTV</div>
             <div className="pt-[1rem]">기간</div>
-            <div className="py-[1rem]">우대조건</div>
+            {/* <div className="py-[1rem]">우대조건</div> */}
           </div>
           <div className="flex flex-col w-[70%]">
             <div className="pt-[1rem]">{loanDetailResult.loanType}</div>
-            <div className="pt-[1rem]">2억원</div>
-            <div className="pt-[1rem]">{loanDetailResult.ltv}%</div>
             <div className="pt-[1rem]">
+              {formatLoanLimit(loanDetailResult.loanLimit)}
+            </div>
+            <div className="pt-[1rem]">
+              {loanDetailResult.ltv === null ? (
+                <div>없음</div>
+              ) : (
+                <div>{loanDetailResult.ltv}%</div>
+              )}
+            </div>
+            <div className="py-[1rem]">
               {loanDetailResult.minTerm === null ? (
                 <div>{Math.floor(loanDetailResult.maxTerm / 12)}년</div>
               ) : (
@@ -156,7 +162,7 @@ const LoanDetail = () => {
                 </div>
               )}
             </div>
-            <div className="py-[1rem]">신혼, 부부합산소득, 자녀여부</div>
+            {/* <div className="py-[1rem]">신혼, 부부합산소득, 자녀여부</div> */}
           </div>
         </div>
       </div>

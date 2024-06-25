@@ -1,6 +1,5 @@
-import {
+import React, {
   ChangeEvent,
-  FC,
   useCallback,
   useEffect,
   useState,
@@ -11,36 +10,49 @@ import styles from './multiRangeSlider.module.css';
 interface MultiRangeSliderProps {
   min: number;
   max: number;
+  minValue: number;
+  maxValue: number;
+  onChange: ({ min, max }: { min: number; max: number }) => void;
 }
 
-const MultiRangeSliderYear: FC<MultiRangeSliderProps> = ({ min, max }) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+const MultiRangeSliderYear: React.FC<MultiRangeSliderProps> = ({
+  min,
+  max,
+  minValue,
+  maxValue,
+  onChange,
+}) => {
+  const [minVal, setMinVal] = useState(minValue);
+  const [maxVal, setMaxVal] = useState(maxValue);
+  const minValRef = useRef(minValue);
+  const maxValRef = useRef(maxValue);
   const range = useRef<HTMLDivElement>(null);
 
-  const formatCurrency = (value: number): string => {
+  // Function to convert number to currency format (e.g., 1천만원)
+  const formatCurrency = useCallback((value: number): string => {
     const year = Math.floor(value / 12);
     const month = value % 12;
-    if (month == 0) {
+    if (month === 0) {
       return `${year}년`;
-    } else if (year == 0) {
+    } else if (year === 0) {
       return `${month}개월`;
     } else {
       return `${year}년 ${month}개월`;
     }
-  };
+  }, []);
 
-  const roundToNearest10M = (value: number): number => {
-    return value;
-  };
+  // Convert to nearest 1000만원 (10,000,000)
+  const roundToNearest10M = useCallback((value: number): number => {
+    return Math.round(value / 10) * 10;
+  }, []);
 
+  // Convert to percentage
   const getPercent = useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
 
+  // Set width of the range to decrease from the left side
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxValRef.current);
@@ -60,6 +72,17 @@ const MultiRangeSliderYear: FC<MultiRangeSliderProps> = ({ min, max }) => {
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [maxVal, getPercent]);
+
+  useEffect(() => {
+    if (minVal !== minValue || maxVal !== maxValue) {
+      onChange({ min: minVal, max: maxVal });
+    }
+  }, [minVal, maxVal, minValue, maxValue, onChange]);
+
+  useEffect(() => {
+    setMinVal(minValue);
+    setMaxVal(maxValue);
+  }, [minValue, maxValue]);
 
   return (
     <div className="flex flex-col">
@@ -84,8 +107,13 @@ const MultiRangeSliderYear: FC<MultiRangeSliderProps> = ({ min, max }) => {
             value={minVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMinVal(value);
-              minValRef.current = value;
+              if (value <= maxVal) {
+                setMinVal(value);
+                minValRef.current = value;
+              } else {
+                setMinVal(maxVal - 10);
+                minValRef.current = maxVal - 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbLeft} `}
             style={{ zIndex: minVal > max - 10 ? 5 : 3 }}
@@ -97,8 +125,13 @@ const MultiRangeSliderYear: FC<MultiRangeSliderProps> = ({ min, max }) => {
             value={maxVal}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = roundToNearest10M(Number(event.target.value));
-              setMaxVal(value);
-              maxValRef.current = value;
+              if (value >= minVal) {
+                setMaxVal(value);
+                maxValRef.current = value;
+              } else {
+                setMaxVal(minVal + 10); // Ensure maxVal stays above minVal
+                maxValRef.current = minVal + 10;
+              }
             }}
             className={`${styles.thumb} ${styles.thumbRight}`}
           />
