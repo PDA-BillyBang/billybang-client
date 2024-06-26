@@ -57,8 +57,7 @@ export default function Map() {
   const viewportSize = GetViewportSize(); // viewport 변경 감지
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { lat, lon, level } = location.state || { lat: 37.563915912, lon: 126.99772498493, level: 8 };
+  const { lat, lon, level } = location.state || { lat: 37.5450631771303, lon: 127.056761593503, level: 3 };
   const { setAddress } = useOutletContext<{setAddress: (title: string) => void;}>();
 
 
