@@ -22,9 +22,10 @@ export default function Login() {
         console.error(errorResponse.response.data.response);
       }
       navigate('/user/login');
-    } finally {
-      navigate('/');
     }
+    // finally {
+    //   navigate('/');
+    // }
   };
 
   // const handleKakaoLogin2 = () => {
@@ -95,7 +96,7 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center w-full mt-auto">
+      {/* <div className="flex flex-col items-center w-full mt-auto">
         <div className="flex items-center mt-1 w-customWidthPercent">
           <div className="h-[1px] flex-1 mx-2 bg-grey-2"></div>
           <div className="mx-2 text-center text-grey-2 text-[0.8rem] p-2">
@@ -105,7 +106,6 @@ export default function Login() {
         </div>
 
         <div className="flex flex-col mb-4 w-customWidthPercent">
-          {/* <a href="http://3.39.52.110:3000/api/oauth2/authorization/kakao"> */}
           <button
             className=" w-full flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
             onClick={handleKakaoLogin}
@@ -113,9 +113,8 @@ export default function Login() {
             <img src={KaKaoBtn} alt="kakao" className="h-6" />
             <div className="w-full text-center">카카오로 시작하기</div>
           </button>
-          {/* </a> */}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
