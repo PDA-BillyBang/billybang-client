@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams, useOutletContext } from 'react-router-dom';
 export default function RoadView() {
   const [searchParams] = useSearchParams();
@@ -16,7 +16,10 @@ export default function RoadView() {
 
   useEffect(() => {
     if (latitude && longitude) {
-      const mapCenter = new kakao.maps.LatLng(Number(latitude), Number(longitude));
+      const mapCenter = new kakao.maps.LatLng(
+        Number(latitude),
+        Number(longitude)
+      );
 
       // Create map
       const mapContainer = document.getElementById('map');
@@ -25,8 +28,8 @@ export default function RoadView() {
         level: 4,
       };
       let map;
-      if (mapContainer){
-          map = new kakao.maps.Map(mapContainer, mapOption);
+      if (mapContainer) {
+        map = new kakao.maps.Map(mapContainer, mapOption);
       }
 
       // Create marker
@@ -40,17 +43,17 @@ export default function RoadView() {
         position: mapCenter,
         content: `${buildingName}`,
       });
-      if (map){
-          mLabel.open(map, mMarker);
+      if (map) {
+        mLabel.open(map, mMarker);
       }
 
       // Create roadview
       const rvContainer = document.getElementById('roadview');
       let rv: kakao.maps.Roadview;
-      if (rvContainer){
+      if (rvContainer) {
         rv = new kakao.maps.Roadview(rvContainer);
       }
-        
+
       const rc = new kakao.maps.RoadviewClient();
 
       rc.getNearestPanoId(mapCenter, 50, function (panoId) {
@@ -71,14 +74,20 @@ export default function RoadView() {
 
         // Adjust viewpoint to center marker
         const projection = rv.getProjection();
-        const viewpoint = projection.viewpointFromCoords(rMarker.getPosition(), rMarker.getAltitude());
+        const viewpoint = projection.viewpointFromCoords(
+          rMarker.getPosition(),
+          rMarker.getAltitude()
+        );
         rv.setViewpoint(viewpoint);
       });
     }
   }, [latitude, longitude, buildingName]);
 
   return (
-    <div className="roadview-container" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div
+      className="roadview-container"
+      style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
+    >
       <div id="map" style={{ width: '100%', height: '50%' }}></div>
       <div id="roadview" style={{ width: '100%', height: '50%' }}></div>
     </div>
