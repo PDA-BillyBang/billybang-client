@@ -11,27 +11,26 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  const handleKakaoLogin = async () => {
-    try {
-      await kakaoLogin();
-      // navigate('/');
-    } catch (error: unknown) {
-      const errorResponse = error as AxiosError<ErrorResponseI>;
-      if (errorResponse.response) {
-        console.error(errorResponse.response.data.response);
-      }
-      navigate('/user/login');
-    }
-    // finally {
-    //   navigate('/');
-    // }
-  };
+  // const handleKakaoLogin = async () => {
+  //   try {
+  //     await kakaoLogin();
+  //     // navigate('/');
+  //   } catch (error: unknown) {
+  //     const errorResponse = error as AxiosError<ErrorResponseI>;
+  //     if (errorResponse.response) {
+  //       console.error(errorResponse.response.data.response);
+  //     }
+  //     navigate('/user/login');
+  //   }
+  //   // finally {
+  //   //   navigate('/');
+  //   // }
+  // };
 
   // const handleKakaoLogin2 = () => {
   //   window.location.href =
   //     'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
   // };
-
 
   const isExistedUser = async () => {
     if (!email) {
