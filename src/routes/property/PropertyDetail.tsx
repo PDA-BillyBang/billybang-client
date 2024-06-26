@@ -117,14 +117,14 @@ export default function PropertyDetail({}: Props) {
               propertyId={propertyDetail?.propertyId}
             />
           </div>
-          <div className="flex items-center font-thin text-black-3">
+          <div className="flex items-center font-thin text-black-3 ">
             <div className="mr-2">{propertyDetail?.jibeonAddress}</div>
             <div className='flex' onClick={()=>{navigate(`/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`)}}>
               <img src={pin} className="w-6"></img>
-              <div>로드뷰</div>
+              <div className="min-w-[3rem]">로드뷰</div>
             </div>
           </div>
-          <div className="flex gap-1 mt-3">
+          <div className="flex gap-1 mt-3 flex-wrap">
             <SmallButton
               text="전세"
               isActive={true}
