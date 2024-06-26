@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
-import Aim from '@/assets/image/map/aim.png';
 import {
   PropertyGroup,
   Property,
@@ -175,14 +174,6 @@ export default function Map() {
   return (
     <div className="pt-16 h-[100vh] flex">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
-        <div className="absolute z-10 p-1 rounded-full top-3.5 left-3.5 bg-white-2 select-none">
-          <img
-            id="currentLocationImg"
-            src={Aim}
-            alt="현재 위치로 이동"
-            className="cursor-pointer w-7 h-7"
-          />
-        </div>
 
         <BottomDrawer
           isOpen={isDrawerOpen !== 0}
@@ -201,7 +192,7 @@ export default function Map() {
             />
           )}
         </BottomDrawer>
-        <div className="absolute z-10 top-4 left-16">
+        <div className="absolute z-10 top-4 left-8">
           <OptionButton
             text={'옵션'}
             isActive={isDrawerOpen === 1}
