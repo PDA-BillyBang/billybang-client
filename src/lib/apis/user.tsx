@@ -88,3 +88,8 @@ export async function updatePassword(data: { password: string }) {
 export async function updateNickname(nickname: string) {
   return await userInstance.put('/nickname', { nickname });
 }
+
+//회원 탈퇴(DELETE
+export async function deleteUser() {
+  return await userInstance.delete('');
+}

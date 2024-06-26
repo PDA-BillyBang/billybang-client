@@ -4,7 +4,14 @@ import editGrey from '../../assets/image/icons/editGrey.svg';
 import rightArrowGrey from '../../assets/image/icons/rightArrowGrey.svg';
 import userImg from 'images/user2.svg';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo, isvalidateToken, logout } from '@/lib/apis/user';
+import Swal from 'sweetalert2';
+
+import {
+  deleteUser,
+  getUserInfo,
+  isvalidateToken,
+  logout,
+} from '@/lib/apis/user';
 import { ErrorResponseI } from '@/utils/errorTypes';
 import { AxiosError } from 'axios';
 
@@ -57,9 +64,48 @@ export default function MypageEdit() {
 
   const handleClickedUserLogoutButton = async () => {
     try {
-      const resp = await logout();
-      console.log(resp);
-      navigate('/');
+      Swal.fire({
+        icon: 'info',
+        title: '로그아웃',
+        text: '정말로 로그아웃 하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonColor: '#004CC7',
+        confirmButtonText: '네',
+        cancelButtonText: '아니요',
+        cancelButtonColor: '#d33',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const resp = await logout();
+          console.log(resp);
+          navigate('/');
+        }
+      });
+    } catch (error: unknown) {
+      const errorResponse = error as AxiosError<ErrorResponseI>;
+      if (errorResponse.response) {
+        console.error(errorResponse.response.data.response);
+      }
+    }
+  };
+
+  const handleClickedUserQuit = async () => {
+    try {
+      Swal.fire({
+        icon: 'info',
+        title: '회원 탈퇴',
+        text: '정말로 탈퇴 하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonColor: '#004CC7',
+        confirmButtonText: '네',
+        cancelButtonText: '아니요',
+        cancelButtonColor: '#d33',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const resp = await deleteUser();
+          console.log(resp);
+          navigate('/');
+        }
+      });
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
       if (errorResponse.response) {
@@ -134,7 +180,10 @@ export default function MypageEdit() {
           />
         </div>
         <div className="py-[0.8rem]" />
-        <div className="w-[100%] text-grey-1 flex flex-row justify-between">
+        <div
+          className="w-[100%] text-grey-1 flex flex-row justify-between"
+          onClick={handleClickedUserQuit}
+        >
           <div className="w-[30%]">회원탈퇴</div>
           <img
             src={rightArrowGrey}
