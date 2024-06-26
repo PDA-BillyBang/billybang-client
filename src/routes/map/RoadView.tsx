@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams, useOutletContext } from 'react-router-dom';
+
 export default function RoadView() {
   const [searchParams] = useSearchParams();
   const latitude = searchParams.get('latitude');
@@ -41,7 +42,19 @@ export default function RoadView() {
       // Create info window
       const mLabel = new kakao.maps.InfoWindow({
         position: mapCenter,
-        content: `${buildingName}`,
+        content: `
+          <div class="infoWindow-content" style="padding:5px;">
+              ${buildingName}
+          </div>
+          <style>
+              .infoWindow-content {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 150px;
+              }
+          </style>
+          `,
       });
       if (map) {
         mLabel.open(map, mMarker);
@@ -68,7 +81,19 @@ export default function RoadView() {
         // Add info window to roadview
         const rLabel = new kakao.maps.InfoWindow({
           position: mapCenter,
-          content: `${buildingName}`,
+          content: `
+            <div class="infoWindow-content" style="padding:5px;">
+                ${buildingName}
+            </div>
+            <style>
+                .infoWindow-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 150px;
+                }
+            </style>
+            `
         });
         rLabel.open(rv, rMarker);
 
@@ -84,12 +109,9 @@ export default function RoadView() {
   }, [latitude, longitude, buildingName]);
 
   return (
-    <div
-      className="roadview-container"
-      style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}
-    >
-      <div id="map" style={{ width: '100%', height: '50%' }}></div>
-      <div id="roadview" style={{ width: '100%', height: '50%' }}></div>
+    <div className="roadview-container flex flex-col md:flex-row h-screen">
+      <div id="map" className="w-full h-1/2 md:w-1/2 md:h-full"></div>
+      <div id="roadview" className="w-full h-1/2 md:w-1/2 md:h-full"></div>
     </div>
   );
 }
