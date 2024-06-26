@@ -26,6 +26,7 @@ import { fetchPropertyDetail } from './methods/fetchPropertyDetail';
 import { searchPlaces } from './methods/searchPlaces';
 import { fetchPropertyGroups } from './methods/fetchPropertyGroups';
 import { debounce } from 'lodash';
+import BottomAlert from '@components/common/alert/BottomAlert';
 
 export default function Map() {
   const [propertyGroups, setPropertyGroups] = useState<PropertyGroup[]>([]); // 매물 묶음 데이터
@@ -49,6 +50,7 @@ export default function Map() {
   );
   const [gu, setGu] = useState<string>('');
   const [guCode, setGuCode] = useState<string>('');
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const overlayRef = useRef<{ [key: number]: OverlayData }>({}); // 매물 그룹들의 컴포넌트
   const previousSelectedPropertyIdRef = useRef<number | null>(null); // 직전에 선택한 매물그룹의 propertyId
   const markers = useRef<kakao.maps.Marker[]>([]); // 편의시설을 나타낼 marker
@@ -79,7 +81,8 @@ export default function Map() {
       lat,
       lon,
       level,
-      infoWindowRef
+      infoWindowRef,
+      setShowAlert,
     );
     return cleanup;
   }, []);
@@ -237,6 +240,13 @@ export default function Map() {
           customWidth="min-w-14"
         ></SmallButton>
       </div>
+      {showAlert && 
+        <BottomAlert 
+          message='해당 위치에 로드뷰가 없어요' 
+          onClose={()=>{setShowAlert(false)}} >
+        </BottomAlert>
+      }
+      
     </div>
   );
 }

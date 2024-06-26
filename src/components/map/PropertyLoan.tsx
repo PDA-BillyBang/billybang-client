@@ -151,7 +151,7 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="font-bold text-[1rem]">
                 {bestLoan?.providerName}
               </div>
-              <div className="text-[1rem] w-[15rem] overflow-hidden whitespace-nowrap text-ellipsis">
+              <div className="text-[1rem] overflow-hidden whitespace-nowrap text-ellipsis">
                 {bestLoan?.productName}
               </div>
               <div className="flex flex-row justify-between">
