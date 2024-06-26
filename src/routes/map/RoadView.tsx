@@ -17,7 +17,10 @@ export default function RoadView() {
 
   useEffect(() => {
     if (latitude && longitude) {
-      const mapCenter = new kakao.maps.LatLng(Number(latitude), Number(longitude));
+      const mapCenter = new kakao.maps.LatLng(
+        Number(latitude),
+        Number(longitude)
+      );
 
       // Create map
       const mapContainer = document.getElementById('map');
@@ -96,7 +99,10 @@ export default function RoadView() {
 
         // Adjust viewpoint to center marker
         const projection = rv.getProjection();
-        const viewpoint = projection.viewpointFromCoords(rMarker.getPosition(), rMarker.getAltitude());
+        const viewpoint = projection.viewpointFromCoords(
+          rMarker.getPosition(),
+          rMarker.getAltitude()
+        );
         rv.setViewpoint(viewpoint);
       });
     }
