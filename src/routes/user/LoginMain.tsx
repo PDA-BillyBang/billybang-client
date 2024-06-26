@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 // import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
@@ -8,8 +8,21 @@ import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
 
 export default function Login() {
+  const [isActive, setIsActive] = useState<number>(2);
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (validateInputs()) {
+      setIsActive(0);
+    } else {
+      setIsActive(1);
+    }
+  }, [email]);
+
+  const validateInputs = (): boolean => {
+    return validateEmail(email);
+  };
 
   // const handleKakaoLogin = async () => {
   //   try {
@@ -69,6 +82,13 @@ export default function Login() {
     }
   };
 
+  // 이메일 유효성 검사 함수
+  const validateEmail = (value: string | number) => {
+    if (typeof value !== 'string') return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <div className="w-customWidthPercent font-bold text-[1.5rem] my-[7rem]">
@@ -84,12 +104,14 @@ export default function Login() {
           text="이메일 주소를 입력해주세요"
           value={email}
           onChange={handleEmailChange}
+          validate={(value) => validateEmail(value)}
+          errorMessage="정확한 이메일을 입력해주세요"
         ></FloatingInputForm1>
         <div className="my-4">
           <LargeButton
             text="계속하기"
             customWidth="w-full"
-            isActive={0}
+            isActive={isActive}
             handleClick={isExistedUser}
           ></LargeButton>
         </div>
