@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
-import KaKaoBtn from 'images/kakao.png';
+// import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
 import { isEmailRegistered } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
