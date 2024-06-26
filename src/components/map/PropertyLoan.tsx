@@ -4,7 +4,8 @@ import LikeButton from '@components/common/button/LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { Property } from '@/utils/types';
 import LoanSkeleton from '@/routes/loan/LoanSkeleton';
-import { getBestLoans } from '@/lib/apis/loan';8
+import { getBestLoans } from '@/lib/apis/loan';
+8;
 
 type Props = {
   bottomButton?: boolean;
@@ -154,7 +155,9 @@ export default function PropertyLoan({ bottomButton, property }: Props) {
               <div className="flex flex-row justify-between">
                 <div className="text-[0.8rem]">
                   {bestLoan?.loanLimit ? priceFormatter(bestLoan.loanLimit) : 0}
-                  {bestLoan?.ltv && `, LTV ${bestLoan?.ltv}% 이내`}
+                  {bestLoan?.ltv &&
+                    bestLoan?.ltv !== null &&
+                    `, LTV ${bestLoan?.ltv}% 이내`}
                 </div>
                 <div className="text-[0.8rem] font-bold">
                   {bestLoan?.minInterestRate &&
