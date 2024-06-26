@@ -88,6 +88,13 @@ export default function Login() {
     return emailRegex.test(value);
   };
 
+  // 이메일 유효성 검사 함수
+  const validateEmail = (value: string | number) => {
+    if (typeof value !== 'string') return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen">
       <div className="w-customWidthPercent font-bold text-[1.5rem] my-[7rem]">
@@ -103,6 +110,8 @@ export default function Login() {
           text="이메일 주소를 입력해주세요"
           value={email}
           onChange={handleEmailChange}
+          validate={(value) => validateEmail(value)}
+          errorMessage="정확한 이메일을 입력해주세요"
           validate={(value) => validateEmail(value)}
           errorMessage="정확한 이메일을 입력해주세요"
         ></FloatingInputForm1>

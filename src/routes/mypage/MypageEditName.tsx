@@ -29,6 +29,7 @@ export default function MypageEditName() {
       navigate('../');
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ErrorResponseI>;
+      console.log(errorResponse.response?.data);
       if (errorResponse.response && errorResponse.response.status === 400) {
         Swal.fire({
           icon: 'error',
