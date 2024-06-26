@@ -27,6 +27,7 @@ export const initializeMap = (
   lon: number,
   level: number,
   infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>,
+  setShowAlert: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -181,6 +182,9 @@ export const initializeMap = (
               const newPosition = new kakao.maps.LatLng(position.getLat(),(mapInstance.getBounds().getNorthEast().getLng() + position.getLng())/2)
               mapInstance.setLevel(1,{animate:true, anchor: newPosition})
               mapInstance.panTo(newPosition)
+            } else {
+              setShowAlert(true);
+              console.log('실패')
             }
           });
         }
