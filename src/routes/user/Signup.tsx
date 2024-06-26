@@ -63,7 +63,7 @@ export default function SignUp() {
           confirmButtonText: '확인',
         });
 
-        navigate('/');
+        navigate('/user/login');
         console.log(1);
       }
       console.log(2);
