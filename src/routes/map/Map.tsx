@@ -79,7 +79,7 @@ export default function Map() {
       lat,
       lon,
       level,
-      infoWindowRef
+      infoWindowRef,
     );
     return cleanup;
   }, []);
@@ -137,7 +137,7 @@ export default function Map() {
     if (!map) return;
     const handleFetchPropertyGroups = debounce(() => {
       fetchPropertyGroups(map, setPropertyGroups, propertyOption);
-    }, 2000, { maxWait: 4000, trailing: true, leading: true });
+    }, 1000, { maxWait: 4000, trailing: true, leading: true });
 
     handleFetchPropertyGroups();
     kakao.maps.event.addListener(map, 'idle', handleFetchPropertyGroups);
@@ -174,7 +174,7 @@ export default function Map() {
 
   const drawerPosition = viewportSize.width >= 768 ? 'left' : 'bottom';
   return (
-    <div className="pt-16 h-[100vh]">
+    <div className="pt-16 h-[100vh] flex">
       <div id="map" className="relative h-full w-full bg-grey-6 rounded-[5px]">
         <div className="absolute z-10 p-1 rounded-full top-3.5 left-3.5 bg-white-2 select-none">
           <img

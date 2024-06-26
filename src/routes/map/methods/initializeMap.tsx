@@ -26,7 +26,7 @@ export const initializeMap = (
   lat: number,
   lon: number,
   level: number,
-  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>
+  infoWindowRef: React.MutableRefObject<kakao.maps.InfoWindow | null>,
 ) => {
   const container = document.getElementById('map');
   const options = {
@@ -72,8 +72,8 @@ export const initializeMap = (
     );
 
     // 현재 '구' 가져오기
-    const center = mapInstance.getCenter();
     const getGu = debounce(() => {
+      const center = mapInstance.getCenter();
       geocoder.coord2RegionCode(
         center.getLng(),
         center.getLat(),
@@ -92,12 +92,12 @@ export const initializeMap = (
           }
         }
       );
-    }, 500, { maxWait: 500, trailing: true, leading: false });
+    }, 1000, { maxWait: 1000, trailing: true, leading: false });
     getGu();
 
 
     // 구 hover시 구명 보기
-    const infoWindow = new kakao.maps.InfoWindow({});
+    const infoWindow = new kakao.maps.InfoWindow({disableAutoPan:true});
     infoWindowRef.current = infoWindow;
 
     // 폴리곤 hover 이벤트 등록
@@ -151,6 +151,8 @@ export const initializeMap = (
       }
       setPropertyGroups([]);
       const level = mapInstance.getLevel();
+
+      // 다각형 그리기 결정
       if (level <= 6) {
         hideGuPolygons();
       } else if (level >= 7) {
@@ -158,17 +160,18 @@ export const initializeMap = (
         setPropertyGroups(initialDistrictLocation)
       }
     };
-
+        
     // 초기 다각형 표시
     onZoomChanged();
-
+    
+    // 초기 지역구 핀 설정
     setPropertyGroups(initialDistrictLocation);
 
     // 이벤트 리스너 등록
     kakao.maps.event.addListener(mapInstance, 'click', removeCovenientInfo);
     kakao.maps.event.addListener(mapInstance, 'idle', getGu);
     kakao.maps.event.addListener(mapInstance, 'zoom_changed', onZoomChanged);
-
+    
     return () => {
       kakao.maps.event.removeListener(
         mapInstance,
@@ -176,11 +179,7 @@ export const initializeMap = (
         removeCovenientInfo
       );
       kakao.maps.event.removeListener(mapInstance, 'idle', getGu);
-      kakao.maps.event.removeListener(
-        mapInstance,
-        'zoom_changed',
-        onZoomChanged
-      );
+      kakao.maps.event.removeListener(mapInstance, 'zoom_changed', onZoomChanged);
     };
   });
 };

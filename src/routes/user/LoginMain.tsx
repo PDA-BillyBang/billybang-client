@@ -2,11 +2,10 @@ import { useState } from 'react';
 import FloatingInputForm1 from '../../components/common/form/FloatingInputForm1'; // 경로를 프로젝트 구조에 맞게 조정합니다.
 import KaKaoBtn from 'images/kakao.png';
 import LargeButton from '@components/common/button/LargeButton';
-import { isEmailRegistered, kakaoLogin } from '@/lib/apis/user';
+import { isEmailRegistered } from '@/lib/apis/user';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
-import { ErrorResponseI } from '@/utils/errorTypes';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -32,6 +31,7 @@ export default function Login() {
   //   window.location.href =
   //     'http://3.39.52.110:3000/api/oauth2/authorization/kakao';
   // };
+
 
   const isExistedUser = async () => {
     if (!email) {
@@ -108,11 +108,11 @@ export default function Login() {
         <div className="flex flex-col mb-4 w-customWidthPercent">
           <button
             className=" w-full flex items-center justify-between h-[57px] bg-[#FEE500] border-none rounded-[5px] px-4"
-            onClick={handleKakaoLogin}
           >
             <img src={KaKaoBtn} alt="kakao" className="h-6" />
             <div className="w-full text-center">카카오로 시작하기</div>
           </button>
+
         </div>
       </div> */}
     </div>

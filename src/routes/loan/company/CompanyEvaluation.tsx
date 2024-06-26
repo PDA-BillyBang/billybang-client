@@ -19,7 +19,7 @@ export default function CompanyEvaluation({ financialIndicators }: Props) {
   const data = financialIndicators
     ? [
         {
-          name: '규모형태',
+          name: '수익성',
           평균: financialIndicators[0].avgValue,
           당사: financialIndicators[0].value,
         },
@@ -58,7 +58,7 @@ export default function CompanyEvaluation({ financialIndicators }: Props) {
         <div className="flex flex-row h-[3rem] rounded-[5px] bg-grey-6 my-[0.4rem] justify-between items-center px-[1.5rem]">
           <div className="text-[0.8rem] flex flex-row items-center">
             <img src={size} className="pr-[0.2rem]" />
-            규모형태
+            수익성
           </div>
           <div className="text-[0.8rem] font-bold text-red-1">
             {financialIndicators[0].grade}
