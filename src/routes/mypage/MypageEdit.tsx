@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import {
-  deleteUser,
   getUserInfo,
   isvalidateToken,
   logout,
@@ -88,31 +87,31 @@ export default function MypageEdit() {
     }
   };
 
-  const handleClickedUserQuit = async () => {
-    try {
-      Swal.fire({
-        icon: 'info',
-        title: '회원 탈퇴',
-        text: '정말로 탈퇴 하시겠습니까?',
-        showCancelButton: true,
-        confirmButtonColor: '#004CC7',
-        confirmButtonText: '네',
-        cancelButtonText: '아니요',
-        cancelButtonColor: '#d33',
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const resp = await deleteUser();
-          console.log(resp);
-          navigate('/');
-        }
-      });
-    } catch (error: unknown) {
-      const errorResponse = error as AxiosError<ErrorResponseI>;
-      if (errorResponse.response) {
-        console.error(errorResponse.response.data.response);
-      }
-    }
-  };
+  // const handleClickedUserQuit = async () => {
+  //   try {
+  //     Swal.fire({
+  //       icon: 'info',
+  //       title: '회원 탈퇴',
+  //       text: '정말로 탈퇴 하시겠습니까?',
+  //       showCancelButton: true,
+  //       confirmButtonColor: '#004CC7',
+  //       confirmButtonText: '네',
+  //       cancelButtonText: '아니요',
+  //       cancelButtonColor: '#d33',
+  //     }).then(async (result) => {
+  //       if (result.isConfirmed) {
+  //         const resp = await deleteUser();
+  //         console.log(resp);
+  //         navigate('/');
+  //       }
+  //     });
+  //   } catch (error: unknown) {
+  //     const errorResponse = error as AxiosError<ErrorResponseI>;
+  //     if (errorResponse.response) {
+  //       console.error(errorResponse.response.data.response);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="pt-[80px] w-[100%] flex flex-col items-center">
@@ -180,7 +179,7 @@ export default function MypageEdit() {
           />
         </div>
         <div className="py-[0.8rem]" />
-        <div
+        {/* <div
           className="w-[100%] text-grey-1 flex flex-row justify-between"
           onClick={handleClickedUserQuit}
         >
@@ -190,7 +189,7 @@ export default function MypageEdit() {
             className="h-[1.5rem] w-[1.5rem] cursor-pointer"
             alt="edit"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
