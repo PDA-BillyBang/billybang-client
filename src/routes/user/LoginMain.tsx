@@ -81,12 +81,6 @@ export default function Login() {
     }
   };
 
-  // 이메일 유효성 검사 함수
-  const validateEmail = (value: string | number) => {
-    if (typeof value !== 'string') return false;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value);
-  };
 
   // 이메일 유효성 검사 함수
   const validateEmail = (value: string | number) => {
@@ -110,8 +104,6 @@ export default function Login() {
           text="이메일 주소를 입력해주세요"
           value={email}
           onChange={handleEmailChange}
-          validate={(value) => validateEmail(value)}
-          errorMessage="정확한 이메일을 입력해주세요"
           validate={(value) => validateEmail(value)}
           errorMessage="정확한 이메일을 입력해주세요"
         ></FloatingInputForm1>
