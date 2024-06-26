@@ -108,7 +108,7 @@ export default function PropertyDetail({}: Props) {
         <div className="flex flex-col">
           <div className="flex items-center justify-between">
             <div className="font-bold text-[1.5rem]">
-              {propertyDetail?.buildingName}
+              {propertyDetail?.articleName}
             </div>
             <LikeButton
               isActive={likeButtonActive}
@@ -167,7 +167,7 @@ export default function PropertyDetail({}: Props) {
         </div>
 
         <div className="flex flex-col bg-grey-5 my-3 gap-y-4 items-center py-5 rounded-[5px] ">
-          <div className="flex h-8 w-customWidthPercent">
+          <div className="flex h-6 w-customWidthPercent">
             <div className="w-[20%] text-grey-1 ">
               {propertyDetail?.tradeType === 'LEASE' ? '전세' : '매매'}가
             </div>
@@ -175,7 +175,7 @@ export default function PropertyDetail({}: Props) {
               {propertyDetail && priceFormatter(propertyDetail?.price)}
             </div>
           </div>
-          <div className="flex h-8 w-customWidthPercent">
+          <div className="flex h-6 w-customWidthPercent">
             <div className="w-[20%] text-grey-1 ">방향</div>
             <div className="w-[80%]">{propertyDetail?.direction}</div>
           </div>
@@ -183,18 +183,18 @@ export default function PropertyDetail({}: Props) {
             <div className="w-[20%] text-grey-1 ">동호수</div>
             <div className="w-[80%]">102동</div>
           </div> */}
-          <div className="flex h-8 w-customWidthPercent">
+          <div className="flex h-6 w-customWidthPercent">
             <div className="w-[20%] text-grey-1 ">면적</div>
             <div className="w-[80%]">
-              {propertyDetail?.area2} / {propertyDetail?.area1} m2
+              {propertyDetail?.area2} / {propertyDetail?.area1} ㎡
             </div>
           </div>
-          <div className="flex h-8 w-customWidthPercent">
+          <div className="flex h-6 w-customWidthPercent">
             <div className="w-[20%] text-grey-1 ">해당층</div>
             <div className="w-[80%]">{propertyDetail?.floorInfo}층</div>
           </div>
           <div className="flex items-center w-customWidthPercent">
-            <div className="w-[20%] text-grey-1 ">소개</div>
+            <div className="w-[20%] text-grey-1">소개</div>
             <div className="w-[80%]">{propertyDetail?.articleFeatureDesc}</div>
           </div>
           <div className="flex items-center w-customWidthPercent">

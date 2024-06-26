@@ -52,7 +52,7 @@ export default function Login() {
     <div className="flex flex-col items-center min-h-screen">
       <div className="w-customWidthPercent font-bold text-[1.5rem] my-[7rem]">
         <div>원하는 매물을 찾고</div>
-        <div>나에게 맞는 대출 상품을</div>
+        <div> 대출 상품을</div>
         <div>추천받아 볼까요?</div>
       </div>
       <div className="flex-grow w-customWidthPercent">
