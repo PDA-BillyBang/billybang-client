@@ -92,6 +92,12 @@ export default function PropertyDetail({}: Props) {
     setLikeButtonActive((prev) => !prev);
   };
 
+  const handleRealEstateClick = () => {
+    if (propertyDetail?.articleUrl) {
+      window.open(propertyDetail.articleUrl, '_blank');
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col mt-[5rem] items-center w-full">
@@ -119,12 +125,19 @@ export default function PropertyDetail({}: Props) {
           </div>
           <div className="flex items-center font-thin text-black-3 ">
             <div className="mr-2">{propertyDetail?.jibeonAddress}</div>
-            <div className='flex cursor-pointer' onClick={()=>{navigate(`/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`)}}>
+            <div
+              className="flex cursor-pointer"
+              onClick={() => {
+                navigate(
+                  `/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`
+                );
+              }}
+            >
               <img src={pin} className="w-6"></img>
               <div className="min-w-[3rem]">로드뷰</div>
             </div>
           </div>
-          <div className="flex gap-1 mt-3 flex-wrap">
+          <div className="flex flex-wrap gap-1 mt-3">
             <SmallButton
               text="전세"
               isActive={true}
@@ -199,7 +212,10 @@ export default function PropertyDetail({}: Props) {
           </div>
           <div className="flex items-center w-customWidthPercent">
             <div className="w-[20%] text-grey-1 ">부동산</div>
-            <div className="flex flex-col w-[80%] underline decoration-blue-2">
+            <div
+              onClick={handleRealEstateClick}
+              className="flex flex-col w-[80%] underline decoration-blue-2"
+            >
               <div className="flex-col text-blue-2">
                 {propertyDetail?.cpName}
               </div>
