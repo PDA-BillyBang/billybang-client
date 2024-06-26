@@ -3,6 +3,7 @@ import Map from '../routes/map/Map';
 import MapSearch from '../routes/map/MapSearch';
 import MainHeader from '../components/common/header/MainHeader';
 import SubHeader from '@components/common/header/SubHeader';
+import RoadView from '@/routes/map/RoadView';
 
 export const mapRoutes: RouteObject[] = [
   {
@@ -23,10 +24,10 @@ export const mapRoutes: RouteObject[] = [
     path: 'map',
     element: <SubHeader />,
     children: [
-      // {
-      //   path: ':px/:py',
-      //   element: <MapPropertyLoan />,
-      // },
+      {
+        path: 'roadview',
+        element: <RoadView />,
+      },
     ],
   },
 ];

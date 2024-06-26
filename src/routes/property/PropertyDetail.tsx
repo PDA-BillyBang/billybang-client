@@ -1,6 +1,6 @@
 import SmallButton from '@components/common/button/SmallButton';
 import { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import pin from 'images/pin.svg';
 import LikeButton from '@components/common/button/LikeButton';
 import { getPropertyDetailInfo } from '@/lib/apis/property';
@@ -42,6 +42,7 @@ export default function PropertyDetail({}: Props) {
   const [propertyDetail, setPropertyDetail] = useState<PropertyDetailI>();
   // const navigate= useNavigate()
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
   const transformTags = (tags: string): string[] => {
     return tags.split(',').map((tag) => tag.trim());
   };
@@ -118,7 +119,7 @@ export default function PropertyDetail({}: Props) {
           </div>
           <div className="flex items-center font-thin text-black-3">
             <div className="mr-2">{propertyDetail?.jibeonAddress}</div>
-            <div className="flex cursor-pointer">
+            <div className='flex' onClick={()=>{navigate(`/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`)}}>
               <img src={pin} className="w-6"></img>
               <div>로드뷰</div>
             </div>
