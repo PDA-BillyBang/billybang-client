@@ -119,7 +119,7 @@ export default function PropertyDetail({}: Props) {
           </div>
           <div className="flex items-center font-thin text-black-3">
             <div className="mr-2">{propertyDetail?.jibeonAddress}</div>
-            <div className='flex' onClick={()=>{navigate(`/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`)}}>
+            <div className='flex cursor-pointer' onClick={()=>{navigate(`/map/roadview?latitude=${propertyDetail?.latitude}&longitude=${propertyDetail?.longitude}&buildingname=${propertyDetail?.buildingName}`)}}>
               <img src={pin} className="w-6"></img>
               <div>로드뷰</div>
             </div>
